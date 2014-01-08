@@ -218,3 +218,6 @@ Auto running git bisect with a command
 
 	$ git log --format='%aN' | sort -u
 
+#### pull out the number of changes from a commit
+
+  $ git show f769bc31bdd --stat | grep '|.*[+]*-*$' | awk '{print $3}' | paste -sd+ - | bc
