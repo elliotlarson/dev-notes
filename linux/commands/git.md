@@ -47,9 +47,15 @@
 
 	$ git diff 3ca00c2c847^!
 	
+	# it would be better to say:
+	$ git show 3ca00c2c847
+	
 #### diff the last 5 commits
 
 	$ git diff HEAD~5
+	
+	# you could also say
+	$ git log -p -5
 
 #### diffing two different branches
 
@@ -69,10 +75,15 @@
 #### make log output one line for each commit
 
 	$ git log --pretty=oneline
+	$ git log --oneline
 
-#### show lines removed and added in git log
+#### show diffs in commit
 
-	$ git log --oneline -p
+This is a great way to search for changes in the codebase.  
+	
+	$ git log -p
+	
+	# then you can search for terms by hitting the "/" key
 
 #### show only commits added by an author
 
