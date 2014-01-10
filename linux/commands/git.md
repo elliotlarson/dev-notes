@@ -7,127 +7,13 @@
 * http://git-scm.com/book
 * http://mislav.uniqpath.com/2010/07/git-tips/
 
-## How To
+## Rebasing
 
 #### merge the last two commits.
 
 	$ git rebase -i HEAD~2
 
 	# change 'pick' to 'squash' next to the commit you want to squash
-
-#### show the changes from your last commit
-
-	$ git diff
-
-#### show what the staged changed are
-
-	$ git diff --staged
-
-#### show git log with one line output
-
-	$ git log --pretty=oneline
-	$ git log --oneline
-
-#### unstage a file
-
-	$ git reset file.html
-
-#### roll a commit back, keeping changed files in staged area
-
-	$ git reset --soft HEAD^
-
-#### undo last 2
-
-	$ git reset --soft HEAD^^
-
-#### roll a commit back, and blow away any files that were changed
-
-	$ get reset --hard HEAD^
-
-#### add to the previous commit
-
-	$ git commit --amend -m "New message for commit"
-
-#### get list of remote repositories that Git knows about
-
-	$ git remote -v
-
-	$ git pull force
-	$ git fetch --all
-	$ git reset --hard origin/branch
-
-#### Add a remote repository
-
-	$ git remote add origin https://github.com…
-
-#### remove a remote
-
-	$git remote rm <name>
-
-#### git bisect run article
-
-http://lwn.net/Articles/317154/
-
-Passing bad and good revisions to git bisect start
-
-	$ git bisect start HEAD e6be773
-    # <bad> <good>
-
-Auto running git bisect with a command
-
-	$ git bisect run zeus rspec ./spec/models/commercial_application_spec.rb 
-
-#### show the changes in a commit with the git difftool
-
-	$ git difftool 3e11f62ad37b871f^!
-
-#### show the changes in a commit with command line diff
-
-	$ git diff 3ca00c2c847^!
-
-#### track a remote branch
-
-	$ git checkout -t origin/haml
-
-#### get list of remote branches
-
-	$ git branch -r
-
-#### delete a remote branch
-
-	$ git branch origin :weasel
-
-#### show information about remote origin
-
-	$ git remote show origin
-
-#### clean up deleted remote branches
-
-	$ git remote prune origin
-
-#### push a local branch to a remote branch with a different name
-
-	$ git push origin staging:master
-
-#### list all tags
-
-	$ git tag
-
-#### checkout a tag
-
-	$ git checkout <tagname>
-
-#### add a new tag
-
-	$ git tag -a v0.0.3 -m "version 0.0.3"
-
-#### push tags to remote
-
-	$ git push --tags
-
-#### pull down all changes without committing them
-
-	$ git fetch
 
 #### rebase conflict
 
@@ -142,11 +28,44 @@ Auto running git bisect with a command
 
 	# <abort rebase>
 	$ git rebase --abort
+	
+## Diffing
 
-#### add color to git output with config option
+#### show the changes from your last commit
 
-	$ git config --global color.ui true
+	$ git diff
 
+#### show what the staged changed are
+
+	$ git diff --staged
+	
+#### show the changes in a commit with the git difftool
+
+	$ git difftool 3e11f62ad37b871f^!
+
+#### show the changes in a commit with command line diff
+
+	$ git diff 3ca00c2c847^!
+	
+#### diff the last 5 commits
+
+	$ git diff HEAD~5
+
+#### diffing two different branches
+
+	$ git diff master bird
+
+#### diffing a single file
+
+	$ git diff HEAD^ app/controllers/sites/corporate/pages_controller.rb
+	
+## Log
+
+#### show git log with one line output
+
+	$ git log --pretty=oneline
+	$ git log --oneline
+	
 #### make log output one line for each commit
 
 	$ git log --pretty=oneline
@@ -178,18 +97,136 @@ Auto running git bisect with a command
 #### show log of last 2 commits
 
 	$ git log -2
+	
+#### get a number of commits from git log, check them out, and run spec suite against them:
 
-#### diff the last 5 commits
+	# <this doesn't actually work>
+	$ git log --author='onehouse <elliot@onehouse.net>' --since=1.day.ago --until=today --oneline | awk '{print $1}' | while read line; git checkout $line; rspec spec/; end
+	
+#### show all authors in a repo:
 
-	$ git diff HEAD~5
+	$ git log --format='%aN' | sort -u
 
-#### diffing two different branches
+#### pull out the number of changes from a commit
 
-	$ git diff master bird
+ 	$ git show f769bc31bdd --stat | grep '|.*[+]*-*$' | awk '{print $3}' | paste -sd+ - | bc
 
-#### diffing a single file
+#### show the git log stat for a single commit
 
-	$ git diff HEAD^ app/controllers/sites/corporate/pages_controller.rb
+	$ git show f769bc31bdd --stat
+
+## Resetting
+
+#### unstage a file
+
+	$ git reset file.html
+
+#### roll a commit back, keeping changed files in staged area
+
+	$ git reset --soft HEAD^
+
+#### undo last 2
+
+	$ git reset --soft HEAD^^
+
+#### roll a commit back, and blow away any files that were changed
+
+	$ get reset --hard HEAD^
+	
+## Committing
+
+#### add to the previous commit
+
+	$ git commit --amend -m "New message for commit"
+	
+## Remotes
+
+#### get list of remote repositories that Git knows about
+
+	$ git remote -v
+
+	$ git pull force
+	$ git fetch --all
+	$ git reset --hard origin/branch
+
+#### Add a remote repository
+
+	$ git remote add origin https://github.com…
+
+#### remove a remote
+
+	$git remote rm <name>
+	
+## Bisecting
+
+#### git bisect run article
+
+http://lwn.net/Articles/317154/
+
+Passing bad and good revisions to git bisect start
+
+	$ git bisect start HEAD e6be773
+    # <bad> <good>
+
+Auto running git bisect with a command
+
+	$ git bisect run zeus rspec ./spec/models/commercial_application_spec.rb 
+
+## Branches
+
+#### track a remote branch
+
+	$ git checkout -t origin/haml
+
+#### get list of remote branches
+
+	$ git branch -r
+
+#### delete a remote branch
+
+	$ git branch origin :weasel
+
+#### show information about remote origin
+
+	$ git remote show origin
+
+#### clean up deleted remote branches
+
+	$ git remote prune origin
+
+#### push a local branch to a remote branch with a different name
+
+	$ git push origin staging:master
+	
+## Tags
+
+#### list all tags
+
+	$ git tag
+
+#### checkout a tag
+
+	$ git checkout <tagname>
+
+#### add a new tag
+
+	$ git tag -a v0.0.3 -m "version 0.0.3"
+
+#### push tags to remote
+
+	$ git push --tags
+	
+## Fetching
+
+#### pull down all changes without committing them
+
+	$ git fetch
+
+## Config
+
+#### add color to git output with config option
+
+	$ git config --global color.ui true
 
 #### see all config options
 
@@ -199,25 +236,8 @@ Auto running git bisect with a command
 
 	$ git config --global alias.st status
 	$ git config --global alias.mylog "log --pretty=format: '%h %s [%an]' --graph"
-
-#### get a number of commits from git log, check them out, and run spec suite against them:
-
-	# <this doesn't actually work>
-	$ git log --author='onehouse <elliot@onehouse.net>' --since=1.day.ago --until=today --oneline | awk '{print $1}' | while read line; git checkout $line; rspec spec/; end
-
-#### show the git log stat for a single commit
-
-	$ git show f769bc31bdd --stat
-
+	
 #### rebase by default config
 
 	$ git config --global branch.master.rebase true
 	$ git config --global branch.autosetuprebase always
-
-#### show all authors in a repo:
-
-	$ git log --format='%aN' | sort -u
-
-#### pull out the number of changes from a commit
-
-  $ git show f769bc31bdd --stat | grep '|.*[+]*-*$' | awk '{print $3}' | paste -sd+ - | bc
