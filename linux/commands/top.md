@@ -1,12 +1,30 @@
 # Top Notes
 
-type "h" to get help
+## Starting Top
 
-change filter:
+#### show only specific processes
 
-type "F"
+	$ top -p 1212 -p 2310
 
-then type the letter matching the field you want to sort by
+## Interactive Commands
 
-type "q" to quit
+#### getting help
+
+	type "h"
+
+#### change filter
+
+	type "F"
+
+	then type the letter matching the field you want to sort by
+
+#### quitting 
+
+	type "q"
+	
+#### killing a process
+
+	type "K"
+	
+	then type the Id of the process
 
