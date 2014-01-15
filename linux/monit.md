@@ -3,6 +3,7 @@
 ## Resources
 
 * https://www.digitalocean.com/community/articles/how-to-install-and-configure-monit
+* http://www.tecmint.com/how-to-install-and-setup-monit-linux-process-and-services-monitoring-program/
 
 ## Configuration
 
@@ -35,6 +36,14 @@ or
         if cpu is greater than 80% for 2 cycles then restart
         group thin
 
+or
+
+    check process thin-3000
+        with pidfile /home/deployer/apps/acadia/shared/pids/thin.3000.pid
+        start program = "/bin/su - deployer -c 'thin start -C /etc/thin/acadia.yml -o 3000 -f'"
+        stop program = "/bin/su - deployer -c 'thin stop -C /etc/thin/acadia.yml -o 3000'"
+        if failed port 3000 then restart
+        group thin
 
 #### configuring Gmail mail server
 
