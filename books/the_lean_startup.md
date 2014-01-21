@@ -22,6 +22,15 @@
 
 "...true startup productivity [is] systematically figuring out the right things to build." p.52
 
+"The goal of early contact with customers is not to gain definitive answers.  Instead, it is to clarify at a basic, course level that we understand our potential customer and what problems they have.  With that understanding, we can craft a customer archetype, a brief document that seeks to humanize the proposed target customer." p.89
+
+"... because customers don't really know what they want, it's easy for... entrepreneurs to delude themselves that they are on the right path [after talking to customers]." p.90
+
+"The goal [of the minimum viable product] is to test fundamental business hypotheses." p.94
+
+"Every extra feature is a form of waste, and if we delay the test for these extra features, it comes with a tremendous potential cost in terms of learning and cycle time." p.96
+
+"Customers don't care how much time something takes to build.  They only care if it serves their needs." p.109
 
 
 
@@ -47,7 +56,17 @@
 3. Would they buy it from us?
 4. Can we build a solution for that problem?
 
-It's commong for engineers to jump to #4.
+It's common for engineers to jump to #4.
 
+#### The two most important assumptions:
+
+These give rise to tuning variables that drive the startup's engine of growth
+
+1. value hypothesis
+2. growth hypothesis
+
+#### genchi gembutsu
+
+go and see for yourself
 
 
