@@ -32,7 +32,11 @@
 
 "Customers don't care how much time something takes to build.  They only care if it serves their needs." p.109
 
+"... cohort based reports are the gold standard of learning metrics..." p.144
 
+"... the more money, time, and creative energy that has been sunk into an idea, the harder it is to pivot." p.153
+
+"... the runway that [a] startup has left [is]: the amount of remaining time in which a startup must either achieve lift-off or fail.  This is usually defined as the remaining cash in the bank divided by the monthly burn rate..." p.160
 
 ## Notes
 
@@ -69,4 +73,6 @@ These give rise to tuning variables that drive the startup's engine of growth
 
 go and see for yourself
 
+#### Misc Notes:
 
+* user stories are not complete until they lead to validated learning
