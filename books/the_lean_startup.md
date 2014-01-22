@@ -38,6 +38,10 @@
 
 "... the runway that [a] startup has left [is]: the amount of remaining time in which a startup must either achieve lift-off or fail.  This is usually defined as the remaining cash in the bank divided by the monthly burn rate..." p.160
 
+"... our efforts at tuning the engine were reaching diminishing returns, the classic sign of the need to pivot." p.171
+
+
+
 ## Notes
 
 #### The 5 principles of the lean startup
