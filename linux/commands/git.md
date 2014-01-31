@@ -33,7 +33,7 @@
 
 	$ git rebase -i
 	
-	# change 'pick' to 'edit' next to the commit you want to change; 
+	# change 'pick' to 'reword' next to the commit you want to change; 
 	# when you save the file, vim will open a commit file where you
 	# can change the message
 	
