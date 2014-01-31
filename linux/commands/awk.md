@@ -8,12 +8,12 @@
 
 #### pull out the columns 3 and 4
 
-  $ ls -l | awk '{print $3, $4}'
+    $ ls -l | awk '{print $3, $4}'
 
 #### print out matching column
 
-  $ ls -l | awk '{if ($3 == "rahmu") print $0;}'
+    $ ls -l | awk '{if ($3 == "rahmu") print $0;}'
 
 #### print out ls -l lines that start with config
 
-  $ ls -l | awk '$9 ~ /^config/ {print $0;}'
+    $ ls -l | awk '$9 ~ /^config/ {print $0;}'

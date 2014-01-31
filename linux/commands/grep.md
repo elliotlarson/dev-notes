@@ -8,5 +8,5 @@
 
 #### grep a tail of a log:
 
-  $ tail -n 1000 -f training.log | grep --line-buffered 'Started'
+    $ tail -n 1000 -f training.log | grep --line-buffered 'Started'
 
