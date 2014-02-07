@@ -40,11 +40,17 @@
 
 "... our efforts at tuning the engine were reaching diminishing returns, the classic sign of the need to pivot." p.171
 
-"A pivot... is a special kind of structured change designed to test a new fundamental hypothesis about the product, business model, and engine of growth.  It is the heart of the Lean Starup method." p.178
+"A pivot... is a special kind of structured change designed to test a new fundamental hypothesis about the product, business model, and engine of growth.  It is the heart of the Lean Startrup method." p.178
 
 "The critical first question for any lean transformation is: which activities create value and which are a form of waste?" p.181
 
 "There are always a zillion new ideas about how to make the product better floating around, but the hard truth is that most of those ideas make a difference only at the margins.  They are mere optimizations.  Startups have to focus on the big experiments that lead to validated learning.  The engines of growth framework helps them stay focused on the metrics that matter." p.209
+
+"The ability to grow in the long term using the paid engine requires a differentiated ability to monetize a certain set of customers." p.218
+
+"... the individual efficiency of these [people] is not the goal in a lean startup.  Instead, we want to force teams to work cross-functionally to achieve validated learning." p.271
+
+"It does not matter how fast we can build.  It does not matter how fast we can measure.  What matters is how fast we can get through the entire loop." p.271
 
 
 ## Notes
@@ -94,7 +100,7 @@ go and see for yourself
 * **customer need pivot** - focusing on different customer need(s)
 * **platform pivot** - changing from an app to a platform for apps, or vice versa
 * **business architecture pivot** - changing from high margin, low volume to low margin, high volume (or vice versa)
-* **value capture pivot** - changing the way the company captures customer value (monitization strategy)
+* **value capture pivot** - changing the way the company captures customer value (monetization strategy)
 * **engine of growth pivot** - change in growth strategy (viral, sticky, paid)
 * **channel pivot** - a change in the sales or distribution channel 
 * **technology pivot** - changing approach to using the technology
@@ -113,8 +119,13 @@ There are four ways past customers drive sustainable growth:
 #### Engines of growth
 
 * **Sticky**: getting and holding onto customers for the long term. high customer retention rate is necessary.  The rules that govern sticky growth are simple: if the rate of new customer acquisition exceeds the churn rate, the product will grow.  The churn rate is defined as the fraction o f customers in any period who fail to remain engaged with the company's product.  read more about this on p.211
+
 * **viral engine of growth** - awareness of the product spreads rapidly from customer to customer.  This is not word of mouth, rather it is result of customers using the product and other people finding out about the product from their use.  Growth is determined by looking at the viral coefficient.  This measures how many new customers will use a product as a consequence  of each new customer who signs up. (how many friends will each customer bring?)  Most viral customers don't charge customers directly but rely on indirect sources of revenue.
-* **paid engine of growth** - 
 
+* **paid engine of growth** - each customer pays a certain amount for a product over his or her "lifetime" as a customer, called the customer lifetime value (LTV).  Each new customer has a cost per acquisition (CPA).  The margin between the CPA and the LTV determines how fast the paid engine of growth goes.
 
+#### Adopt these rules:
+
+* be tolerant of all mistakes the first time
+* never let the same mistake happen twice
 
