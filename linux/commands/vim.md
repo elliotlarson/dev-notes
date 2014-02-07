@@ -4,6 +4,17 @@
 
 * power line font: https://github.com/eugeneching/consolas-powerline-vim
 
+## Commands
+
+#### Finding and replacing across multiple files
+
+http://www.isaacsloan.com/posts/3-vim-find-replace-in-projects-using-ack
+
+	:args `ack -l keywords`
+	:argdo %s/keywords/replacement/ge | update
+	
+another approach: http://www.isaacsloan.com/posts/51-vim-find-and-replace-in-project-episode-2
+
 ####  omni completion
 
 	c-x c-l
