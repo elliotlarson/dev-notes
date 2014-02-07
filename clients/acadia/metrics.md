@@ -1,6 +1,4 @@
-# ACADIA Notes
-
-## Metrics
+# ACADIA Metrics
 
 #### projects created by month and year
 
