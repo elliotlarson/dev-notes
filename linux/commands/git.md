@@ -75,6 +75,10 @@
 	
 ## Log
 
+#### searching the log for a term
+
+	$ git log --grep=maps
+
 #### show git log with one line output
 
 	$ git log --pretty=oneline
