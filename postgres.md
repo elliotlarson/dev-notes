@@ -20,4 +20,11 @@
 
 	$ pg_dump -a mydatabase > mydumpfile.sql
 	
+
+#### date and time formatting
+
+http://www.postgresql.org/docs/8.1/static/functions-formatting.html
+
+	select to_char(created_at, 'YYYY-MM-DD HH:MM AM') from projects;
+	
 	
