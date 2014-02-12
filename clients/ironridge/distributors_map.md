@@ -41,3 +41,11 @@ https://www.pivotaltracker.com/s/projects/885958/stories/65323318
     spec/helpers/distributors_helper_spec.rb                  |  15 ---------------
     spec/models/distributor_spec.rb                           |   6 +-----
 
+
+#### API for zipcode search service object
+
+	DistributorLocationSearch.call(options)
+	
+	# options = zipcode, array of location types, array of product types
+	
+	# returns = list of distributor location records ordered by closest to farthest away
