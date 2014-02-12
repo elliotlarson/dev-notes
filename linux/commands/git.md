@@ -184,7 +184,8 @@ This is a great way to search for changes in the codebase.
 
 #### git bisect run article
 
-http://lwn.net/Articles/317154/
+* http://robots.thoughtbot.com/git-bisect
+* http://lwn.net/Articles/317154/
 
 Passing bad and good revisions to git bisect start
 
