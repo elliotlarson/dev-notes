@@ -38,6 +38,8 @@ summary_hardware = hardware_response.body[:get_summary_hardware_response][:get_s
 # {:device_code=>"SU", :device_id=>"0", :flags=>"0", :gateway_id=>nil, :hardware_id=>"-28097", :name=>nil, :site_id=>"28097", :field_list=>{:field_info=>[{:name=>"ProdKWH", :units=>nil}, {:name=>"Insolation", :units=>nil}]}}
 summary_data_response = client.call(:get_summary_data, message: {SessionID: session_id, BinSize: 'BinDay', FromLocal: DateTime.new(2014, 1, 29, 0, 0, 0), ToLocal: DateTime.new(2014, 1, 29, 23, 59, 0), DataField: [{HID: 28097, FieldName: 'ProdKWH', Function: 'Integral'}]})
 
+summary_data_response = client.call(:get_summary_data, message: {SessionID: session_id, BinSize: 'BinDay', FromLocal: '1/29/2014', ToLocal: '1/29/2014', Fields: [{DataField: {HID: '-28097', FieldName: 'ProdKWH', Function: 'Avg'}}]})
+
 site_hardware_response = client.call(:get_site_hardware_list, message: {SessionID: session_id, SiteID: 28097})
 site_hardware = site_hardware_response.body[:get_site_hardware_list_response][:get_site_hardware_list_result][:hardware_list][:hardware_complete]
 # [
