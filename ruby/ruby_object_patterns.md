@@ -1,5 +1,13 @@
 # Ruby Object Patterns
 
+## Singleton Pattern
+
+## Observer Pattern
+
+## Object Behaving Like a Hash
+
+## Using OpenStruct to Create an Object Data Bag
+
 ## Configuration Block Pattern
 
 This is used when you want to create an initializer file with configuration options in it (i.e. like a lot of third party gems allow you to do in a Rails initializer).
