@@ -6,12 +6,42 @@
 
 ## Commands
 
+#### Rails extract partial
+
+In a view file extract a section to a partial.
+
+Select the text. Go into command mode and type:
+
+    :Rextract my_partial.html.haml
+
+#### Copying a line to another line
+
+"T" is the shorthand for copy (i.e. move to)
+
+Copy 21 to current line
+
+    :21t.
+    
+Copy 21 to line 35
+
+    :21t35
+
+#### Moving a line to another line
+
+Move 21 to current line
+
+    :21m.
+    
+Move 21 to line 35
+
+    :21m35
+
 #### Finding and replacing across multiple files
 
 http://www.isaacsloan.com/posts/3-vim-find-replace-in-projects-using-ack
 
 	:args `ack -l keywords`
-	:argdo %s/keywords/replacement/ge | update
+	:argdo %s/keywords/replacement/gce | update
 	
 another approach: http://www.isaacsloan.com/posts/51-vim-find-and-replace-in-project-episode-2
 
@@ -43,7 +73,15 @@ another approach: http://www.isaacsloan.com/posts/51-vim-find-and-replace-in-pro
 
 #### go to the place where you were last in insert mode
 
+This enters insert mode at that point
+
 	gi
+	
+#### go to line where you were last in insert mode
+
+This does not enter insert mode
+
+    `.
 
 #### looks for method under cursor using ctags
 
