@@ -20,7 +20,35 @@ There are a number of special key codes you can use when creating maps.  Some of
 
 #### Asking for information in the command prompt
 
+You need to use the input command.  Here's an example that will ask you for some text and then echo it out:
+
+```
+function MyMeth()
+  let l:myVar = input('yo, say it: ')
+  echo myVar
+endfunction
+
+noremap <leader><leader>g :call MyMeth()<cr>
+```
+
 #### Showing a list of items in the quick fix menu
 
+## Plugin Ideas
 
+#### Change hash access to fetch
 
+In a ruby file change `my_hash[:my_val]` to `my_hash.fetch(:my_val)`
+
+#### Change string keyed hash to symbol hash
+
+Change this:
+
+```
+{ 'foo' => 'bar' }
+```
+
+to this:
+
+```
+{ foo: 'bar' }
+```
