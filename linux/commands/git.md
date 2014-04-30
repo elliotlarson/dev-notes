@@ -7,6 +7,17 @@
 * http://git-scm.com/book
 * http://mislav.uniqpath.com/2010/07/git-tips/
 
+## Misc
+
+#### Getting back a file that you removed
+
+1. Find the hash for the commit when you removed the file
+2. Enter this command:
+
+```
+$ git checkout 048ddf081^ -- path/to/file.rb
+```    
+
 ## Rebasing
 
 #### merge the last two commits.

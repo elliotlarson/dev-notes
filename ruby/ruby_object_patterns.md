@@ -144,7 +144,7 @@ end
 
 ```ruby
 class MyGroupedFunctionality
-  def self.include(klass)
+  def self.included(klass)
     klass.send :include, InstanceMethods
     klass.send :extend, ClassMethods
     

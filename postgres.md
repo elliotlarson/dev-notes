@@ -28,3 +28,8 @@ http://www.postgresql.org/docs/8.1/static/functions-formatting.html
 	select to_char(created_at, 'YYYY-MM-DD HH:MM AM') from projects;
 	
 	
+## SQL
+
+#### Create a CSV backup of a table
+
+    COPY accounts TO '/Users/Elliot/website_account_signups.csv' DELIMITER ',' CSV HEADER;

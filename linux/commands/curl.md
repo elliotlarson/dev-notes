@@ -1,5 +1,14 @@
 # cURL Notes
 
+#### outputting JSON results prettily
+
+Using python, pipe call to `python -mjson.tool` which I have aliased to `pjson`:
+
+```
+curl http://api.openweathermap.org/data/2.5/forecast/daily\?id\=524901\&lang\=zh_cn | pjson
+```
+
+
 #### posting with Data
 	
 	$ curl -d "birthyear=1905&press=%20OK%20" www.hotmail.com/when/junk.cgi
