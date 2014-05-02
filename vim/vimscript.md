@@ -8,6 +8,14 @@
 
 ## Language Constructs
 
+### Functions
+
+#### Misc bullet points
+
+* functions will return zero if no return is specified
+* function names must start with an uppercase letter
+* declare a function with `function!` and you can load it as many times as you want
+
 ## Mapping
 
 #### Special keycodes
@@ -37,7 +45,17 @@ noremap <leader><leader>g :call MyMeth()<cr>
 
 #### Change hash access to fetch
 
-In a ruby file change `my_hash[:my_val]` to `my_hash.fetch(:my_val)`
+In a ruby file change:
+
+```
+my_hash[:my_val]
+``` 
+
+to this:
+
+```
+my_hash.fetch(:my_val)
+```
 
 #### Change string keyed hash to symbol hash
 
@@ -51,4 +69,24 @@ to this:
 
 ```
 { foo: 'bar' }
+```
+
+#### Add or remove focus from rspec block
+
+If configured to do so, rspec will run only specs with `focus: true` applied to them.  Write a plugin that adds or removes this from the nearest rspec `describe`, `context`, or `it` block.
+
+Change this:
+
+```
+describe 'foo' do
+  # some specs
+end
+```
+
+to this:
+
+```
+describe 'foo', focus: true do
+  # some specs
+end
 ```
