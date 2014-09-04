@@ -91,6 +91,9 @@ add the following to the knife.rb file (it's in mysite/.chef/knife.rb):
 
 	deployer_password = `openssl passwd -1 #{deployer_user['password']}`.chomp
 
+#### using data bags with 
+
+check out this article: https://blog.engineyard.com/2014/encrypted-data-bags
 
 ## Standard Server Setup
 

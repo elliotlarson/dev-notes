@@ -233,6 +233,15 @@ Auto running git bisect with a command
 
 	$ git push origin staging:master
 	
+#### merging in a feature branch and squashing commits into one
+
+    $ git checkout -b my-feature-branch
+    # ... do some work and commit several times
+    $ git rebase master
+    $ git checkout master
+    $ git merge --squash my-feature-branch
+    $ git commit -m 'adding in my feature'
+	
 ## Tags
 
 #### list all tags
