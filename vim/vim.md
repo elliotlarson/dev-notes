@@ -4,7 +4,26 @@
 
 * power line font: https://github.com/eugeneching/consolas-powerline-vim
 
-## Commands
+## Misc Notes
+
+#### Paste contents of the yank register into search bar
+
+1. yank some text
+2. in the search bar enter `ctrl + r` then `"`
+
+#### Create a Directory for the current file
+
+I'm often creating a spec file on the fly by using my Gary Bernhardt test/implementation file switcher.  I switch from the my new implementation file to a new test file, which doesn't exist yet.  The test file switcher will create the file in the buffer.  But when I try to save it, if it's located in a directory that doesn't exist in my spec directory, it errors out with a directory not found error.  
+
+But, I can auto create the directory with this workflow:
+
+In the spec file:
+
+```
+:!mkdir 
+```
+
+... then press **ctrl** + **r** and then **%**.  This will place the file name and path on the command.  Then delete the filename and hit **enter**.
 
 #### Rails extract partial
 
