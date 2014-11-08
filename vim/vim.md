@@ -4,6 +4,23 @@
 
 * power line font: https://github.com/eugeneching/consolas-powerline-vim
 
+## Overriding vim solarized 
+
+look for this
+
+```
+elseif g:solarized_termcolors == 256
+```
+
+set this:
+
+```
+let s:base03      = "233"
+let s:base02      = "233"
+let s:base01      = "236"
+let s:base00      = "234"
+```
+
 ## Misc Notes
 
 #### Paste contents of the yank register into search bar
