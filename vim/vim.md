@@ -72,6 +72,13 @@ Move 21 to line 35
 
     :21m35
 
+
+#### opening help in a vertical split
+
+```
+:vert help quickfix
+```
+
 #### Finding and replacing across multiple files
 
 http://www.isaacsloan.com/posts/3-vim-find-replace-in-projects-using-ack

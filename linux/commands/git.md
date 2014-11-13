@@ -9,6 +9,12 @@
 
 ## Misc
 
+#### Getting a list of files from a commit 
+
+```
+$ git diff-tree --no-commit-id --name-only -r ddf0df08
+```
+
 #### Getting back a file that you removed
 
 1. Find the hash for the commit when you removed the file
