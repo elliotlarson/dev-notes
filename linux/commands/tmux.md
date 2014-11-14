@@ -1,5 +1,11 @@
 # Tmux Notes
 
+## getting fonts to install
+
+I installed this font to get tmux to work: https://github.com/eugeneching/consolas-powerline-vim
+
+then I installed this font to get vim to work: https://github.com/runsisi/consolas-font-for-powerline
+
 ## Resources
 
 * https://github.com/aziz/tmuxinator
