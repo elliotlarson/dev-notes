@@ -23,6 +23,14 @@ let s:base00      = "234"
 
 ## Misc Notes
 
+#### Map to run a command
+
+This will run rspec on the current file when using `<leader>t`.
+
+```
+:map ,t :!rspec %<cr>
+```
+
 #### Paste contents of the yank register into search bar
 
 1. yank some text
