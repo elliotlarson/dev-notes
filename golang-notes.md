@@ -51,6 +51,111 @@ $ hello
 # => Hello, Go!
 ```
 
+## Packages
+
+In Go, code is organized into groups of files called packages.
+
+All go files declare a package that they belong to as their first line.  For example, in the `hello` program, the `main.go` file has:
+
+```go
+package main
+```
+
+The `main` package is special and indicates to the Go compiler that the program is going to be an executable.  
+
+The package `main` is accompanied by the function `main` that is the entrypoint for execution of an executable Go app:
+
+```go
+package main
+
+func main() {
+  // the stuff that runs when your app runs
+}
+```
+
+If there is no `main` package the application is then a set of utlity packages meant for reuse in other programs.
+
+For example, if you look at the `net/http` package from the standard library, it has no `main` package and its directory structure is:
+
+```bash
+net/http
+  cgi
+  cookiejar
+    testdata
+  fcgi
+  httptest
+  httputil
+  pprof
+  testdata
+```
+
+By convention, packages take the name of their directory, so this library has a `cgi` package and a `httptest` package.  You can have any number of files in a directory that belong to a package.  However, you may not have multiple packages in a directory.  One directory, one package.
+
+#### Importing packages
+
+To import a library from the standar go library, you just need to use it's name:
+
+```go
+import (
+  "net/http" // actually looks in $GOPATH/src/pkg/net/http
+)
+```
+
+You can also import remote packages:
+
+```go
+import "github.com/fatih/color"
+```
+
+If you don't have this file on your local system, you can import with `go get`:
+
+```bash
+$ go get github.com/fatih/color
+```
+
+The go compiler will look for a matching library in this order, quiting when it finds one that satisfies an import statement:
+
+1. standard library location: $GOPATH/src/pkg
+2. the current project: $GOROOT/src/your/project
+3. the location of other Go packages on your system: $GOROOT/src/...
+
+If you have a package that conflicts with the naming of a standard package, you can use a named import:
+
+```go
+import (
+  "fmt"
+  myfmt "mylib/fmt"
+)
+```
+
+The Go compiler will fail if you have an import statement for a package that you don't use.  But, sometimes you still want to load a package to take advantage of the package's `init` functionality.  In this case, you can prefix the import with an underscore:
+
+```go
+import (
+  _ "some/library/with/init/functionality"
+)
+```
+
+#### Init functions
+
+Init functions allow setup for packages to happen before the `main` function is run.  Each package can have as many `init` functions as it wants.  A good example of an `init` function is in the `postgres` package:
+
+```go
+package postgres
+
+import (
+  "database/sql"
+)
+
+func init() {
+  sql.Register("postgres", new(PostgresDriver))
+}
+```
+
+The registration of drivers with the `sql` package can't happen at compile time.  It needs to happen at execution time.
+
+The `init` function is a great way to bootstrap stuff before a program executes.
+
 ## Variables
 
 Go is strongly typed and when declaring variables you can do it explicitly:
@@ -76,6 +181,21 @@ When using this inference approach, you can specify the data type that you want:
 
 ```go
 pi := float64(3.14)
+```
+
+If you use the short variable assignment syntax, you must assign at least one new variable.  So, this would cause an error:
+
+```go
+foo := "bar"
+foo := "baz"
+// compile error: no new variables
+```
+
+But, you can do:
+
+```go
+foo := "bar"
+foo = "baz"
 ```
 
 It is a common Go idiom to declare variables and use them in conditionals:
@@ -105,6 +225,68 @@ if numChars, err := fmt.Printf("%s\n", "Hello, World!"); err != nil {
   fmt.Printf("%d\n", numChars)
 }
 // => 13
+```
+
+#### Pointers
+
+A variable is a piece of storage containing a value.  A pointer value is the address of a variable.  It's the location at which the value is stored.
+
+Say you have the variable assignment:
+
+```go
+x := 1
+p := &x
+fmt.Println(*p)
+// 1
+*p = 2
+fmt.Println(x)
+// 2
+```
+
+The expression `&x` (address of `x`) yields a pointer to the integer value 1, that is a value of type `*int`.  The `&` operator is called the **address of operator**.  With our next assignment, we are saying **"p points to x"** or **"p contains the address of x"**.  To print the value 1, we need to "dereference" `p` with `*p`.  We can also set the underlying value of `x` through `p` with `*p = 2`, which is **"assign the value that p points to to 2"**.
+
+Say you have the following code:
+
+```go
+func incr(p *int) int {
+  *p++
+  return *p
+}
+
+func main() {
+  v := 1
+  incr(&v)
+  fmt.Println(incr(&v))
+}
+```
+
+If you run a debug session with a breakpoint after the `v` variable assignment:
+
+```bash
+(dlv) p v
+# 1
+(dlv) p &v
+# (*int)(0x8201fbef8)
+(dlv) p *v
+# expression "v" (int) can not be dereferenced
+```
+
+#### New function
+
+Executing `new(T)` creates a variable of type `T`, initializes it to its zero value, and returns its address (or `*T`).
+
+```go
+p := new(int)
+fmt.Println(*p)
+// 0
+```
+
+#### The blank `_` identifier
+
+Go will throw a compile error if you declare a variable that you don't use.  However, sometimes you need to assign a variable you don't intend to use.  In these cases, you can use the `_` identifier.
+
+```go
+_, err := io.Copy(dst, src)
 ```
 
 ## Strings
@@ -469,18 +651,18 @@ You can also use a shorter form:
 
 ```go
 dayMonths := map[string]int{
-	"Jan": 31,
-	"Feb": 28,
-	"Mar": 31,
-	"Apr": 30,
-	"May": 31,
-	"Jun": 30,
-	"Jul": 31,
-	"Aug": 31,
-	"Sep": 30,
-	"Oct": 31,
-	"Nov": 30,
-	"Dec": 31,
+  "Jan": 31,
+  "Feb": 28,
+  "Mar": 31,
+  "Apr": 30,
+  "May": 31,
+  "Jun": 30,
+  "Jul": 31,
+  "Aug": 31,
+  "Sep": 30,
+  "Oct": 31,
+  "Nov": 30,
+  "Dec": 31,
 }
 ```
 
@@ -545,4 +727,411 @@ We can also convert a string to a byte slice, like we would need to do to write 
 ```go
 msg := "Some text to write to a file"
 file.Write([]byte(msg))
+```
+
+## Error Handling
+
+You can return an error with the `fmt` library:
+
+```go
+func errorProducer(msg string) error {
+  if msg == "" {
+    return fmt.Errorf("Hey that message was empty.")
+  } 
+}
+
+if error := errorProducer(""); error != nil {
+  fmt.Printf("ERROR: %s\n", error)
+}
+```
+
+This is a useful way to produce error messages if you don't need to figure out at some later time what kind of error it was.  In other words, if you just need a quick error message.
+
+If you want something a little more like a standard error, you can use the errors package:
+
+```go
+var errorEmptyMessage = errors.New("Hey that message was empty.")
+
+func errorProducer(msg string) error {
+  if msg == "" {
+    return errorEmptyMessage
+  } 
+}
+
+if error := errorProducer(""); error != nil {
+  if error == errorEmptyMessage {
+    fmt.Printf("EMPTY MESSAGE ERROR: %s\n", error)
+  } else {
+    fmt.Printf("ERROR: %s\n", error)
+  }
+}
+```
+
+If you want to end program execution when an error occurs, you can use `panic`, although it is more advisable to catch standard errors and deal with them in your code:
+
+```go
+func errorProducer(msg string) error {
+  if msg == "" {
+    panic("Hey that message was empty.")
+  } 
+}
+
+errorProducer("")
+```
+
+This will cancel execution of the Go program and give a stack trace.
+
+## User defined types
+
+The most common way to define a custom type in Go is to use a `struct`:
+
+```go
+type user struct {
+  first_name string
+  last_name string
+  email string
+  admin bool
+}
+```
+
+You can use this type in a couple of ways:
+
+```go
+elliot := user{
+  first_name: "Elliot",
+  last_name: "Larson",
+  email: "elliot@onehouse.net",
+  admin: true,
+}
+
+// or
+
+elliot := user{"Elliot", "Larson", "elliot@onehouse.net", true}
+```
+
+You can also use user defined types when setting struct types:
+
+```go
+type admin struct {
+  level int
+}
+
+type user struct {
+  name string
+  admin admin
+}
+
+elliot := user{
+  name: "Elliot Larson",
+  admin: admin{
+    level: 1,
+  },
+}
+```
+
+You can also create types that are based on existing types.  
+
+```go
+type Duration int64
+```
+
+This can be useful if you want to attach applicationn specific functionality or meaning to a standard type.
+
+You can add behavior to user defined types with methods:
+
+```go
+type user struct {
+  firstName string
+  lastName string
+}
+
+func (user user) fullName() string {
+  n := []byte{user.firstName, user.LastName}
+  return strings.Join(n, " ")
+}
+
+func main() {
+  elliot := user{
+    firstName: "Elliot",
+    lastName: "Larson",
+  }
+  fmt.Printf("Full name: %s", elliot.fullName())
+}
+// => Full name: Elliot Larson
+```
+
+However, lets say you had a method that modified the data in the `user` struct:
+
+```go
+func (user user) setFirstName(newFirstName string) {
+  user.firstName = newFirstName
+}
+
+func main() {
+  elliot := user{
+    firstName: "Elliot",
+    lastName: "Larson",
+  }
+  fmt.Printf("Full name: %s", elliot.fullName())
+  elliot.setFirstName("El")
+  fmt.Printf("Full name: %s", elliot.fullName())
+}
+// => Full name: Elliot Larson
+// => Full name: Elliot Larson
+```
+
+Notice that both `Printf` statements output the same value, even though we changed the `firstName` value.  This is because the user struct is being passed by value (copied) into each method instead of passing by reference.
+
+To fix this, we need to use pointers:
+
+```go
+type user struct {
+  firstName string
+  lastName string
+}
+
+func (user user) fullName() string {
+  n := []byte{user.firstName, user.LastName}
+  return strings.Join(n, " ")
+}
+
+func (user *user) setFirstName(newFirstName string) {
+  user.firstName = newFirstName
+}
+
+func main() {
+  elliot := &user{
+    firstName: "Elliot",
+    lastName: "Larson",
+  }
+  fmt.Printf("Full name: %s", elliot.fullName())
+  elliot.setFirstName("El")
+  fmt.Printf("Full name: %s", elliot.fullName())
+}
+// => Full name: Elliot Larson
+// => Full name: El Larson
+```
+
+Go is somewhat forgiving here, translating pointers and values into the appropriate thing a method expects, so this can be a bit confusing.  If you plan to mutate a value, use a pointer.  If you don't care about maintaining the state of a mutation, use a value.
+
+## Debugging with Delve
+
+[Delve](https://github.com/derekparker/delve) (dlv) is a full featured, community developed Go debugger. 
+
+#### Installation
+
+The installation instructions are a little hard to follow.  Basically, you start by getting the code:
+
+```bash
+$ go get github.com/derekparker/delve
+```
+
+This grabs the code from GitHub and puts it in the `$GOPATH/src/github.com/derekparker/delve` directory.
+
+Then you generate a self signed certificate using the Keychain Access application.  This is more complicated than it should be.  (Long-winded instructions are here.)[https://github.com/derekparker/delve/wiki/Building].
+
+Once you have the certificate in place, you need to `make` the delve binary:
+
+```bash
+$ cd $GOPATH/src/github.com/derekparker/delve
+$ GO15VENDOREXPERIMENT=1 CERT=dlv-cert make install
+```
+
+#### Usage
+
+Lets say you have the following code in `main.go`:
+
+```go
+package main
+
+import (
+  "fmt"
+  "os"
+)
+
+func main() {
+  var s, sep string
+  for i := 1; i < len(os.Args); i++ {
+    s += sep + os.Args[i]
+    sep = " "
+  }
+  fmt.Println(s)
+}
+```
+
+In the same directory as `main.go`, enter the following:
+
+```bash
+$ sudo dlv debug -- foo bar baz
+# Type 'help' for list of commands.
+(dlv) b main.go:18
+(dlv) c
+# > main.main() ./main.go:18 (hits goroutine(1):1 total:1) (PC: 0x20a2)
+#     13: )
+#     14:
+#     15: func main() {
+#     16:         var s, sep string
+#     17:         for i := 1; i < len(os.Args); i++ {
+# =>  18:                 s += sep + os.Args[i]
+#     19:                 sep = " "
+#     20:         }
+#     21:         fmt.Println(s)
+#     22: }
+#     23:
+(dlv) p os.Args
+# => []string len: 4, cap: 4, ["./debug","foo","bar","baz"]
+(dlv) p os.Args[1]
+# "foo"
+(dlv) p i
+# 1
+(dlv) c
+# > main.main() ./main.go:18 (hits goroutine(1):2 total:2) (PC: 0x20a2)
+#     13: )
+#     14:
+#     15: func main() {
+#     16:         var s, sep string
+#     17:         for i := 1; i < len(os.Args); i++ {
+# =>  18:                 s += sep + os.Args[i]
+#     19:                 sep = " "
+#     20:         }
+#     21:         fmt.Println(s)
+#     22: }
+#     23:
+(dlv) p i
+# 2
+# ctrl-d to exit
+```
+
+If you are debugging an application that doesn't take in command line arguments the command to start a debugging session is:
+
+```bash
+$ sudo dlv debug
+```
+
+In our case, we *do* want command line arguments, so we append `-- arg1 arg2 arg2`.
+
+Once the debugging session is started, we set breakpoints.  We did this with `b main.go:18`.  This tells dlv to set a breakpoint at line 18 in the `main.go` file.  
+
+Once we're done setting breakpoints, we tell dlv to execute throught to the first breakpoint with the continue command `c`.
+
+When dlv hits a breakpoint, it prints out the code's context and allows you to poke around.  To look at variables, use the print command.  In our case, we looked at the args being passed in with `p os.Args`.
+
+Once you're finished with your debugging session, you can `ctrl-d` to quit.
+
+## Testing
+
+Go has a testing package in its standard library.  Here is a basic, trivial test:
+
+```go
+package my_first_test
+
+import "testing"
+
+func TestMyFirstTest(t *testing.T) {
+  if 1 != 2 {
+    t.Errorf("An error occured")
+  }
+}
+```
+
+Test functions all start with the prefix `Test` and accept the argument `t *testing.T`.  The text after the prefix `Test` in the function name is up to you and should be descriptive about the nature of the test (maybe something better than `MyFirstTest`.
+
+`*testing.T` provides a number of methods for use in your tests. If you call `t.Error` or `t.Errorf`, the test runner will register a failure with the message supplied.  The errors will be printed out as they occur when the test suite is run.  If you use `t.Fatal` or `t.Fatalf` the error will be printed out and the suite will stop running. 
+
+Go tests generally have the same name as the file they are testing, but the filename is postfixed with `_test.go`.  The test also generally belongs to the same package as the file under test. 
+
+Here's a trivial example:
+
+Say we have an implementation file `simplemath/math.go`:
+
+```go
+package simplemath
+
+func IntAdd(a, b int) int {
+  return a + b
+}
+```
+
+Then we could have a test file `simplemath/math_test.go`:
+
+```go
+package simplemath
+
+import "testing"
+
+func TestIntAdd(t *testing.T) {
+  c := IntAdd(2, 2)
+  if c != 4 {
+    t.Errorf("Expected result to eq %d, but received %d", 4, c)
+  }
+}
+```
+
+#### Running tests
+
+You can run all tests from the root of the codebase with:
+
+```bash
+$ go test
+# PASS
+# ok      github.com/elliotlarson/simplemath      0.005s
+```
+
+You can also use the `-v` option to get verbose output:
+
+```bash
+$ go test -v
+# === RUN   TestIntAdd
+# --- PASS: TestIntAdd (0.00s)
+# PASS
+# ok      github.com/elliotlarson/simplemath      0.005s
+```
+
+To run a specific file, you can pass in the filename as an argument:
+
+```bash
+$ go test math_test.go
+# command-line-arguments
+# ./math_test.go:6: undefined: IntAdd
+# FAIL    command-line-arguments [build failed]
+```
+
+We failed here because the implementation file was not included.  To fix this problem, add the implementation filename too:
+
+```bash
+$ go test math_test.go math.go
+# ok      command-line-arguments  0.005s
+```
+
+You can also run specific tests identified by a regex using the `-run` argument to identify matching test names:
+
+```bash
+$ go test -v -run 'IntAdd' math_test.go math.go
+# === RUN   TestIntAdd
+# --- PASS: TestIntAdd (0.00s)
+# PASS
+# ok      command-line-arguments  0.006s
+```
+
+#### Debugging tests with Delve
+
+To start a testing debug session:
+
+```bash
+$ sudo dlv test
+(dlv) b math_test.go:8
+# Breakpoint 1 set at 0x7df2f for _/Users/Elliot/Work/GoCode/src/github.com/elliotlarson/simplemath.TestIntAdd() ./math_test.go:8
+(dlv) c
+# > _/Users/Elliot/Work/GoCode/src/github.com/elliotlarson/simplemath.TestIntAdd() ./math_test.go:8 (hits goroutine(5):1 total:1) (PC: # 0x7df2f)
+#      3: import "testing"
+#      4:
+#      5: func TestIntAdd(t *testing.T) {
+#      6:         c := IntAdd(2, 2)
+# =>   7:         if c != 4 {
+#      8:                 t.Errorf("Expected result to eq %d, but it was %d", 4, c)
+#      9:         }
+#     10: }
+#     11:
+(dlv) p c
+# 4
 ```
