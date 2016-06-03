@@ -42,7 +42,7 @@ $ go build
 $ go install
 ```
 
-This will generate an executable called `hello` and put it in your `$GOPATH/bin/` directory.  
+This will generate an executable called `hello` and put it in your `$GOPATH/bin/` directory.
 
 Provided you have this directory included in your `$PATH`, you should be able to execute it:
 
@@ -61,7 +61,7 @@ All go files declare a package that they belong to as their first line.  For exa
 package main
 ```
 
-The `main` package is special and indicates to the Go compiler that the program is going to be an executable.  
+The `main` package is special and indicates to the Go compiler that the program is going to be an executable.
 
 The package `main` is accompanied by the function `main` that is the entrypoint for execution of an executable Go app:
 
@@ -281,6 +281,28 @@ fmt.Println(*p)
 // 0
 ```
 
+#### The make function
+
+`Make` allocates and initializes a slice, map, or channel.  The first argumnet is a type and it returns a type.  The next arguments depend on the type.
+
+For a slice, `make` accepts two size arguments.  The first is length, and the second is capacity.  This allocates an int slice with a length of 0 and a capacity of 10.
+
+```go
+s := make(int[], 0, 10)
+```
+
+The following initializes an empty map with string keys and int values:
+
+```go
+m := make(map[string]int)
+```
+
+The following initializes an empty channel of type int:
+
+```go
+c := make(channel int)
+```
+
 #### The blank `_` identifier
 
 Go will throw a compile error if you declare a variable that you don't use.  However, sometimes you need to assign a variable you don't intend to use.  In these cases, you can use the `_` identifier.
@@ -432,7 +454,7 @@ for i := 0; i < 10; i++ {
 }
 ```
 
-## Functions 
+## Functions
 
 Here is what a basic function looks like:
 
@@ -494,7 +516,7 @@ func printer(msg string) (e error) {
 
 Notice that you don't have to add the variable to the return here.  Since you've named it, when you return from the function, Go knows you want to return the `e` variable.
 
-Functions in Go can accept variable numbers of arguments:
+Functions in Go can accept variable numbers of arguments (variadic):
 
 ```go
 func printer(msgs ...string) {
@@ -502,6 +524,13 @@ func printer(msgs ...string) {
     fmt.Printf("%s\n", msg)
   }
 }
+```
+
+You can translate an array of items into a variadic set of arguments:
+
+```go
+myMsgs := []string{"foo", "bar", "baz"}
+printer(myMsgs...)
 ```
 
 ## Arrays and Slices
@@ -591,8 +620,6 @@ words := make([]string, 0, 4)
 ```
 
 This is, initialize the slice with zero items and only allow a maximum capacity of 4 items.
-
-
 
 Then you can use the `append` method to add to the words slice:
 
@@ -737,7 +764,7 @@ You can return an error with the `fmt` library:
 func errorProducer(msg string) error {
   if msg == "" {
     return fmt.Errorf("Hey that message was empty.")
-  } 
+  }
 }
 
 if error := errorProducer(""); error != nil {
@@ -755,7 +782,7 @@ var errorEmptyMessage = errors.New("Hey that message was empty.")
 func errorProducer(msg string) error {
   if msg == "" {
     return errorEmptyMessage
-  } 
+  }
 }
 
 if error := errorProducer(""); error != nil {
@@ -773,7 +800,7 @@ If you want to end program execution when an error occurs, you can use `panic`, 
 func errorProducer(msg string) error {
   if msg == "" {
     panic("Hey that message was empty.")
-  } 
+  }
 }
 
 errorProducer("")
@@ -829,7 +856,7 @@ elliot := user{
 }
 ```
 
-You can also create types that are based on existing types.  
+You can also create types that are based on existing types.
 
 ```go
 type Duration int64
@@ -914,109 +941,187 @@ func main() {
 
 Go is somewhat forgiving here, translating pointers and values into the appropriate thing a method expects, so this can be a bit confusing.  If you plan to mutate a value, use a pointer.  If you don't care about maintaining the state of a mutation, use a value.
 
-## Debugging with Delve
+According to the GoTour: "There are two reasons to use a pointer receiver":
 
-[Delve](https://github.com/derekparker/delve) (dlv) is a full featured, community developed Go debugger. 
+* The first is so that the method can modify the value that its receiver points to.
+* The second is to avoid copying the value on each method call.
 
-#### Installation
+#### Type embedding
 
-The installation instructions are a little hard to follow.  Basically, you start by getting the code:
+Golang doesn't support inheritance, but it allows you to use composition, giving you the ability to include one struct and it's behaviors into another.
 
-```bash
-$ go get github.com/derekparker/delve
-```
-
-This grabs the code from GitHub and puts it in the `$GOPATH/src/github.com/derekparker/delve` directory.
-
-Then you generate a self signed certificate using the Keychain Access application.  This is more complicated than it should be.  (Long-winded instructions are here.)[https://github.com/derekparker/delve/wiki/Building].
-
-Once you have the certificate in place, you need to `make` the delve binary:
-
-```bash
-$ cd $GOPATH/src/github.com/derekparker/delve
-$ GO15VENDOREXPERIMENT=1 CERT=dlv-cert make install
-```
-
-#### Usage
-
-Lets say you have the following code in `main.go`:
+In this example, we'll create a `User` type and embed it into the `Admin` type, which will give it access to the `User`'s data and methods.
 
 ```go
-package main
+type User struct {
+	FirstName string
+	LastName  string
+}
 
-import (
-  "fmt"
-  "os"
-)
+func (user *User) FullName() string {
+	return fmt.Sprintf("%s %s", user.FirstName, user.LastName)
+}
+
+type Admin struct {
+	User
+	Roles map[string]string
+}
 
 func main() {
-  var s, sep string
-  for i := 1; i < len(os.Args); i++ {
-    s += sep + os.Args[i]
-    sep = " "
-  }
-  fmt.Println(s)
+	admin := &Admin{
+		User{
+			FirstName: "Elliot",
+			LastName:  "Larson",
+		},
+		map[string]string{"pies": "manage"},
+	}
+	fmt.Println(admin.FullName())
+	fmt.Println("First name: ", admin.FirstName)
+	fmt.Println("Last name: ", admin.LastName)
 }
 ```
 
-In the same directory as `main.go`, enter the following:
+If we run this we get:
 
 ```bash
-$ sudo dlv debug -- foo bar baz
-# Type 'help' for list of commands.
-(dlv) b main.go:18
-(dlv) c
-# > main.main() ./main.go:18 (hits goroutine(1):1 total:1) (PC: 0x20a2)
-#     13: )
-#     14:
-#     15: func main() {
-#     16:         var s, sep string
-#     17:         for i := 1; i < len(os.Args); i++ {
-# =>  18:                 s += sep + os.Args[i]
-#     19:                 sep = " "
-#     20:         }
-#     21:         fmt.Println(s)
-#     22: }
-#     23:
-(dlv) p os.Args
-# => []string len: 4, cap: 4, ["./debug","foo","bar","baz"]
-(dlv) p os.Args[1]
-# "foo"
-(dlv) p i
-# 1
-(dlv) c
-# > main.main() ./main.go:18 (hits goroutine(1):2 total:2) (PC: 0x20a2)
-#     13: )
-#     14:
-#     15: func main() {
-#     16:         var s, sep string
-#     17:         for i := 1; i < len(os.Args); i++ {
-# =>  18:                 s += sep + os.Args[i]
-#     19:                 sep = " "
-#     20:         }
-#     21:         fmt.Println(s)
-#     22: }
-#     23:
-(dlv) p i
-# 2
-# ctrl-d to exit
+$ go run
+# Elliot Larson
+# First name:  Elliot
+# Last name:  Larson
 ```
 
-If you are debugging an application that doesn't take in command line arguments the command to start a debugging session is:
+You can override methods, like so:
+
+```go
+func (admin *Admin) FullName() string {
+	return fmt.Sprintf("Mr. %s", admin.User.FullName())
+}
+```
+
+Then the output for `FullName` would be "Mr. Elliot Larson".
+
+## Interfaces
+
+Interfaces provide contracts for your user defined types that allow you to provide behaviors to objects that adhere to the contracts.
+
+From the Way To Go book:
+
+> Interfaces in Go provide a way to specify the behavior of an object: if something can do **this**, then it can be used **here**.
+
+You create an interface by defining the methods that user defined types that implement it must implement.  It is also the Go convention to end an interface name in "er", like `Writer`, `Reader`, `Stringer`, etc.
+
+```go
+type BeerDrinker interface {
+	Cheers() string
+}
+```
+
+In this example, the `BeerDrinker` interface requires one method to be implemented.
+
+```go
+type German struct{}
+
+func (g *German) Cheers() string {
+	return "Prost!"
+}
+
+type Irishman struct{}
+
+func (i *Irishman) Cheers() string {
+	return "Sláinte!"
+}
+```
+
+The `German` and `Irishman` structs are said to implement the `BeerDrinker` interface because they both have the method `Cheers() string`.
+
+Notice that these structs do not need to specificially state that they implement `BeerDrinker`.  Simply by having the appropriate method, they do.
+
+One advantage here is that you can create general collections of user defined types that implement an interface:
+
+```go
+func main() {
+	gunter := &German{}
+	conner := &Irishman{}
+	dietrich := &German{}
+	beerDrinkers := []BeerDrinker{gunter, conner, dietrich}
+	for _, beerDrinker := range beerDrinkers {
+		fmt.Println(beerDrinker.Cheers())
+	}
+}
+```
+
+If we run this:
 
 ```bash
-$ sudo dlv debug
+$ go run
+# Prost!
+# Sláinte!
+# Prost!
 ```
 
-In our case, we *do* want command line arguments, so we append `-- arg1 arg2 arg2`.
+We've created a `[]BeerDrinker` slice containing both `German` and `Irishman` types and iterated through them.
 
-Once the debugging session is started, we set breakpoints.  We did this with `b main.go:18`.  This tells dlv to set a breakpoint at line 18 in the `main.go` file.  
+You can also pass an implementer into a function that accepts an interface, allowing a function to accept heterogeneous types:
 
-Once we're done setting breakpoints, we tell dlv to execute throught to the first breakpoint with the continue command `c`.
+```go
+func (g *German) OrderAnother() string {
+	return "Einmal bier bitte"
+}
 
-When dlv hits a breakpoint, it prints out the code's context and allows you to poke around.  To look at variables, use the print command.  In our case, we looked at the args being passed in with `p os.Args`.
+func (i *Irishman) OrderAnother() string {
+	return "Beoir eile, le do thóil"
+}
 
-Once you're finished with your debugging session, you can `ctrl-d` to quit.
+func FinishBeer(bd BeerDrinker) string {
+	return bd.OrderAnother()
+}
+
+func main() {
+	gunter := &German{}
+	conner := &Irishman{}
+	dietrich := &German{}
+	beerDrinkers := []BeerDrinker{gunter, conner, dietrich}
+	for _, beerDrinker := range beerDrinkers {
+		fmt.Println(beerDrinker.Cheers())
+		fmt.Println("Ahhhh!")
+		fmt.Println(FinishBeer(beerDrinker))
+	}
+}
+```
+
+Here, the function `FinishBeer` accepts a `BeerDrinker` interface, which is implemented by both `German` and `Irishman`.
+
+#### Interface pointers
+
+Notice the `FinishBeer(bd BeerDrinker) string` function above, accepts an interface argument that is not a pointer.  You (seem to) never define an interface method that accepts a pointer interface.  Even though we're passing in pointers to `German` and `Irishman` structs this still works.
+
+[Karl Seguin](http://openmymind.net/Things-I-Wish-Someone-Had-Told-Me-About-Go/) said this about interfaces:
+
+> ... either a value-type or a reference-type can satisfy an interface. So, technically, you don't know whether the value being passed is a copy of a pointer or a copy of a value, but it's probably the former.
+
+e.g.
+
+```go
+func MyHandler(res http.ResponseWriter, req *http.Request) {
+  // ...
+}
+```
+
+#### Empty interface
+
+You may also see something like this:
+
+```go
+func MyAmazingMEthod(v interface{}) {
+   // ...
+}
+```
+
+The argument to this function is `interface{}`, which means an object of any type.  There are times where this is a necessary convenience, like when decoding JSON with an unknown structure.  However, it is discouraged unless necessary, since using the empty interface value forgoes the type safety you get with Go.
+
+#### Resources
+
+* http://jordanorelli.com/post/32665860244/how-to-use-interfaces-in-go
 
 ## Testing
 
@@ -1036,9 +1141,9 @@ func TestMyFirstTest(t *testing.T) {
 
 Test functions all start with the prefix `Test` and accept the argument `t *testing.T`.  The text after the prefix `Test` in the function name is up to you and should be descriptive about the nature of the test (maybe something better than `MyFirstTest`.
 
-`*testing.T` provides a number of methods for use in your tests. If you call `t.Error` or `t.Errorf`, the test runner will register a failure with the message supplied.  The errors will be printed out as they occur when the test suite is run.  If you use `t.Fatal` or `t.Fatalf` the error will be printed out and the suite will stop running. 
+`*testing.T` provides a number of methods for use in your tests. If you call `t.Error` or `t.Errorf`, the test runner will register a failure with the message supplied.  The errors will be printed out as they occur when the test suite is run.  If you use `t.Fatal` or `t.Fatalf` the error will be printed out and the suite will stop running.
 
-Go tests generally have the same name as the file they are testing, but the filename is postfixed with `_test.go`.  The test also generally belongs to the same package as the file under test. 
+Go tests generally have the same name as the file they are testing, but the filename is postfixed with `_test.go`.  The test also generally belongs to the same package as the file under test.
 
 Here's a trivial example:
 
@@ -1111,27 +1216,4 @@ $ go test -v -run 'IntAdd' math_test.go math.go
 # --- PASS: TestIntAdd (0.00s)
 # PASS
 # ok      command-line-arguments  0.006s
-```
-
-#### Debugging tests with Delve
-
-To start a testing debug session:
-
-```bash
-$ sudo dlv test
-(dlv) b math_test.go:8
-# Breakpoint 1 set at 0x7df2f for _/Users/Elliot/Work/GoCode/src/github.com/elliotlarson/simplemath.TestIntAdd() ./math_test.go:8
-(dlv) c
-# > _/Users/Elliot/Work/GoCode/src/github.com/elliotlarson/simplemath.TestIntAdd() ./math_test.go:8 (hits goroutine(5):1 total:1) (PC: # 0x7df2f)
-#      3: import "testing"
-#      4:
-#      5: func TestIntAdd(t *testing.T) {
-#      6:         c := IntAdd(2, 2)
-# =>   7:         if c != 4 {
-#      8:                 t.Errorf("Expected result to eq %d, but it was %d", 4, c)
-#      9:         }
-#     10: }
-#     11:
-(dlv) p c
-# 4
 ```

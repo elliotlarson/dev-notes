@@ -4,7 +4,7 @@
 
 * power line font: https://github.com/eugeneching/consolas-powerline-vim
 
-## Overriding vim solarized 
+## Overriding vim solarized
 
 look for this
 
@@ -45,7 +45,7 @@ But, I can auto create the directory with this workflow:
 In the spec file:
 
 ```
-:!mkdir 
+:!mkdir
 ```
 
 ... then press **ctrl** + **r** and then **%**.  This will place the file name and path on the command.  Then delete the filename and hit **enter**.
@@ -65,7 +65,7 @@ Select the text. Go into command mode and type:
 Copy 21 to current line
 
     :21t.
-    
+
 Copy 21 to line 35
 
     :21t35
@@ -75,7 +75,7 @@ Copy 21 to line 35
 Move 21 to current line
 
     :21m.
-    
+
 Move 21 to line 35
 
     :21m35
@@ -93,7 +93,7 @@ http://www.isaacsloan.com/posts/3-vim-find-replace-in-projects-using-ack
 
 	:args `ack -l keywords`
 	:argdo %s/keywords/replacement/gce | update
-	
+
 another approach: http://www.isaacsloan.com/posts/51-vim-find-and-replace-in-project-episode-2
 
 ####  omni completion
@@ -102,7 +102,7 @@ another approach: http://www.isaacsloan.com/posts/51-vim-find-and-replace-in-pro
 
 #### Insert yanked register
 
-	insert mode 
+	insert mode
 	<c-r>0
 
 #### Do calculation and insert results
@@ -127,24 +127,24 @@ another approach: http://www.isaacsloan.com/posts/51-vim-find-and-replace-in-pro
 This enters insert mode at that point
 
 	gi
-	
+
 #### go to line where you were last in insert mode
 
 This does not enter insert mode
 
-    `.
+    \`.
 
 #### looks for method under cursor using ctags
 
 	<c-]>
 
 #### start recording a macro named s
-	
+
 	qs
 
 #### stop recording macro
 
-	q 
+	q
 
 #### apply a macro named s
 
@@ -203,15 +203,15 @@ Commands I've already learned
 
 #### select word and white space at end
 
-	aw 
+	aw
 
 #### select up to character but not including
 
-	t{char} 
+	t{char}
 
 #### change surrounding " to '
-	
-	cs"' 
+
+	cs"'
 
 #### exit vim to the terminal
 
@@ -227,8 +227,8 @@ Commands I've already learned
 
 #### move to previous tab
 
-	gT	
+	gT
 
 #### move to tab number #
 
-	#gt	
+	#gt
