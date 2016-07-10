@@ -1,293 +1,337 @@
 # Git Notes
 
-## Resources
+## Removing a file from the git repo history
 
-* http://www.youtube.com/watch?v=ZDR433b0HJY
-* http://www.youtube.com/watch?v=ig5E8CcdM9g
-* http://git-scm.com/book
-* http://mislav.uniqpath.com/2010/07/git-tips/
-
-## Misc
-
-#### Getting a list of files from a commit 
-
-```
-$ git diff-tree --no-commit-id --name-only -r ddf0df08
+```bash
+$ git filter-branch --tree-filter 'rm -f supersecretpass.txt' HEAD
 ```
 
-#### Getting back a file that you removed
+## Getting back a file that you removed
 
 1. Find the hash for the commit when you removed the file
 2. Enter this command:
 
-```
+```bash
 $ git checkout 048ddf081^ -- path/to/file.rb
 ```    
 
-## Rebasing
-
-#### merge the last two commits.
-
-	$ git rebase -i HEAD~2
-
-	# change 'pick' to 'squash' next to the commit you want to squash
-
-#### rebase conflict
-
-	$ git rebase
-
-	# <fix conflict>
-	$ git add <fixed file>
-	$ git rebase --continue
-
-	# <skip conflict>
-	$ git rebase --skip
-
-	# <abort rebase>
-	$ git rebase --abort
-	
-#### rename a commit
-
-	$ git rebase -i
-	
-	# change 'pick' to 'reword' next to the commit you want to change; 
-	# when you save the file, vim will open a commit file where you
-	# can change the message
-	
 ## Diffing
 
-#### show the changes from your last commit
+#### Show the changes from your last commit
 
-	$ git diff
+```bash
+$ git diff
+```
 
-#### show what the staged changed are
+#### Show what the staged changed are
 
-	$ git diff --staged
-	
-#### show the changes in a commit with the git difftool
+```bash
+$ git diff --staged
+```
 
-	$ git difftool 3e11f62ad37b871f^!
+#### Show the changes in a commit with the git difftool
 
-#### show the changes in a commit with command line diff
+```bash
+$ git difftool 3e11f62ad37b871f^!
+```
 
-	$ git diff 3ca00c2c847^!
-	
-	# it would be better to say:
-	$ git show 3ca00c2c847
-	
-#### diff the last 5 commits
+#### Show the changes in a commit with command line diff
 
-	$ git diff HEAD~5
-	
-	# you could also say
-	$ git log -p -5
+```bash
+$ git diff 3ca00c2c847^!
+# it would be better to say:
+$ git show 3ca00c2c847
+```
 
-#### diffing two different branches
+#### Diff the last 5 commits
 
-	$ git diff master bird
+```bash
+$ git diff HEAD~5
+# you could also say
+$ git log -p -5
+```
 
-#### diffing a single file
+#### Diffing two different branches
 
-	$ git diff HEAD^ app/controllers/sites/corporate/pages_controller.rb
-	
+```bash
+$ git diff master bird
+```
+
+#### Diffing a single file
+
+```bash
+$ git diff HEAD^ app/controllers/sites/corporate/pages_controller.rb
+```
+
 ## Log
 
-#### searching the log for a term
+#### Searching the log for a term
 
-	$ git log --grep=maps
+```bash
+$ git log --grep=maps
+```
 
-#### show git log with one line output
+#### Show git log with one line output
 
-	$ git log --pretty=oneline
-	$ git log --oneline
-	
-#### make log output one line for each commit
+```bash
+$ git log --pretty=oneline
+$ git log --oneline
+```
 
-	$ git log --pretty=oneline
-	$ git log --oneline
+#### Make log output one line for each commit
 
-#### show diffs in commit
+```bash
+$ git log --pretty=oneline
+$ git log --oneline
+```
+
+#### Show diffs in commit
 
 This is a great way to search for changes in the codebase.  
-	
-	$ git log -p
-	
-	# then you can search for terms by hitting the "/" key
 
-#### show only commits added by an author
+```bash
+$ git log -p
+# then you can search for terms by hitting the "/" key
+```
 
-	$ git log --author='onehouse <elliot@onehouse.net>'
+#### Show only commits added by an author
 
-#### show how many insertions and deletions were made in each commit
+```bash
+$ git log --author='onehouse <elliot@onehouse.net>'
+```
 
-	$ git log --oneline --stat
+#### Show how many insertions and deletions were made in each commit
 
-#### show a visual representation of commits in log
+```bash
+$ git log --oneline --stat
+```
 
-	$ git log --oneline --graph
+#### Show a visual representation of commits in log
 
-#### show git log until one minute ago
+```bash
+$ git log --oneline --graph
+```
 
-	$ git log --until=1.minute.ago
+#### Show git log until one minute ago
 
-#### show git log between two times
+```bash
+$ git log --until=1.minute.ago
+```
 
-	$ git log --since=1.month.ago --until=2.weeks.ago
+#### Show git log between two times
 
-#### show log of last 2 commits
+```bash
+$ git log --since=1.month.ago --until=2.weeks.ago
+```
 
-	$ git log -2
-	
-#### get a number of commits from git log, check them out, and run spec suite against them:
+#### Show log of last 2 commits
 
-	# <this doesn't actually work>
-	$ git log --author='onehouse <elliot@onehouse.net>' --since=1.day.ago --until=today --oneline | awk '{print $1}' | while read line; git checkout $line; rspec spec/; end
-	
-#### show all authors in a repo:
+```bash
+$ git log -2
+```
 
-	$ git log --format='%aN' | sort -u
+#### Show all authors in a repo:
 
-#### pull out the number of changes from a commit
+```bash
+$ git log --format='%aN' | sort -u
+```
 
- 	$ git show f769bc31bdd --stat | grep '|.*[+]*-*$' | awk '{print $3}' | paste -sd+ - | bc
+#### Pull out the number of changes from a commit
 
-#### show the git log stat for a single commit
+```bash
+$ git show f769bc31bdd --stat | grep '|.*[+]*-*$' | awk '{print $3}' | paste -sd+ - | bc
+```
 
-	$ git show f769bc31bdd --stat
+#### Show the git log stat for a single commit
+
+```bash
+$ git show f769bc31bdd --stat
+```
 
 ## Resetting
 
-#### unstage a file
+#### Unstage a file
 
-	$ git reset file.html
+```bash
+$ git reset file.html
+```
 
-#### roll a commit back, keeping changed files in staged area
+#### Roll a commit back, keeping changed files in staged area
 
-	$ git reset --soft HEAD^
+```bash
+$ git reset --soft HEAD^
+```
 
-#### undo last 2
+#### Undo last 2
 
-	$ git reset --soft HEAD^^
+```bash
+$ git reset --soft HEAD^^
+```
 
-#### roll a commit back, and blow away any files that were changed
+#### Roll a commit back, and blow away any files that were changed
 
-	$ get reset --hard HEAD^
-	
+```bash
+$ get reset --hard HEAD^
+```
+
 ## Committing
 
-#### add to the previous commit
+#### Add to the previous commit
 
-	$ git commit --amend -m "New message for commit"
-	
+```bash
+$ git commit --amend -m "New message for commit"
+```
+
 ## Remotes
 
-#### get list of remote repositories that Git knows about
+#### Get list of remote repositories that Git knows about
 
-	$ git remote -v
-
-	$ git pull force
-	$ git fetch --all
-	$ git reset --hard origin/branch
+```bash
+$ git remote -v
+$ git pull force
+$ git fetch --all
+$ git reset --hard origin/branch
+```
 
 #### Add a remote repository
 
-	$ git remote add origin https://github.com…
+```bash
+$ git remote add origin https://github.com…
+```
 
-#### remove a remote
+#### Remove a remote
 
-	$git remote rm <name>
-	
+```bash
+$ git remote rm <name>
+```
+
 ## Bisecting
 
-#### git bisect run article
+#### Git bisect run article
 
 * http://robots.thoughtbot.com/git-bisect
 * http://lwn.net/Articles/317154/
 
 Passing bad and good revisions to git bisect start
 
-	$ git bisect start HEAD e6be773
-    # <bad> <good>
+```bash
+$ git bisect start HEAD e6be773
+# <bad> <good>
+```
 
 Auto running git bisect with a command
 
-	$ git bisect run zeus rspec ./spec/models/commercial_application_spec.rb 
+```bash
+$ git bisect run zeus rspec ./spec/models/commercial_application_spec.rb
+```
 
 ## Branches
 
-#### track a remote branch
+#### Track a remote branch
 
-	$ git checkout -t origin/haml
+```bash
+$ git checkout -t origin/haml
+```
 
-#### get list of remote branches
+#### Get list of remote branches
 
-	$ git branch -r
+```bash
+$ git branch -r
+```
 
-#### delete a remote branch
+#### Delete a remote branch
 
-	$ git branch origin :weasel
+```bash
+$ git branch origin :weasel
+```
 
-#### show information about remote origin
+#### Show information about remote origin
 
-	$ git remote show origin
+```bash
+$ git remote show origin
+```
 
-#### clean up deleted remote branches
+#### Clean up deleted remote branches
 
-	$ git remote prune origin
+```bash
+$ git remote prune origin
+```
 
-#### push a local branch to a remote branch with a different name
+#### Push a local branch to a remote branch with a different name
 
-	$ git push origin staging:master
-	
-#### merging in a feature branch and squashing commits into one
+```bash
+$ git push origin staging:master
+```
 
-    $ git checkout -b my-feature-branch
-    # ... do some work and commit several times
-    $ git rebase master
-    $ git checkout master
-    $ git merge --squash my-feature-branch
-    $ git commit -m 'adding in my feature'
-	
+#### Merging in a feature branch and squashing commits into one
+
+```bash
+$ git checkout -b my-feature-branch
+# ... do some work and commit several times
+$ git rebase master
+$ git checkout master
+$ git merge --squash my-feature-branch
+$ git commit -m 'adding in my feature'
+```
+
 ## Tags
 
-#### list all tags
+#### List all tags
 
-	$ git tag
+```bash
+$ git tag
+```
 
-#### checkout a tag
+#### Checkout a tag
 
-	$ git checkout <tagname>
+```bash
+$ git checkout <tagname>
+```
 
-#### add a new tag
+#### Add a new tag
 
-	$ git tag -a v0.0.3 -m "version 0.0.3"
+```bash
+$ git tag -a v0.0.3 -m "version 0.0.3"
+```
 
-#### push tags to remote
+#### Push tags to remote
 
-	$ git push --tags
-	
+```bash
+$ git push --tags
+```
+
 ## Fetching
 
-#### pull down all changes without committing them
+#### Pull down all changes without committing them
 
-	$ git fetch
+```bash
+$ git fetch
+```
 
 ## Config
 
-#### add color to git output with config option
+#### Add color to git output with config option
 
-	$ git config --global color.ui true
+```bash
+$ git config --global color.ui true
+```
 
-#### see all config options
+#### See all config options
 
-	$ git config --list
+```bash
+$ git config --list
+```
 
-#### set alias for git command
+#### Set alias for git command
 
-	$ git config --global alias.st status
-	$ git config --global alias.mylog "log --pretty=format: '%h %s [%an]' --graph"
-	
-#### rebase by default config
+```bash
+$ git config --global alias.st status
+$ git config --global alias.mylog "log --pretty=format: '%h %s [%an]' --graph"
+```
 
-	$ git config --global branch.master.rebase true
-	$ git config --global branch.autosetuprebase always
+#### Rebase by default config
+
+```bash
+$ git config --global branch.master.rebase true
+$ git config --global branch.autosetuprebase always
+```
