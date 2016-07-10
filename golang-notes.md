@@ -281,6 +281,18 @@ fmt.Println(*p)
 // 0
 ```
 
+Another example might be to initialize a pointer to a struct:
+
+```go
+ms := new(MyStruct)
+```
+
+which is equivalent to:
+
+```go
+ms := &MyStruct{}
+```
+
 #### The make function
 
 `Make` allocates and initializes a slice, map, or channel.  The first argumnet is a type and it returns a type.  The next arguments depend on the type.
@@ -1122,98 +1134,3 @@ The argument to this function is `interface{}`, which means an object of any typ
 #### Resources
 
 * http://jordanorelli.com/post/32665860244/how-to-use-interfaces-in-go
-
-## Testing
-
-Go has a testing package in its standard library.  Here is a basic, trivial test:
-
-```go
-package my_first_test
-
-import "testing"
-
-func TestMyFirstTest(t *testing.T) {
-  if 1 != 2 {
-    t.Errorf("An error occured")
-  }
-}
-```
-
-Test functions all start with the prefix `Test` and accept the argument `t *testing.T`.  The text after the prefix `Test` in the function name is up to you and should be descriptive about the nature of the test (maybe something better than `MyFirstTest`.
-
-`*testing.T` provides a number of methods for use in your tests. If you call `t.Error` or `t.Errorf`, the test runner will register a failure with the message supplied.  The errors will be printed out as they occur when the test suite is run.  If you use `t.Fatal` or `t.Fatalf` the error will be printed out and the suite will stop running.
-
-Go tests generally have the same name as the file they are testing, but the filename is postfixed with `_test.go`.  The test also generally belongs to the same package as the file under test.
-
-Here's a trivial example:
-
-Say we have an implementation file `simplemath/math.go`:
-
-```go
-package simplemath
-
-func IntAdd(a, b int) int {
-  return a + b
-}
-```
-
-Then we could have a test file `simplemath/math_test.go`:
-
-```go
-package simplemath
-
-import "testing"
-
-func TestIntAdd(t *testing.T) {
-  c := IntAdd(2, 2)
-  if c != 4 {
-    t.Errorf("Expected result to eq %d, but received %d", 4, c)
-  }
-}
-```
-
-#### Running tests
-
-You can run all tests from the root of the codebase with:
-
-```bash
-$ go test
-# PASS
-# ok      github.com/elliotlarson/simplemath      0.005s
-```
-
-You can also use the `-v` option to get verbose output:
-
-```bash
-$ go test -v
-# === RUN   TestIntAdd
-# --- PASS: TestIntAdd (0.00s)
-# PASS
-# ok      github.com/elliotlarson/simplemath      0.005s
-```
-
-To run a specific file, you can pass in the filename as an argument:
-
-```bash
-$ go test math_test.go
-# command-line-arguments
-# ./math_test.go:6: undefined: IntAdd
-# FAIL    command-line-arguments [build failed]
-```
-
-We failed here because the implementation file was not included.  To fix this problem, add the implementation filename too:
-
-```bash
-$ go test math_test.go math.go
-# ok      command-line-arguments  0.005s
-```
-
-You can also run specific tests identified by a regex using the `-run` argument to identify matching test names:
-
-```bash
-$ go test -v -run 'IntAdd' math_test.go math.go
-# === RUN   TestIntAdd
-# --- PASS: TestIntAdd (0.00s)
-# PASS
-# ok      command-line-arguments  0.006s
-```

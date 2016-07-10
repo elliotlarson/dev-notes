@@ -516,6 +516,36 @@ $ curl -id "name=foo&name=bar" http://localhost:8088
 # foo
 ```
 
+## Returning Status Codes
+
+If you are returning an error code, you can use the `http.Error` method:
+
+```go
+func StatusHandler(writer http.ResponseWriter, request *http.Request) {
+	http.Error(writer, http.StatusText(http.StatusTeapot), http.StatusTeapot)
+}
+```
+
+The `http` package has named variables that represent the various status codes, which can make your code easier to read.  There is also a `StatusText` method which returns standard status messages.
+
+You could also do this with the writer's `WriteHeader` and `Write` methods:
+
+```go
+func StatusHandler(writer http.ResponseWriter, request *http.Request) {
+	writer.WriteHeader(http.StatusTeapot)
+	writer.Write([]byte("I'm a teapot\n"))
+}
+```
+
+... or a good response:
+
+```go
+func StatusHandler(writer http.ResponseWriter, request *http.Request) {
+	writer.WriteHeader(http.StatusOK)
+	writer.Write([]byte("Hello, World!\n"))
+}
+```
+
 ## Serving an HTML response with `Write`
 
 The response writer `Write` method takes in a `[]byte` and writes it to the response body.
@@ -538,6 +568,197 @@ func main() {
 	http.HandleFunc("/", writeBodyHandler)
 	server := http.Server{Addr: ":8088"}
 	server.ListenAndServe()
+}
+```
+
+## Creating a CRUD Resourceful Route System
+
+Data piece that supports the routes:
+
+```go
+import (
+	"database/sql"
+
+	_ "github.com/lib/pq"
+)
+
+var Db *sql.DB
+
+func init() {
+	var err error
+	Db, err = sql.Open(
+		"postgres",
+		"user=gosql_user password=secret dbname=gosql sslmode=disable",
+	)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func getPost(id int) (post Post, err error) {
+	post = Post{}
+	sql := `
+		SELECT
+			id, content, author
+		FROM
+			posts
+		WHERE
+			id = $1
+	`
+	row := Db.QueryRow(sql, id)
+	err = row.Scan(&post.ID, &post.Content, &post.Author)
+	return
+}
+
+func (post *Post) create() (err error) {
+	sql := `
+		INSERT INTO posts
+			(content, author)
+		VALUES
+			($1, $2)
+		RETURNING
+			id
+	`
+	statement, err := Db.Prepare(sql)
+	if err != nil {
+		return
+	}
+	defer statement.Close()
+	row := statement.QueryRow(post.Content, post.Author)
+	err = row.Scan(&post.ID)
+	return
+}
+
+func (post *Post) update() (err error) {
+	sql := `
+		UPDATE
+			posts
+		SET
+			content = $2,
+			author = $3
+		WHERE
+			id = $1
+	`
+	_, err = Db.Exec(sql, post.ID, post.Content, post.Author)
+	return
+}
+
+func (post *Post) delete() (err error) {
+	sql := `
+		DELETE FROM
+			posts
+		WHERE
+			id = $1
+	`
+	_, err = Db.Exec(sql, post.ID)
+	return
+}
+```
+
+Notice that the `"github.com/lib/pq"` is not used directly but imported in order to call through to its `init` method.
+
+Here is the multiplexer piece that handles the routes:
+
+```go
+type Post struct {
+	ID      int    `json:"id"`
+	Author  string `json:"author"`
+	Content string `json:"content"`
+}
+
+func main() {
+	server := http.Server{Addr: ":8088"}
+	http.HandleFunc("/posts/", requestHandler)
+	server.ListenAndServe()
+}
+
+func requestHandler(writer http.ResponseWriter, request *http.Request) {
+	var err error
+	switch request.Method {
+	case "GET":
+		err = handleGet(writer, request)
+	case "POST":
+		err = handlePost(writer, request)
+	case "PUT":
+		err = handlePut(writer, request)
+	case "DELETE":
+		err = handleDelete(writer, request)
+	}
+	if err != nil {
+		http.Error(writer, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func handleGet(writer http.ResponseWriter, request *http.Request) (err error) {
+	id, err := strconv.Atoi(path.Base(request.URL.Path))
+	if err != nil {
+		return
+	}
+	post, err := getPost(id)
+	if err != nil {
+		return
+	}
+	postJSON, err := json.MarshalIndent(&post, "", "\t")
+	if err != nil {
+		return
+	}
+	writer.Header().Set("Content-Type", "application/json")
+	writer.Write(postJSON)
+	return
+}
+
+func handlePost(writer http.ResponseWriter, request *http.Request) (err error) {
+	len := request.ContentLength
+	body := make([]byte, len)
+	request.Body.Read(body)
+	fmt.Printf("%#v\n", request.Body)
+	var post Post
+	json.Unmarshal(body, &post)
+	fmt.Printf("%#v\n", post)
+	err = post.create()
+	if err != nil {
+		return
+	}
+	writer.WriteHeader(200)
+	return
+}
+
+func handlePut(writer http.ResponseWriter, request *http.Request) (err error) {
+	id, err := strconv.Atoi(path.Base(request.URL.Path))
+	if err != nil {
+		return
+	}
+	post, err := getPost(id)
+	if err != nil {
+		return
+	}
+	len := request.ContentLength
+	body := make([]byte, len)
+	request.Body.Read(body)
+	json.Unmarshal(body, &post)
+	err = post.update()
+	if err != nil {
+		return
+	}
+	writer.WriteHeader(200)
+	return
+}
+
+func handleDelete(writer http.ResponseWriter, request *http.Request) (err error) {
+	id, err := strconv.Atoi(path.Base(request.URL.Path))
+	if err != nil {
+		return
+	}
+	post, err := getPost(id)
+	if err != nil {
+		return
+	}
+	err = post.delete()
+	if err != nil {
+		return
+	}
+	writer.WriteHeader(200)
+	return
 }
 ```
 
