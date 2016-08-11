@@ -1,6 +1,6 @@
 # Debugging with Delve
 
-[Delve](https://github.com/derekparker/delve) (dlv) is a full featured, community developed Go debugger. 
+[Delve](https://github.com/derekparker/delve) (dlv) is a full featured, community developed Go debugger.
 
 ## Installation
 
@@ -86,7 +86,7 @@ $ sudo dlv debug -- foo bar baz
 # ctrl-d to exit
 ```
 
-If you are debugging an application that doesn't take in command line arguments the command to start a debugging session is:
+If you are debugging an application that doesn't take in command line arguments the command, to start a debugging session is:
 
 ```bash
 $ sudo dlv debug
