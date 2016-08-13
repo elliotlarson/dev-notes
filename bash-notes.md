@@ -101,7 +101,7 @@ There are a number of file specific features you can use with test:
 You can check if a file exists with `-e`:
 
 ```bash
-if [ -e "$file" ]; then 
+if [ -e "$file" ]; then
   echo "file exists"
 fi
 ```
@@ -113,7 +113,7 @@ Some of the usefule file test options:
 | -e   | file exists                                      |
 | -L   | file exists and is a symbolic link               |
 | -r   | file exists and is readable                      |
-| -w   | file exists and is writable                      | 
+| -w   | file exists and is writable                      |
 | -x   | file exists and is executable                    |
 | -s   | file exists and has a length greater than zero   |
 | -d   | file is a directory                              |
@@ -139,6 +139,16 @@ Some useful string test options:
 | string1 > string2  | string1 is greater than string2     |
 | string1 < string2  | string1 is less than string2        |
 | string1 != string2 | string1 does not equal string2      |
+
+One example of `-z` is checking if there is an argument being passed to the script:
+
+```bash
+if [ -z "$1" ]; then
+  echo "no arguments"
+else
+  echo "argument passed in: $1"
+fi
+```
 
 You can do integer based tests:
 
@@ -302,12 +312,12 @@ fi
 You can also read multiple values in at once:
 
 ```bash
-echo -n "Enter one or more values > " 
-read var1 var2 var3 var4 var5 
-echo "var1 = '$ var1'" 
-echo "var2 = '$ var2'" 
-echo "var3 = '$ var3'" 
-echo "var4 = '$ var4'" 
+echo -n "Enter one or more values > "
+read var1 var2 var3 var4 var5
+echo "var1 = '$ var1'"
+echo "var2 = '$ var2'"
+echo "var3 = '$ var3'"
+echo "var4 = '$ var4'"
 echo "var5 = '$ var5'"
 ```
 
