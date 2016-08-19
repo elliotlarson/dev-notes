@@ -76,6 +76,14 @@ func NewWriter(w io.Writer) *Writer {
 }
 ```
 
+And the `Write` method on the writer has this signature:
+
+```go
+func (w *Writer) Write(record []string) error
+```
+
+So, it expects an array of strings.
+
 #### Writing a tab delimited file
 
 To export a tab delimited file, you just need to update the `Comma` value of the `csv.Writer` struct.

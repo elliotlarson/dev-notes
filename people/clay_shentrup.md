@@ -14,7 +14,7 @@
 
 * check out bundle standalone (Myron Marston)
 
-* using Rails.env is an anti pattern 
+* using Rails.env is an anti pattern
 
 * git bisect
   http://git-scm.com/book/en/Git-Tools-Debugging-with-Git
@@ -25,9 +25,9 @@
 
 * YAGNI http://en.wikipedia.org/wiki/You_aren't_gonna_need_it
 
-* checkout estimation is evil article: http://pragprog.com/magazines/2013-02/estimation-is-evil 
+* checkout estimation is evil article: http://pragprog.com/magazines/2013-02/estimation-is-evil
 
-* git annotate 
+* git annotate
 
 * paste without formatting: shift + command + v
 
@@ -37,7 +37,7 @@
 * "needing to seed data in a migration is maybe a sign that the data you are trying to seed doesn't belong in the database" - e.g. categories that are getting added to the system, maybe they belong as constants instead
 
 * git config merge by rebase
-	checkout [branch] 
+	checkout [branch]
 					autosetupmerge = true
 					autosetuprebase = always
 			   
@@ -45,7 +45,7 @@
 
 * ruby system command passing in arguments as comma delimited arguments to the method
 
-* https://deveo.com/blog/2013/03/22/immutability-in-ruby-part-1/
+* http://blog.deveo.com/immutability-in-ruby-part-1-data-structures/
 
 * http://betterspecs.org/
 
@@ -56,10 +56,10 @@ Slice a hash to include only the given keys. This is useful for limiting an opti
     def search(criteria = {})
     criteria.assert_valid_keys(:mass, :velocity, :time)
     end
-    
+
     search(options.slice(:mass, :velocity, :time))
     If you have an array of keys you want to limit to, you should splat them:
-    
+
     valid_keys = [:mass, :velocity, :time]
     search(options.slice(*valid_keys))
 
@@ -67,18 +67,18 @@ Slice a hash to include only the given keys. This is useful for limiting an opti
 
 * bundle update rspec rspec-rails to update both
 
-* checkout stub_chain
+* checkout stub_chain (Note: this is deprecated Myron Marston considers this a code smell)
 
     describe "stubbing a chain of methods" do
     subject { Object.new }
-    
+
     context "given symbols representing methods" do
         it "returns the correct value" do
         subject.stub_chain(:one, :two, :three).and_return(:four)
         subject.one.two.three.should eq(:four)
         end
     end
-    
+
     context "given a string of methods separated by dots" do
         it "returns the correct value" do
         subject.stub_chain("one.two.three").and_return(:four)
@@ -87,7 +87,7 @@ Slice a hash to include only the given keys. This is useful for limiting an opti
     end
     end
 
-* factory girl build_stubbed: 
+* factory girl build_stubbed:
 it returns an object with all of the attributes for the model stubbed out
 
 * checkout Ruby's SimpleDelegator
@@ -104,11 +104,11 @@ it returns an object with all of the attributes for the model stubbed out
 
 * git log -p filename (-p gives diff of files)
 
-* comparing arrays in rspec use match_array 
+* comparing arrays in rspec use match_array
 
 * RubyMine ctrl-w
 
-* rake:stats 
+* rake:stats
 
 
 http://golangtutorials.blogspot.com/2011/06/anonymous-fields-in-structs-like-object.html
