@@ -1,5 +1,25 @@
 # Vim Notes
 
+## Color scheme
+
+To view the highlight group for the element under the cursor:
+
+```vimscript
+:echo synIDattr(synID(line("."),col("."),1),"name")
+```
+
+I have this aliased to `,si`.
+
+To view the color for the element under the cursor:
+
+```vimscript
+:echo synIDattr(synIDtrans(synID(line("."), col("."), 1)), "fg")
+```
+
+I have this aliased to `,sc`.
+
+Here is a link to a [page with ANSI color codes](http://misc.flogisoft.com/bash/tip_colors_and_formatting).
+
 ## Resources
 
 * power line font: https://github.com/eugeneching/consolas-powerline-vim
