@@ -686,3 +686,9 @@ echo "${RED}Here is some red text.${COLOR_RESET}"
 echo "${GREEN}Here is some red green.${COLOR_RESET}"
 echo "${YELLOW}Here is some red yellow.${COLOR_RESET}"
 ```
+
+## Creating a timestamp
+
+```bash
+$ date +'%Y%m%d%H%M%S'
+```
