@@ -51,6 +51,10 @@ This will run rspec on the current file when using `<leader>t`.
 :map ,t :!rspec %<cr>
 ```
 
+#### Copy line to register
+
+`shift + "`,  `a`, `yy`
+
 #### Paste contents of the yank register into search bar
 
 1. yank some text
