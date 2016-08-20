@@ -251,7 +251,7 @@ foo foo foo bar foo bar foo
 # ctrl + d
 ```
 
-#### Print out file contents with line numbers with `cat` 
+#### Print out file contents with line numbers with `cat`
 
 Lets say we have this content in the file `brown-fox.txt`:
 
@@ -289,7 +289,7 @@ $ cat -ns brown-fox.txt
      4
 ```
 
-## Sorting output with `sort` 
+## Sorting output with `sort`
 
 #### Sorting by a field
 
@@ -354,15 +354,15 @@ Ubuntu	7.04	04/19/2007
 Ubuntu	7.10	10/18/2007
 Ubuntu	8.04	04/24/2008
 Ubuntu	8.10	10/30/2008
-``` 
+```
 
 The `-k 1,1` tells sort to sort starting at column 1 and ending at column 1.  Then the `-k 2n` says to sort by column 2 using the numeric sort.
 
-## Sort by a piece of a column with `sort` 
+## Sort by a piece of a column with `sort`
 
 You can identify the character starting point of a column with a decimal notation.
 
-Say you have this data in a file `data.txt` 
+Say you have this data in a file `data.txt`
 
 <pre>
 01 Joe Sr.Designer
@@ -389,7 +389,7 @@ $ sort -k 3.3,3.5 data.txt
 
 This will start sorting with the 3rd character of the 3rd column, and stop comparing with the 5th character of the 3rd column (so, it will just look at "De" in each case).
 
-#### Sorting by a specific delimiter 
+#### Sorting by a specific delimiter
 
 Sort uses tabs as the default delimiter.  To change this you need the `-t 'delimiter'` flag:
 
@@ -429,7 +429,7 @@ You need to use the `-i` flag:
 $ ls -l /var/log | grep -i auth
 ```
 
-#### Search for a pattern and only return the match 
+#### Search for a pattern and only return the match
 
 You need the `-o` flag:
 
@@ -471,36 +471,41 @@ There are two types of regular expressions for `grep`:
 
 * **POSIX Basic (BRE):** With BRE, the following meta characters are recognized: `^ $ . [ ] *`, and all other characters are considered literals.  However, if the meta characters `( ) { } +` are escaped with a backslash, they are usable.
 * **Extended (ERE):** With ERE, the following meta characters are added `( ) { } ? + |`.  To use extended regular expressions, you need the `-E` flag.
-  `$ grep -E 'AAA|BBB'` 
+  `$ grep -E 'AAA|BBB'`
 
 #### BRE and ERE regular expressions matchers
 
 character | function | example
-----------|----------|--------- 
-^ | match begining of line | `grep '^#' myfile.txt` 
-$ | match end of line | `grep 'foo$' myfile.txt` 
-[] | match characters between brackets | `grep '[fb]' myfile.txt` 
-[^] | match characters **not** between brackets | `grep '[^zx]' myfile.txt` 
-[-] | match range of characters between brackets | `grep '[A-Z]' myfile.txt` 
-[:alnum:] | alphanumeric characters, same as [A-Za-z0-9] | `grep '[[:alnum:]]' myfile.txt` 
-[:word:] | same as `alnum` with `_` character | `grep '[[:word:]]' myfile.txt` 
+----------|----------|---------
+^ | match begining of line | `grep '^#' myfile.txt`
+$ | match end of line | `grep 'foo$' myfile.txt`
+[] | match characters between brackets | `grep '[fb]' myfile.txt`
+[^] | match characters **not** between brackets | `grep '[^zx]' myfile.txt`
+[-] | match range of characters between brackets | `grep '[A-Z]' myfile.txt`
+[:alnum:] | alphanumeric characters, same as [A-Za-z0-9] | `grep '[[:alnum:]]' myfile.txt`
+[:word:] | same as `alnum` with `_` character | `grep '[[:word:]]' myfile.txt`
 [:alpha:] | same as [A-Za-z] | `grep '[[:alpha:]]' myfile.txt`
-[:blank:] | includes space and tab characters | `grep '[[:blank:]]' myfile.txt` 
-[:digit:] | same as [0-9] | `grep '[[:digit:]]' myfile.txt` 
-[:lower:] | lower case letter | `grep '[[:lower:]]' myfile.txt` 
-[:upper:] | upper case letter | `grep '[[:upper:]]' myfile.txt` 
-[:punct:] | punctuation marks | `grep '[[:punct:]]' myfile.txt` 
+[:blank:] | includes space and tab characters | `grep '[[:blank:]]' myfile.txt`
+[:digit:] | same as [0-9] | `grep '[[:digit:]]' myfile.txt`
+[:lower:] | lower case letter | `grep '[[:lower:]]' myfile.txt`
+[:upper:] | upper case letter | `grep '[[:upper:]]' myfile.txt`
+[:punct:] | punctuation marks | `grep '[[:punct:]]' myfile.txt`
 [:space:] | same as [\t\r\n\v\f] | `grep '[[:space:]]' myfile.txt`
-&#124; | match one or the other | `grep -E 'foo`&#124;`bar'` 
-? | match zero or 1 time | `grep -E 'z?' myfile.txt` 
+&#124; | match one or the other | `grep -E 'foo`&#124;`bar'`
+? | match zero or 1 time | `grep -E 'z?' myfile.txt`
 * | match zero or more times | `grep -E 'z*' myfile.txt`
-+ | match one or more times | `grep -E 'z+' myfile.txt` 
-{n} | match a character `n` times | `grep -E 'z{3}' myfile.txt` 
-{n,m} | match `n` times but no more than `m` times | `grep -E 'z{3,5}' myfile.txt` 
-{n,} | match `n` or more times | `grep -E 'z{3,}' myfile.txt` 
-{,m} | match no more than `m` times | `grep -E 'z{,3}' myfile.txt` 
++ | match one or more times | `grep -E 'z+' myfile.txt`
+{n} | match a character `n` times | `grep -E 'z{3}' myfile.txt`
+{n,m} | match `n` times but no more than `m` times | `grep -E 'z{3,5}' myfile.txt`
+{n,} | match `n` or more times | `grep -E 'z{3,}' myfile.txt`
+{,m} | match no more than `m` times | `grep -E 'z{,3}' myfile.txt`
 
 
+#### Grep a tail of a log
+
+```bash
+$ tail -n 1000 -f training.log | grep --line-buffered 'Started'
+```
 
 ## Print out the users on the system with `awk`
 
@@ -581,13 +586,13 @@ To do a dry-run, you can pass in the `-n` and `-v` flags.
 $ rsync -avn dir1/ dir2
 ```
 
-#### Syncing a local directory to a remote directory 
+#### Syncing a local directory to a remote directory
 
 ```bash
 $ rsync -a ~/dir1 username@remote_host:destination_directory
 ```
 
-#### Syncing a remote directory to a local directory 
+#### Syncing a remote directory to a local directory
 
 ```bash
 $ rsync -a username@remote_host:/home/username/dir1 place_to_sync_on_local_machine
