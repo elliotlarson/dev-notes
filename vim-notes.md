@@ -43,6 +43,14 @@ let s:base00      = "234"
 
 ## Misc Notes
 
+#### Resize the current buffer split
+
+Sometimes the nerdtree resizes itself.  To put it back, enter this buffer and enter:
+
+```vimscript
+:vert resize 406
+```
+
 #### Map to run a command
 
 This will run rspec on the current file when using `<leader>t`.
