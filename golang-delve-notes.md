@@ -124,3 +124,12 @@ $ sudo dlv test
 (dlv) p c
 # 4
 ```
+
+#### Dealing with `GOPATH` sudo issues
+
+I had problems executing the `dlv` test with sudo when having to import packages.  This solved the problem.
+
+```bash
+$ sudo /usr/bin/env GOPATH=/Users/Elliot/Work/GoCode dlv test ./models
+```
+
