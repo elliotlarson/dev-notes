@@ -1,5 +1,19 @@
 # Postgres Notes
 
+## Utilities
+
+#### Creating a database with `createdb`
+
+```bash
+$ createdb -O ownername databasename
+```
+
+#### Dropping a database with `dropdb`
+
+```bash
+$ dropdb databasename
+```
+
 ## Backups
 
 ## Doing a database dump
