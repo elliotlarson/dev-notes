@@ -22,9 +22,6 @@ $ dropdb databasename
 $ psql mydb
 psql> ALTER TABLE my_table OWNER TO newuserrole;
 ```
-
-## Backups
-
 ## Doing a database dump
 
 Dumping a compressed backup:
