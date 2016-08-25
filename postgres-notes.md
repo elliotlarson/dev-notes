@@ -14,6 +14,15 @@ $ createdb -O ownername databasename
 $ dropdb databasename
 ```
 
+## Permissions
+
+#### Change the role of a table:
+
+```bash
+$ psql mydb
+psql> ALTER TABLE my_table OWNER TO newuserrole;
+```
+
 ## Backups
 
 ## Doing a database dump
