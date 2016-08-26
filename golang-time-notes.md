@@ -13,6 +13,14 @@ fmt.Println(time.Time{})
 // => 0001-01-01 00:00:00 +0000 UTC
 ```
 
+You can ask a time if it is the zero value:
+
+```go
+if myTime.IsZero() {
+  // do some stuff
+}
+```
+
 ## Creating a new time value
 
 To get the current time:
