@@ -1,12 +1,19 @@
 # Golang Time Notes
 
-## Creating a new time value
-
 The `Time` value is an empty struct:
 
 ```go
 type Time struct {}
 ```
+
+The zero value of type Time is January 1, year 1, 00:00:00.000000000 UTC.
+
+```go
+fmt.Println(time.Time{})
+// => 0001-01-01 00:00:00 +0000 UTC
+```
+
+## Creating a new time value
 
 To get the current time:
 
