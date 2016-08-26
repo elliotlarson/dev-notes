@@ -41,6 +41,12 @@ To get a time value specifying values:
 t := time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC)
 ```
 
+The `Date` signature is:
+
+```go
+func Date(year int, month Month, day, hour, min, sec, nsec int, loc *Location) Time
+```
+
 To parse the time from a formatted string:
 
 ```go
