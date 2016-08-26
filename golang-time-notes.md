@@ -38,7 +38,7 @@ To get the datetime from 36 hours ago:
 
 ```go
 t := time.Now().UTC().Add(-time.Hour * 36)
-``
+```
 
 ... or, from 45 minutes ago using a constant:
 
