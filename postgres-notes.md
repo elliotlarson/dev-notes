@@ -81,6 +81,14 @@ mydb=> \c
 mydb=> \pset pager off
 ```
 
+## Queries
+
+### Renaming a table
+
+```sql
+ALTER TABLE my_table RENAME TO new_table_name;
+```
+
 ### Creating a user
 
 This user can create and delete databases.
