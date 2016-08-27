@@ -78,6 +78,18 @@ mydb=> \l
 mydb=> \du
 ```
 
+#### Describe a table
+
+```bash
+mydb=> \d table_name
+```
+
+#### Return select results in expanded format
+
+```bash
+mydb=> \x
+```
+
 #### Connect to database
 
 ```bash
