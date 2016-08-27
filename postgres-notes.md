@@ -16,6 +16,15 @@ $ dropdb databasename
 
 ## Permissions
 
+#### Creating a user
+
+This user can create and delete databases.
+
+```bash
+mydb=> create user brandt password 'thatsmarvelous';
+mydb=> alter user brandt createdb;
+```
+
 #### Change the role of a table:
 
 ```bash
@@ -57,25 +66,25 @@ $ pg_restore -j8 -f db/production_bak.bak -d mydb_production
 
 ## Psql Commands
 
-### List databases
+#### List databases
 
 ```bash
 mydb=> \l
 ```
 
-### List users
+#### List users
 
 ```bash
 mydb=> \du
 ```
 
-### Connect to database
+#### Connect to database
 
 ```bash
 mydb=> \c
 ```
 
-### Turn pager setting off for session
+#### Turn pager setting off for session
 
 ```bash
 mydb=> \pset pager off
@@ -83,22 +92,13 @@ mydb=> \pset pager off
 
 ## Queries
 
-### Renaming a table
+#### Renaming a table
 
 ```sql
 ALTER TABLE my_table RENAME TO new_table_name;
 ```
 
-### Creating a user
-
-This user can create and delete databases.
-
-```bash
-mydb=> create user brandt password 'thatsmarvelous';
-mydb=> alter user brandt createdb;
-```
-
-### Getting database size:
+#### Getting database size:
 
 For the whole database:
 
@@ -134,7 +134,7 @@ ORDER BY n_live_tup DESC;
 
 Using the Postgres.app on the Mac, assuming version `9.5`.
 
-### Logfile
+#### Logfile
 
 `~/Library/Application\ Support/Postgres/var-9.5/postgres-server.log`
 
@@ -144,7 +144,7 @@ Using the Postgres.app on the Mac, assuming version `9.5`.
 $ less +F ~/Library/Application\ Support/Postgres/var-9.5/postgres-server.log
 ```
 
-### Config file
+#### Config file
 
 `~/Library/Application\ Support/Postgres/var-9.5/postgresql.conf`
 
