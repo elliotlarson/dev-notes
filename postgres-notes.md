@@ -51,6 +51,12 @@ You can dump only data (no table creates or drops):
 $ pg_dump -a mydatabase > mydumpfile.sql
 ```
 
+Dumping only the schema:
+
+```bash
+$ pg_dump -s my_database > my_database_schema.sql
+```
+
 #### Loading database backup
 
 Loading a non compressed backup:
