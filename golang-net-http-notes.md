@@ -550,7 +550,7 @@ Another common scenario is to check if an error is nil, and if not, return a 500
 
 ```go
 if err != nil {
-	http.Error(writer,·err.Error(),·http.StatusInternalServerError)
+	http.Error(writer, err.Error(), http.StatusInternalServerError)
 }
 ```
 
