@@ -1,5 +1,21 @@
 # Git Notes
 
+## Reflog
+
+Git keeps track of everything that happens to the repo in the reflog.  
+
+To view a list of events:
+
+```bash
+$ git reflog
+```
+
+The output of that command isn't super useful.  To show output in git log format:
+
+```bash
+$ git log -g
+```
+
 ## Removing a file from the git repo history
 
 ```bash
