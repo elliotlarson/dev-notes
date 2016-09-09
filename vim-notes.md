@@ -20,6 +20,14 @@ I have this aliased to `,sc`.
 
 Here is a link to a [page with ANSI color codes](http://misc.flogisoft.com/bash/tip_colors_and_formatting).
 
+## Manually set the syntax for the current buffer
+
+This will change the current file's syntax to gohtmltmpl:
+
+```vimscript
+:set syntax=gohtmltmpl
+```
+
 ## Resources
 
 * power line font: https://github.com/eugeneching/consolas-powerline-vim
