@@ -546,6 +546,14 @@ func StatusHandler(writer http.ResponseWriter, request *http.Request) {
 }
 ```
 
+Another common scenario is to check if an error is nil, and if not, return a 500 error with the message:
+
+```go
+if err != nil {
+	http.Error(writer,·err.Error(),·http.StatusInternalServerError)
+}
+```
+
 ## Serving an HTML response with `Write`
 
 The response writer `Write` method takes in a `[]byte` and writes it to the response body.
