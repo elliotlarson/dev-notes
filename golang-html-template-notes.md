@@ -81,7 +81,7 @@ Say you have a template `template1.html`:
     {{ end -}}
     </ul>
   </body>
-</html
+</html>
 ```
 
 Notice the dashes `{{-` and `-}}`.  These remove newline characters before and after the line so you don't end up with a slew of empty lines in your template where template logic is used.
