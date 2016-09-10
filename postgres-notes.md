@@ -25,6 +25,12 @@ mydb=> create user brandt password 'thatsmarvelous';
 mydb=> alter user brandt createdb;
 ```
 
+#### Making the user a superuser
+
+```bash
+psql> ALTER USER myuser WITH SUPERUSER;
+```
+
 #### Change the role of a table:
 
 ```bash
