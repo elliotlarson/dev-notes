@@ -198,7 +198,7 @@ User details template `user.html`:
 </tr>
 ```
 
-## ParseGlob instead of parsefiles
+## ParseGlob instead of ParseFiles
 
 You can use a globbing method instead of naming files individually:
 
