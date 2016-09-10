@@ -198,6 +198,14 @@ User details template `user.html`:
 </tr>
 ```
 
+## ParseGlob instead of parsefiles
+
+You can use a globbing method instead of naming files individually:
+
+```go
+var t = template.Must(template.ParseGlob("templates/*.gohtml"))
+```
+
 ## Formatting output
 
 You can use pipelining to format output in a template:
