@@ -185,3 +185,29 @@ func main() {
 ```
 
 In our test we're using the `httptest` package's `NewRecorder` method to create an `io.Writer` that we can pass into our handler.  We also create a request to pass into the handler.  Then we execute the handler's `ServeHTTP` method and interrogate the writer/recorder to ensure that our handler behaved as expected.
+
+## Testing template responses
+
+You can test the output of a template by inspecting the response body with [goquery](github.com/PuerkitoBio/goquery).
+
+Install `goquery`:
+
+```bash
+$ go get github.com/PuerkitoBio/goquery
+```
+
+Test response body:
+
+```go
+doc, err := goquery.NewDocumentFromReader(recorder.Body)
+assert.Nil(t, err)
+
+assert.Equal(t, 1, doc.Find("table#visits-table").Size())
+assert.Equal(t, 2, doc.Find("table#visits-table tbody tr").Size())
+assert.Contains(t, doc.Find("#visit-42 .user-name").Text(), "John Doe")
+assert.Contains(t, doc.Find("#visit-42 .events").Text(), "20")
+assert.Contains(
+	t, doc.Find("#visit-42 .started-at").Text(), "08/09/2016 02:35PM",
+)
+```
+
