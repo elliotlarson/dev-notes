@@ -211,3 +211,47 @@ assert.Contains(
 )
 ```
 
+## Mocking out the database
+
+Sometimes you don't want to directly interact with the database in your code.  You can mock it out with [go-sqlmock](https://github.com/DATA-DOG/go-sqlmock).
+
+Get the package:
+
+```bash
+$ go get gopkg.in/DATA-DOG/go-sqlmock.v1
+```
+
+Mock away in your test:
+
+```go
+db, mock, err := sqlmock.New()
+if err != nil {
+	panic(err)
+}
+rowNames := []string{
+	"id",
+	"user_first_name",
+	"user_last_name",
+	"user_email",
+	"started_at",
+	"events",
+}
+rows := sqlmock.NewRows(
+	rowNames,
+).AddRow(
+	42,
+	"John",
+	"Doe",
+	"john.doe@example.com",
+	createTime("2016-08-09T21:35:00+00:00"),
+	20,
+).AddRow(
+	23,
+	"Jane",
+	"Doe",
+	"jane.doe@example.com",
+	createTime("2016-08-09T08:30:00+00:00"),
+	15,
+)
+mock.ExpectQuery("^SELECT (.+) FROM visits").WillReturnRows(rows)
+```
