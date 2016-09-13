@@ -1,5 +1,13 @@
 # Vim Notes
 
+## Set tabs instead of spaces
+
+Pasted some stuff into vim with tabs today and it converted to using tabs for a Ruby file.  To get back to using spaces:
+
+```vimscript
+:set expandtab
+```
+
 ## Color scheme
 
 To view the highlight group for the element under the cursor:
