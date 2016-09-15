@@ -1,5 +1,11 @@
 # Vim Notes
 
+## Delete all `swp` files from a directory
+
+```bash
+$ find . -name "*.swp" -delete
+```
+
 ## Set tabs instead of spaces
 
 Pasted some stuff into vim with tabs today and it converted to using tabs for a Ruby file.  To get back to using spaces:
