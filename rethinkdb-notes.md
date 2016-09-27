@@ -64,3 +64,21 @@ r.db('ra_sam').tableDrop('monthly_records')
 r.db('ra_sam').tableList()
 // [ ]
 ```
+
+### CRUD
+
+Adding some data:
+
+```javascript
+r.db('ra_sam').table('monthly_records').insert({ end_of_month_date: '2012-01-31', production: 229.8036 })
+r.db('ra_sam').table('monthly_records').count()
+// 1
+```
+
+You can view the data with this:
+
+```javascript
+r.db('ra_sam').table('monthly_records')
+```
+
+
