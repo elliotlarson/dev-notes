@@ -25,7 +25,7 @@ $ rethinkdb --help
 Here's a command where you specify the directory and server name:
 
 ```bash
-$ rethinkdb -d ~/rethinkdb-data -n test-rethink-server
+$ rethinkdb -d ~/rethinkdb_data -n test_rethink_server
 ```
 
 ## ReQL 
@@ -34,14 +34,16 @@ You can execute `ReQL`, the query language for Rethinkdb, in the admin interface
 
 [Here is the documentation for ReQL](https://www.rethinkdb.com/api/javascript/)
 
-### Creating a database
+### Creating and dropping database
 
 ```javascript
-r.dbCreate('ra-sam')
+r.dbCreate('ra_sam')
+r.dbDrop('ra_sam')
 ```
 
-### Creating a table
+### Creating and dropping a table
 
 ```javascript
-r.db('ra-sam').createTable('monthly-records')
+r.db('ra-sam').tableCreate('monthly_records')
+r.db('ra-sam').tableDrop('monthly_records')
 ```
