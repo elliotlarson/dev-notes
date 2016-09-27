@@ -70,7 +70,9 @@ r.db('ra_sam').tableList()
 #### Creating 
 
 ```javascript
-r.db('ra_sam').table('monthly_records').insert({ end_of_month_date: '2012-01-31', production: 229.8036 })
+r.db('ra_sam').table('monthly_records').insert(
+  { monthly_recordable_id: 2, monthly_recordable_type: 'Forecast', end_of_month_date: '2012-01-31', production: 229.8036 }
+)
 r.db('ra_sam').table('monthly_records').count()
 // 1
 ```
@@ -108,3 +110,6 @@ r.db('ra_sam').table('monthly_records').get('08a10125-6c8a-4710-9e0c-37dacd80403
 r.db('ra_sam').table('monthly_records').get('08a10125-6c8a-4710-9e0c-37dacd804034')
   .delete()
 ```
+
+### More advanced reading/filtering
+
