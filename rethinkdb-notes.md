@@ -126,7 +126,7 @@ r.db('ra_sam').table('monthly_records').filter(function(artists) {
 })
 ```
 
-### Commong functions
+### Common functions
 
 * [pluck](https://www.rethinkdb.com/api/ruby/pluck/)
 * [filter](https://www.rethinkdb.com/api/ruby/filter/)
