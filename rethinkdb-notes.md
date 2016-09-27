@@ -77,6 +77,8 @@ r.db('ra_sam').table('monthly_records').count()
 
 #### Reading
 
+This will return all data:
+
 ```javascript
 r.db('ra_sam').table('monthly_records')
 ```
