@@ -125,3 +125,15 @@ r.db('ra_sam').table('monthly_records').filter(function(artists) {
   return artists('name').match('House.*')
 })
 ```
+
+### Commong functions
+
+* [pluck](https://www.rethinkdb.com/api/ruby/pluck/)
+* [filter](https://www.rethinkdb.com/api/ruby/filter/)
+* [concatMap](https://www.rethinkdb.com/api/ruby/concat_map/)
+* [map](https://www.rethinkdb.com/api/ruby/map/)
+* [hasFields](https://www.rethinkdb.com/api/ruby/has_fields/)
+* [withFields](https://www.rethinkdb.com/api/ruby/with_fields/)
+* [limit](https://www.rethinkdb.com/api/ruby/limit/)
+* [orderBy](https://www.rethinkdb.com/api/ruby/order_by/)
+* [skip](https://www.rethinkdb.com/api/ruby/skip/)
