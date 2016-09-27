@@ -34,16 +34,33 @@ You can execute `ReQL`, the query language for Rethinkdb, in the admin interface
 
 [Here is the documentation for ReQL](https://www.rethinkdb.com/api/javascript/)
 
-### Creating and dropping database
+### Creating, listing, and dropping database
 
 ```javascript
 r.dbCreate('ra_sam')
+r.dbList()
+// [
+//   "ra_sam" ,
+//   "rethinkdb" ,
+//   "test"
+// ]
 r.dbDrop('ra_sam')
+r.dbList()
+// [
+//   "rethinkdb" ,
+//   "test"
+// ]
 ```
 
-### Creating and dropping a table
+### Creating, listing, and dropping a table
 
 ```javascript
-r.db('ra-sam').tableCreate('monthly_records')
-r.db('ra-sam').tableDrop('monthly_records')
+r.db('ra_sam').tableCreate('monthly_records')
+r.db('ra_sam').tableList()
+// [
+//   "monthly_records"
+// ]
+r.db('ra_sam').tableDrop('monthly_records')
+r.db('ra_sam').tableList()
+// [ ]
 ```
