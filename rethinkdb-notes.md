@@ -25,5 +25,23 @@ $ rethinkdb --help
 Here's a command where you specify the directory and server name:
 
 ```bash
-$ rethinkdb -d ~/rethinkdb_data -n test_rethink_server
+$ rethinkdb -d ~/rethinkdb-data -n test-rethink-server
+```
+
+## ReQL 
+
+You can execute `ReQL`, the query language for Rethinkdb, in the admin interface.  Navigate to http://localhost:8080 and click on the "Data Explorer" nav item.  This will put you on a page with an editor.
+
+[Here is the documentation for ReQL](https://www.rethinkdb.com/api/javascript/)
+
+### Creating a database
+
+```javascript
+r.dbCreate('ra-sam')
+```
+
+### Creating a table
+
+```javascript
+r.db('ra-sam').createTable('monthly-records')
 ```
