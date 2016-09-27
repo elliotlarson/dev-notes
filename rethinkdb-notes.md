@@ -118,3 +118,10 @@ r.db('ra_sam').table('monthly_records').get('08a10125-6c8a-4710-9e0c-37dacd80403
 
 ### More advanced reading/filtering
 
+You can use regular expressions:
+
+```javascript
+r.db('ra_sam').table('monthly_records').filter(function(artists) {
+  return artists('name').match('House.*')
+})
+```
