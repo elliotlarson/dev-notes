@@ -104,5 +104,5 @@ r.db('ra_sam').table('monthly_records').get('08a10125-6c8a-4710-9e0c-37dacd80403
 
 ```javascript
 r.db('ra_sam').table('monthly_records').get('08a10125-6c8a-4710-9e0c-37dacd804034')
-  .delete({ production: 42.5 })
+  .delete()
 ```
