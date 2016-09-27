@@ -71,7 +71,12 @@ r.db('ra_sam').tableList()
 
 ```javascript
 r.db('ra_sam').table('monthly_records').insert(
-  { monthly_recordable_id: 2, monthly_recordable_type: 'Forecast', end_of_month_date: '2012-01-31', production: 229.8036 }
+  { 
+    monthly_recordable_id: 2, 
+    monthly_recordable_type: 'Forecast', 
+    end_of_month_date: '2012-01-31', 
+    production: 229.8036, 
+  }
 )
 r.db('ra_sam').table('monthly_records').count()
 // 1
