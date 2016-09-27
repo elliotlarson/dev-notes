@@ -1,0 +1,2 @@
+# Rethinkdb Notes
+
