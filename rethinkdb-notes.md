@@ -67,7 +67,7 @@ r.db('ra_sam').tableList()
 
 ### CRUD
 
-Adding some data:
+#### Creating 
 
 ```javascript
 r.db('ra_sam').table('monthly_records').insert({ end_of_month_date: '2012-01-31', production: 229.8036 })
@@ -75,7 +75,7 @@ r.db('ra_sam').table('monthly_records').count()
 // 1
 ```
 
-You can view the data with this:
+#### Reading
 
 ```javascript
 r.db('ra_sam').table('monthly_records')
@@ -93,11 +93,16 @@ You can get a specific document with the `get` command, using the guid for the d
 r.db('ra_sam').table('monthly_records').get('08a10125-6c8a-4710-9e0c-37dacd804034')
 ```
 
-This will allow you to update the document by chaining `update` onto the end:
+#### Updating
 
 ```javascript
 r.db('ra_sam').table('monthly_records').get('08a10125-6c8a-4710-9e0c-37dacd804034')
   .update({ production: 42.5 })
 ```
 
+#### Deleting
 
+```javascript
+r.db('ra_sam').table('monthly_records').get('08a10125-6c8a-4710-9e0c-37dacd804034')
+  .delete({ production: 42.5 })
+```
