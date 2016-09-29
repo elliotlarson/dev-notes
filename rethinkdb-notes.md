@@ -141,3 +141,48 @@ r.db('ra_sam').table('monthly_records').filter(function(artists) {
 * [limit](https://www.rethinkdb.com/api/ruby/limit/)
 * [orderBy](https://www.rethinkdb.com/api/ruby/order_by/)
 * [skip](https://www.rethinkdb.com/api/ruby/skip/)
+
+## Importing data
+
+You can import JSON or CSV data.
+
+### Importing a JSON file
+
+Lets create a `bookmarks` database with a single `bookmarks` table:
+
+```javascript
+r.dbCreate('bookmarks')
+r.db('bookmarks').tableCreate('bookmarks')
+```
+
+Assume we have a file with bookmarks JSON data `bookmarks.json`:
+
+```json
+[
+  {
+    "url": "https://medium.com/@matryer/golang-advent-calendar-day-seventeen-io-reader-in-depth-6f744bb4320b#.x4ucxwf6e",
+    "title": "io.Reader in depth — Medium",
+    "tags": ["golang", "interfaces", "reader"]
+  },
+  {
+    "url": "http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api",
+    "title": "Best Practices for Designing a Pragmatic RESTful API | Vinay Sahni",
+    "tags": ["api", "rest", "best-practices"]
+  },
+]
+```
+
+We can import this like so:
+
+```bash
+$ rethinkdb import -f bookmarks.json --table bookmarks.bookmarks --format json --force
+```
+
+You need the `--force` command to load into an existing table.
+
+**Note**: The import tool is a python script.  You will need to have the Python driver installed:
+
+```bash
+$ sudo pip install rethinkdb
+```
+
