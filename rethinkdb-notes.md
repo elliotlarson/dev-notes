@@ -28,6 +28,10 @@ Here's a command where you specify the directory and server name:
 $ rethinkdb -d ~/rethinkdb_data -n test_rethink_server
 ```
 
+## Starting on boot
+
+[Information about setting up to start on boot](/Library/LaunchDaemons/com.rethinkdb.server.plist)
+
 ## ReQL 
 
 You can execute `ReQL`, the query language for Rethinkdb, in the admin interface.  Navigate to http://localhost:8080 and click on the "Data Explorer" nav item.  This will put you on a page with an editor.
