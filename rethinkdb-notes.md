@@ -125,9 +125,21 @@ r.db('ra_sam').table('monthly_records').get('08a10125-6c8a-4710-9e0c-37dacd80403
 You can use regular expressions:
 
 ```javascript
-r.db('ra_sam').table('monthly_records').filter(function(artists) {
-  return artists('name').match('House.*')
-})
+r.db('bookmarks').table('bookmarks').filter(
+  function(bookmark) { 
+    return bookmark('title').match('.* Go *.');
+  }
+)
+```
+
+Say you have a nested array like tags.  You can filter on these like this:
+
+```javascript
+r.db('bookmarks').table('bookmarks').filter(
+  function(bookmark) { 
+    return bookmark('tags').contains('golang');
+  }
+)
 ```
 
 ### Common functions
