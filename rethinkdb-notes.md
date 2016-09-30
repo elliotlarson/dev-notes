@@ -127,7 +127,7 @@ You can use regular expressions:
 ```javascript
 r.db('bookmarks').table('bookmarks').filter(
   function(bookmark) { 
-    return bookmark('title').match('.* Go *.');
+    return bookmark('title').match('.* [gG]o(lang)* *.');
   }
 )
 ```
