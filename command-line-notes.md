@@ -597,3 +597,31 @@ $ rsync -a ~/dir1 username@remote_host:destination_directory
 ```bash
 $ rsync -a username@remote_host:/home/username/dir1 place_to_sync_on_local_machine
 ```
+
+## User management
+
+### Adding a user
+
+This will add a user and a group at the same time, and it will give the user the default home directory of `/home/conference2017`:
+
+```bash
+$ sudo useradd conference2017
+```
+
+### Setting user password:
+
+```bash
+$ sudo passwd conference2017
+```
+
+### Deleting a user
+
+```bash
+$ sudo deluser conference2017
+```
+
+### Deleting a group
+
+```bash
+$ sudo delgroup conference2017
+```
