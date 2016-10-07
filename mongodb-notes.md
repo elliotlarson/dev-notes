@@ -83,3 +83,47 @@ mongo> db.restaurants.find(
    { $or: [ { "cuisine": "Italian" }, { "address.zipcode": "10075" } ] }
 )
 ```
+
+### Updating
+
+Update the first record that has the name "Juni", set the field "cuisine" to "American (New)" and update the "lastModified" field to the current date:
+
+```bash
+mongo> db.restaurants.update(
+    { "name" : "Juni" },
+    {
+      $set: { "cuisine": "American (New)" },
+      $currentDate: { "lastModified": true }
+    }
+)
+```
+
+You can update multiple records with:
+
+```bash
+mongo> db.restaurants.update(
+  { "address.zipcode": "10016", cuisine: "Other" },
+  {
+    $set: { cuisine: "Category To Be Determined" },
+    $currentDate: { "lastModified": true }
+  },
+  { multi: true}
+)
+```
+
+You can also just replace the entire document:
+
+```bash
+mongo> db.restaurants.update(
+   { "restaurant_id" : "41704620" },
+   {
+     "name" : "Vella 2",
+     "address" : {
+              "coord" : [ -73.9557413, 40.7720266 ],
+              "building" : "1480",
+              "street" : "2 Avenue",
+              "zipcode" : "10075"
+     }
+   }
+)
+```
