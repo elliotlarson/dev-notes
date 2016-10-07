@@ -127,3 +127,29 @@ mongo> db.restaurants.update(
    }
 )
 ```
+
+### Deleting data
+
+You can remove all documents that match a condition:
+
+```bash
+mongo> db.restaurants.remove( { "borough": "Manhattan" } )
+```
+
+### Dropping a collection
+
+```bash
+mongo> db.restaurants.drop()
+```
+
+### Grouping
+
+You can group by a specified field and count:
+
+```bash
+mongo> db.restaurants.aggregate(
+   [
+     { $group: { "_id": "$borough", "count": { $sum: 1 } } }
+   ]
+);
+```
