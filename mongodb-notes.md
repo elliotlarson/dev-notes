@@ -59,3 +59,11 @@ mongo> db.restaurants.find()
 ```bash
 mongo> db.restaurants.find( { "borough": "Manhattan" } )
 ```
+
+### Return documents filtered by a nested field
+
+You can use the dot syntax to reference nested field filters:
+
+```bash
+mongo> db.restaurants.find( { "address.zipcode": "10075" } )
+```
