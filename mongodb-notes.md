@@ -42,6 +42,12 @@ mongo> use MyMovies
 
 If you list the databases at this point, you won't see your new database in the list.  You need to add some data first.
 
+### Listing collections
+
+```bash
+mongo> show collections
+```
+
 ### Inserting data
 
 ```bash
