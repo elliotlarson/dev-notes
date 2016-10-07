@@ -67,3 +67,11 @@ You can use the dot syntax to reference nested field filters:
 ```bash
 mongo> db.restaurants.find( { "address.zipcode": "10075" } )
 ```
+
+### Using comparison operators
+
+You can also use [comparison operators](https://docs.mongodb.com/manual/reference/operator/query-comparison/) in your query as well.  This query uses the `$gt` greater than operator to find restaurants with a grade score of greater than 30:
+
+```bash
+mongo> db.restaurants.find( { "grades.score": { $gt: 30 } } )
+```
