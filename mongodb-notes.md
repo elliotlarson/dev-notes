@@ -14,3 +14,12 @@ To have it load on startup:
 $ brew services start mongodb
 ```
 
+## The mongo Shell
+
+The mongo shell is an interactive JavaScript interface to MongoDB.
+
+To start it, just type:
+
+```bash
+$ mongo
+```
