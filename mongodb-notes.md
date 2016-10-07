@@ -23,3 +23,5 @@ To start it, just type:
 ```bash
 $ mongo
 ```
+
+[Here is a shell quick reference](https://docs.mongodb.com/manual/reference/mongo-shell/)
