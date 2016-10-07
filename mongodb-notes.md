@@ -75,3 +75,11 @@ You can also use [comparison operators](https://docs.mongodb.com/manual/referenc
 ```bash
 mongo> db.restaurants.find( { "grades.score": { $gt: 30 } } )
 ```
+
+### You can also use `or`
+
+```bash
+mongo> db.restaurants.find(
+   { $or: [ { "cuisine": "Italian" }, { "address.zipcode": "10075" } ] }
+)
+```
