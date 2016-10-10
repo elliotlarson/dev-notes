@@ -170,7 +170,9 @@ To import a csv file:
 $ mongoimport --db rasam --collection monthly_records --type csv --headerline --file monthly_records.csv
 ```
 
-## Resources
+## Tools
 
 * For some advanced mongo cli features, install [Mongo Hacker](https://github.com/TylerBrock/mongo-hacker)
+* GUI: [Mongo Compass](https://www.mongodb.com/download-center?gclid=CNXU4_fT0M8CFYcCaQodNyYMZA#compass) - the official mongoDb GUI client
+* GUI: [RoboMongo](https://robomongo.org/) - a good third party GUI
 
