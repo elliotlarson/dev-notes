@@ -26,13 +26,13 @@ $ mongo
 
 [Here is a shell quick reference](https://docs.mongodb.com/manual/reference/mongo-shell/)
 
-### Listing databases
+#### Listing databases
 
 ```bash
 mongo> show dbs
 ```
 
-### Creating a database
+#### Creating a database
 
 To create a new database, issue the `use` command:
 
@@ -42,31 +42,33 @@ mongo> use MyMovies
 
 If you list the databases at this point, you won't see your new database in the list.  You need to add some data first.
 
-### Listing collections
+#### Listing collections
 
 ```bash
 mongo> show collections
 ```
 
-### Inserting data
+#### Inserting data
 
 ```bash
 mongo> db.movies.insert({ "name": "The Big Lebowski" })
 ```
 
-### Return all documents in a collection
+#### Getting data
+
+Return all documents in a collection
 
 ```bash
 mongo> db.restaurants.find()
 ```
 
-### Return documents filtered by a top level field
+Return documents filtered by a top level field
 
 ```bash
 mongo> db.restaurants.find( { "borough": "Manhattan" } )
 ```
 
-### Return documents filtered by a nested field
+Return documents filtered by a nested field
 
 You can use the dot syntax to reference nested field filters:
 
@@ -74,7 +76,7 @@ You can use the dot syntax to reference nested field filters:
 mongo> db.restaurants.find( { "address.zipcode": "10075" } )
 ```
 
-### Using comparison operators
+Using comparison operators
 
 You can also use [comparison operators](https://docs.mongodb.com/manual/reference/operator/query-comparison/) in your query as well.  This query uses the `$gt` greater than operator to find restaurants with a grade score of greater than 30:
 
@@ -82,7 +84,7 @@ You can also use [comparison operators](https://docs.mongodb.com/manual/referenc
 mongo> db.restaurants.find( { "grades.score": { $gt: 30 } } )
 ```
 
-### You can also use `or`
+You can also use `or`
 
 ```bash
 mongo> db.restaurants.find(
@@ -90,7 +92,7 @@ mongo> db.restaurants.find(
 )
 ```
 
-### Updating
+#### Updating
 
 Update the first record that has the name "Juni", set the field "cuisine" to "American (New)" and update the "lastModified" field to the current date:
 
@@ -134,7 +136,7 @@ mongo> db.restaurants.update(
 )
 ```
 
-### Deleting data
+#### Deleting data
 
 You can remove all documents that match a condition:
 
@@ -142,13 +144,13 @@ You can remove all documents that match a condition:
 mongo> db.restaurants.remove( { "borough": "Manhattan" } )
 ```
 
-### Dropping a collection
+#### Dropping a collection
 
 ```bash
 mongo> db.restaurants.drop()
 ```
 
-### Grouping
+#### Grouping
 
 You can group by a specified field and count:
 
@@ -159,3 +161,16 @@ mongo> db.restaurants.aggregate(
    ]
 );
 ```
+
+## Importing data
+
+To import a csv file:
+
+```bash
+$ mongoimport --db rasam --collection monthly_records --type csv --headerline --file monthly_records.csv
+```
+
+## Resources
+
+* For some advanced mongo cli features, install [Mongo Hacker](https://github.com/TylerBrock/mongo-hacker)
+
