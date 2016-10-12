@@ -692,3 +692,29 @@ echo "${YELLOW}Here is some red yellow.${COLOR_RESET}"
 ```bash
 $ date +'%Y%m%d%H%M%S'
 ```
+
+## Arguments passed to a script
+
+You can access all of the args passed to a script with `$@`.  For example this would call `anotherscript` with all the arguments passed to the script that this line is in.
+
+File: `somescript.bash`
+
+```bash
+#!/bin/bash
+anotherscript $@
+```
+So calling it with `somescript.bash one two three` would in turn call `anotherscript` with the arguments `one two three`.
+
+You can also translate the args passed to a script into an array:
+
+```bash
+args=("$@")
+echo args[0]
+```
+
+And, you can count the number of arguments being passed in with `$#`:
+
+```bash
+echo $#
+```
+
