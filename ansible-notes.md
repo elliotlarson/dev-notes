@@ -428,6 +428,7 @@ $ ansible-playbook·-i·inventory.local·app-server.yml --tags appdb
 ```
 
 This only runs these tasks tagged with `appdb`.
+
 ## Resources
 
 * http://hakunin.com/six-ansible-practices
