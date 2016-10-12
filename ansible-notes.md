@@ -407,6 +407,27 @@ Edting a vault:
 $ ansible-vault edit foo.yml --vault-password-file ~/.vault_pass.txt
 ```
 
+## Tags
+
+You can add tags to tasks, and you can run only tasks with specified tasks for a playbook.  For example, I needed to run this one task multiple times to get the regex and the process restarting to work propery:
+
+```text
+- name: Postgres | Give deploy user password access to db
+  become: yes
+  replace: dest='/etc/postgresql/9.3/main/pg_hba.conf' regexp='^(local\s*all\s*all\s*)(peer)$' replace='\1md5'
+  notify: 
+    - restart postgresql
+  tags:
+    - appdb
+```
+
+With the tag `appdb` added to the task, I can run it like:
+
+```bash
+$ ansible-playbook·-i·inventory.local·app-server.yml --tags appdb
+```
+
+This only runs these tasks tagged with `appdb`.
 ## Resources
 
 * http://hakunin.com/six-ansible-practices
