@@ -605,7 +605,7 @@ $ rsync -a username@remote_host:/home/username/dir1 place_to_sync_on_local_machi
 This will add a user and a group at the same time, and it will give the user the default home directory of `/home/conference2017`:
 
 ```bash
-$ sudo useradd conference2017
+$ sudo useradd -m -s /bin/bash conference2017
 ```
 
 ### Setting user password:
