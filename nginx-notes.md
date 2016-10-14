@@ -6,7 +6,7 @@ This amounts to redirecting traffic from HTTP to HTTPS.
 
 To force SSL across the board:
 
-```c
+```nginx
 server {
        listen         80;
        server_name    my.domain.com;
@@ -16,7 +16,7 @@ server {
 
 To force SSL for a specific subdirectory:
 
-```c
+```nginx
 location ^~ /www/admin/ {
     rewrite ^ https://domain.com$request_uri? permanent;
 }
