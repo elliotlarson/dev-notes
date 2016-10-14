@@ -36,3 +36,19 @@ server {
   ssl_certificate_key     /etc/nginx/ssl/{{ app_domain_name }}.key;
 }
 ```
+
+## Checking configuration
+
+You can do a configuration test with 
+
+```bash
+$ sudo service nginx configtest
+```
+
+If there is something wrong, it'll tell you, but it won't be very instructive about what the problem is.
+
+To find out what's wrong try:
+
+```bash
+$ sudo nginx -t
+```
