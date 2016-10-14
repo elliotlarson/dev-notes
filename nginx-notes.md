@@ -17,6 +17,7 @@ server {
 To force SSL for a specific subdirectory:
 
 ```nginx
+# within the server block
 location ^~ /www/admin/ {
     rewrite ^ https://domain.com$request_uri? permanent;
 }
