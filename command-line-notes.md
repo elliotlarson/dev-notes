@@ -598,6 +598,12 @@ $ rsync -a ~/dir1 username@remote_host:destination_directory
 $ rsync -a username@remote_host:/home/username/dir1 place_to_sync_on_local_machine
 ```
 
+#### Syncing current directory to remote 
+
+```bash
+$ rsync -av $(pwd)/ acadia.local:/home/deploy/acadia/current
+```
+
 ## User management
 
 ### Adding a user
