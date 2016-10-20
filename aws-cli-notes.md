@@ -2,12 +2,9 @@
 
 **Note:** almost all commands allow a `--dryrun` option that when used will output what would have been done if it was not a dry run.
 
-## Documentation
-
-* [S3 sub-command](http://docs.aws.amazon.com/cli/latest/reference/s3)
-* [EC2 sub-command](http://docs.aws.amazon.com/cli/latest/reference/ec2)
-
 ## S3 Commands
+
+**Documentation**: [S3 sub-command](http://docs.aws.amazon.com/cli/latest/reference/s3)
 
 #### Get a listing of folders in a bucket
 
@@ -90,3 +87,7 @@ Sync current local directory to S3:
 ```bash
 $ aws s3 sync ./ s3://mybucket/
 ```
+
+## EC2 commands
+
+**Documentation**: [EC2 sub-command](http://docs.aws.amazon.com/cli/latest/reference/ec2)
