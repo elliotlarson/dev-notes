@@ -91,3 +91,9 @@ $ aws s3 sync ./ s3://mybucket/
 ## EC2 commands
 
 **Documentation**: [EC2 sub-command](http://docs.aws.amazon.com/cli/latest/reference/ec2)
+
+#### Showing list of instances
+
+```bash
+$ aws ec2 describe-instances --profile acadia-admin --region us-west-2
+```
