@@ -42,8 +42,11 @@ server {
 This might be helpful if you have something like a rails app, and you'd like all of your related log files in a single directory:
 
 ```nginx
-error_log /home/deploy/myapp/shared/log/nginx.error.log;
-access_log /home/deploy/myapp/shared/log/nginx.access.log;
+server {
+       # other stuff
+       error_log /home/deploy/myapp/shared/log/nginx.error.log;
+       access_log /home/deploy/myapp/shared/log/nginx.access.log;
+}
 ```
 
 ## Checking configuration
