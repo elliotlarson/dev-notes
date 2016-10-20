@@ -47,8 +47,14 @@ To remove all files in a bucket:
 $ aws s3 rm s3://mybucket/ --recursive
 ```
 
-To remove only files that match a glob pattern:
+To remove only files that match a glob pattern (note that we're excluding everything and then including just the glob that we want):
 
 ```bash
-$ aws s3 rm s3://mybucket/
+$ aws s3 rm s3://acadia-database-daily-backups --recursive --exclude "*" --include "*.sql.gz"
+```
+
+To remove all files except those that match a glob pattern:
+
+```bash
+$ aws s3 rm s3://acadia-database-daily-backups --recursive --exclude "*.bak"
 ```
