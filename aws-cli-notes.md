@@ -58,3 +58,35 @@ To remove all files except those that match a glob pattern:
 ```bash
 $ aws s3 rm s3://acadia-database-daily-backups --recursive --exclude "*.bak"
 ```
+
+#### Create a bucket
+
+```bash
+$ aws s3 mb s3://mybucket
+```
+
+#### Remove a bucket
+
+```bash
+$ aws s3 rb s3://mybucket
+```
+
+#### Syncing files
+
+To grab everything from a bucket and sync to current directory:
+
+```bash
+$ aws s3 sync s3://acadia-database-daily-backups ./
+```
+
+To sync only certain files from bucket to local directory:
+
+```bash
+$ aws s3 sync s3://acadia-database-daily-backups ./ --exclude "*" --include "acadia-staging*"
+```
+
+Sync current local directory to S3:
+
+```bash
+$ aws s3 sync ./ s3://mybucket/
+```
