@@ -43,7 +43,7 @@ This might be helpful if you have something like a rails app, and you'd like all
 
 ```nginx
 server {
-       # other stuff
+       # other config stuff...
        error_log /home/deploy/myapp/shared/log/nginx.error.log;
        access_log /home/deploy/myapp/shared/log/nginx.access.log;
 }
