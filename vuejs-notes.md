@@ -270,3 +270,9 @@ You can achieve the `event.preventDefault()` approach with the `.prevent` modifi
 ```html
 <button @click.prevent="upvote">Upvotes {{ upvotes }}</button>
 ```
+
+The `keyup` event also has identifiers that allow you to specify which key you care about.  Here we only care about the `enter` key:
+
+```html
+<input @keyup.enter="doSomething">
+```
