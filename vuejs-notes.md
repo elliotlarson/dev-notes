@@ -264,3 +264,9 @@ upvote: function(event) {
 	event.preventDefault();
 }
 ```
+
+You can achieve the `event.preventDefault()` approach with the `.prevent` modifier on the `v-on` directive:
+
+```html
+<button @click.prevent="upvote">Upvotes {{ upvotes }}</button>
+```
