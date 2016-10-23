@@ -106,6 +106,17 @@ If you use the `<template>` tag with `v-if` and the data value is truthy, the co
 </div>
 ```
 
+You can also use standard conditional operators in the `v-if` and `v-show` directives:
+
+```html
+<h1 v-show="name">
+	Hello, 
+	<span v-if="gender == 'female'">miss</span>
+	<span v-if="gender == 'male'">mister</span>
+	{{ name }}.
+</h1>
+```
+
 #### `v-else`
 
 Following an element with a `v-if` directive, you can add an element with a `v-else` directive:
