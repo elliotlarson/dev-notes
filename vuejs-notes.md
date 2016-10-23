@@ -182,7 +182,7 @@ Iterate through an array of objects with an index:
 </ul>
 ```
 
-#### `v-on`
+## Events and `v-on`
 
 This is how you handle events on elements.  `v-on` is followed by the type of event, like `click` and the attribute value is the functioanality to execute when the event happens:
 
