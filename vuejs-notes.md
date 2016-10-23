@@ -122,3 +122,7 @@ Following an element with a `v-if` directive, you can add an element with a `v-e
 	<input v-model="name">
 </div>
 ```
+
+#### `v-if` vs `v-show`
+
+> When using v-if, if the condition is false on initial render, it will not do anything - - the conditional block won’t be rendered until the condition becomes true for the first time. Generally speaking, v-if has higher toggle costs while v-show has higher initial render costs. So prefer v-show if you need to toggle something very often, and prefer v-if if the condition is unlikely to change at runtime.
