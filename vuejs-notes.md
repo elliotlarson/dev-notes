@@ -276,3 +276,42 @@ The `keyup` event also has identifiers that allow you to specify which key you c
 ```html
 <input @keyup.enter="doSomething">
 ```
+
+## Computed values
+
+You can create computed values that behave like normal data properties:
+
+```html
+<html>
+	<head>
+		<title>v-on</title>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>Square a number</h1>
+					<h4>Enter the number:</h4>
+					<input v-model="number">
+					<p>{{ number }} * {{ number }} = {{ squared }}</p>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+	<script>
+		new Vue({
+			el: '.container',
+			data: { 
+				number: 0 
+			},
+			computed: {
+				squared: function() {
+					return this.number * this.number;
+				}
+			}
+		});
+	</script>
+</html>
+```
