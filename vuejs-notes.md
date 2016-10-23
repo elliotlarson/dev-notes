@@ -248,3 +248,9 @@ You can also call a method on the Vue object.  Add the method to a `methods` has
 	</script>
 </html>
 ```
+
+The `v-on` directive has a shorthand:
+
+```html
+<button @click="upvote">Upvotes {{ upvotes }}</button>
+```
