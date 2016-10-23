@@ -63,6 +63,12 @@ The basic hello world in vue uses just the core library, and it looks like this:
 
 ## Template directives
 
+#### `v-model`
+
+Places the contents of the data item in the element it is attached to.  There is two way binding on this, so if you update the value on the element, the data value of the Vue object will also get updated.
+
+You can see an example of this in the hello world example above.
+
 #### `v-show`
 
 For conditionally showing or hiding an element.  This directive will apply a CSS style to either show or hide the element:
