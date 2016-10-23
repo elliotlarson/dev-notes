@@ -213,3 +213,38 @@ This is how you handle events on elements.  `v-on` is followed by the type of ev
 	</script>
 </html>
 ```
+
+You can also call a method on the Vue object.  Add the method to a `methods` hash.
+
+```html
+<html>
+	<head>
+		<title>v-on</title>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<br>
+					<button v-on:click="upvote" class="btn btn-primary">
+						Upvote {{ upvotes }}
+					</button>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+	<script>
+		new Vue({
+			el: '.container',
+			data: { upvotes: 0 },
+			methods: {
+				upvote: function() {
+					this.upvotes++;
+				}
+			}
+		});
+	</script>
+</html>
+```
