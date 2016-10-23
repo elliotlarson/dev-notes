@@ -171,3 +171,13 @@ Iterate through an array of objects:
 	</li>
 </ul>
 ```
+
+Iterate through an array of objects with an index:
+
+```html
+<ul>
+	<li v-for="(movie, index) in movies">
+		{{ index }}. {{ movie.title }} - {{ movie.release_date }}
+	</li>
+</ul>
+```
