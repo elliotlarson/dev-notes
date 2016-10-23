@@ -1,14 +1,14 @@
 # Vue.js Notes
 
-## Installation
+## Installation & Getting setup
 
-#### Via npm:
+#### Via npm
 
 ```bash
 $ sudo npm install -g vue
 ```
 
-#### Via CDN:
+#### Via CDN
 
 ```html
 <!-- development version -->
@@ -18,9 +18,9 @@ $ sudo npm install -g vue
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
 ```
 
-#### Development tools:
+#### Vue CLI
 
-The **Vue CLI** will help you bootstrap a SPA app with Vue:
+The Vue CLI will help you bootstrap a SPA app with Vue:
 
 ```bash
 $ sudo npm install -g vue-cli
@@ -32,4 +32,8 @@ Create the app with:
 $ vue init webpack my-project
 ```
 
-Also, grab the [**Vue devtools** Chrome extension](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
+#### Dev tools Chrome extension
+
+Also, grab the [**Vue devtools** Chrome extension](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd).
+
+
