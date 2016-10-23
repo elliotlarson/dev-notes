@@ -73,3 +73,29 @@ For conditionally showing or hiding an element.  This directive will apply a CSS
 	<h1 v-show="name">Hi, {{ name }}!</h1>
 	<input v-model="name">
 </div>
+```
+
+#### `v-if`
+
+You can also use `v-if` to show or hide an element.  However, this directive will not use CSS.  It will either render the element or not.
+
+```html
+<div id="app">
+	<h1 v-if="!name">What's your name?</h1>
+	<h1 v-if="name">Hi, {{ name }}!</h1>
+	<input v-model="name">
+</div>
+```
+
+If you use the `<template>` tag with `v-if` and the data value is truthy, the contents will be rendered, but the template tag will not:
+
+```html
+<div id="app">
+	<h1 v-if="!name">What's your name?</h1>
+	<template v-if="name">
+		<h1>Hi, {{ name }}!</h1>
+		<p>It's nice to meet you.</p>
+	</template>
+	<input v-model="name">
+</div>
+```
