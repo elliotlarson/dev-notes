@@ -63,4 +63,13 @@ The basic hello world in vue uses just the core library, and it looks like this:
 
 ## Template directives
 
+#### `v-show`
 
+For conditionally showing or hiding an element.  This directive will apply a CSS style to either show or hide the element:
+
+```html
+<div id="app">
+	<h1 v-show="!name">What's your name?</h1>
+	<h1 v-show="name">Hi, {{ name }}!</h1>
+	<input v-model="name">
+</div>
