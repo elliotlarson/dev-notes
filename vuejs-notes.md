@@ -254,3 +254,14 @@ The `v-on` directive has a shorthand:
 ```html
 <button @click="upvote">Upvotes {{ upvotes }}</button>
 ```
+
+The method receiving the event will have the `event` argument passed to it:
+
+```javascript
+// ...
+upvote: function(event) {
+	// ...
+	event.preventDefault();
+}
+event.preventDefault();
+```
