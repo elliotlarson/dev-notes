@@ -1,6 +1,6 @@
 # Vue.js Notes
 
-## Installation & Getting setup
+## Installation & getting setup
 
 #### Via npm
 
