@@ -263,5 +263,4 @@ upvote: function(event) {
 	// ...
 	event.preventDefault();
 }
-event.preventDefault();
 ```
