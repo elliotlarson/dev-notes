@@ -36,4 +36,31 @@ $ vue init webpack my-project
 
 Also, grab the [**Vue devtools** Chrome extension](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd).
 
+## Hello world
+
+Vue.js is meant to be used as either just a view layer, the vue core library, or as a full SPA solution by including additional vue libraries.  
+
+The basic hello world in vue uses just the core library, and it looks like this:
+
+```html
+<html> 
+	<head>
+		<title>Hello Vue</title> 
+	</head>
+	<body>
+		<div id="app">
+			<h1>{{ message }}</h1>
+			<input v-model="message">
+		</div>
+	</body> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
+	<script>
+		var data = { message: 'Hello, world!' };
+		new Vue({ el: '#app', data: data });
+	</script>
+</html>
+```
+
+## Template directives
+
 
