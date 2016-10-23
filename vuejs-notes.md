@@ -105,3 +105,20 @@ If you use the `<template>` tag with `v-if` and the data value is truthy, the co
 	<input v-model="name">
 </div>
 ```
+
+#### `v-else`
+
+Following an element with a `v-if` directive, you can add an element with a `v-else` directive:
+
+```html
+<div id="app">
+	<template v-if="name">
+		<h1>Hi, {{ name }}!</h1>
+		<p>It's nice to meet you.</p>
+	</template>
+	<template v-else>
+		<h1>What's your name?</h1>
+	</template>
+	<input v-model="name">
+</div>
+```
