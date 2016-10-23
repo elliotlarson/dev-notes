@@ -139,3 +139,35 @@ Following an element with a `v-if` directive, you can add an element with a `v-e
 From the documentation:
 
 > When using v-if, if the condition is false on initial render, it will not do anything - - the conditional block won’t be rendered until the condition becomes true for the first time. Generally speaking, v-if has higher toggle costs while v-show has higher initial render costs. So prefer v-show if you need to toggle something very often, and prefer v-if if the condition is unlikely to change at runtime.
+
+#### `v-for`
+
+Iterate a specified number of times:
+
+```html
+<ul>
+	<li v-for="i in 11" class="list-group-item"> 
+  		{{ i-1 }} times 4 equals {{ (i-1) * 4 }}.
+	</li>
+</ul>
+```
+
+Iterate through an array of strings:
+
+```html
+<ul>
+	<li v-for="movie in movies">
+		{{ movie }}
+	</li>
+</ul>
+```
+
+Iterate through an array of objects:
+
+```html
+<ul>
+	<li v-for="movie in movies">
+		{{ movie.title }} - {{ movie.release_date }}
+	</li>
+</ul>
+```
