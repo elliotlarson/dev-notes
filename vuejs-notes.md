@@ -315,3 +315,17 @@ You can create computed values that behave like normal data properties:
 	</script>
 </html>
 ```
+
+## Adding Sass (scss) to webpack template
+
+```bash
+$ npm install node-sass sass-loader -D
+```
+
+After this is in place, you should be able to just use it in your components:
+
+```html
+<style lang="scss">
+/* some scss */
+</style>
+```
