@@ -1,5 +1,29 @@
 # Git Notes
 
+## Rewording a commit
+
+The first way you can do this is to just ammend the commit (provided it's the last commit):
+
+```bash
+$ git commit --amend
+```
+
+If the commit isn't the last commit, you need to rebase:
+
+```bash
+$ git rebase -i head~3
+```
+
+This will open the last 3 commits in an interactive rebase.  Each commit starts with the work `pick`.  For the commit you want to change the message for, change `pick` to `reword`:
+
+```text
+pick 0d7dd56 Moving test helpers out into support file
+pick ec6e0c9 Adding in vue-router
+reword 8f6b0ab Adding in debug unit testing
+```
+
+When you save this and close out of it, git will open the commit dialog for this commit again so you can edit the message.
+
 ## Reflog
 
 Git keeps track of everything that happens to the repo in the reflog.  
