@@ -329,3 +329,21 @@ After this is in place, you should be able to just use it in your components:
 /* some scss */
 </style>
 ```
+
+## Debugging with Karma
+
+First you need to load the Chrome Karma launcher:
+
+```bash
+$ npm install karma-chrome-launcher --save-dev
+```
+
+Then run the tests in debug mode with the browser set to Chrome:
+
+```bash
+$ ./node_modules/karma/bin/karma start test/unit/karma.conf.js --browser=Chrome --single-run=false --debug
+```
+
+In the browser, click the debug button, which will open a debug page.  Open the developer tools on this page, and you might need to reload.
+
+You should now be able to debug stuff by sticking a `debugger` statement in your code and refreshing the karma debug page.
