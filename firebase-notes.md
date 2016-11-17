@@ -151,7 +151,7 @@ In the case that a collection does not exist, say we don't have a collection of 
 
 ```javascript
 
-var rootRef = database.ref(); // empty refers to the root
+var rootRef = database.ref(); // no argument on ref() to the root
 rootRef.child('bookmarks').push({ 
   // new bookmark object 
 });
