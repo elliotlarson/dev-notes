@@ -100,3 +100,14 @@ bookmarksRef.once('value', function(dataSnapshot) {
   bookmarksCount = dataSnapshot.numChildren();
 });
 ```
+
+#### Limiting results
+
+You can limit the number of results you pull back with either [limitToFirst](https://firebase.google.com/docs/reference/js/firebase.database.Query#limitToFirst) or [limitToLast](https://firebase.google.com/docs/reference/js/firebase.database.Query#limitToFirst) methods on the ref.
+
+```javascript
+var lastFiveBookmarks = [];
+bookmarksRef.limitToLast(5).once('value', function(dataSnapshot) {
+  lastFiveBookmarks.push(dataSnapshot.val());
+});
+```
