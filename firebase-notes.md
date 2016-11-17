@@ -122,7 +122,7 @@ Notice the use of `firebase.database.ServerValue.TIMESTAMP` to add the current t
 
 ```javascript
 var newBookmarkRef = bookmarksRef.push();
-newBookmarkRef.set({
+newBookmarkRef.push({
   createdAt: firebase.database.ServerValue.TIMESTAMP,
   title: 'Firebase documentation',
   url: 'https://firebase.google.com/docs/',
@@ -131,6 +131,29 @@ newBookmarkRef.set({
 var newBookmark;
 newBookmarkRef.once('value', function(dataSnapshot) {
   newBookmark = dataSnapshot.val();
+});
+```
+
+You can also just call `push` directly if you don't need the ref:
+
+```javascript
+bookmarksRef.push({
+  createdAt: firebase.database.ServerValue.TIMESTAMP,
+  title: 'Firebase documentation',
+  url: 'https://firebase.google.com/docs/',
+  tags: ['firebase', 'nosql']
+});
+```
+
+#### Adding a new ref
+
+In the case that a collection does not exist, say we don't have a collection of bookmarks, but would like to add a bookmark.  We can add to the bookmarks ref even if it does not exist yet:
+
+```javascript
+
+var rootRef = database.ref(); // empty refers to the root
+rootRef.child('bookmarks').push({ 
+  // new bookmark object 
 });
 ```
 
