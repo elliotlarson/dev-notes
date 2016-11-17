@@ -29,6 +29,8 @@ firebase.initializeApp(config);
 var database = firebase.database();
 ```
 
+[Here is a simple repl script](https://gist.github.com/elliotlarson/8e16160c93d58f10646be006243441e7) that launches an interactive shell with this config preloaded.
+
 ### Getting data
 
 You can grab a onetime set of data from the database.  The `ref` is the location of the collection.  In this case it's the grabbing the "bookmarks" collection, accessible at this URL: `https://bookmrks-e4ff5.firebaseio.com/bookmarks.json`.
@@ -149,16 +151,24 @@ bookmarkRef.once('value', function(dataSnapshot) {
 To update the whole record you can call the [set](https://firebase.google.com/docs/reference/js/firebase.database.Reference#set) method on the collection item's ref:
 
 ```javascript
-bookmark.title = 'New Title';
+bookmark.title = 'New Title of Awesomeness';
 bookmarkRef.set(bookmark);
 ```
 
-This will update the entire document with what you pass in.  so if you pass in `{ title: 'New Title' }`, the whole bookmark collection item will be replaced with an object with a single title value.
+This will update the entire document with what you pass in.  so if you pass in `{ title: 'New Title of Awesomeness' }`, the whole bookmark collection item will be replaced with an object with a single title value.
 
 #### Updating just a field on an item
 
 To update a single field/value for a collection item, you can use the [update](https://firebase.google.com/docs/reference/js/firebase.database.Reference#update) method:
 
 ```javascript
-bookmarkRef.update({ title: 'New Title' });
+bookmarkRef.update({ title: 'New Title of Awesomeness' });
+```
+
+### Deleting data
+
+This is as easy as calling the [remove](https://firebase.google.com/docs/reference/js/firebase.database.Reference#remove) method on a collection item's ref (scary):
+
+```javascript
+bookmarkRef.remove();
 ```
