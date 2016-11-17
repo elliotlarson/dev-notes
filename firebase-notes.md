@@ -89,3 +89,14 @@ bookmarksRef.orderByChild('title').once(function(dataSnapshot) {
   });
 });
 ```
+
+#### Getting collection count
+
+There is the [numChildren](https://firebase.google.com/docs/reference/js/firebase.database.DataSnapshot#numChildren) method on the dataSnapshot object:
+
+```javascript
+var bookmarksCount = 0;
+bookmarksRef.once('value', function(dataSnapshot) {
+  bookmarksCount = dataSnapshot.numChildren();
+});
+```
