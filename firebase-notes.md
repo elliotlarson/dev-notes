@@ -24,4 +24,21 @@ var config = {
   messagingSenderId: "61922992922259161"
 };
 firebase.initializeApp(config);
+
+// get a reference to the database service
+var database = firebase.database();
+```
+
+### Grabbing list of data
+
+You can grab a onetime set of data from the database.  The `ref` is the location of the collection.  In this case it's the grabbing the "bookmarks" collection, accessible at this URL: `https://bookmrks-e4ff5.firebaseio.com/bookmarks.json`.
+
+[once](https://firebase.google.com/docs/reference/js/firebase.database.Reference#once) returns a [Firebase.Promise](https://firebase.google.com/docs/reference/js/firebase.Promise).  It accepts the event type to listen for.  In this case we're listening for the "value" event, which just means we're looking for the value.  Once listens for exactly one event and then stops listening.  The success callback of the promise passes in a [DataSnapshot](https://firebase.google.com/docs/reference/js/firebase.database.DataSnapshot).  You can then get the data off of this object, with the [val](https://firebase.google.com/docs/reference/js/firebase.database.DataSnapshot#val) method.
+
+```javascript
+let bookmarksRef = database.ref('bookmarks');
+let bookmarks;
+bookmarksRef.once('value').then(function(dataSnapshot) {
+  bookmarks = dataSnapshot.val();
+});
 ```
