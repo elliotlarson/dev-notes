@@ -70,3 +70,22 @@ firstBookmarkRef.once('value', function(dataSnapshot) {
   bookmark = dataSnapshot.val();
 });
 ```
+
+#### Getting a subset of data
+
+You can use the [orderByChild](https://firebase.google.com/docs/reference/js/firebase.database.Reference#orderByChild) method on a ref.  This will allow you to sort by a child key of a collection of objects.  
+
+The parent `dataSnapshot.val()` returns a JSON object, where the order is not sorted.  To get the sorted order, you need to loop throught the child refs and build up an array.
+
+The only available order is ascending.  If this is okay, `push` onto an array.  If you want descending `unshift` onto an array.
+
+Also keep in mind that the string sorting is case sensative lexographic, so `Z` comes before `a` in the sort order.
+
+```javascript
+var bookmarks = [];
+bookmarksRef.orderByChild('title').once(function(dataSnapshot) {
+  dataSnapshot.forEach(function(child) {
+    bookmarks.push(child.val());
+  });
+});
+```
