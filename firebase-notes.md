@@ -172,3 +172,14 @@ This is as easy as calling the [remove](https://firebase.google.com/docs/referen
 ```javascript
 bookmarkRef.remove();
 ```
+
+### Transactional update
+
+Both `set` and `update` will update the value regardless of the current value.  Usually this is fine, however in the case of a counter increment (imagine Facebook likes) you may not have a current value to increment (imagine lots of people favoriting at the same time).  You can use the [transaction](https://firebase.google.com/docs/reference/js/firebase.database.Reference#transaction) method to deal with this.
+
+```javascript
+// say our bookmarks app is social and people can "like" our bookmarks
+var bookmarkRef = database.ref('bookmarks/-KWkxBFE0js_G-mdX98Q/favorites');
+bookmarkRef.transaction(function(currentFavorites) {
+  return currentFavorites + 1;
+});
