@@ -61,7 +61,7 @@ onValueChange.off()
 
 #### Child refs
 
-You can get a child of a ref.  Here I'm getting a single bookmark by using a child ref off of the `bookmarksRef`:
+You can get a child of a ref.  Here I'm getting a single bookmark by using a child ref off of the `bookmarksRef` (the "0" is the key of the bookmark):
 
 ```javascript
 let firstBookmarkRef = bookmarsRef.child('0')
