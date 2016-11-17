@@ -206,3 +206,24 @@ var bookmarkRef = database.ref('bookmarks/-KWkxBFE0js_G-mdX98Q/favorites');
 bookmarkRef.transaction(function(currentFavorites) {
   return currentFavorites + 1;
 });
+```
+
+### Authentication
+
+#### Users and user data
+
+Firebase provides a pre-packaged authentication system for your app.  When using this, users are created in the Firebase system.  However, these user "records" are only for authentication.  You will probably want to store additional user related data in your database.  To do this, you need to create your own users collection and associate collection items with the user records via the user record's uid.
+
+#### Seeding a user with Google auth provider
+
+In order for this to work, I had to create a [utility web page](https://gist.github.com/elliotlarson/e73bdcd025f688e4e7a84332b9460300) to call the Google auth popup.  The web page can not just be served from the local filesystem, it has to be served with a web server with the HTTP protocol.
+
+Using the simple python server:
+
+```bash
+$ http-serve
+```
+
+Then open the web page: `http://localhost:8080/create-app-user.html`
+
+
