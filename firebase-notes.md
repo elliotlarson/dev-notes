@@ -131,3 +131,34 @@ newBookmarkRef.once('value', function(dataSnapshot) {
   newBookmark = dataSnapshot.val();
 });
 ```
+
+### Updating data
+
+First you'll get a ref for a collection item:
+
+```javascript
+var bookmarkRef = database.ref('bookmarks/-KWkxBFE0js_G-mdX98Q');
+var bookmark;
+bookmarkRef.once('value', function(dataSnapshot) {
+  bookmark = dataSnapshot.val();
+});
+```
+
+#### Updating the whole collection item
+
+To update the whole record you can call the [set](https://firebase.google.com/docs/reference/js/firebase.database.Reference#set) method on the collection item's ref:
+
+```javascript
+bookmark.title = 'New Title';
+bookmarkRef.set(bookmark);
+```
+
+This will update the entire document with what you pass in.  so if you pass in `{ title: 'New Title' }`, the whole bookmark collection item will be replaced with an object with a single title value.
+
+#### Updating just a field on an item
+
+To update a single field/value for a collection item, you can use the [update](https://firebase.google.com/docs/reference/js/firebase.database.Reference#update) method:
+
+```javascript
+bookmarkRef.update({ title: 'New Title' });
+```
