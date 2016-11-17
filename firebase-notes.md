@@ -111,3 +111,23 @@ bookmarksRef.limitToLast(5).once('value', function(dataSnapshot) {
   lastFiveBookmarks.push(dataSnapshot.val());
 });
 ```
+
+### Adding data
+
+We can add a new item to a collection by using the [push](https://firebase.google.com/docs/reference/js/firebase.database.Reference#push) method on a collection ref and then using the [set](https://firebase.google.com/docs/reference/js/firebase.database.Reference#set) method to update values.
+
+Notice the use of `firebase.database.ServerValue.TIMESTAMP` to add the current timestamp.  You probably don't want to rely on a value set in your app, so Firebase provides this value.
+
+```javascript
+var newBookmarkRef = bookmarksRef.push();
+newBookmarkRef.set({
+  createdAt: firebase.database.ServerValue.TIMESTAMP,
+  title: 'Firebase documentation',
+  url: 'https://firebase.google.com/docs/',
+  tags: ['firebase', 'nosql']
+});
+var newBookmark;
+newBookmarkRef.once('value', function(dataSnapshot) {
+  newBookmark = dataSnapshot.val();
+});
+```
