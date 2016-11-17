@@ -1,6 +1,6 @@
 # Firebase Notes
 
-## Using Node.js 
+## Using JavaScript
 
 ### Setup
 
@@ -29,7 +29,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 ```
 
-### Grabbing list of data
+### Getting data
 
 You can grab a onetime set of data from the database.  The `ref` is the location of the collection.  In this case it's the grabbing the "bookmarks" collection, accessible at this URL: `https://bookmrks-e4ff5.firebaseio.com/bookmarks.json`.
 
@@ -57,4 +57,16 @@ let onValueChange = bookmarksRef.on('value', function(dataSnapshot) {
 });
 // then cancel the subscription with
 onValueChange.off()
+```
+
+#### Children refs
+
+You can get a child of a ref.  Here I'm getting a single bookmark by using a child ref off of the `bookmarksRef`:
+
+```javascript
+let firstBookmarkRef = bookmarsRef.child('0')
+let bookmark;
+firstBookmarkRef.once('value', function(dataSnapshot) {
+  bookmark = dataSnapshot.val();
+});
 ```
