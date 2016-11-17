@@ -59,7 +59,7 @@ let onValueChange = bookmarksRef.on('value', function(dataSnapshot) {
 onValueChange.off()
 ```
 
-#### Children refs
+#### Child refs
 
 You can get a child of a ref.  Here I'm getting a single bookmark by using a child ref off of the `bookmarksRef`:
 
