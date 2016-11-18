@@ -16,6 +16,7 @@ $ sudo npm install -g firebase-tools
 In the Firebase interface, you should be able to navigate to the general settings in your project (the gear icon).  From there you should be able to find a link that says something to the effect of "Add Firebase to your web app".  Click this and copy the general connection code:
 
 ```javascript
+var firebase = require("firebase");
 var config = {
   apiKey: "AIzaSyDBASDSDDF23SDVAS_ZmGSfM",
   authDomain: "foo-bar42.firebaseapp.com",
@@ -29,7 +30,18 @@ firebase.initializeApp(config);
 var database = firebase.database();
 ```
 
-[Here is a simple repl script](https://gist.github.com/elliotlarson/8e16160c93d58f10646be006243441e7) that launches an interactive shell with this config preloaded.
+The previous example logs you in as a regular user and you are subject to the database access rules you setup.  You can also access Firebase through the admin SDK, which will give you full access irrespective of the database access rules.
+
+```javascript
+var admin = require("firebase-admin");
+admin.initializeApp({
+  credential: admin.credential.cert(".adminServiceAccountKey.json"),
+  databaseURL: "https://bookmrks-e4ff5.firebaseio.com"
+});
+var database = admin.database()
+```
+
+[Here are a couple of simple repl scripts](https://gist.github.com/elliotlarson/8e16160c93d58f10646be006243441e7) that launch an interactive Node.js shell with the firebase configs above preloaded.
 
 ### Getting data
 
