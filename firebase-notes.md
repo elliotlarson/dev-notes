@@ -257,7 +257,9 @@ Rules are written in a JSON file.  If you are hosting on Firebase and deploying 
 
 In this example, anyone is granted read access to the foo collection, or the `/foo` path, but no one is granted write access.
 
-**Shallower level rules that grant read access override deeper rules.**  Concider the following example:
+### Shallower level rules that grant read access override deeper rules
+
+Concider the following example:
 
 ```json
 {
@@ -291,7 +293,7 @@ However, if we reverse this example...
 
 ... access is granted for bar, even though it is not granted on the parent.  So, when evaluating if access is granted, Firebase walks down the rule tree looking at each node in the hierarchy.  The first node it encounters that grants access is accepted and the system quits descending the tree.
 
-**If no rule is provided it is assumed to be false.**  
+### If no rule is provided it is assumed to be false
 
 These two examples are the same:
 
@@ -309,3 +311,13 @@ These two examples are the same:
   }
 }
 ```
+
+### Only allowing create or delete
+
+`data` and `newData` are from a list of [predefined variables](https://firebase.google.com/docs/database/security/securing-data#predefined_variables) that can be used in your rules.
+
+```json
+".write": "!data.exists() || !newData.exists()"
+```
+
+
