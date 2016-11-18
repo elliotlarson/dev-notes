@@ -220,13 +220,13 @@ bookmarkRef.transaction(function(currentFavorites) {
 });
 ```
 
-### Authentication
+## Authentication
 
-#### Users and user data
+### Users and user data
 
 Firebase provides a pre-packaged authentication system for your app.  When using this, users are created in the Firebase system.  However, these user "records" are only for authentication.  You will probably want to store additional user related data in your database.  To do this, you need to create your own users collection and associate collection items with the user records via the user record's uid.
 
-#### Seeding a user with Google auth provider
+### Seeding a user with Google auth provider
 
 In order for this to work, I had to create a [utility web page](https://gist.github.com/elliotlarson/e73bdcd025f688e4e7a84332b9460300) to call the Google auth popup.  The web page can not just be served from the local filesystem, it has to be served with a web server with the HTTP protocol.
 
@@ -238,4 +238,56 @@ $ http-serve
 
 Then open the web page: `http://localhost:8080/create-app-user.html`
 
+## Rules
+
+The rules system gives you control over who gets to read and write data, and it allows you do add in data validation.
+
+The rules for your database are essentially a JSON file with access and validation logic descriptors.
+
+```json
+{
+  "rules": {
+    "foo": {
+      ".read": true,
+      ".write": false
+    }
+  }
+}
+```
+
+In this example, anyone is granted read access to the foo collection, or the `/foo` path, but no one is granted write access.
+
+**Shallower level rules that grant read access override deeper rules.**  Concider the following example:
+
+```json
+{
+  "rules": {
+    "foo": {
+      ".read": true,
+      "bar": {
+        ".read": false
+      }
+    }
+  }
+}
+```
+
+Even though we've specified that reading for `bar` is false, the shallower parent node has granted read access.  The highest level rule that grants read access takes precedence.
+
+However, if we reverse this example...
+
+```json
+{
+  "rules": {
+    "foo": {
+      ".read": false,
+      "bar": {
+        ".read": true
+      }
+    }
+  }
+}
+```
+
+... access is granted for bar, even though it is not granted on the parent.  So, when evaluating if access is granted, Firebase walks the rules tree down each node looking at each node in the hierarchy.  The first node it encounters that grants access is accepted and the system quits descending the node tree.
 
