@@ -240,9 +240,9 @@ Then open the web page: `http://localhost:8080/create-app-user.html`
 
 ## Rules
 
-The rules system gives you control over who gets to read and write data, and it allows you do add in data validation.
+The rules system gives you a declarative mechanism to define access privileges and schema validation to your database.
 
-The rules for your database are essentially a JSON file with access and validation logic descriptors.
+Rules are written in a JSON file.  If you are hosting on Firebase and deploying with the `firebase deploy` command, this file can be stored in revision control and it will be applied on each deploy.
 
 ```json
 {
@@ -289,5 +289,23 @@ However, if we reverse this example...
 }
 ```
 
-... access is granted for bar, even though it is not granted on the parent.  So, when evaluating if access is granted, Firebase walks the rules tree down each node looking at each node in the hierarchy.  The first node it encounters that grants access is accepted and the system quits descending the node tree.
+... access is granted for bar, even though it is not granted on the parent.  So, when evaluating if access is granted, Firebase walks down the rule tree looking at each node in the hierarchy.  The first node it encounters that grants access is accepted and the system quits descending the tree.
 
+**If no rule is provided it is assumed to be false.**  
+
+These two examples are the same:
+
+```json
+{
+  "rules": {}
+}
+```
+
+```json
+{
+  "rules": {
+    ".read": false,
+    ".write": false
+  }
+}
+```
