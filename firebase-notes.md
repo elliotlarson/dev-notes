@@ -242,6 +242,8 @@ Then open the web page: `http://localhost:8080/create-app-user.html`
 
 The rules system gives you a declarative mechanism to define access privileges and schema validation to your database.
 
+Rules are defined on a per-node basis.
+
 Rules are written in a JSON file.  If you are hosting on Firebase and deploying with the `firebase deploy` command, this file can be stored in revision control and it will be applied on each deploy.
 
 ```json
@@ -320,4 +322,8 @@ These two examples are the same:
 ".write": "!data.exists() || !newData.exists()"
 ```
 
+## Misc
 
+### Pushkeys
+
+One of the core Angular developers published [this gist](https://gist.github.com/mikelehen/3596a30bd69384624c11) which provides the code for generating pushkeys.  This might be useful if you are creating fake data.
