@@ -21,3 +21,16 @@ You can execute this with:
 $ ts-node hello-world.ts
 # => hello
 ```
+
+## Merging an object onto an object
+
+Like you merge in Ruby, you can use the `Object.assign` method:
+
+```typescript
+let objectOne = { 'one': 1, 'two': 2 };
+let objectTwo = { 'three': 3, 'four' };
+
+let merged = Object.assign(objectOne, objectTwo);
+```
+
+This is a variadic method, so you can pass in as many objects as you want.  The values of each object in the chain take precedence over objects that come before it.
