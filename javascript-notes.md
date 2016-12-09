@@ -34,3 +34,16 @@ let merged = Object.assign(objectOne, objectTwo);
 ```
 
 This is a variadic method, so you can pass in as many objects as you want.  The values of each object in the chain take precedence over objects that come before it.
+
+
+## Looping over an object hash
+
+You can grab the keys of the object and then loop over these with a `for of` loop:
+
+```typescript
+let myObj = { 'firstName': 'Elliot', 'lastName': 'Larson', 'middleName': 'Gordon' };
+let keys = Object.keys(myObj);
+for (let key of keys) {
+  console.log(myObj[key]);
+}
+```
