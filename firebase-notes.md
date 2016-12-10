@@ -157,15 +157,21 @@ bookmarksRef.push({
 });
 ```
 
-#### Adding a new ref
-
-In the case that a collection does not exist, say we don't have a collection of bookmarks, but would like to add a bookmark.  We can add to the bookmarks ref even if it does not exist yet:
+You can also pass an optional callback function as the second argument to the `push` method:
 
 ```javascript
-
-var rootRef = database.ref(); // no argument on ref() to the root
-rootRef.child('bookmarks').push({ 
-  // new bookmark object 
+let bookmarkData = {
+  createdAt: firebase.database.ServerValue.TIMESTAMP,
+  title: 'Firebase documentation',
+  url: 'https://firebase.google.com/docs/',
+  tags: ['firebase', 'nosql']
+}
+bookmarksRef.push(bookmarkData, (error) => {
+  if (error) {
+    console.log(`ERROR: ${error}`);
+  } else {
+    console.log('push successful!');
+  }
 });
 ```
 
