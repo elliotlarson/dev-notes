@@ -1,5 +1,28 @@
 # JavaScript Notes
 
+## Typescript class constructors
+
+Typescript will auto assign arguments passed to the constructor as object properties:
+
+```typescript
+class Post
+  constructor(
+    public title: string,
+    public content: string,
+    public hashTag?: string
+  ) { }
+
+let post = new Post('Foo', 'Bar');
+console.log(post.title);
+// => Foo
+console.log(post.content)
+// => Bar
+console.log(post.hashTag)
+// => undefined
+```
+
+Notice the use of the optional parameter `hashTag`.
+
 ## Executing a typescript file as a node script
 
 To write a typescript and then have node execute it, you need the [ts-node](https://github.com/TypeStrong/ts-node) library.
