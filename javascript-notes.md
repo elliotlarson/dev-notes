@@ -23,6 +23,16 @@ console.log(post.hashTag)
 
 Notice the use of the optional parameter `hashTag`.
 
+## Typescript destructured object as argument to function with optional types
+
+Sometimes you want to pass an object into a function as an argument and you want to specify some of the object types as optional with default values.  You can do this like so:
+
+```typescript
+function foo({ optionOne, optionTwo = '' } : { optionOne: string, option2? string }): void {
+  console.log(`${optionOne} ${optionTwo}`);
+}
+```
+
 ## Executing a typescript file as a node script
 
 To write a typescript and then have node execute it, you need the [ts-node](https://github.com/TypeStrong/ts-node) library.
