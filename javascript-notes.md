@@ -28,13 +28,13 @@ Notice the use of the optional parameter `hashTag`.
 Sometimes you want to pass an object into a function as an argument and you want to specify some of the object types as optional with default values.  You can do this like so:
 
 ```typescript
-function foo({ optionOne, optionTwo = '' } : { optionOne: string, option2?: string }): void {
+function foo({ optionOne, optionTwo = '' } : { optionOne: string, optionTwo?: string }): void {
   console.log(`${optionOne} ${optionTwo}`);
 }
 
-foo({ optionOne: 'foo', optionTwo: 'bar' })
+foo({ optionOne: 'foo', optionTwo: 'bar' });
 // => foo bar
-foo({ optionOne: 'baz' })
+foo({ optionOne: 'baz' });
 // => baz
 ```
 
