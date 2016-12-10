@@ -31,6 +31,11 @@ Sometimes you want to pass an object into a function as an argument and you want
 function foo({ optionOne, optionTwo = '' } : { optionOne: string, option2?: string }): void {
   console.log(`${optionOne} ${optionTwo}`);
 }
+
+foo({ optionOne: 'foo', optionTwo: 'bar' })
+// => foo bar
+foo({ optionOne: 'baz' })
+// => baz
 ```
 
 ## Executing a typescript file as a node script
