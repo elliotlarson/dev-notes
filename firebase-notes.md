@@ -336,4 +336,4 @@ One of the core Angular developers published [this gist](https://gist.github.com
 
 ## Modeling data
 
-Here is a [good StackOverflow](http://stackoverflow.com/questions/16638660/firebase-data-structure-and-url/16651115#16651115) response about data modeling in Firebase, written by a Firebase engineer.  He goes over the different tradoffs when doing basic data modeling in different ways with Firebase.
+Here is a [good StackOverflow response](http://stackoverflow.com/questions/16638660/firebase-data-structure-and-url/16651115#16651115) about data modeling in Firebase, written by a Firebase engineer.  He goes over the different tradoffs when doing basic data modeling in different ways with Firebase.
