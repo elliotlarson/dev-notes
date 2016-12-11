@@ -333,3 +333,7 @@ These two examples are the same:
 ### Pushkeys
 
 One of the core Angular developers published [this gist](https://gist.github.com/mikelehen/3596a30bd69384624c11) which provides the code for generating pushkeys.  This might be useful if you are creating fake data.
+
+## Modeling data
+
+Here is a [good StackOverflow](http://stackoverflow.com/questions/16638660/firebase-data-structure-and-url/16651115#16651115) response about data modeling in Firebase, written by a Firebase engineer.  He goes over the different tradoffs when doing basic data modeling in different ways with Firebase.
