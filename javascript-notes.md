@@ -60,7 +60,7 @@ $ ts-node hello-world.ts
 # => hello
 ```
 
-## Merging an object onto an object
+## Merging an object into an object
 
 Like you merge in Ruby, you can use the `Object.assign` method:
 
