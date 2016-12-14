@@ -8,7 +8,7 @@ I'm starting to learn Angular with version 2, so these are Angular 2 notes.
 
 It looks like the `ng test` command doesn't give you the ability to run specs for a single file, but you can do it with `karma` directly:
 
-First, start the `karma` run with `start`.  This will unfortunately run all of your tests when it starts up:
+First, start the `karma` test runner with `start`.  This will unfortunately run all of your tests when it starts up:
 
 ```bash
 $ node_modules/.bin/karma start
