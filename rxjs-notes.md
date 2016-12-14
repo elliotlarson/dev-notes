@@ -13,6 +13,10 @@ let source$ = Rx.Observable.interval(400).take(9)
 source$.subscribe(x => console.log(x));
 ```
 
+We create an observable, have it execute every 400 milliseconds for 9 iterations.  Then we map over the observable stream and pull out a relevant array item.  Then we subscribe to the observable stream and `console.log` each item.
+
+Here's a [JS Bin](https://jsbin.com/sazupih/edit?js,console) of this snippet of code.
+
 ## Resources
 
 * [A great overview as a gist](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
