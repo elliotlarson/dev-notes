@@ -25,7 +25,7 @@ $ node_modules/.bin/karma run -- --grep='Todo model'
 This will only run the test for that file once.  If you want it to run each time the test or implementation file are updated, you can use `nodemon`:
 
 ```bash
-$ node_modules/.bin/nodemon -x "node_modules/.bin/karma run -- --grep='Emotion model'" -w src/app/models/todo.model.ts -w src/
+$ node_modules/.bin/nodemon -x "node_modules/.bin/karma run -- --grep='Todo model'" -w src/app/models/todo.model.ts -w src/
 app/models/todo.model.spec.ts
 ```
 
