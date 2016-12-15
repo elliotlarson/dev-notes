@@ -22,7 +22,8 @@ RX programming also attempts to make it easier to reason about and express async
 > it provides idiomatic abstractions to treat asynchronous data similar to how you would treat any source of synchronous data, like a simple array.
 > it abstracts the notion of time from your code
 
-With RXJS you have a standard flow **producer** (observable) -> **data processing pipeline** (operators) -> **consumer** (observer).
+With RXJS you have a standard flow: 
+**producer** (observable) -> **data processing pipeline** (operators) -> **consumer** (observer).
 
 ## Solving the promise problem
 
