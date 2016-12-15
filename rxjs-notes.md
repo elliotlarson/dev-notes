@@ -51,6 +51,9 @@ The `from` operator creates an observable sequence from an array:
 
 ```typescript
 Rx.Observable.from([1, 2, 3]).subscribe(console.log);
+// => 1
+// => 2
+// => 3
 ```
 
 
