@@ -56,6 +56,14 @@ Rx.Observable.from([1, 2, 3]).subscribe(console.log);
 // => 3
 ```
 
+### `fromPromise`
+
+Creates an observable sequence from a promise:
+
+```typescript
+Rx.Observable.fromPromise($.getJSON('https://api.github.com/users')).subscribe(console.log);
+```
+
 ## Resources
 
 * [A great overview as a gist](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
