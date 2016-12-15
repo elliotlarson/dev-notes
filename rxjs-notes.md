@@ -32,6 +32,28 @@ Promises were created to deal with "callback hell" or a mess of deeply nested ca
 
 But, promises only react to a single event, not an event stream, like mouse movements or sequences of bytes in a file stream.  And, promises can't be cancelled.
 
+## Creating observables
+
+### `of` 
+
+The `of` operator creates an observable sequence from a list of arguments.
+
+```typescript
+Rx.Observable.of(1, 2, 3).subscribe(console.log);
+// => 1
+// => 2
+// => 3
+```
+
+### `from`
+
+The `from` operator creates an observable sequence from an array:
+
+```typescript
+Rx.Observable.from([1, 2, 3]).subscribe(console.log);
+```
+
+
 ## Resources
 
 * [A great overview as a gist](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
