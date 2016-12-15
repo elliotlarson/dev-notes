@@ -21,7 +21,7 @@ Here's a [JS Bin](https://jsbin.com/sazupih/edit?js,console) of this snippet of 
 
 Promises were created to deal with "callback hell" or a mess of deeply nested callback functions.  Promises give you the ability to move this to a chainable sequence of events tied together with `then` and `catch` statements.
 
-But, promises only react to a single event, not an event stream.  And, promises can't be cancelled.
+But, promises only react to a single event, not an event stream, like mouse movements or sequences of bytes in a file stream.  And, promises can't be cancelled.
 
 ## Resources
 
