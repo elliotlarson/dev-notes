@@ -1,5 +1,7 @@
 # RXJS Notes
 
+> [it is] an API for asynchronous programming with observable streams
+
 > Reactive programming is programming with asynchronous data streams. A stream is a sequence of ongoing events ordered in time.  
 
 A stream can be operated on like an array.  In order to interact with the stream, you can subscribe to it.
