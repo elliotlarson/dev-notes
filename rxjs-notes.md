@@ -17,6 +17,8 @@ We create an observable, have it execute every 400 milliseconds for 9 iterations
 
 Here's a [JS Bin](https://jsbin.com/sazupih/edit?js,console) of this snippet of code.
 
+RX programming also attempts to make it easier to reason about and express asynchronous data stream functionality.
+
 ## Solving the promise problem
 
 Promises were created to deal with "callback hell" or a mess of deeply nested callback functions.  Promises give you the ability to move this to a chainable sequence of events tied together with `then` and `catch` statements.
