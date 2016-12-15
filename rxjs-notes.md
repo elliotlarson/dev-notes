@@ -64,6 +64,16 @@ Creates an observable sequence from a promise:
 Rx.Observable.fromPromise($.getJSON('https://api.github.com/users')).subscribe(console.log);
 ```
 
+### `fromEvent`
+
+Creates an observable sequence from a DOM event:
+
+```typescript
+let btn = document.querySelector('#my-button');
+Rx.Observable.fromEvent(btn, 'click')
+  .subscribe(_ => console.log('clicked it'));
+```
+
 ## Resources
 
 * [A great overview as a gist](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
