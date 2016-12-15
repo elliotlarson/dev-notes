@@ -19,6 +19,8 @@ Here's a [JS Bin](https://jsbin.com/sazupih/edit?js,console) of this snippet of 
 
 RX programming also attempts to make it easier to reason about and express asynchronous data stream functionality.
 
+> it provides idiomatic abstractions to treat asynchronous data similar to how you would treat any source of synchronous data, like a simple array.
+
 ## Solving the promise problem
 
 Promises were created to deal with "callback hell" or a mess of deeply nested callback functions.  Promises give you the ability to move this to a chainable sequence of events tied together with `then` and `catch` statements.
