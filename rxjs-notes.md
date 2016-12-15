@@ -17,6 +17,12 @@ We create an observable, have it execute every 400 milliseconds for 9 iterations
 
 Here's a [JS Bin](https://jsbin.com/sazupih/edit?js,console) of this snippet of code.
 
+## Solving the promise problem
+
+Promises were created to deal with "callback hell" or a mess of deeply nested callback functions.  Promises give you the ability to move this to a chainable sequence of events tied together with `then` and `catch` statements.
+
+But, promises only react to a single event, not an event stream.  And, promises can't be cancelled.
+
 ## Resources
 
 * [A great overview as a gist](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
