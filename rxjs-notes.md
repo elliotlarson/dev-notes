@@ -61,7 +61,8 @@ Rx.Observable.from([1, 2, 3]).subscribe(console.log);
 Creates an observable sequence from a promise:
 
 ```typescript
-Rx.Observable.fromPromise($.getJSON('https://api.github.com/users')).subscribe(console.log);
+Rx.Observable.fromPromise($.getJSON('https://api.github.com/users'))
+  .subscribe(console.log);
 ```
 
 ### `fromEvent`
