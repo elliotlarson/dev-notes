@@ -47,7 +47,7 @@ Rx.Observable.of(1, 2, 3).subscribe(console.log);
 
 ### `from`
 
-The `from` operator creates an observable sequence from an array:
+The `from` operator creates an observable sequence from an array or iterable object:
 
 ```typescript
 Rx.Observable.from([1, 2, 3]).subscribe(console.log);
@@ -55,7 +55,6 @@ Rx.Observable.from([1, 2, 3]).subscribe(console.log);
 // => 2
 // => 3
 ```
-
 
 ## Resources
 
