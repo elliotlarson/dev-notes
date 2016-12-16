@@ -85,3 +85,32 @@ for (let key of keys) {
   console.log(myObj[key]);
 }
 ```
+
+## Setting up: Typescript, Webpack, Yarn
+
+First create a directory and initialize yarn:
+
+```bash
+$ mkdir myApp
+$ cd myApp
+$ yarn init .
+```
+
+Answer some questions that npm will ask you about the app (you can just hit enter all the way through if you like).
+
+Install the necessary packages:
+
+```bash
+$ yarn add webpack webpack-dev-server typescript typings ts-loader
+```
+
+Setup types for typescript:
+
+```bash
+$ node_modules/.bin/typings install dt~es6-shim --global --save
+```
+
+
+
+
+
