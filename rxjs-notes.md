@@ -50,9 +50,9 @@ let source$ = Observable.create(observer => {
 });
 
 source$.subscribe(
-  value => console.log(value),
-  e => console.log(e),
-  () => console.log('complete')
+  value => console.log(value), // next(value)
+  e => console.log(e), // error(e)
+  () => console.log('complete') // complete()
 )
 ```
 
