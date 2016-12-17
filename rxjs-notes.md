@@ -34,6 +34,28 @@ But, promises only react to a single event, not an event stream, like mouse move
 
 ## Creating observables
 
+### `create`
+
+This is a low level method of creating an observable from a datasource:
+
+```typescript
+import { Observable, Observer } from 'rxjs';
+
+let numbers = [1, 5, 10];
+let source$ = Observable.create(observer => {
+  for (let n of numbers) {
+    observer.next(n);
+  }
+  observer.complete();
+});
+
+source$.subscribe(
+  value => console.log(value),
+  e => console.log(e),
+  () => console.log('complete')
+)
+```
+
 ### `of` 
 
 The `of` operator creates an observable sequence from a list of arguments.
@@ -114,7 +136,7 @@ You can also invoke the subscribe function with three function callbacks `next`,
 source$.subscribe(
   value => console.log(`value: ${value}`),
   message => console.log(`error: ${message}`),
-  _ => console.log('complete')
+  () => console.log('complete')
 );
 ```
 
