@@ -110,7 +110,44 @@ Setup types for typescript:
 $ node_modules/.bin/typings install dt~es6-shim --global --save
 ```
 
+Create a `tsconfig.json` file in the root:
 
+```json
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "sourceMap": true
+  }
+```
 
+Create a `webpack.config.js` file in the root:
 
+```javascript
+module.exports = {
+  entry: './main',
+  output: { filename: 'app.js' },
+  module: {
+    loaders: [
+      {
+        test: /.ts$/,
+        loader: 'ts-loader'
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['', '.ts', '.js']
+  }
+}
+```
 
+In your `package.json` make sure you have webpack scripts in place (this is optional):
+
+```json
+{
+  "scripts": {
+    "start": "webpack-dev-server --watch --inline",
+    "postinstall": "typings install"
+  }
+}
+```
