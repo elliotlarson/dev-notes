@@ -112,9 +112,9 @@ You can also invoke the subscribe function with three function callbacks `next`,
 
 ```typescript
 source$.subscribe(
-  value => { console.log(`value: ${value}`); },
-  message => {  console.log(`error: ${message}`); },
-  _ => { console.log('complete'); }
+  value => console.log(`value: ${value}`),
+  message => console.log(`error: ${message}`),
+  _ => console.log('complete')
 );
 ```
 
@@ -122,7 +122,7 @@ You can also just pass in a single method for `next`:
 
 
 ```typescript
-source$.subscribe(value => { console.log(`value: ${value}`); });
+source$.subscribe(value => console.log(`value: ${value}`));
 ```
 
 Or, if you just wanted to `console.log` value:
