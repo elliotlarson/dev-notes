@@ -56,6 +56,26 @@ source$.subscribe(
 )
 ```
 
+**Note**: If the error method is called, the observer will stop.  In this example, the `complete` method will never get called:
+
+```typescript
+import { Observable, Observer } from 'rxjs';
+
+let numbers = [1, 5, 10];
+let source$ = Observable.create(observer => {
+  for (let n of numbers) {
+    observer.next(n);
+  }
+  observer.complete();
+});
+
+source$.subscribe(
+  value => console.log(value), // next(value)
+  e => console.log(e), // error(e)
+  () => console.log('complete') // complete()
+)
+```
+
 ### `of` 
 
 The `of` operator creates an observable sequence from a list of arguments.
