@@ -36,7 +36,7 @@ But, promises only react to a single event, not an event stream, like mouse move
 
 ### `create`
 
-This is a low level method of creating an observable from a datasource:
+This is a low level method of creating an observable from a datasource.  With `create` you interact with the oberver by calling the `next`, `error` and `complete` methods directly.
 
 ```typescript
 import { Observable, Observer } from 'rxjs';
