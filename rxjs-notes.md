@@ -176,6 +176,29 @@ Or, if you just wanted to `console.log` value:
 source$.subscribe(console.log);
 ```
 
+## Using operators
+
+There are a slew of operators in RXJS that allow you to setup a data processing pipeline.
+
+### `map`
+
+[`map`](http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-map) allows you to translate a data stream like `map` would help you translate an array.
+
+```typescript
+let numbers = [1, 5, 10];
+let source$ = Observable.from(numbers).map(n => 2 * n);
+
+source$.subscribe(
+  value => console.log(value),
+  e => console.log(e),
+  () => console.log('complete')
+);
+// => 2
+// => 10
+// => 20
+// => complete
+```
+
 ## Resources
 
 * [A great overview as a gist](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
