@@ -75,11 +75,13 @@ Rx.Observable.fromEvent(btn, 'click')
   .subscribe(_ => console.log('clicked it'));
 ```
 
-## Observers
+## Creating observers
 
 An observer is just an object that has three methods `next`, `error`, and `complete`.  
 
-### Creating with a class
+### With a class
+
+This is a fairly formal approach, which you are not likely to use most of the time.  However, it's good to see when learning:
 
 ```typescript
 import { Observable } from 'rxjs';
