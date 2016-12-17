@@ -99,11 +99,36 @@ class MyObserver implements Observer<number> {
   }
 
   complete() {
-    console.log('complete')
+    console.log('complete');
   }
 }
 
 source$.subscribe(new MyObserver());
+```
+
+### With `subscribe` functions
+
+You can also invoke the subscribe function with three function callbacks `next`, `error`, and `complete`:
+
+```typescript
+source$.subscribe(
+  value => { console.log(`value: ${value}`); },
+  message => {  console.log(`error: ${message}`); },
+  _ => { console.log('complete'); }
+);
+```
+
+You can also just pass in a single method for `next`:
+
+
+```typescript
+source$.subscribe(value => { console.log(`value: ${value}`); });
+```
+
+Or, if you just wanted to `console.log` value:
+
+```typescript
+source$.subscribe(console.log);
 ```
 
 ## Resources
