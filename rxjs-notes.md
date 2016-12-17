@@ -106,7 +106,7 @@ class MyObserver implements Observer<number> {
 source$.subscribe(new MyObserver());
 ```
 
-### With `subscribe` functions
+### With `subscribe` callback functions
 
 You can also invoke the subscribe function with three function callbacks `next`, `error`, and `complete`:
 
