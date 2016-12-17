@@ -77,7 +77,9 @@ Rx.Observable.fromEvent(btn, 'click')
 
 ## Observers
 
-An observer is just an object that has three methods `next`, `error`, and `complete`.  Here is a basic example:
+An observer is just an object that has three methods `next`, `error`, and `complete`.  
+
+### Creating with a class
 
 ```typescript
 import { Observable } from 'rxjs';
