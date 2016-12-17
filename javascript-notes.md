@@ -151,3 +151,22 @@ In your `package.json` make sure you have webpack scripts in place (this is opti
   }
 }
 ```
+
+Add an `index.html` file:
+
+```html
+<html>
+  <head>
+    <title>TypeScript Test Bed</title>
+    <script src="app.js"></script>
+  </head>
+  <body>
+  </body>
+</html>
+```
+
+Add in a `main.ts` file where you can start coding, and then execute:
+
+```bash
+$ yarn start
+```
