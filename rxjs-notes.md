@@ -75,6 +75,33 @@ Rx.Observable.fromEvent(btn, 'click')
   .subscribe(_ => console.log('clicked it'));
 ```
 
+## Observers
+
+An observer is just an object that has three methods `next`, `error`, and `complete`.  Here is a basic example:
+
+```typescript
+import { Observable } from 'rxjs';
+
+let numbers = [1, 5, 10];
+let source$ = Observable.from(numbers);
+
+class MyObserver {
+  next(value) {
+    console.log(`value: ${value}`);
+  }
+
+  error(message) {
+    console.log(`error: ${message}`);
+  }
+
+  complete() {
+    console.log('complete')
+  }
+}
+
+source$.subscribe(new MyObserver());
+```
+
 ## Resources
 
 * [A great overview as a gist](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
