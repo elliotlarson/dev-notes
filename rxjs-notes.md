@@ -84,12 +84,12 @@ An observer is just an object that has three methods `next`, `error`, and `compl
 This is a fairly formal approach, which you are not likely to use most of the time.  However, it's good to see when learning:
 
 ```typescript
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 
 let numbers = [1, 5, 10];
 let source$ = Observable.from(numbers);
 
-class MyObserver {
+class MyObserver implements Observer<number> {
   next(value) {
     console.log(`value: ${value}`);
   }
