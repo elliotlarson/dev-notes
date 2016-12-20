@@ -63,6 +63,8 @@ bookmarksRef.once('value', function(dataSnapshot) {
 
 [on](https://firebase.google.com/docs/reference/js/firebase.database.Reference#on) works just like `once` except it is a subscription that will continue to be updated everytime the event ("value" in this case) changes.  This will give your app some real-time-ness.  Since this is essentially a subscription, you will need to call the [off](https://firebase.google.com/docs/reference/js/firebase.database.Reference#off) method to cancel the subscription:
 
+**Note**: This will add the complete hash of bookmarks to the bookmarks variable.
+
 ```javascript
 let bookmarksRef = database.ref('bookmarks');
 let bookmarks;
@@ -82,6 +84,20 @@ let firstBookmarkRef = bookmarsRef.child('0')
 let bookmark;
 firstBookmarkRef.once('value', function(dataSnapshot) {
   bookmark = dataSnapshot.val();
+});
+```
+
+#### Grabbing individual values
+
+When you get back a `dataSnapshot` for a collection, you may still want to iterate through them and do something for each.  For example, you may want to translate each into an object.  In this example, we're creating an array of `Bookmark` objects from the returned `dataSnapshot`:
+
+```typescript
+let bookmarks: Bookmark[] = [];
+database.ref('bookmarks').on('value', function(dataSnapshot) {
+  let bookmarksHash = dataSnapshot.val();
+  Object.keys(bookmarksHash).forEach((key) => {
+    bookmarks.push(Bookmark.fromHash(bookmarksHash[key]));
+  });
 });
 ```
 
