@@ -120,6 +120,20 @@ bookmarksRef.orderByChild('title').once(function(dataSnapshot) {
 });
 ```
 
+#### Grabbing by key
+
+You are able to grab by a single key in Firebase.  This is essentially like a one off `where` clause, where you can grab a subset of a collection where a child key is equal to something.  For example:
+
+```typescript
+var bookmarks = [];
+bookmarksRef.orderByChild('uid').equalTo('fn9QGFdlHKMuraGEEGLHjTi3SoW2')
+  .once(function(dataSnapshot) {
+  dataSnapshot.forEach(function(child) {
+    bookmarks.push(child.val());
+  });
+});
+```
+
 #### Getting collection count
 
 There is the [numChildren](https://firebase.google.com/docs/reference/js/firebase.database.DataSnapshot#numChildren) method on the dataSnapshot object:
