@@ -122,7 +122,7 @@ bookmarksRef.orderByChild('title').once(function(dataSnapshot) {
 
 #### Grabbing by key
 
-You are able to grab by a single key in Firebase.  This is essentially like a one-off `where` clause, allowing you to grab a subset of a collection where one of the child keys is equal to some value.  For example:
+You are able to grab by a single key in Firebase.  This is essentially like a one-off `where` clause, allowing you to grab a subset of a collection where one of the child keys is equal to some value.  For example, this shows how to grab all bookmark nodes that have `uid` value set to a specific user's `uid`:
 
 ```typescript
 var bookmarks = [];
