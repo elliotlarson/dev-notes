@@ -387,7 +387,7 @@ Here is a [good StackOverflow response](http://stackoverflow.com/questions/16638
 
 ### Fanning out
 
-You will encounter the term "fan-out" in discussions of Firebase data modeling.  The idea is that if you need to query data from multiple places, it may be more performant to write this data to these locations, duplicating and denormalizing the data.  This may increase your read performance.  
+The idea is that if you need to query data from multiple places, it may be more performant to write this data to these locations, duplicating and denormalizing the data.  This may increase your read performance.  
 
 For example, say you have a Twitter clone.  Your twitter feed is the culmination of all of your tweets mixed in with all of the tweets from people you are following.  In a tranditional RDBS you might have a single Tweets table.  Each Tweet would have a user ID associated with it.  To ge the feed, you might get a list of user IDs for users who you are following and then you could select all tweets with user ID `IN()` the set.
 
