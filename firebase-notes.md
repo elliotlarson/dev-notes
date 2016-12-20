@@ -236,6 +236,23 @@ To update a single field/value for a collection item, you can use the [update](h
 bookmarkRef.update({ title: 'New Title of Awesomeness' });
 ```
 
+### Adding or updating multiple nodes at once
+
+You can add or update multiple nodes at one time.  The updates are atomic.  Either they all pass or they all fail.
+
+Here is an example where we're creating multiple new nodes at the same time, one for a master feed of posts and one for a user's own feed:
+
+```typescript
+function newPost(uid: string, title: string, content: string): firebase.Promise {
+  let postData = { uid, title, content };
+  let postKey = firebase.database().ref.child('posts').push().key;
+  let updates = {};
+  updates[`feed/${postKey}`] = postData;
+  updates[`users/${uid}/feed/${postKey}`] = postData;
+  return firebase.database().ref().update(updates);
+}
+```
+
 ### Deleting data
 
 This is as easy as calling the [remove](https://firebase.google.com/docs/reference/js/firebase.database.Reference#remove) method on a collection item's ref (scary):
