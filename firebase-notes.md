@@ -384,3 +384,11 @@ One of the core Angular developers published [this gist](https://gist.github.com
 ## Modeling data
 
 Here is a [good StackOverflow response](http://stackoverflow.com/questions/16638660/firebase-data-structure-and-url/16651115#16651115) about data modeling in Firebase, written by a Firebase engineer.  He goes over the different tradoffs when doing basic data modeling in different ways with Firebase.
+
+### Fanning out
+
+You will encounter the term "fan-out" in discussions of Firebase data modeling.  The idea is that if you need to query data from multiple places, it may be more performant to write this data to these locations, duplicating and denormalizing the data.  This may increase your read performance.  
+
+For example, say you have a Twitter clone.  Your twitter feed is the culmination of all of your tweets mixed in with all of the tweets from people you are following.  In a tranditional RDBS you might have a single Tweets table.  Each Tweet would have a user ID associated with it.  To ge the feed, you might get a list of user IDs for users who you are following and then you could select all tweets with user ID `IN()` the set.
+
+However, Firebase doesn't give you the ability to do `IN()` queries or even `WHERE` statements.  If you stored all tweets in a single master feed, to get a user's feed you would need to grab tweets for each user individually and then manually assemble and sort the tweets to compose the feed.  To do this in Firebase, you might have a feed for each user.  When you save a tweet, it's added to your feed and it is added/duplicated onto the feed of every user who's following you.  This is "fanning-out".
