@@ -58,6 +58,8 @@ export class AppModule { }
 
 Now, when you create a component with the `TodoService` in the constructor, Angular will inject it for you when creating an instance.
 
+### `useClass`
+
 Then, when you're testing a component that uses this service, you can tell the injector to use a mock in the testbed, like so:
 
 ```typescript
@@ -72,4 +74,22 @@ TestBed.configureTestingModule({
 
 Instead of passing the `TodoService` directly to the `providers` array of the `TestBed`, we pass an object with two keys.  The `provide` key is set to the expected service class, and the `useClass` key is set to the mock used for testing.
 
+### `useValue`
+
 You can also use the `useValue` key instead of the `useClass` key.  `useClass` passes in the class you want to instantiate using the DI system.  If you use `useValue` instead, this becomes the value used as the instance, instead of instantiating an instance of the class.  So, if you want to instantiate your own instance outside the DI system and then just pass this in, this is your option.
+
+### `useFactory`
+
+If you need to define a custom factory method for instantiating an instance, you can use `useFactory`.  Here you pass in a method that constructs the instance.  You also need to provide a `deps` array that defines the objects that need to be instantiated and passed into the method.
+
+```typescript
+let heroServiceFactory = (logger: Logger, userService: UserService) => {
+  return new HeroService(logger, userService.user.isAuthorized);
+};
+
+export let heroServiceProvider =
+  { provide: HeroService,
+    useFactory: heroServiceFactory,
+    deps: [Logger, UserService]
+  };
+```
