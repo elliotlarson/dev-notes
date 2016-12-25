@@ -101,3 +101,11 @@ Then, elsewhere in the providers array:
   providers: [heroServiceProvider]
 }
 ```
+
+## Testing
+
+### `TestBed`
+
+The `TestBed` helps to create an isolated testing environment for testing components.  It is essentially a special `NgModule` that you attach your component to.  The `TestBed` class's `configureTestingModule` takes a hash like `NgModule`.
+
+
