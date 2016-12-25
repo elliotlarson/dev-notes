@@ -55,3 +55,21 @@ For example, here lets make a TodoService available application wide by adding i
 })
 export class AppModule { }
 ```
+
+Now, when you create a component with the `TodoService` in the constructor, Angular will inject it for you when creating an instance.
+
+Then, when you're testing a component that uses this service, you can tell the injector to use a mock in the testbed, like so:
+
+```typescript
+TestBed.configureTestingModule({
+  declarations: [ TodosComponent ],
+  providers: [
+    { provide: TodoService, useClass: MockTodoService }
+  ]
+})
+.compileComponents();
+```
+
+Instead of passing the `TodoService` directly to the `providers` array of the `TestBed`, we pass an object with two keys.  The `provide` key is set to the expected service class, and the `useClass` key is set to the mock used for testing.
+
+You can also use the `useValue` key instead of the `useClass` key.  `useClass` passes in the class you want to instantiate using the DI system.  If you use `useValue` instead, this becomes the value used as the instance, instead of instantiating an instance of the class.  So, if you want to instantiate your own instance outside the DI system and then just pass this in, this is your option.
