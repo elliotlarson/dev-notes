@@ -93,3 +93,11 @@ export let heroServiceProvider =
     deps: [Logger, UserService]
   };
 ```
+
+Then, elsewhere in the providers array:
+
+```typescript
+{
+  providers: [heroServiceProvider]
+}
+```
