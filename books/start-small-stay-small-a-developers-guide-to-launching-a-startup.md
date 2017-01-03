@@ -107,3 +107,5 @@ There are also existing lists of business ideas:
 * [A Startup a Day](https://astartupaday.wordpress.com/) blog of business ideas
 * [Brad Templeton Ideas](http://ideas.4brad.com/) business and general ideas from "crazy" Brad
 * [Springwise - pay for access list of business inovations](https://www.springwise.com/)
+* [Trendwatching - a look at consumer trends](http://trendwatching.com/)
+* [Cool Business Ideas](http://www.coolbusinessideas.com/) 
