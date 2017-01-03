@@ -109,3 +109,18 @@ There are also existing lists of business ideas:
 * [Springwise - pay for access list of business inovations](https://www.springwise.com/)
 * [Trendwatching - a look at consumer trends](http://trendwatching.com/)
 * [Cool Business Ideas](http://www.coolbusinessideas.com/) 
+
+### Evaluating a niche
+
+**TODO**: Find magazines, meetup groups, and online forums where people in this niche hangout.  Get advertising rate cards for these publications.  Most of them will have it on their website.  This will allow you to asses the cost of marketing to this group.
+
+> When searching for a niche, there’s a loose rule of thumb that says to stick to markets where you can take out a full-page ad in a magazine targeted at your market for less than $5,000.
+
+> As an aside, I don’t recommend magazine advertising due to the difficulty of tracking prospects, the inability to tweak content mid-stream, and the challenge of getting people to “switch media” from print to the web. But understanding how magazine publishers segment the market will provide you with insight into viable niches.
+
+> ... if you’re targeting a niche that has a magazine devoted to them, such as bass fishermen or ASP.NET programmers, you’re on the right track.
+
+> Beyond searching for a magazine that caters to your market, you should also look at census and labor statistics to get an estimate of your market size. It’s important to remember during this process that a large market is not helpful if you can’t reach them economically through a specific website or magazine.
+
+> Be wary of a market if you are unable to find a handful of websites or a magazine/journal dedicated to it, and the labor statistics claim less than 10,000 members.
+ 
