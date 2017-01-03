@@ -132,3 +132,17 @@ There are also existing lists of business ideas:
 * [Laborsta](http://laborsta.ilo.org/) - international labor data
 * [International labor sites on the web](https://www.bls.gov/bls/other.htm#International)
 
+### Choose a vertical market
+
+Horizontal markets are too general to market to (affordably).  Virticals offer more affordable and targeted marketing opportunities.
+
+### Measuring demand affordably or for free
+
+* **Conversion rate**: The percentage of unique people who visit your site and plunk down the money for your product or service. A viable business has a conversion rate between 1-4%.  More is great, and less can work, but that is the sweet spot.
+* **Traffic**: You need to ask a question like, how many visitors do I need to gross $1,000.
+  Sources:
+  * Search engine - organic search engines
+  * Incoming links - organic links from blogs
+  * Direct traffic - someone types your URL into their browser directly
+  * Advertising - AdWords, banner ads, etc.
+  
