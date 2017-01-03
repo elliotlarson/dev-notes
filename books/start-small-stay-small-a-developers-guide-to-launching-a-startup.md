@@ -128,3 +128,7 @@ There are also existing lists of business ideas:
 
 * [Bureau of Labor Statistics](https://www.bls.gov/)
 * [Economy.com - free labor statistics](https://www.economy.com/freelunch/default.asp)
+* [International Labor Organization - library services](http://www.ilo.org/dyn/lfsurvey/lfsurvey.home)
+* [Laborsta](http://laborsta.ilo.org/) - international labor data
+* [International labor sites on the web](https://www.bls.gov/bls/other.htm#International)
+
