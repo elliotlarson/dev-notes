@@ -56,4 +56,11 @@ You need to fail fast and recover quickly.
 
 Don't expect instant gratification.
 
+### Recommended reading
+
+* [Why We Buy: The Science of Shopping](https://www.amazon.com/gp/product/1416595244?ie=UTF8&tag=feedshot-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=1416595244)
+* [Made to Stick](https://www.amazon.com/gp/product/1400064287?ie=UTF8&tag=softwarbyrob-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=1400064287)
+* [Outliers](https://www.amazon.com/gp/product/0316017922?ie=UTF8&tag=softwarbyrob-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=0316017922)
+
+
 
