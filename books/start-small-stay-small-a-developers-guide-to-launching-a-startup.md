@@ -124,3 +124,7 @@ There are also existing lists of business ideas:
 
 > "Be wary of a market if you are unable to find a handful of websites or a magazine/journal dedicated to it, and the labor statistics claim less than 10,000 members."
  
+ ### Here are the best online resources for researching employment and demographic data:
+
+* [Bureau of Labor Statistics](https://www.bls.gov/)
+* [Economy.com - free labor statistics](https://www.economy.com/freelunch/default.asp)
