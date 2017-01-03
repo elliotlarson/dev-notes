@@ -38,4 +38,9 @@ The author lists a number of the top roadblocks he's seen:
 * Fear.  It can be scary to start something... I guess.  
 * Lack of goals.  Seriously, be clear with yourself about what you are trying to accomplish before setting down the path.
 * Inconsistency.  I would call this section **focus** instead.  Be dilligent in following through and put in consistent work that moves you closer to your goal(s).
+* Failing to effectively delegate.  Use outsourcing to your advantage.  This will not seem like a time/money saver in the beginning.  Do it anyway, get better at it, and it will pay off when you learn the ropes and become comfortable with your outsourcing personel.  He recommends a personal private assistant VPA (like Tim Ferris does in his 4 Hour Work Week).
+
+He re-iterates the importance of outsourcing:
+
+> Outsourcing aspects of your business is the single most powerful approach I've seen to increasing your true hourly rate as an entrepreneur
 
