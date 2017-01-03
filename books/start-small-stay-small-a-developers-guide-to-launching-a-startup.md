@@ -44,3 +44,16 @@ He re-iterates the importance of outsourcing:
 
 > Outsourcing aspects of your business is the single most powerful approach I've seen to increasing your true hourly rate as an entrepreneur
 
+### Developer to entrepreneur
+
+The thing you are good at as a developer is not all that important in entrepreneurship.  Finding the right niche market comes first, solid marketing to this market comes next, something aethetically pleasing to this market comes third... then fourth, functionality.  The author says:
+
+> Market comes first, marketing second, aesthetics third, and functionality a distant fourth
+
+> **In the same market, the product with better marketing wins. Everytime.**
+
+You need to fail fast and recover quickly.
+
+Don't expect instant gratification.
+
+
