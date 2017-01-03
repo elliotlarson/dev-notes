@@ -85,3 +85,25 @@ Niche's require you to focus your efforts on a smaller group of people.  By spec
 Niches have less competition.  Larger players aren't interested in small markets.
 
 Niches have higher profit margins.  He uses the example of [Notabene](https://www.notabene.com/), which provides a word proessor for academics.  The software sells for $350, which is substantially more than Microsoft Word.  And, the software is no where near as nice and robust as Word.  But, it solves the problem of putting together bibliographies for academic publications.
+
+Niche markets are not used to good marketing.  You don't have to knock it out of the park with your marketing efforts.
+
+### Finding niches and product ideas
+
+First, look at all areas of your life.
+
+**TODO**: Write down all of your hobies and interests and work/educational experiences.  Look for niches in this list.  These are referred to as **warm** niches because you know something about them personally. To compose a list of luke-warm niches, do this for friends and family.  These are poeple who you could ask directly about the niches they know something about.
+
+You also look for **cold** niches, by spelunking through occupation lists.  You can begin thinking about product ideas for these grouops of people:
+
+* [Wikipedia list of occupations](https://en.wikipedia.org/wiki/Lists_of_occupations)
+* [Bureau of Labor Statistics national employment data](https://www.bls.gov/news.release/ocwage.t01.htm): There's also some information here about how much the average person makes in the lines of work
+
+There are also existing lists of business ideas:
+
+* [Entrepreneur.com business idea center](https://www.entrepreneur.com/businessideas)
+* [Ycombinator Requests for startups](https://www.ycombinator.com/rfs/)
+* [Ahhbo list of home businesses](http://www.ahbbo.com/ideas.html)
+* [A Startup a Day](https://astartupaday.wordpress.com/) blog of business ideas
+* [Brad Templeton Ideas](http://ideas.4brad.com/) business and general ideas from "crazy" Brad
+* [Springwise - pay for access list of business inovations](https://www.springwise.com/)
