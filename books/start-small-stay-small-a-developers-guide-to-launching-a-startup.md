@@ -123,8 +123,8 @@ There are also existing lists of business ideas:
 > "Beyond searching for a magazine that caters to your market, you should also look at census and labor statistics to get an estimate of your market size. It’s important to remember during this process that a large market is not helpful if you can’t reach them economically through a specific website or magazine."
 
 > "Be wary of a market if you are unable to find a handful of websites or a magazine/journal dedicated to it, and the labor statistics claim less than 10,000 members."
- 
- ### Here are the best online resources for researching employment and demographic data:
+
+### Here are the best online resources for researching employment and demographic data:
 
 * [Bureau of Labor Statistics](https://www.bls.gov/)
 * [Economy.com - free labor statistics](https://www.economy.com/freelunch/default.asp)
