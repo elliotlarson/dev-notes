@@ -150,5 +150,9 @@ Things that matter:
   
 You can also put a survey or link to call to action landing page on targeted forum to guage interest.
 
+You can also use these tools:
 
-  
+* [Google Adwords - keyword suggestion tool](https://adwords.google.com/home/tools/keyword-planner/)
+* [SEO Moz's Keyword Difficulty Tool](https://moz.com/tools/keyword-difficulty)
+* [Micro Niche Finder](http://www.micronichefinder.com/) horribly marketed pay tool, but good, according to the author
+
