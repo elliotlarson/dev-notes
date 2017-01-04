@@ -138,11 +138,17 @@ Horizontal markets are too general to market to (affordably).  Virticals offer m
 
 ### Measuring demand affordably or for free
 
+Things that matter:
+
 * **Conversion rate**: The percentage of unique people who visit your site and plunk down the money for your product or service. A viable business has a conversion rate between 1-4%.  More is great, and less can work, but that is the sweet spot.
 * **Traffic**: You need to ask a question like, how many visitors do I need to gross $1,000.
   Sources:
-  * Search engine - organic search engines
-  * Incoming links - organic links from blogs
+  * Search engine - organic search engines (check Google for stats on searches for relevant keywords)
+  * Incoming links - organic links from blogs 
   * Direct traffic - someone types your URL into their browser directly
   * Advertising - AdWords, banner ads, etc.
+  
+You can also put a survey or link to call to action landing page on targeted forum to guage interest.
+
+
   
