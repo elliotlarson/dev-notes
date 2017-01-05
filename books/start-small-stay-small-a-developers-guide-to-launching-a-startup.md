@@ -140,6 +140,8 @@ Horizontal markets are too general to market to (affordably).  Virticals offer m
 
 ### Measuring demand affordably or for free
 
+You can do a certain amount of demand assessment using search engine keyword difficulty tools.
+
 Things that matter:
 
 * **Conversion rate**: The percentage of unique people who visit your site and plunk down the money for your product or service. A viable business has a conversion rate between 1-4%.  More is great, and less can work, but that is the sweet spot.
@@ -152,11 +154,13 @@ Things that matter:
   
 You can also put a survey or link to call to action landing page on targeted forum to guage interest.
 
-You can also use these tools:
+You can use these tools:
 
 * [Google Adwords - keyword suggestion tool](https://adwords.google.com/home/tools/keyword-planner/)
 * [SEO Moz's Keyword Difficulty Tool](https://moz.com/tools/keyword-difficulty)
 * [Micro Niche Finder](http://www.micronichefinder.com/) horribly marketed pay tool, but good, according to the author
+
+The author likes Micro Niche finder.  SEOMoz is the Rolls Royce in the space, but it's expensive.
 
 **ACTION ITEM:** List out your warm and cold niches.  Try to assess the market size of a niche and what it would cost to market to them.  Do some brain storming on ideas to pitch to your top niches.
 
