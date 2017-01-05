@@ -30,7 +30,7 @@ One short term goal the author recommends is:
 
 This will take a remarkable amount of learning and knowledge to accomplish.
 
-Try to write down your goals and stay accountable to them.  Revisit daily/weekly and assess what you've done since the previous checking to achieve your goals.
+**ACTION ITEM:** Try to write down your goals and stay accountable to them.  Revisit daily/weekly and assess what you've done since the previous checking to achieve your goals.
 
 ### Roadblocks
 
@@ -157,4 +157,6 @@ You can also use these tools:
 * [Google Adwords - keyword suggestion tool](https://adwords.google.com/home/tools/keyword-planner/)
 * [SEO Moz's Keyword Difficulty Tool](https://moz.com/tools/keyword-difficulty)
 * [Micro Niche Finder](http://www.micronichefinder.com/) horribly marketed pay tool, but good, according to the author
+
+**ACTION ITEM:** List out your warm and cold niches.  Try to assess the market size of a niche and what it would cost to market to them.  Do some brain storming on ideas to pitch to your top niches.
 
