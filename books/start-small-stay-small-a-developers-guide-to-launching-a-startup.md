@@ -30,6 +30,8 @@ One short term goal the author recommends is:
 
 This will take a remarkable amount of learning and knowledge to accomplish.
 
+Try to write down your goals and stay accountable to them.  Revisit daily/weekly and assess what you've done since the previous checking to achieve your goals.
+
 ### Roadblocks
 
 The author lists a number of the top roadblocks he's seen:
