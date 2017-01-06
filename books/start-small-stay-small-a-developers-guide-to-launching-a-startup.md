@@ -94,7 +94,7 @@ Niche markets are not used to good marketing.  You don't have to knock it out of
 
 First, look at all areas of your life.
 
-**TODO**: Write down all of your hobies and interests and work/educational experiences.  Look for niches in this list.  These are referred to as **warm** niches because you know something about them personally. To compose a list of luke-warm niches, do this for friends and family.  These are poeple who you could ask directly about the niches they know something about.
+**ACTION ITEM:** Write down all of your hobies and interests and work/educational experiences.  Look for niches in this list.  These are referred to as **warm** niches because you know something about them personally. To compose a list of luke-warm niches, do this for friends and family.  These are poeple who you could ask directly about the niches they know something about.
 
 You also look for **cold** niches, by spelunking through occupation lists.  You can begin thinking about product ideas for these grouops of people:
 
@@ -161,6 +161,10 @@ You can use these tools:
 * [Micro Niche Finder](http://www.micronichefinder.com/) horribly marketed pay tool, but good, according to the author
 
 The author likes Micro Niche finder.  SEOMoz is the Rolls Royce in the space, but it's expensive.
+
+The content in this book is a bit old.  You might also check out the following:
+
+*[Semrush](https://www.semrush.com)
 
 **ACTION ITEM:** List out your warm and cold niches.  Try to assess the market size of a niche and what it would cost to market to them.  Do some brain storming on ideas to pitch to your top niches.
 
