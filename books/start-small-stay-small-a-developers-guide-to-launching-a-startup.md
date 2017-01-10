@@ -30,7 +30,7 @@ One short term goal the author recommends is:
 
 This will take a remarkable amount of learning and knowledge to accomplish.
 
-**ACTION ITEM:** Try to write down your goals and stay accountable to them.  Revisit daily/weekly and assess what you've done since the previous checking to achieve your goals.
+**ACTION ITEM:** Try to write down your goals and stay accountable to them.  Revisit daily/weekly and assess what you've done since the previous checkin to achieve your goals.
 
 ### Roadblocks
 
@@ -94,7 +94,7 @@ Niche markets are not used to good marketing.  You don't have to knock it out of
 
 First, look at all areas of your life.
 
-**ACTION ITEM:** Write down all of your hobies and interests and work/educational experiences.  Look for niches in this list.  These are referred to as **warm** niches because you know something about them personally. To compose a list of luke-warm niches, do this for friends and family.  These are poeple who you could ask directly about the niches they know something about.
+**ACTION ITEM:** Write down all of your hobbies and interests and work/educational experiences.  Look for niches in this list.  These are referred to as **warm** niches because you know something about them personally. To compose a list of luke-warm niches, do this for friends and family.  These are poeple who you could ask directly about the niches they know something about.
 
 You also look for **cold** niches, by spelunking through occupation lists.  You can begin thinking about product ideas for these grouops of people:
 
@@ -169,4 +169,48 @@ The content in this book is a bit old.  You might also check out the following:
 **ACTION ITEM:** List out your warm and cold niches.  Try to assess the market size of a niche and what it would cost to market to them.  Do some brain storming on ideas to pitch to your top niches.
 
 ## Chapter 3
+
+### Product success triangle
+
+The success of your product depends on three things:
+
+* **product** - building the actual software
+* **market** - a group of people that want the product
+* **execution** - marketing, sales, support
+
+> But a brilliant product with no market or execution is dead. A mediocre product with brilliant marketing and execution will make you money.
+
+He recommends outsourcing as much as possible design and development.  Marketing is the hard part.
+
+### Pricing
+
+The author recommends some standard pricing guidelines:
+
+* **consumer hobby product**: $29 or $14 a month
+* **consumer product that saves the consumer money**: $49 or $19 a month
+* **small business**: $400 or $99 a month
+* **large business**: $1,000 or $199 a month
+
+The common techniques used to figure out pricing:
+
+* comparable sales in the area - look at similar products and services and price accordingly
+* replacement value - the cost to replace the product or service
+* look at cost of not using the software
+
+37 Signals asks themselfs:
+
+* What would we pay?
+* What feels right?
+
+The author recommends using 3 tier pricing.  Multiply your bottom tier by 2 for middle tier, and then multiply your middle tier by 2 for your top tier.  Also, make sure the benefit for each step up more than doubles.
+
+Lean towards higher pricing.  It's common for software developers to undervalue their software.
+
+Use prices that end in 7, 8, or 9.  It's silly, but it works.
+
+Understand that support is a serious cost, and should be factored in.
+
+Test your pricing model.  Measure pricing/revenue at different levels and use data to find the sweet spot.
+
+## Chapter 4
 
