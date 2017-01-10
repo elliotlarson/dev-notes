@@ -231,3 +231,48 @@ You may only convert %1 of your visitors.  Work on increasing the number of peop
 **You also shouldn't plan to sell to a customer on their first visit**.  A customer will likely ponder before buying.
 
 > Your number one goal, even beyond selling your product, is turning browsers into prospects.
+
+A prospect is essentially someone who is interested enough to give you their email address.
+
+Strategy for turning someone into a prospec: **establish a reward** -> set up a contest to win something, or provide solid content for free in exchange for an email address
+
+Work out a customer profile before designing a marketing site.  Who is the target audience and what do they like?  What are their interests and pain points?
+
+Every page of your site needs to have the email list and sales call to actions.
+
+Core pages:
+
+* home
+* tour/ features
+* testimonials
+* contact
+* pricing/ signup
+
+Find a hook/ tagline.  Succinctly state the value proposition.
+
+### Marketing emails
+
+Send them Tue, Wed, or Thurs between 7 and 10:30 am.
+
+Never send attachments.
+
+Make sure you pay attention to the from line.  Don't just send stuff out as "Admin".  Use something like "[Product name] - newsletter".
+
+The subject line is important.  Try to make it 7 words or less.
+
+Watch your spam score.  Mailchimp offers this.
+
+Have one goal for each email.
+
+Test your results.  Watch the numbers closely.
+
+### Ideal product launch
+
+Six months out from product launch, start drumming up interest by blogging, social networking, etc.  Accumulate your email list, and stay in touch at least once a month.
+
+One week before launch, send out information to your list with a discount offer.
+
+A short time after launch, the launch price is about to expire.  Send out an email to those that haven't signed up and let them know that the deal pricing is about to expire.
+
+Following months, stay in touch with list and continue to work on drumming up interest for your product (marking, marketing, marketing).
+
