@@ -168,3 +168,5 @@ The content in this book is a bit old.  You might also check out the following:
 
 **ACTION ITEM:** List out your warm and cold niches.  Try to assess the market size of a niche and what it would cost to market to them.  Do some brain storming on ideas to pitch to your top niches.
 
+## Chapter 3
+
