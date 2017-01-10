@@ -214,3 +214,20 @@ Test your pricing model.  Measure pricing/revenue at different levels and use da
 
 ## Chapter 4
 
+You should build a killer marketing site before you build the product. 
+
+Measure traffic to the site.
+
+Have clear call to actions.
+
+Start maintaining a marketing list of emails.  Don't abuse the list.  Provide value and useful information in your marketing emails.
+
+### The sales funnel
+
+people who see your url -> site visitors -> prospects -> buyers
+
+You may only convert %1 of your visitors.  Work on increasing the number of people coming to your site, and improving your conversion rate.
+
+**You also shouldn't plan to sell to a customer on their first visit**.  A customer will likely ponder before buying.
+
+> Your number one goal, even beyond selling your product, is turning browsers into prospects.
