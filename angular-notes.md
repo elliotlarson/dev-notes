@@ -197,7 +197,8 @@ You can iterate over a collection in a template with an `*ngFor` directive:
   template: `
     <h2>Users</h2>
     <ul>
-      <li *ngFor="let user of users">
+      <li *ngFor="let user of users; let i = index">
+        {{ i + 1 }}
         {{ user.firstName }} {{ user.lastName }}:
         <a href="mailto:{{ user.email }}">{{ user.email }}</a>
       </li>
@@ -228,6 +229,8 @@ export class AppComponent {
   constructor() {}
 }
 ``` 
+
+Notice the use of the `i` variable.  We reference this to the `index` variable made available to us by angular in the loop.
 
 ## Angular CLI
 
