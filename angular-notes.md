@@ -187,6 +187,48 @@ export class AppComponent {
 }
 ```
 
+### `ngFor`
+
+You can iterate over a collection in a template with an `*ngFor` directive:
+
+```typescript
+@Component({
+  selector: 'foo',
+  template: `
+    <h2>Users</h2>
+    <ul>
+      <li *ngFor="let user of users">
+        {{ user.firstName }} {{ user.lastName }}:
+        <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+      </li>
+    </ul>
+  `
+})
+export class AppComponent {
+  users: User[] = [
+    {
+      id: 1,
+      firstName: 'Elliot',
+      lastName: 'Larson',
+      email: 'elliot@onehouse.net'
+    },
+    {
+      id: 2,
+      firstName: 'Ricky',
+      lastName: 'Ahn',
+      email: 'ricky@onehouse.net'
+    },
+    {
+      id: 3,
+      firstName: 'Nolan',
+      lastName: 'Ehrstrom',
+      email: 'nolan@onehouse.net'
+    }
+  ];
+  constructor() {}
+}
+``` 
+
 ## Angular CLI
 
 ### Testing a single file
