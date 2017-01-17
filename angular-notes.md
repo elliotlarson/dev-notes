@@ -145,6 +145,25 @@ export class AppComponent {
 
 Notice in the method attribute we pass in a special argument `$event`, which allows us to call `preventDefault` on it.
 
+## Template `#ref` variables
+
+This allows you to reference a template element elsewhere in a template.  For example, lets pass the value of an input element to an event handler:
+
+```typescript
+@Component({
+  selector: 'foo',
+  template: `
+    <input type='text' #myStatement />
+    <a href='#' (click)='logIt($event, myStatement.value)'>Say it</a>
+  `
+})
+export class AppComponent { 
+  logIt(event: any, statement: string) {
+    console.log(statement);
+  }
+}
+```
+
 ## Angular CLI
 
 ### Testing a single file
