@@ -324,6 +324,12 @@ You can modify values for they get interpolated with pipes.  For example, if you
 </ul>
 ```
 
+You can also chain pipes:
+
+```html
+{{ todo.dueDate | date: 'yMMMMd' | uppercase }}
+```
+
 [Here is a list of built in Angular pipes.](https://angular.io/docs/ts/latest/api/#!?query=pipe)
 
 ## Angular CLI
