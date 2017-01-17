@@ -304,8 +304,27 @@ You can do the same thing with `ngClass`.  The syntax is a bit more long-winded,
       <a href="mailto:{{ user.email }}">{{ user.email }}</a>
     </div>
   </li>
-</ul
+</ul>
 ```
+
+### `ngStyle`
+
+This works in almost the same way as `ngClass`.  You can either use the `[style.background]` approach, or the `[ngStyle]="{ background: 'red', color: 'white' }"`.
+
+## Pipes
+
+You can modify values for they get interpolated with pipes.  For example, if you were to try to output an object in a template, you would get `[object Object]` as the output.  But you can use the `json` pipe to get the desired output:
+
+```html
+<h2>Users:</h2>
+<ul>
+  <li *ngFor="let user of users">
+    {{ user | json }}
+  </li>
+</ul>
+```
+
+[Here is a list of built in Angular pipes.](https://angular.io/docs/ts/latest/api/#!?query=pipe)
 
 ## Angular CLI
 
