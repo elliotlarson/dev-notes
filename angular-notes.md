@@ -22,6 +22,25 @@ export class AppComponent {
 
 This will place the value of title ("Foo") in the `<h1>` tag.
 
+The code in the curly braces is interpolated JavaScript, so you can manipulate values.  For example, you can add:
+
+```typescript
+@Component({
+  selector: 'foo',
+  template: `
+    <h1>{{ numberOne + numberTwo }}</h1>
+  `
+})
+export class AppComponent {
+  numberOne: number = 1;
+  numberTwo: number = 2;
+  
+  constructor() {}
+}
+```
+
+This will place the number 3 in the `<h1>` tag.
+
 ## Property binding
 
 You use square brackets `[]` to wrap a property you want to set to a value in your component class.  For example:
