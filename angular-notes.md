@@ -232,6 +232,67 @@ export class AppComponent {
 
 Notice the use of the `i` variable.  We reference this to the `index` variable made available to us by angular in the loop.
 
+### Class binding and `ngClass`
+
+You can set a class of an element based on a boolean value, like this:
+
+```typescript
+@Component({
+  selector: 'foo',
+  style: `
+    .wears-a-sombrero {
+      background: url('../img/sombrero.png') no-repeat;
+      background-size: 24px 24px;
+      padding-left: 30px;
+    }
+  `,
+  template: `
+    <h2>Users:</h2>
+    <ul>
+      <li *ngFor="let user of users">
+        <div [class.wears-a-sombrero]='user.likesMexicanFood'>
+          {{ user.firstName }} {{ user.lastName }}:
+          <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+        </div>
+      </li>
+    </ul
+  `
+})
+export class AppComponent {
+  users: User[] = [
+    {
+      id: 1,
+      firstName: 'Elliot',
+      lastName: 'Larson',
+      email: 'elliot@onehouse.net',
+      likesMexicanFood: true,
+    },
+    {
+      id: 4,
+      firstName: 'Arum',
+      lastName: 'Ahn',
+      email: 'arum@onehouse.net',
+      likesMexicanFood: false,
+    },
+    {
+      id: 2,
+      firstName: 'Ricky',
+      lastName: 'Ahn',
+      email: 'ricky@onehouse.net',
+      likesMexicanFood: true,
+    },
+    {
+      id: 3,
+      firstName: 'Nolan',
+      lastName: 'Ehrstrom',
+      email: 'nolan@onehouse.net'
+      likesMexicanFood: true,
+    }
+  ];
+  constructor() {}
+}
+``` 
+
 ## Angular CLI
 
 ### Testing a single file
