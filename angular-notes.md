@@ -164,6 +164,29 @@ export class AppComponent {
 }
 ```
 
+## Template directives
+
+### `ngIf`
+
+You can choose to conditionally show or hide an element in the template with the `*ngIf` directive.  In this example the div containing "Hello..." will only be rendered if the lenght of the `name` property is at least one character long.
+
+```typescript
+@Component({
+  selector: 'foo',
+  template: `
+    What's your name?
+    <input type="text" [(ngModel)]="name" />
+    <div *ngIf="name.length">
+      Hello, {{ name }}.
+    </div>
+  `
+})
+export class AppComponent {
+  name: string: '';
+  constructor() {}
+}
+```
+
 ## Angular CLI
 
 ### Testing a single file
