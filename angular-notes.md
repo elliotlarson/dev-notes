@@ -111,7 +111,7 @@ Angular makes this a bit easier with the `FormsModule`, allowing you to use the 
 @Component({
   selector: 'foo',
   template: `
-    <input [ngModel]='name' />
+    <input [(ngModel)]='name' />
     {{ name }}
   `
 })
