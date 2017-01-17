@@ -90,7 +90,7 @@ We can do this manually by using one way property binding and event binding:
 @Component({
   selector: 'foo',
   template: `
-    <input [value]='name' (keypress)='updateName($event)' />
+    <input [value]='name' (input)='updateName($event)' />
     {{ name }}
   `
 })
@@ -102,6 +102,23 @@ export class AppComponent {
   updateName(event) {
     this.name = event.target.value;
   }
+}
+```
+
+Angular makes this a bit easier with the `FormsModule`, allowing you to use the `ngModel` attribute on input fields:
+
+```typescript
+@Component({
+  selector: 'foo',
+  template: `
+    <input [ngModel]='name' />
+    {{ name }}
+  `
+})
+export class AppComponent {
+  name: string = 'Elliot';
+  
+  constructor() {}
 }
 ```
 
