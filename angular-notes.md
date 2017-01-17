@@ -255,7 +255,7 @@ You can set a class of an element based on a boolean value, like this:
           <a href="mailto:{{ user.email }}">{{ user.email }}</a>
         </div>
       </li>
-    </ul
+    </ul>
   `
 })
 export class AppComponent {
@@ -291,7 +291,21 @@ export class AppComponent {
   ];
   constructor() {}
 }
-``` 
+```
+
+You can do the same thing with `ngClass`.  The syntax is a bit more long-winded, however it allows you to add additional class conditionals to the same statement.
+
+```html
+<h2>Users:</h2>
+<ul>
+  <li *ngFor="let user of users">
+    <div [ngClass]='{ "wears-a-sombrero": user.likesMexicanFood, "wears-a-kasa": user.likesSushi }'>
+      {{ user.firstName }} {{ user.lastName }}:
+      <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+    </div>
+  </li>
+</ul
+```
 
 ## Angular CLI
 
