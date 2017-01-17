@@ -2,6 +2,29 @@
 
 I'm starting to learn Angular with version 2, so these are Angular 2 notes.
 
+## Property binding
+
+You use square brackets `[]` to wrap a property you want to set to a value in your component class.  For example:
+
+```typescript
+
+@Component({
+  selector: 'foo',
+  template: `
+    <h1>{{ title }}</h1>
+    <img [src]='logoUrl' />
+  `
+})
+export class AppComponent {
+  title: string = 'Foo';
+  logoUrl: string = './img/logo.svg';
+  
+  constructor() {}
+}
+```
+
+This will bind the `src` attribute value of the image in the template to the component class's `logoUrl` property.
+
 ## Angular CLI
 
 ### Testing a single file
