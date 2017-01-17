@@ -43,6 +43,8 @@ This will place the number 3 in the `<h1>` tag.
 
 ## Property binding
 
+### One way data flow
+
 You use square brackets `[]` to wrap a property you want to set to a value in your component class.  For example:
 
 ```typescript
@@ -60,6 +62,27 @@ export class AppComponent {
 ```
 
 This will bind the `src` attribute value of the image in the template to the component class's `logoUrl` property.
+
+However, changing the value of an attribute bound like this after it has been rendered will not update the value in the component class.  For example, if we bind to an `<input>` value and then update the input's value in the browser by typing into it, it will not update the value in the component class:
+
+```typescript
+@Component({
+  selector: 'foo',
+  template: `
+    <input [value]='name' />
+    {{ name }}
+  `
+})
+export class AppComponent {
+  name: string = 'Elliot';
+  
+  constructor() {}
+}
+```
+
+### Two way binding
+
+In order for the data to flow both ways (from the component class to the template and from the template to the component class), you need to use two way binding.
 
 ## Angular CLI
 
