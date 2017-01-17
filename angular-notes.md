@@ -84,6 +84,27 @@ export class AppComponent {
 
 In order for the data to flow both ways (from the component class to the template and from the template to the component class), you need to use two way binding.
 
+We can do this manually by using one way property binding and event binding:
+
+```typescript
+@Component({
+  selector: 'foo',
+  template: `
+    <input [value]='name' (keypress)='updateName($event)' />
+    {{ name }}
+  `
+})
+export class AppComponent {
+  name: string = 'Elliot';
+  
+  constructor() {}
+  
+  updateName(event) {
+    this.name = event.target.value;
+  }
+}
+```
+
 ## Event binding
 
 You can use a binding approach similar to property binding to bind to events.  By wrapping an event handler attribute in parens `()` and assigning the attribute to the name of a method in your component class, that method will be called when the event is triggered.  For example, lets log out some text when clicking a link:
