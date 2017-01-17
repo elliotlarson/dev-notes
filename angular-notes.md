@@ -2,21 +2,38 @@
 
 I'm starting to learn Angular with version 2, so these are Angular 2 notes.
 
+## Expressions
+
+You can render a value from your component in your template with double curly braces.
+
+```typescript
+@Component({
+  selector: 'foo',
+  template: `
+    <h1>{{ title }}</h1>
+  `
+})
+export class AppComponent {
+  title: string = 'Foo';
+  
+  constructor() {}
+}
+```
+
+This will place the value of title ("Foo") in the `<h1>` tag.
+
 ## Property binding
 
 You use square brackets `[]` to wrap a property you want to set to a value in your component class.  For example:
 
 ```typescript
-
 @Component({
   selector: 'foo',
   template: `
-    <h1>{{ title }}</h1>
     <img [src]='logoUrl' />
   `
 })
 export class AppComponent {
-  title: string = 'Foo';
   logoUrl: string = './img/logo.svg';
   
   constructor() {}
