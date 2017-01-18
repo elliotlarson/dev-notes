@@ -15,7 +15,7 @@ You can render a value from your component in your template with double curly br
 })
 export class AppComponent {
   title: string = 'Foo';
-  
+
   constructor() {}
 }
 ```
@@ -117,7 +117,7 @@ Angular makes this a bit easier with the `FormsModule`, allowing you to use the 
 })
 export class AppComponent {
   name: string = 'Elliot';
-  
+
   constructor() {}
 }
 ```
@@ -331,6 +331,116 @@ You can also chain pipes:
 ```
 
 [Here is a list of built in Angular pipes.](https://angular.io/docs/ts/latest/api/#!?query=pipe)
+
+## Component architecture
+
+Generally you have a parent component with data, that gets passed down into nested, child components.  The data in these child components can be bubbled up using events.
+
+### Passing data to child components with `Input`
+
+To send data to a child component, you create and `Input` on the child class and you pass it using a bound attribute on the child component directive used in the parent component's template:
+
+```typescript
+@Component({
+  selector: 'parent',
+  template: '<child [user]="users[0]"></child>',
+})
+export class ParentComponent {
+  users: User[];
+
+  ngOnInit() {
+    this.users = [
+      {
+        firstName: "Jeffrey",
+        lastName: "Lebowski"
+      }
+    ]
+  }
+}
+
+@Component({
+  selector: 'child',
+  template: `
+    <div>{{ user.firstName }}</div>
+    <div>{{ user.lastName }}</div>
+  `
+})
+export class ChildComponent {
+  @Input() user: User;
+}
+```
+
+If you are iterating over the array of users in the parent template, you may use the `ngFor` approach.  Notice how we can iterate over the users with the `ngFor` loop, and that we have access to the current iteration's `user`, which we bind to the input attribute for the child component.
+
+```typescript
+@Component({
+  selector: 'parent',
+  template: '<child *ngFor="let user of users" [user]="user"></child>',
+})
+export class ParentComponent {
+  users: User[];
+
+  ngOnInit() {
+    this.users = [
+      {
+        firstName: "Jeffrey",
+        lastName: "Lebowski"
+      }
+    ]
+  }
+}
+```
+
+### Getting data back out of a child compontent with `Output`s
+
+When you want to pass data back up to a parent component, you use an output attribute on the child component and you bind to a custom event on the child component's directive.  You then `emit` the custom event with an `EventEmitter`.
+
+```typescript
+@Component({
+  selector: 'parent',
+  template: '<child [user]="users[0]" (update)="handleUpdate($event)"></child>',
+})
+export class ParentComponent {
+  users: User[];
+
+  ngOnInit() {
+    this.users = [
+      {
+        id: 1,
+        firstName: "Jeffrey",
+        lastName: "Lebowski"
+      }
+    ]
+  }
+
+  handleUpdate(event: User) {
+    this.users = this.users.map((user: User) => {
+      if (user.id == event.id) {
+        user = Object.assigns({}, user, event);
+      }
+      return user;
+    });
+  }
+}
+
+@Component({
+  selector: 'child',
+  template: `
+    {{ user.firstName }} {{ user.lastName }}
+    <input type="text" [(ngModel)]="user.firstName">
+    <input type="text" [(ngModel)]="user.lastName">
+    <button (click)="updateClicked($event)">Update</button>
+  `
+})
+export class ChildComponent {
+  @Input() user: User;
+  @Output() update: EventEmitter<User> = new EventEmitter();
+
+  updateClicked(event) {
+    this.update.emit(this.user);
+  }
+}
+```
 
 ## Angular CLI
 
