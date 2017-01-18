@@ -391,7 +391,7 @@ export class ParentComponent {
 }
 ```
 
-### Getting data back out of a child compontent with `Output`s
+### Getting data back out of a child component with `Output`s
 
 When you want to pass data back up to a parent component, you use an output attribute on the child component and you bind to a custom event on the child component's directive.  You then `emit` the custom event with an `EventEmitter`.
 
@@ -429,14 +429,14 @@ export class ParentComponent {
     {{ user.firstName }} {{ user.lastName }}
     <input type="text" [(ngModel)]="user.firstName">
     <input type="text" [(ngModel)]="user.lastName">
-    <button (click)="updateClicked($event)">Update</button>
+    <button (click)="updateClicked()">Update</button>
   `
 })
 export class ChildComponent {
   @Input() user: User;
   @Output() update: EventEmitter<User> = new EventEmitter();
 
-  updateClicked(event) {
+  updateClicked() {
     this.update.emit(this.user);
   }
 }
