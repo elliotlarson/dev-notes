@@ -2,6 +2,19 @@
 
 I'm starting to learn Angular with version 2, so these are Angular 2 notes.
 
+## Upgrading Angular 
+
+To upgrade to the most recent version of Angular, if you are using the CLI:
+
+```bash
+$ npm uninstall --global angular-cli
+$ npm cache clean
+$ npm install --global angular-cli
+$ ng init
+```
+
+**Note:** I attempted to use `$ npm update --save`, but this resulted in code being out of sync.  We started getting weird zone.js errors.  This needs to be revisited.  There should be standard documentation on the Angular site at some point about how to do this.
+
 ## Expressions
 
 You can render a value from your component in your template with double curly braces.
