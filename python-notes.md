@@ -79,3 +79,17 @@ You can use the [pip package manager](https://pip.pypa.io/en/stable/) to install
 ```bash
 $ python -m pip install pylint
 ```
+
+## Dependency management
+
+After installing a pip package, you can create a requirements file that other can use to load the same packages:
+
+```bash
+$ python -m pip freeze > requirements.txt
+```
+
+Then someone else can load the requirements file:
+
+```bash
+$ python -m pip install -r requirements.txt
+```
