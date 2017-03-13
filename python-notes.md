@@ -74,7 +74,7 @@ $ pyenv local my-project-3.6.0
 
 ## Installing a package
 
-You can use the pip package manager to install a package:
+You can use the [pip package manager](https://pip.pypa.io/en/stable/) to install a package:
 
 ```bash
 $ python -m pip install pylint
