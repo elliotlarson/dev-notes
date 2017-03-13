@@ -71,3 +71,11 @@ Use a virtual env for the current project:
 ```bash
 $ pyenv local my-project-3.6.0
 ```
+
+## Installing a package
+
+You can use the pip package manager to install a package:
+
+```bash
+$ python -m pip install pylint
+```
