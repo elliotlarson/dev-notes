@@ -2,6 +2,8 @@
 
 ## Connecting to Postgres
 
+Here is the [database settings documentation](https://docs.djangoproject.com/en/1.10/ref/settings/#std:setting-DATABASES).
+
 You will need to have [psychopg](http://initd.org/psycopg/) installed:
 
 ```bash
