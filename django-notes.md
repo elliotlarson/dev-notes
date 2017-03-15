@@ -39,4 +39,4 @@ class Person(models.Model):
     last_name = models.CharField(max_length=30)
 ```
 
-This is very DataMapper like from the Ruby world, where you describe your model's fields in the model itself instead of in a migration file as you would in Rails.
+This is very DataMapper like from the Ruby world, where you describe your model's fields in the model itself.
