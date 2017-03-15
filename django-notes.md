@@ -1,6 +1,12 @@
 # Django Notes
 
-## Connecting to postgres
+## Connecting to Postgres
+
+You will need to have [psychopg](http://initd.org/psycopg/) installed:
+
+```bash
+$ python -m pip install psychopg2
+```
 
 In your `mysite/settings.py` file:
 
