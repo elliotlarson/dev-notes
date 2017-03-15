@@ -8,7 +8,7 @@ You will need to have [psychopg](http://initd.org/psycopg/) installed:
 $ python -m pip install psychopg2
 ```
 
-In your `mysite/settings.py` file:
+In your `mysite/settings.py` file setup postgres with:
 
 ```python
 DATABASES = {
