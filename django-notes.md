@@ -40,3 +40,56 @@ class Person(models.Model):
 ```
 
 This is very DataMapper like from the Ruby world, where you describe your model's fields in the model itself.
+
+## Create an app
+
+Setup your virtual env:
+
+```bash
+$ pyenv virtualenv 3.6.0 my-app-3.6.0
+```
+
+Activate the virtual env:
+
+```bash
+$ pyenv activate my-app-3.6.0
+```
+
+Rehash the shell:
+
+```bash
+$ exec $SHELL
+```
+
+Create the Django project:
+
+```bash
+$ django-admin startproject my_app
+```
+
+Set the virtual env for the project:
+
+```bash
+$ cd my_app
+$ pyenv local my-app-3.6.0
+```
+
+Create the initial requirements file:
+
+```bash
+$ python -m pip freeze > requirements.txt
+```
+
+Add some Git. [Here's a good `.gitignore`](https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore)
+
+```bash
+$ git init
+$ touch .gitignore
+```
+
+Generate the app:
+
+```bash
+$ python manage.py startapp bestappever
+```
+
