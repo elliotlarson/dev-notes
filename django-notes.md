@@ -41,6 +41,14 @@ class Person(models.Model):
 
 This is very DataMapper like from the Ruby world, where you describe your model's fields in the model itself.
 
+[Model fields documentation](https://docs.djangoproject.com/en/1.10/ref/models/fields/)
+
+Generate the migrations after creating the model:
+
+```bash
+$ python manage.py makemigrations bestappevery
+```
+
 ## App creation workflow
 
 Setup your virtual env:
