@@ -41,7 +41,7 @@ class Person(models.Model):
 
 This is very DataMapper like from the Ruby world, where you describe your model's fields in the model itself.
 
-## Create an app
+## App creation workflow
 
 Setup your virtual env:
 
