@@ -1,6 +1,8 @@
 # Django Notes
 
-## Connecting to Postgres
+## Data and Models
+
+### Connecting to Postgres
 
 Here is the [database settings documentation](https://docs.djangoproject.com/en/1.10/ref/settings/#std:setting-DATABASES).
 
@@ -24,8 +26,6 @@ DATABASES = {
     }
 }
 ```
-
-## Models
 
 Here is the [model documentation](https://docs.djangoproject.com/en/1.10/topics/db/models/).
 
