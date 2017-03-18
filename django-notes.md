@@ -159,6 +159,13 @@ $ git init
 $ touch .gitignore
 ```
 
+Then run the server and login:
+
+```bash
+$ python manage.py runserver
+```
+
+
 Generate the app:
 
 ```bash
