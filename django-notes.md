@@ -62,8 +62,9 @@ $ python manage.py migrate
 title = models.CharField(max_length=200)
 release_date = models.DateField()
 num_stars = models.IntegerField()
+active = models.BooleanField()
 
-# Timestamp
+# Auto timestamp
 created_at = models.DateTimeField(auto_now_add=True)
 
 # Verbose label
