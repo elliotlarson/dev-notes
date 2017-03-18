@@ -93,6 +93,18 @@ id = models.AutoField(primary_key=True)
 post = models.ForeignKey(Post, on_delete=models.CASCADE)
 ```
 
+### Seeding data
+
+[Here's documentation on seeding](https://docs.djangoproject.com/en/1.10/howto/initial-data/).
+
+You can create yaml or json files in a `fixtures` directory in your app.
+
+Then you can load the data with:
+
+```bash
+$ python manage.py loaddata <fixturename>
+```
+
 ## App creation workflow
 
 Setup your virtual env:
