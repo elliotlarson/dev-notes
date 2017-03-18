@@ -57,7 +57,7 @@ Run the migrations:
 $ python manage.py migrate
 ```
 
-### Field type examples:
+### Field type examples
 
 ```python
 # Standard types
