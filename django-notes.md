@@ -165,3 +165,23 @@ Generate the app:
 $ python manage.py startapp bestappever
 ```
 
+## Admin site
+
+To log into the admin site, you need to create a superuser:
+
+```bash
+$ python manage.py createsuperuser
+```
+
+Then in your app, you need to register your models to be editable by the admin section:
+
+`blog/admin.py`
+
+```python
+from django.contrib import admin
+from .models import Comment, Post
+
+
+admin.site.register(Comment)
+admin.site.register(Post)
+```
