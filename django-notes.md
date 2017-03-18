@@ -27,6 +27,8 @@ DATABASES = {
 }
 ```
 
+### Generating models
+
 Here is the [model documentation](https://docs.djangoproject.com/en/1.10/topics/db/models/).
 
 In your app models file you can setup a model with:
