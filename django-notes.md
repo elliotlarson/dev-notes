@@ -55,6 +55,40 @@ Run the migrations:
 $ python manage.py migrate
 ```
 
+### Field type examples:
+
+```python
+# Standard types
+title = models.CharField(max_length=200)
+release_date = models.DateField()
+num_stars = models.IntegerField()
+
+# Verbose label
+first_name = models.CharField("Person's first name", max_length=30)
+
+# Setting default
+foo = models.CharField(default="bar")
+
+# Unique index
+email = models.CharField(unique=True)
+
+# Options
+SHIRT_SIZES = (
+    ('S', 'Small'),
+    ('M', 'Medium'),
+    ('L', 'Large'),
+)
+shirt_size = models.CharField(max_length=1, choices=SHIRT_SIZES)
+
+# Primary key: this is done for you by default, so you don't have to add
+# this, but if Django sees that the name is different than "id" then it 
+# won't auto add the id field and will use your custom field instead.
+id = models.AutoField(primary_key=True)
+
+# Belongs to with cascade delete
+post = models.ForeignKey(Post, on_delete=models.CASCADE)
+```
+
 ## App creation workflow
 
 Setup your virtual env:
