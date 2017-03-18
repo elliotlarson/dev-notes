@@ -48,7 +48,7 @@ This is very DataMapper like from the Ruby world, where you describe your model'
 Generate the migrations after creating the model:
 
 ```bash
-$ python manage.py makemigrations bestappevery
+$ python manage.py makemigrations bestappever
 ```
 
 Run the migrations:
