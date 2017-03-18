@@ -107,6 +107,12 @@ Then you can load the data with:
 $ python manage.py loaddata <fixturename>
 ```
 
+If you want to use yaml, you will need to install the yaml package:
+
+```bash
+$ python -m pip install pyyaml
+```
+
 ## App creation workflow
 
 Setup your virtual env:
