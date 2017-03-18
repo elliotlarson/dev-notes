@@ -49,6 +49,12 @@ Generate the migrations after creating the model:
 $ python manage.py makemigrations bestappevery
 ```
 
+Run the migrations:
+
+```bash
+$ python manage.py migrate
+```
+
 ## App creation workflow
 
 Setup your virtual env:
