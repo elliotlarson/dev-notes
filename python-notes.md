@@ -98,16 +98,6 @@ $ python -m pip install -r requirements.txt
 
 Here's some basic class/object examples:
 
-Some notes about this code:
-
-* A basic object that doesn't inherit from anything inherits from `object` (e.g. `class Person(object):`).  This isn't enforcesd but it's suggested by `pylint`
-* **Inheritance** works by providing the parent object to the child object's declaration (e.g. `class Contractor(Person):`).  You can inherit from multiple objects (e.g. `class Employee(Person, HealthInsuranceRecipient)`).
-* The **`__init__`** method is the constructor
-* The constructor and all **instance methods** take `self` as the first argument
-* You assign an **instance variable** with `self.<variable> = <value>`.  Once assigned, this becomes available in other instance methods via `self.<variable>`.  It's also available externally on instance objects.
-* The **`__str__`** method on an object is what is called when converting an object into a string (like when printing an instance)
-* **Class variables** are defined like variables in the class scope.  These are then accessible like instance variables with `self.<variable>` because Python looks up the value in the object instance first; if it doesn't find anything, then it looks at the class.
-
 ```python
 class Person(object):
     role = 'undefined'
@@ -176,3 +166,15 @@ accounting_string = 'Intranet | C:Doe, John | E:Doe, Jane'
 project2 = Project.from_accounting_string(accounting_string)
 print(f'Project: {project2}')
 ```
+
+Some notes about this code:
+
+* A basic object that doesn't inherit from anything inherits from `object` (e.g. `class Person(object):`).  This isn't enforcesd but it's suggested by `pylint`
+* **Inheritance** works by providing the parent object to the child object's declaration (e.g. `class Contractor(Person):`).  You can inherit from multiple objects (e.g. `class Employee(Person, HealthInsuranceRecipient)`).
+* The **`__init__`** method is the constructor
+* The constructor and all **instance methods** take `self` as the first argument
+* You assign an **instance variable** with `self.<variable> = <value>`.  Once assigned, this becomes available in other instance methods via `self.<variable>`.  It's also available externally on instance objects.
+* The **`__str__`** method on an object is what is called when converting an object into a string (like when printing an instance)
+* **Class variables** are defined like variables in the class scope.  These are then accessible like instance variables with `self.<variable>` because Python looks up the value in the object instance first; if it doesn't find anything, then it looks at the class.
+* **Class methods** are prefixed with a `@classmethod` decorator.  They receive the class as the first variable.  The convention is to call this argument `cls`.
+* **Custom constructors** are generally class methods, conventionally prefixed with `from_`
