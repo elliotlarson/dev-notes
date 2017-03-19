@@ -93,3 +93,76 @@ Then someone else can load the requirements file:
 ```bash
 $ python -m pip install -r requirements.txt
 ```
+
+## Classes and objects
+
+```python
+class Person(object):
+    role = 'undefined'
+
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+
+    def full_name(self):
+        return self.first_name + ' ' + self.last_name 
+    
+    def designation(self):
+        return self.full_name() + ' - ' + self.role
+
+    def __str__(self):
+        return self.designation()
+
+class Contractor(Person):
+    role = 'contractor'
+    pass
+
+class Employee(Person):
+    role = 'employee'
+    pass
+
+class Project(object):
+    def __init__(self, description, participants=[]):
+        self.description = description
+        self.participants = participants
+
+    @classmethod
+    def from_accounting_string(cls, accounting_string):
+        # 'Intranet | C:Doe, John | E:Doe, Jane'
+        project_name = accounting_string.split(' | ')[0]
+        participant_strings = accounting_string.split(' | ')[1:]
+        participants = []
+        participant_type_cls = { 'C': Contractor, 'E': Employee }
+        for participant_string in participant_strings:
+            participant_type_char = participant_string[0]
+            first_name = participant_string[2:].split(', ')[1]
+            last_name = participant_string[2:].split(', ')[0]
+            participants.append(
+                participant_type_cls[participant_type_char](first_name, last_name)
+            )
+        return cls(project_name, participants)
+
+    def add_participant(self, participant):
+        self.participants.append(participant)
+
+    def __str__(self):
+        return self.description + "\n  participants: " + \
+            ', '.join(map(str, self.participants))
+
+john = Contractor('John', 'Doe')
+print(f'Person: {john}')
+jane = Employee('Jane', 'Doe')
+print(f'Person: {jane}')
+
+project = Project('Request for funds system', [john, jane])
+print(f'Project: {project}')
+
+billy = Employee('Billy', 'Bob')
+print(billy)
+project.add_participant(billy)
+print(f'Project: {project}')
+
+accounting_string = 'Intranet | C:Doe, John | E:Doe, Jane'
+project2 = Project.from_accounting_string(accounting_string)
+print(f'Project: {project2}')
+```
