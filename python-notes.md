@@ -102,9 +102,10 @@ Here's some basic class/object examples:
 class Person(object):
     role = 'undefined'
 
-    def __init__(self, first_name, last_name):
+    def __init__(self, first_name, last_name, email=''):
         self.first_name = first_name
         self.last_name = last_name
+        self.email = email
 
     def full_name(self):
         return self.first_name + ' ' + self.last_name 
@@ -114,7 +115,16 @@ class Person(object):
 
     def __str__(self):
         return self.designation()
-
+        
+    def notify(self):
+        # => notification code
+        print("Notified: %s\n" % self.full_name())
+        
+    @staticmethod
+    def notify_people(people):
+        embed()
+        map('notify', people)
+        
 class Contractor(Person):
     role = 'contractor'
 
@@ -149,15 +159,15 @@ class Project(object):
         return self.description + "\n  participants: " + \
             ', '.join(map(str, self.participants))
 
-john = Contractor('John', 'Doe')
+john = Contractor('John', 'Doe', 'john.doe@example.com')
 print(f'Person: {john}')
-jane = Employee('Jane', 'Doe')
+jane = Employee('Jane', 'Doe', 'jane.doe@example.com')
 print(f'Person: {jane}')
 
 project = Project('Request for funds system', [john, jane])
 print(f'Project: {project}')
 
-billy = Employee('Billy', 'Bob')
+billy = Employee('Billy', 'Bob', 'billy.bob@example.com')
 print(billy)
 project.add_participant(billy)
 print(f'Project: {project}')
@@ -165,6 +175,9 @@ print(f'Project: {project}')
 accounting_string = 'Intranet | C:Doe, John | E:Doe, Jane'
 project2 = Project.from_accounting_string(accounting_string)
 print(f'Project: {project2}')
+
+people = [john, jane, billy]
+Person.notify_people(people)
 ```
 
 Some notes about this code:
