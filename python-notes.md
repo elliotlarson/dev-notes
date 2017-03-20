@@ -255,3 +255,40 @@ def my_erroneous_function():
     set_trace()
     # stuff that isn't working
 ```
+
+### With iPython
+
+[iPython](http://ipython.readthedocs.io/en/stable/index.html) is a feature rich repl, kind of like a more powerful version of Ruby's pry.
+
+You can use it to debug by "embedding" it in your source.  When you run your code, the `embed()` statement will launch an iPython terminal at that point in your code, at which point you can poke around.
+
+Install:
+
+```bash
+$ python -m pip install ipython
+```
+
+Usage #1 (more repl than debug):
+
+```python
+from IPython import embed
+
+def my_erroneous_function():
+    # stuff
+    set_trace()
+    # stuff that isn't working
+```
+
+However, this doesn't give you debug capabilities, like code listing and stepping into methods.
+
+Usage #2 (more debug):
+
+```python
+from IPython.core import debugger
+debug = debugger.Pdb().set_trace
+
+def my_erroneous_function():
+    # stuff
+    debug()
+    # stuff that isn't working
+```
