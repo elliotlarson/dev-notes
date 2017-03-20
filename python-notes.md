@@ -191,3 +191,47 @@ Some notes about this code:
 * **Class variables** are defined like variables in the class scope.  These are then accessible like instance variables with `self.<variable>` because Python looks up the value in the object instance first; if it doesn't find anything, then it looks at the class.
 * **Class methods** are prefixed with a `@classmethod` decorator.  They receive the class as the first variable.  The convention is to call this argument `cls`.
 * **Custom constructors** are generally class methods, conventionally prefixed with `from_`
+
+## Debugging
+
+### With pdb
+
+This is the Python debugger included in the standard library.  
+
+Usage:
+
+```python
+import pdb
+
+def my_erroneous_function():
+    # stuff
+    pdb.set_trace()
+    # stuff that isn't working
+```
+
+When the code is executed, this will drop you into a pdb prompt at the trace point in your code.
+
+At the prompt you can ask for help:
+
+```bash
+(Pdb) h
+
+Documented commands (type help <topic>):
+========================================
+EOF    c          d        h         list      q        rv       undisplay
+a      cl         debug    help      ll        quit     s        unt
+alias  clear      disable  ignore    longlist  r        source   until
+args   commands   display  interact  n         restart  step     up
+b      condition  down     j         next      return   tbreak   w
+break  cont       enable   jump      p         retval   u        whatis
+bt     continue   exit     l         pp        run      unalias  where
+
+Miscellaneous help topics:
+==========================
+exec  pdb
+
+(Pdb) h a
+a(rgs)
+        Print the argument list of the current function.
+```
+    
