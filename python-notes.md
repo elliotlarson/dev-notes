@@ -284,3 +284,19 @@ debug = debugger.Pdb().set_trace
 def buggy_method():
     debug()
 ```
+
+### Printing out an object
+
+On a console you may want to print out an object.
+
+Option #1: Convert it to a string, which calls the `__str__` method.
+
+```python
+str(my_object)
+```
+
+Option #2: Print out the object data in dictionary style.
+
+```python
+vars(my_object)
+```
