@@ -177,7 +177,7 @@ project2 = Project.from_accounting_string(accounting_string)
 print(f'Project: {project2}')
 
 people = [john, jane, billy]
-nots = Person.notify_people(people)
+Person.notify_people(people)
 ```
 
 Some notes about this code:
