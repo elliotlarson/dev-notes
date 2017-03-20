@@ -203,10 +203,8 @@ Usage:
 ```python
 import pdb
 
-def my_erroneous_function():
-    # stuff
+def buggy_method():
     pdb.set_trace()
-    # stuff that isn't working
 ```
 
 When the code is executed, this will drop you into a pdb prompt at the trace point in your code.
@@ -250,10 +248,8 @@ Usage:
 ```python
 from pudb import set_trace
 
-def my_erroneous_function():
-    # stuff
+def buggy_method():
     set_trace()
-    # stuff that isn't working
 ```
 
 ### With iPython
@@ -273,10 +269,8 @@ Usage #1 (more repl than debug):
 ```python
 from IPython import embed
 
-def my_erroneous_function():
-    # stuff
+def buggy_method():
     set_trace()
-    # stuff that isn't working
 ```
 
 However, this doesn't give you debug capabilities, like code listing and stepping into methods.
@@ -287,8 +281,6 @@ Usage #2 (more debug):
 from IPython.core import debugger
 debug = debugger.Pdb().set_trace
 
-def my_erroneous_function():
-    # stuff
+def buggy_method():
     debug()
-    # stuff that isn't working
 ```
