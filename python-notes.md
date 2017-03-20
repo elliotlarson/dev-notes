@@ -234,4 +234,24 @@ exec  pdb
 a(rgs)
         Print the argument list of the current function.
 ```
-    
+
+### With pudb
+
+[Pudb](https://pypi.python.org/pypi/pudb) is more of a full fledged interactive, console based debugger.
+
+Install:
+
+```bash
+$ python -m pip install pudb
+```
+
+Usage:
+
+```python
+from pudb import set_trace
+
+def my_erroneous_function():
+    # stuff
+    set_trace()
+    # stuff that isn't working
+```
