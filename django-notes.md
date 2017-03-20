@@ -192,3 +192,33 @@ from .models import Comment, Post
 admin.site.register(Comment)
 admin.site.register(Post)
 ```
+
+### Customizing templates
+
+Add `DIRS` section to your `settings.py`:
+
+```python
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+```
+
+Find the location of the default Django templates:
+
+```bash
+$ python -c "import django; print(django.__path__)"
+```
+
+Copy and paste the template into `<projectroot>/templates/admin`.  `projectroot` being the same directory as the `manage.py` file.
