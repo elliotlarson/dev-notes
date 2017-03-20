@@ -264,7 +264,7 @@ Install:
 $ python -m pip install ipython
 ```
 
-Usage #1 (more repl than debug):
+**Usage #1** (more repl than debug):
 
 ```python
 from IPython import embed
@@ -275,7 +275,7 @@ def buggy_method():
 
 However, this doesn't give you debug capabilities, like code listing and stepping into methods.
 
-Usage #2 (more debug):
+**Usage #2** (more debug):
 
 ```python
 from IPython.core import debugger
@@ -289,13 +289,13 @@ def buggy_method():
 
 On a console you may want to print out an object.
 
-Option #1: Convert it to a string, which calls the `__str__` method.
+**Option #1**: Convert it to a string, which calls the `__str__` method.
 
 ```python
 str(my_object)
 ```
 
-Option #2: Print out the object data in dictionary style.
+**Option #2**: Print out the object data in dictionary style.
 
 ```python
 vars(my_object)
