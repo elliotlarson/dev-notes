@@ -118,12 +118,12 @@ class Person(object):
         
     def notify(self):
         # => notification code
-        print("Notified: %s\n" % self.full_name())
+        print("Notified: %s" % self.full_name())
         
     @staticmethod
     def notify_people(people):
-        embed()
-        map('notify', people)
+        for person in people:
+            person.notify()
         
 class Contractor(Person):
     role = 'contractor'
@@ -177,7 +177,7 @@ project2 = Project.from_accounting_string(accounting_string)
 print(f'Project: {project2}')
 
 people = [john, jane, billy]
-Person.notify_people(people)
+nots = Person.notify_people(people)
 ```
 
 Some notes about this code:
