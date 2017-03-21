@@ -51,6 +51,12 @@ Generate the migrations after creating the model:
 $ python manage.py makemigrations bestappever
 ```
 
+You can view the sql a migration will execute:
+
+```bash
+$ python manage.py sqlmigrate polls 0001
+```
+
 Run the migrations:
 
 ```bash
