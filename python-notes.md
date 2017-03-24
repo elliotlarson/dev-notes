@@ -339,6 +339,8 @@ cursor.execute("select title from project limit 2") # the results now live in th
 results = cursor.fetchall()
 # the results are a list of tuples
 # => [('project #1',), ('project #2',)]
+project_titles = [elt[0] for elt in results]
+connection.close()
 ```
 
 
