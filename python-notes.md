@@ -300,3 +300,28 @@ str(my_object)
 ```python
 vars(my_object)
 ```
+
+## The `os` package
+
+This is the standard operating system library.
+
+### Working with environment variables
+
+Getting:
+
+```python
+os.getenv('MY_VAR')
+```
+
+Setting:
+
+```python
+os.putenv('MY_VAR', 'foo')
+```
+
+
+### Getting the directory of the current script
+
+```python
+path = os.path.dirname(os.path.abspath(__file__))
+```
