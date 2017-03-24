@@ -93,3 +93,26 @@ id          name               game        round       boardPosition
 9           AFRICAN WILDLIFE   7           0           0
 10          LITTLE RED RIDING  8           0           0
 ```
+
+### Show what the current display settings are with `.show`
+
+```bash
+sqlite> .show
+        echo: off
+         eqp: off
+     explain: auto
+     headers: on
+        mode: column
+   nullvalue: ""
+      output: stdout
+colseparator: "|"
+rowseparator: "\n"
+       stats: off
+       width:
+```
+
+### Executing a query directly from the shell
+
+```bash
+$ sqlite3 mydb.db -header -column "SELECT * FROM categories;"
+```
