@@ -325,3 +325,20 @@ os.putenv('MY_VAR', 'foo')
 ```python
 path = os.path.dirname(os.path.abspath(__file__))
 ```
+
+## The `sqlite` package
+
+### Executing a query
+
+```python
+import sqlite3
+
+connection = sqlite3.connect("mydb.db")
+cursor = connection.cursor()
+cursor.execute("select title from project limit 2") # the results now live in the cursor object
+results = cursor.fetchall()
+# the results are a list of tuples
+# => [('project #1',), ('project #2',)]
+```
+
+
