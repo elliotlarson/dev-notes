@@ -94,6 +94,26 @@ id          name               game        round       boardPosition
 10          LITTLE RED RIDING  8           0           0
 ```
 
+### Display query results with records on each line
+
+If you're table is really long, it can be easier to read the output if each field is on its own line:
+
+```bash
+sqlite> .mode line
+sqlite> select * from category limit 2;
+           id = 1
+         name = DETECTIVE FICTION
+         game = 1
+        round = 0
+boardPosition = 0
+
+           id = 2
+         name = THE OLD TESTAMENT
+         game = 2
+        round = 0
+boardPosition = 0
+```
+
 ### Show what the current display settings are with `.show`
 
 ```bash
