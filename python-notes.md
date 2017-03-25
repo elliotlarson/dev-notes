@@ -440,9 +440,11 @@ When I first tried to use matplotlib the first time I encountered the error:
 
 This is a common, ongoing problem that seems to have been around for years.  It has to do with the default rendering engine on Mac OS not being appropriate for matplotlib:
 
-[Here's a good article that talks about it](http://www.wirywolf.com/2016/01/pyplot-in-jupyter-inside-pyenv-on-el-capitan.html)
+[Here's a good article that talks about it](http://www.wirywolf.com/2016/01/pyplot-in-jupyter-inside-pyenv-on-el-capitan.html).
 
 **Approach #1**
+
+NOTE: This didn't work for me.
 
 On the Mac you need to manually set the backend rendering engine (not sure why they couldn't do this for you).
 
@@ -461,5 +463,13 @@ $ vi matplotlibrc
 
 **Approach #2**
 
-The preivous approach appeared to work for a large number of people when I was researching solving this problem
+NOTE: This approach did work for me.
+
+You can also set the rendering engine in your Python script:
+
+```python
+import matplotlib as mpl
+mpl.use('TkAgg')
+from matplotlib import pyplot
+```
 
