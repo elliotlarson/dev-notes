@@ -385,3 +385,21 @@ cursor.execute('insert into projects values(?,?)', ('foo', 'bar'))
 cursor.commit()
 connection.close()
 ```
+
+### Inserting multiple records
+
+You can insert multiple records with `executemany`
+
+```python
+import sqlite3
+
+connection = sqlite3.connect('mydb.db')
+cursor = connection.cursor()
+new_projects = [
+    ('foo', 'bar'),
+    ('baz', 'biz'),
+]
+cursor.executemany('insert into projects values(?,?)', new_projects)
+cursor.commit()
+connection.close()
+```
