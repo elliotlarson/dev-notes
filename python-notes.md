@@ -343,4 +343,19 @@ project_titles = [elt[0] for elt in results]
 connection.close()
 ```
 
+### Getting a single result
+
+```python
+import sqlite3
+
+connection = sqlite3.connect("mydb.db")
+cursor = connection.cursor()
+cursor.execute('select count(*) from projects')
+result = cursor.fetchone()
+# => (234,)
+project_count = result[0]
+print(project_count)
+connection.close()
+```
+
 
