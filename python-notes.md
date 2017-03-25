@@ -358,4 +358,18 @@ print(project_count)
 connection.close()
 ```
 
+### Executing a query passing in a value
+
+```python
+import sqlite3
+
+connection = sqlite3.connect('mydb.db')
+cursor = connection.cursor()
+id = 42
+cursor.execute('select * from projects where id = ?', id)
+result = cursor.fetchone()
+print(result)
+connection.close()
+```
+
 
