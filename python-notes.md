@@ -421,3 +421,25 @@ cursor.executemany('insert into projects values(?,?)', new_projects)
 cursor.commit()
 connection.close()
 ```
+
+## Plotting with `matplotlib`
+
+### Set the rendering engine
+
+On the Mac you need to manually set the backend rendering engine (not sure why they couldn't do this for you).
+
+Figure out the location of matplotlib:
+
+```bash
+$ python -c "import matplotlib; print(matplotlib.__path__)"
+```
+
+Go to the root of the lib and add the necessary config file:
+
+```bash
+$ vi matplotlibrc
+# => add: "backend: TkAgg"
+```
+
+
+
