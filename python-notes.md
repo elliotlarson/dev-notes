@@ -72,6 +72,14 @@ Use a virtual env for the current project:
 $ pyenv local my-project-3.6.0
 ```
 
+## Figure out the location of python
+
+Sometimes you want to know where the location of the installed python you are using is:
+
+```bash
+$ pyenv which python
+```
+
 ## Installing a package
 
 You can use the [pip package manager](https://pip.pypa.io/en/stable/) to install a package:
