@@ -372,4 +372,16 @@ print(result)
 connection.close()
 ```
 
+### Mutating data
 
+If you are mutating data, you need to remember to call `commit`.
+
+```python
+import sqlite3
+
+connection = sqlite3.connect('mydb.db')
+cursor = connection.cursor()
+cursor.execute('insert into projects values(?,?)', ('foo', 'bar'))
+cursor.commit()
+connection.close()
+```
