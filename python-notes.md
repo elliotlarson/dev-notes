@@ -473,3 +473,15 @@ mpl.use('TkAgg')
 from matplotlib import pyplot
 ```
 
+### Save output as SVG file
+
+```python
+import matplotlib as mpl
+mpl.use('TkAgg')
+from matplotlib import pyplot as plt
+import numpy as np
+x = np.arange(0,100,0.00001)
+y = x*np.sin(2*np.pi*x)
+plt.plot(y)
+plt.savefig("test.svg", format="svg")
+```
