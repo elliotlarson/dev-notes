@@ -94,6 +94,24 @@ Then someone else can load the requirements file:
 $ python -m pip install -r requirements.txt
 ```
 
+## Useful idioms 
+
+### Running code only if not being imported
+
+Sometimes you only want to code to execute if it's being run directly, not when it's being imported.
+
+From the documentation:
+
+> '__main__' is the name of the scope in which top-level code executes. A module’s __name__ is set equal to '__main__' when read from standard input, a script, or from an interactive prompt.
+
+```python
+def main():
+    pass
+
+if __name__ == "__main__":
+    main()
+```
+
 ## Classes and objects
 
 Here's some basic class/object examples:
