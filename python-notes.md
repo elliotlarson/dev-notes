@@ -434,6 +434,16 @@ connection.close()
 
 ### Set the rendering engine
 
+When I first tried to use matplotlib the first time I encountered the error:
+
+> RuntimeError: Python is not installed as a framework. 
+
+This is a common, ongoing problem that seems to have been around for years.  It has to do with the default rendering engine on Mac OS not being appropriate for matplotlib:
+
+[Here's a good article that talks about it](http://www.wirywolf.com/2016/01/pyplot-in-jupyter-inside-pyenv-on-el-capitan.html)
+
+**Approach #1**
+
 On the Mac you need to manually set the backend rendering engine (not sure why they couldn't do this for you).
 
 Figure out the location of matplotlib:
@@ -449,5 +459,7 @@ $ vi matplotlibrc
 # => add: "backend: TkAgg"
 ```
 
+**Approach #2**
 
+The preivous approach appeared to work for a large number of people when I was researching solving this problem
 
