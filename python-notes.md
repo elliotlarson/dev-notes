@@ -327,6 +327,95 @@ str(my_object)
 vars(my_object)
 ```
 
+## Working with Files
+
+Say you have the following file `number-words.txt` with the contents:
+
+```text
+one
+two
+three
+```
+
+### Reading a file a line at a time
+
+To open a file for reading, you use the `open` method, passing in the `r` option for "read".
+
+```python
+file = open('number-words.txt', 'r')
+for line in file:
+    print(line.strip())
+file.close()
+```
+
+### Reading in the lines of a file with `readlines`
+
+With readlines, you read in the contents of a file as a list of lines:
+
+```python
+file = open('number-words.txt', 'r')
+number_words_lines = file.readlines() 
+file.close()
+```
+
+This will give you a newline character at the end of each line in your list, so it's common to use a list comprehension to process the lines:
+
+```python
+number_words = [elt.strip() for elt in file.readlines()]
+```
+
+### Reading a file with `read`
+
+You can read the entire contents in at once with `read`.
+
+```python
+file = open('number-words.txt', 'r')
+number_words_contents = file.read()
+file.close()
+```
+
+Remember to close the file handle when you are finished.
+
+### Writing to a file
+
+To write to a file, you need to open it with the `w` flag:
+
+```python
+file = open('number-words.txt', 'w')
+file.write('four')
+file.close()
+```
+
+**HOWEVER**: This will not append the word "four" to the file, it will overwrite it with the word "four". 
+
+To append, use the `a` flag:
+
+```python
+file = open('number-words.txt', 'a')
+file.write('four')
+file.close()
+```
+
+### Reading a writing a file with `with`
+
+The advantage of using `with` is that it closes the file handle automatically:
+
+```python
+with open('number-words.txt', 'r') as file:
+    for line in file:
+        print(line.strip())
+```
+
+### Writing an array to a file as lines
+
+You can use `writelines` for this:
+
+```python
+new_numbers = ['four', 'five']
+with open('number-words.txt', 'a') as file:
+    file.writelines(new_numbers)
+```
+
 ## The `os` package
 
 This is the standard operating system library.
@@ -485,3 +574,4 @@ y = x*np.sin(2*np.pi*x)
 plt.plot(y)
 plt.savefig("test.svg", format="svg")
 ```
+
