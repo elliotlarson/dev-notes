@@ -20,7 +20,7 @@ After disconnecting the pi from the ethernet and restarting, the pi showed up on
 
 ## GPIO
 
-Basic Python Blink
+### Basic Python Blink
 
 I developed this locally and then uploaded to the pi via `scp`.  I called the file `blink.py`
 
