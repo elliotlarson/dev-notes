@@ -236,6 +236,29 @@ Some notes about this code:
 * **Class methods** are prefixed with a `@classmethod` decorator.  They receive the class as the first variable.  The convention is to call this argument `cls`.
 * **Custom constructors** are generally class methods, conventionally prefixed with `from_`
 
+### Getters and setters
+
+```python
+class Person(object):
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name 
+
+    @property
+    def full_name(self):
+        return "{} {}".format(self.first_name, self.last_name)
+
+    @full_name.setter 
+    def full_name(self, name):
+        self.first_name = name.split(' ')[0]
+        self.last_name = name.split(' ')[1]
+
+elliot = Person("Elliot", "Larson")
+print(elliot.full_name)
+elliot.full_name = "John Doe"
+print(elliot.full_name)
+```
+
 ## Debugging
 
 ### With pdb
