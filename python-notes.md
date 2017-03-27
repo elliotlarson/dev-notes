@@ -120,6 +120,24 @@ if __name__ == "__main__":
     main()
 ```
 
+### Method object implementation with Python
+
+```python
+class Add(object):
+    @classmethod
+    def call(cls, number_one, number_two):
+        return cls(number_one, number_two)._call()
+
+    def __init__(self, number_one, number_two):
+        self.number_one = number_one
+        self.number_two = number_two
+
+    def _call(self):
+        return self.number_one + self.number_two
+
+print(Add.call(1, 2))
+```
+
 ## Classes and objects
 
 Here's some basic class/object examples:
