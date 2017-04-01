@@ -368,6 +368,30 @@ str(my_object)
 vars(my_object)
 ```
 
+## Errors and Exceptions
+
+### Manually raising an exception
+
+To raise your own exception use the `raise` method:
+
+```python
+raise ValueError('That value not so good')
+```
+
+[Here's the documentation on the available exception classes](https://docs.python.org/3/library/exceptions.html#exception-hierarchy)
+
+### Handling errors
+
+Like other languages, Python has a `try` construct:
+
+```python
+try:
+    raise NameError('HiThere')
+except NameError:
+    print('An exception flew by!')
+    raise
+```
+
 ## Working with Files
 
 Say you have the following file `number-words.txt` with the contents:
