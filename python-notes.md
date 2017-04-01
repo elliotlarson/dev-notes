@@ -457,6 +457,49 @@ with open('number-words.txt', 'a') as file:
     file.writelines(new_numbers)
 ```
 
+### Reading and working with csv
+
+Say you have a csv file `users.csv`:
+
+```csv
+customerNo,firstName,lastName,birthDate,mailingAddress
+1,John,Dunbar,13/06/1945,"1600 Amphitheatre Parkway Mountain View, CA 94043 United States"
+2,Bob,Down,25/02/1919,"1601 Willow Rd. Menlo Park, CA 94025 United States"
+3,Alice,Wunderland,08/08/1985,"One Microsoft Way Redmond, WA 98052-6399 United States"
+4,Bill,Jobs,10/07/1973,"2701 San Tomas Expressway Santa Clara, CA 95050 United States"
+```
+
+You can read and work with this with the csv module:
+
+```python
+import csv
+
+names = []
+
+with open('users.csv', 'r') as f:
+    rows = csv.reader(f)
+    headers = next(rows)
+    for row in rows:
+        names.append("{} {}".format(row[1], row[2]))
+
+print(names)
+# => ['John Dunbar', 'Bob Down', 'Alice Wunderland', 'Bill Jobs']
+```
+
+### Writing a csv file
+
+You can write with a csv writer:
+
+```python
+import csv 
+
+with open('users.csv', 'a') as file:
+    writer = csv.writer(file)
+    writer.writerow([5, 'John', 'Doe', '123 Any St. San Francisco, CA 99999'])
+```
+
+The writer method also takes "dialect arguments" so you can change the writing format.  For example, you might want to change to tab delimited instead of commas. [More documentation on dialects here](https://docs.python.org/3/library/csv.html#csv.writer)
+
 ## The `os` package
 
 This is the standard operating system library.
