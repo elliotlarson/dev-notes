@@ -592,6 +592,13 @@ os.putenv('MY_VAR', 'foo')
 path = os.path.dirname(os.path.abspath(__file__))
 ```
 
+There is also this approach:
+
+```python
+import os
+path = os.getcwd()
+```
+
 ## The `sqlite` package
 
 ### Executing a query
