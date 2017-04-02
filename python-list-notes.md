@@ -174,7 +174,6 @@ names_copy_1 = names.copy()
 names_copy_2 = names[:]
 ```
 
-
 ## List comprehensions
 
 List comprehensions provide a concise syntax for list manipulation.  They basically amount to map in the front and filter in the back.
@@ -208,3 +207,13 @@ print(greet_names)
 ```
 
 The `if name != 'Bob'` part is the "filter in the back".
+
+## Iterating over a list with an index
+
+You can use the `enumerate` method:
+
+```python
+ints = [1, 2, 3, 4, 5]
+for idx, val in enumerate(ints):
+    print(idx, val)
+```
