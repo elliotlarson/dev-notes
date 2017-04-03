@@ -46,7 +46,7 @@ Without flexbox, this will look like:
 You can add flexbox with `display: flex;`:
 
 ```css 
-#container {
+.container {
   display: flex;
 }
 ```
