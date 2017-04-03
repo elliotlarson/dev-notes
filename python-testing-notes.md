@@ -104,7 +104,7 @@ You can run a single test with
 $ pytest -v tests/greeter_test.py::test_greet
 ```
 
-Notice how much easier it is to call out an individual test than unittest.
+Notice how much easier it is to call out an individual test than it is with unittest.
 
 ### Running iPython debugger in a test
 
