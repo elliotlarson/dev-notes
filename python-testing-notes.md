@@ -106,6 +106,10 @@ $ pytest -v tests/greeter_test.py::test_greet
 
 Notice how much easier it is to call out an individual test than it is with unittest.
 
+### Placing tests in `tests` directory
+
+If you are seeing an error when trying to import your implementation module that is up one directory, you may need to add an `__init__.py` file to the root of your `tests` directory.
+
 ### Running iPython debugger in a test
 
 Pytest captures output by default, but the `-s` option turns capturing off, which allows you to drop an iPython debug statement in your code:
