@@ -12,23 +12,23 @@ class Person(object):
         self.email = email
 
     def full_name(self):
-        return self.first_name + ' ' + self.last_name 
-    
+        return self.first_name + ' ' + self.last_name
+
     def designation(self):
         return self.full_name() + ' - ' + self.role
 
     def __str__(self):
         return self.designation()
-        
+
     def notify(self):
         # => notification code
         print("Notified: %s" % self.full_name())
-        
+
     @staticmethod
     def notify_people(people):
         for person in people:
             person.notify()
-        
+
 class Contractor(Person):
     role = 'contractor'
 
@@ -102,13 +102,13 @@ Some notes about this code:
 class Person(object):
     def __init__(self, first_name, last_name):
         self.first_name = first_name
-        self.last_name = last_name 
+        self.last_name = last_name
 
     @property
     def full_name(self):
         return "{} {}".format(self.first_name, self.last_name)
 
-    @full_name.setter 
+    @full_name.setter
     def full_name(self, name):
         self.first_name = name.split(' ')[0]
         self.last_name = name.split(' ')[1]
@@ -135,4 +135,19 @@ class Add(object):
         return self.number_one + self.number_two
 
 print(Add.call(1, 2))
+```
+
+## Getting and setting instance properties dynamically
+
+You can use the `getattr` and `setattr` methods to get and set properties on an instance:
+
+```python
+class MyObj(object):
+    def __init__(self, name):
+        self.name = name
+
+me = MyObj('Elliot')
+getattr(me, 'name') #=> 'Elliot'
+setattr(me, 'name', 'Billybob')
+getattr(me, 'name') #=> 'Billybob'
 ```
