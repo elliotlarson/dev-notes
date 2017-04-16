@@ -13,59 +13,99 @@ then I installed this font to get vim to work: https://github.com/runsisi/consol
 
 ## From Tmux session
 
-#### detach a session
+#### Swap window
 
-	ctrl + a > d
+Enter command mode
 
-#### rename a session
+```text
+ctrl + a > :
+```
 
-	ctrl + a > $
+To swap window 1 with window 2:
 
-#### show key bindings
+```bash
+: swap-window -s 1 -t 2
+```
 
-	ctrl + a > ?
+#### Detach a session
 
-#### show open sessions from within tmux session
+```text
+ctrl + a > d
+```
 
-	ctrl + a > s
+#### Rename a session
 
-#### swap panes to the left
+```text
+ctrl + a > $
+```
 
-	ctrl + a > {
+#### Show key bindings
 
-#### clear the screen
+```text
+ctrl + a > ?
+```
 
-	ctrl + l
+#### Show open sessions from within tmux session
+
+```text
+ctrl + a > s
+```
+
+#### Swap panes to the left
+
+```text
+ctrl + a > {
+```
+
+#### Clear the screen
+
+```text
+ctrl + l
+```
 	
-#### rename window
+#### Rename window
 
-	ctrl + a > ,
+```text
+ctrl + a > ,
+```
 	
-#### kill a pane
+#### Kill a pane
 
-	ctrl + a > x
+```text
+ctrl + a > x
+```
 	
-#### show pane numbers
+#### Show pane numbers
 
-	ctrl + a > q
+```text
+ctrl + a > q
+```
 	
-#### select a pane number
+#### Select a pane number
 
 ## From Command Line
 
-#### create a new session
+#### Create a new session
 
-	$ tmux new -s sessionname
+```bash
+$ tmux new -s sessionname
+```
 	
-#### list all sessions
+#### List all sessions
 
-	$ tmux ls
+```bash
+$ tmux ls
+```
 	
-#### kill a session 
+#### Kill a session 
 
-	$ tmux kill-session -t sessionname
+```bash
+$ tmux kill-session -t sessionname
+```
 	
-#### attach to session
+#### Attach to session
 
-	$ tmux attach -t sessionname
+```bash
+$ tmux attach -t sessionname
+```
 	
