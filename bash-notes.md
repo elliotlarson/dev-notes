@@ -241,6 +241,14 @@ if [ $? -ne 0 ]; then
 fi
 ```
 
+Test to see if an argument was passed to the script:
+
+```bash
+if [[ $# -ne 0 ]] ; then
+  echo 'An argument was passed'
+fi
+```
+
 ## Exit statuses
 
 Shell functions and scripts output a exit status number ranging from `0` to `255`.  `0` is a successful exit status, whereas all other numbers indicate a failure of some kind.
@@ -700,7 +708,7 @@ Here is a method for outputing colorized messages:
 
 ```bash
 say() {
-	echo -e "${2:-$YELLOW}$1${COLOR_RESET}"
+  echo -e "${2:-$YELLOW}$1${COLOR_RESET}"
 }
 # say "foo" $RED
 ```
