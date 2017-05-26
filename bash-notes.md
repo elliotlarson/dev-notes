@@ -232,6 +232,15 @@ if [[ $( id -u) -eq 0 ]]; then
 fi
 ```
 
+Here is a test that checks if the last process worked:
+
+```bash
+if [ $? -ne 0 ]; then
+  echo "Problems"
+  exit $?
+fi
+```
+
 ## Exit statuses
 
 Shell functions and scripts output a exit status number ranging from `0` to `255`.  `0` is a successful exit status, whereas all other numbers indicate a failure of some kind.
