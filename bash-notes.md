@@ -696,6 +696,15 @@ echo "${GREEN}Here is some red green.${COLOR_RESET}"
 echo "${YELLOW}Here is some red yellow.${COLOR_RESET}"
 ```
 
+Here is a method for outputing colorized messages:
+
+```bash
+say() {
+	echo -e "${2:-$YELLOW}$1${COLOR_RESET}"
+}
+# say "foo" $RED
+```
+
 ## Creating a timestamp
 
 ```bash
