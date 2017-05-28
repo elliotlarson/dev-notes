@@ -114,6 +114,18 @@ mydb=> \c
 mydb=> \pset pager off
 ```
 
+#### Listing schemas
+
+```bash
+mydb=> \dn
+```
+
+#### Listing schemas and tables
+
+```bash
+mydb=> \dl *.*
+```
+
 ## Queries
 
 #### Renaming a table
