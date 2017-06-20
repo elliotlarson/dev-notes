@@ -224,6 +224,12 @@ $ git commit --amend -m "New message for commit"
 
 ## Remotes
 
+#### Get list of remote branches
+
+```bash
+$ git remote show origin
+```
+
 #### Get list of remote repositories that Git knows about
 
 ```bash
