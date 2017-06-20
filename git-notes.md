@@ -230,6 +230,12 @@ $ git commit --amend -m "New message for commit"
 $ git remote show origin
 ```
 
+Then checkout a remote branch:
+
+```bash
+$ git checkout <branch-name>
+```
+
 #### Get list of remote repositories that Git knows about
 
 ```bash
