@@ -26,7 +26,7 @@ When you save this and close out of it, git will open the commit dialog for this
 
 ## Reflog
 
-Git keeps track of everything that happens to the repo in the reflog.  
+Git keeps track of everything that happens to the repo in the reflog.
 
 To view a list of events:
 
@@ -53,7 +53,7 @@ $ git filter-branch --tree-filter 'rm -f supersecretpass.txt' HEAD
 
 ```bash
 $ git checkout 048ddf081^ -- path/to/file.rb
-```    
+```
 
 ## Diffing
 
@@ -127,7 +127,7 @@ $ git log --oneline
 
 #### Show diffs in commit
 
-This is a great way to search for changes in the codebase.  
+This is a great way to search for changes in the codebase.
 
 ```bash
 $ git log -p
@@ -190,6 +190,20 @@ $ git show f769bc31bdd --stat
 
 ## Resetting
 
+#### Reset a local branch to a remote branch
+
+This resets to the upstream branch.  Say you're on a branch `features/cool-stuff`, you can use this to set the local branch to what's on `origin/features/cool-stuff`:
+
+```bash
+$ git reset --hard @{u}
+```
+
+You can also do this by manually specifying the remote branch name explicitly:
+
+```bash
+$ git reset --hard origin/feature/mips-331-#147895895
+```
+
 #### Unstage a file
 
 ```bash
@@ -228,6 +242,12 @@ $ git commit --amend -m "New message for commit"
 
 ```bash
 $ git remote show origin
+```
+
+You can also do this with the branch command.  This will show all branches remote and local:
+
+```bash
+$ git branch -a
 ```
 
 Then checkout a remote branch:
