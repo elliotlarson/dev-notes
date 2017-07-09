@@ -1,5 +1,29 @@
 # Git Notes
 
+## Edit a previous commit
+
+Say the commit you want to edit is `bbc643cd`:
+
+```bash
+$ git rebase --interactive 'bbc643cd^'
+```
+
+Change `pick` to edit for the commit.
+
+Then make the edits you want to make.
+
+Then amend the current commit:
+
+```bash
+$ git commit --all --amend --no-edit
+```
+
+And, finally, continue on with the rebase to finish up:
+
+```bash
+$ git rebase --continue
+```
+
 ## Rewording a commit
 
 The first way you can do this is to just ammend the commit (provided it's the last commit):
