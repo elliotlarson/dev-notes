@@ -5,6 +5,12 @@
 #### Creating a database with `createdb`
 
 ```bash
+$ createdb databasename
+```
+
+...or, with owner
+
+```bash
 $ createdb -O ownername databasename
 ```
 
@@ -16,16 +22,27 @@ $ dropdb databasename
 
 ## Permissions
 
-#### Creating a user
+#### Creating a user on the command line
+
+```bash
+$ createuser brandt
+```
+
+#### Creating a user in `psql`
 
 This user can create and delete databases.
 
 ```bash
 mydb=> create user brandt password 'thatsmarvelous';
+```
+
+#### Give the user the ability to create databases in `psql`
+
+```bash
 mydb=> alter user brandt createdb;
 ```
 
-#### Making the user a superuser
+#### Making the user a superuser in `psql`
 
 ```bash
 psql> ALTER USER myuser WITH SUPERUSER;
@@ -37,30 +54,49 @@ psql> ALTER USER myuser WITH SUPERUSER;
 $ psql mydb
 psql> ALTER TABLE my_table OWNER TO newuserrole;
 ```
-## Doing a database dump
 
-Dumping a compressed backup:
+## Connecting to a database with `psql`
 
 ```bash
-$ pg_dump -Fc mydatabase > mydumpfile.bak
+$ psql -U brandt -h mydb.host.com -p 60924 -d mydbname
 ```
 
-You can also dump specific tables:
+## Doing a database dump
+
+Dumping a compressed backup
+
+```bash
+$ pg_dump -v -Fc mydatabase > mydumpfile.dump
+```
+
+Dumping SQL backup
+
+```bash
+$ pg_dump mydatabase > mydumpfile.sql
+```
+
+Dump specific tables
 
 ```bash
 $ pg_dump -t clients -t sites mydatabase > mydumpfile.sql
 ```
 
-You can dump only data (no table creates or drops):
+Dump only data (no table creates or drops)
 
 ```bash
 $ pg_dump -a mydatabase > mydumpfile.sql
 ```
 
-Dumping only the schema:
+Dumping only the schema
 
 ```bash
-$ pg_dump -s my_database > my_database_schema.sql
+$ pg_dump -s -d my_database -f bak.sql
+```
+
+Dumping a specific schema:
+
+```bash
+$ pg_dump -n my_schema -d my_database -f bak.sql
 ```
 
 #### Loading database backup
@@ -70,61 +106,30 @@ Loading a non compressed backup:
 ```bash
 $ psql -d mydb_production < db/production_bak.sql
 ```
-Loading a compressed backup:
+
+Loading a compressed backup
+
+* `-v` = verbose output
+* `-e` = exit immediately on error
+* `-1` = run in a transaction
+* `-c` = clean or drop database objects (tables) before creating them
 
 ```bash
-$ pg_restore -j8 -f db/production_bak.bak -d mydb_production
+$ pg_restore -v -e -1 -f db/production_bak.bak -d mydb_production
 ```
 
 ## Psql Commands
 
-#### List databases
-
-```bash
-mydb=> \l
-```
-
-#### List users
-
-```bash
-mydb=> \du
-```
-
-#### Describe a table
-
-```bash
-mydb=> \d table_name
-```
-
-#### Return select results in expanded format
-
-```bash
-mydb=> \x
-```
-
-#### Connect to database
-
-```bash
-mydb=> \c
-```
-
-#### Turn pager setting off for session
-
-```bash
-mydb=> \pset pager off
-```
-
-#### Listing schemas
-
-```bash
-mydb=> \dn
-```
-
-#### Listing schemas and tables
-
-```bash
-mydb=> \dl *.*
-```
+* `\l` = list databases
+* `\d` = list tables
+* `\d table` = describe table
+* `\du` = list users
+* `\x` = toggle expanded format of output
+* `\x auto` = psql figures out what the best format is for output
+* `\c` = Connect to database
+* `\pset pager off` = turning pager setting off
+* `\dn` = Listing schemas
+* `\dl *.*` = Listing schemas and tables
 
 ## Queries
 
@@ -166,35 +171,76 @@ FROM pg_stat_user_tables
 ORDER BY n_live_tup DESC;
 ```
 
+#### Set the search path to a schema
+
+```sql
+SET search_path TO 'qualitymetrics-fss';
+```
+
+## Administration
+
+### Showing long running postgres processes
+
+https://medium.com/little-programming-joys/finding-and-killing-long-running-queries-on-postgres-7c4f0449e86d
+
+```sql
+SELECT pid, now() - pg_stat_activity.query_start AS duration, left(query, 80), state
+FROM pg_stat_activity
+WHERE now() - pg_stat_activity.query_start > interval '5 minutes';
+```
+
+### Kill a hung query
+
+First find the PID of the process
+
+```sql
+SELECT pg_terminate_backend(<pid>);
+```
+
+### PSQL queries to increase the Postgres log level
+
+```sql
+ALTER SYSTEM SET log_min_messages = 'INFO';
+ALTER SYSTEM SET log_statement = 'all';
+SELECT pg_reload_conf();
+```
+
 ## Files
 
-Using the Postgres.app on the Mac, assuming version `9.5`.
+### Asking the database where it keeps the log file:
 
-#### Logfile
+This could be useful, however when I tried it the records didn't have a location for the log file on my system.
 
-`~/Library/Application\ Support/Postgres/var-9.5/postgres-server.log`
-
-#### Watch the log:
-
-```bash
-$ less +F ~/Library/Application\ Support/Postgres/var-9.5/postgres-server.log
+```sql
+SELECT *
+FROM pg_settings
+WHERE category IN( 'Reporting and Logging / Where to Log' , 'File Locations')
+ORDER BY category, name;
 ```
 
-#### Config file
+### Log File
 
-`~/Library/Application\ Support/Postgres/var-9.5/postgresql.conf`
+Using the Postgres.app on the Mac: `~/Library/Application\ Support/Postgres/var-9.5/postgres-server.log`
 
-Edit the file
+Using Homebrew: `/usr/local/var/log/postgres.log`
 
-```bash
-$ vi ~/Library/Application\ Support/Postgres/var-9.5/postgresql.conf
-```
+### Config file
+
+Using the Postgres.app on the Mac: `~/Library/Application\ Support/Postgres/var-9.5/postgresql.conf`
+
+Using Homebrew: `/usr/local/var/postgres/postgresql.conf`
+
+### Host based authentication file
+
+Using the Postgres.app on the Mac: `~/Library/Application\ Support/Postgres/var-9.5/pg_hba.conf`
+
+Using Homebrew: `/usr/local/var/postgres/pg_hba.conf`
 
 **Setting the slow query log:**
 
 Set the `log_statement` value to `all`.
 
-Set the `log_min_duration_statement` statement to a number of milliseconds, say `250`.  
+Set the `log_min_duration_statement` statement to a number of milliseconds, say `250`.
 
 Queries that last longer than that get logged to the log file:
 
@@ -210,6 +256,8 @@ $ brew install pgbadger
 
 **Config file settings:**
 
+Add to config file `/usr/local/var/postgres/postgres.conf`
+
 ```text
 log_min_duration_statement = 1
 log_duration = off
@@ -220,7 +268,7 @@ log_statement = 'none'
 Make sure you restart the server.  Run some queries and then generate the report with:
 
 ```bash
-$ pgbadger ~/Library/Application\ Support/Postgres/var-9.5/postgres-server.log
+$ pgbadger /usr/local/var/log/postgres.log
 ```
 
 The report will be an html file named `out.html`.
