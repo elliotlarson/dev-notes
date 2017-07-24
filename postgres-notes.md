@@ -2,7 +2,7 @@
 
 ## Utilities
 
-#### Creating a database with `createdb`
+### Creating a database with `createdb`
 
 ```bash
 $ createdb databasename
@@ -14,7 +14,19 @@ $ createdb databasename
 $ createdb -O ownername databasename
 ```
 
-#### Dropping a database with `dropdb`
+### Creating a database with `psql`
+
+```sql
+CREATE DATABASE mydb;
+```
+
+with an owner
+
+```sql
+CREATE DATABASE mydb;
+```
+
+### Dropping a database with `dropdb`
 
 ```bash
 $ dropdb databasename
@@ -22,37 +34,48 @@ $ dropdb databasename
 
 ## Permissions
 
-#### Creating a user on the command line
+### Creating a user on the command line
 
 ```bash
 $ createuser brandt
 ```
 
-#### Creating a user in `psql`
+### Creating a user in `psql`
 
 This user can create and delete databases.
 
-```bash
-mydb=> create user brandt password 'thatsmarvelous';
+```sql
+CREATE USER brandt PASSWORD 'thatsmarvelous';
 ```
 
-#### Give the user the ability to create databases in `psql`
+or with role
 
-```bash
-mydb=> alter user brandt createdb;
+```sql
+CREATE ROLE brandt WITH PASSWORD 'thatsmarvelous';
 ```
 
-#### Making the user a superuser in `psql`
+### Change owner of a database
 
-```bash
-psql> ALTER USER myuser WITH SUPERUSER;
+```sql
+ALTER DATABASE biglebowski OWNER TO brandt;
 ```
 
-#### Change the role of a table:
+### Give the user the ability to create databases in `psql`
 
-```bash
-$ psql mydb
-psql> ALTER TABLE my_table OWNER TO newuserrole;
+```sql
+ALTER USER brandt CREATEDB;
+```
+
+### Making the user a superuser in `psql`
+
+```sql
+ALTER USER myuser WITH SUPERUSER;
+```
+
+### Change the role of a table:
+
+```sql
+ALTER TABLE my_table OWNER TO newuserrole;
 ```
 
 ## Connecting to a database with `psql`
@@ -99,7 +122,7 @@ Dumping a specific schema:
 $ pg_dump -n my_schema -d my_database -f bak.sql
 ```
 
-#### Loading database backup
+### Loading database backup
 
 Loading a non compressed backup:
 
@@ -133,13 +156,13 @@ $ pg_restore -v -e -1 -f db/production_bak.bak -d mydb_production
 
 ## Queries
 
-#### Renaming a table
+### Renaming a table
 
 ```sql
 ALTER TABLE my_table RENAME TO new_table_name;
 ```
 
-#### Getting database size:
+### Getting database size:
 
 For the whole database:
 
@@ -165,13 +188,13 @@ Get the number of records in a table:
 
 ```sql
 SELECT
-	relname AS "table",
-	to_char(n_live_tup, 'FM9,999,999,999,999') AS "count"
+  relname AS "table",
+  to_char(n_live_tup, 'FM9,999,999,999,999') AS "count"
 FROM pg_stat_user_tables
 ORDER BY n_live_tup DESC;
 ```
 
-#### Set the search path to a schema
+### Set the search path to a schema
 
 ```sql
 SET search_path TO 'qualitymetrics-fss';
@@ -273,11 +296,9 @@ $ pgbadger /usr/local/var/log/postgres.log
 
 The report will be an html file named `out.html`.
 
-
 ## PostgreSQL's explain analyze made readable
 
 You can use the [explain.depesz.com](http://explain.depesz.com) to break down the results of an `EXPLAIN ANALYZE` query in a more human readable fashion.
-
 
 ## Connecting through a tunnel
 
