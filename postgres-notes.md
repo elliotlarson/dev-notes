@@ -86,6 +86,18 @@ $ psql -U brandt -h mydb.host.com -p 60924 -d mydbname
 
 ## Doing a database dump
 
+* `-v` = verbose output
+* `-e` = exit immediately on error
+* `-c` = output clean or drop database objects (tables) before creating them
+* `-O` = do not dump ownership commands on database objects
+* `-x` = do not dump revoke or grant commands
+* `-a` = only dump data
+* `-j<n>` = dump with n number of jobs (use one for each core on the machine)
+* `-s` = dump only the schema of the database
+* `-t<table-name>` = dump specific tables (you can pass multiple `-t` flags)
+* `-n<schema-name>` = only dump the specified namespace (schema)
+* `-T<table-name>` = exclude specific tables (you can pass multiple `-T` flags)
+
 Dumping a compressed backup
 
 ```bash
@@ -136,9 +148,18 @@ Loading a compressed backup
 * `-e` = exit immediately on error
 * `-1` = run in a transaction
 * `-c` = clean or drop database objects (tables) before creating them
+* `-C` = create the database before loading (if -c is also specified the database will be dropped and recreated)
+* `-O` = do not load ownership commands on database objects
+* `-x` = do not load revoke or grant commands
+* `-a` = only load data
+* `-j<n>` = load with n number of jobs (use one for each core on the machine you're dumping from)
+* `-s` = restore only the schema of the database
+* `-t<table-name>` = restore specific tables (you can pass multiple `-t` flags)
+* `-T<table-name>` = exclude specific tables (you can pass multiple `-T` flags)
+* `-n<schema-name>` = only restore the specified namespace (schema)
 
 ```bash
-$ pg_restore -v -e -1 -f db/production_bak.bak -d mydb_production
+$ pg_restore -x -O -v -e -1 -f db/production_bak.bak -d mydb_production
 ```
 
 ## Psql Commands
