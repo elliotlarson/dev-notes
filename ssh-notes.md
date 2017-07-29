@@ -76,6 +76,10 @@ If you have a `deploy` user account on the example.com server, you can tunnel lo
 $ ssh -L 8000:localhost:5432 deploy@example.com -nNT
 ```
 
+* `-T` = Disable pseudo-terminal allocation.
+* `-n` = Redirects stdin from /dev/null (actually, prevents reading from stdin).  This must be used when ssh is run in the background.
+* `-N` = Do not execute a remote command.  This is useful for just forwarding ports.
+
 2. Connect to the database
 
 ```bash
