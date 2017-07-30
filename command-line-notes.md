@@ -598,7 +598,7 @@ $ rsync -a ~/dir1 username@remote_host:destination_directory
 $ rsync -a username@remote_host:/home/username/dir1 place_to_sync_on_local_machine
 ```
 
-#### Syncing current directory to remote 
+#### Syncing current directory to remote
 
 ```bash
 $ rsync -av $(pwd)/ acadia.local:/home/deploy/acadia/current
@@ -630,4 +630,20 @@ $ sudo deluser conference2017
 
 ```bash
 $ sudo delgroup conference2017
+```
+
+## The date command
+
+The date command returns information about the date from your system.
+
+A common timestamp usage
+
+```bash
+$ date +"%Y-%m-%d_%H-%M-%S"
+```
+
+You can create a file with this
+
+```bash
+$ pg_dump mydb -f mydb-$(date +"%Y-%m-%d_%H-%M-%S").dump
 ```
