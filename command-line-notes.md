@@ -647,3 +647,9 @@ You can create a file with this
 ```bash
 $ pg_dump mydb -f mydb-$(date +"%Y-%m-%d_%H-%M-%S").dump
 ```
+
+You can also output an ISO 8601 format date with
+
+```bash
+$ date -u +"%Y-%m-%dT%H:%M:%SZ"
+```

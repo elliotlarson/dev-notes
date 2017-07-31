@@ -90,5 +90,5 @@ Loading a compressed backup
 * `-n<schema-name>` = only restore the specified namespace (schema)
 
 ```bash
-$ pg_restore -j8 -x -O -v -e -1 -f db/production_bak.bak -d mydb_production
+$ pg_restore -j8 -x -O -v -e -1 -d mydb_production database.dump
 ```
