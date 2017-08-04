@@ -1,5 +1,57 @@
 # Ruby File Notes
 
+## Text files
+
+### Reading the whole file in at once
+
+```ruby
+fooness = File.read('foo.txt')
+```
+
+### Reading file lines as an array
+
+```ruby
+lines = File.readlines('foo.txt')
+```
+
+### Iterating through all lines in a file
+
+```ruby
+File.open('foo.txt') do |f|
+  f.each_line do |line|
+    # do some stuff with the line
+  end
+end
+```
+
+You could also get a file handle and then manually close it
+
+```ruby
+file = File.open('foo.txt')
+file.each_line do |line|
+  # do some stuff with the line
+end
+file.close
+```
+
+### Write to a file
+
+```ruby
+File.open('foo.txt', 'w') do |f|
+  f.puts('some text')
+end
+```
+
+This will overwrite the existing text in the file
+
+To append to the existing text in the file
+
+```ruby
+File.open('foo.txt', 'a') do |f|
+  f.puts('some text')
+end
+```
+
 ## CSV files
 
 ### Writing a CSV file
@@ -63,7 +115,7 @@ You can also convert headers into symbols (spaces become underscores):
 ```ruby
 CSV.parse(
   CSV_STRING,
-  headers: true, 
+  headers: true,
   header_converters: [:symbol]
 ) do |row|
   row #=> <CSV::Row header_1:"data 1" header_2:"data 2">
@@ -80,8 +132,8 @@ CSV_STRING = <<~EOF
 EOF
 
 CSV.parse(
-  CSV_STRING, 
-  headers: true, 
+  CSV_STRING,
+  headers: true,
   header_converters: [:symbol, :downcase]
 ) do |row|
   row[:header_one] #=> 'data 1'
@@ -100,8 +152,8 @@ CSV_STRING = <<~EOF
 EOF
 
 CSV.parse(
-  CSV_STRING, 
-  headers: true, 
+  CSV_STRING,
+  headers: true,
   header_converters: [:symbol, :downcase],
   skip_blanks: true,
 ) do |row|
@@ -119,8 +171,8 @@ CSV_STRING = <<~EOF
 EOF
 
 CSV.parse(
-  CSV_STRING, 
-  headers: true, 
+  CSV_STRING,
+  headers: true,
   header_converters: [:symbol, :downcase],
   col_sep: "\t",
 ) do |row|
