@@ -92,7 +92,7 @@ You may want to graph this data
 require 'gruff'
 
 g = Gruff::Line.new
-g.labels = []
+g.labels = {
   0 => 100_000,
   1 => 1_000_000,
   2 => 10_000_000,
