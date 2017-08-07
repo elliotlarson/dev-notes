@@ -30,12 +30,12 @@ require 'benchmark'
 ITERATIONS = 1_000_000
 
 # the 15 is the width of the report label
-Benchmark.bm(15) do |bm|
-  bm.report('each') do # 'each' is the report lable
+Benchmark.bm(15) do |b|
+  b.report('each') do # 'each' is the report lable
     (0..ITERATIONS).each { |n| n }
   end
 
-  bm.report('each_with_index') do
+  b.report('each_with_index') do
     (0..ITERATIONS).each_with_index { |n| n }
   end
 end
@@ -53,12 +53,12 @@ require 'benchmark'
 ITERATION_SETS = [100_000, 1_000_000, 10_000_000, 100_000_000]
 ITERATION_SETS.each do |iterations|
   puts "Benchmarking with iterations #{iterations}"
-  Benchmark.bm(15) do |x|
-    x.report(:each) do
+  Benchmark.bm(15) do |b|
+    b.report(:each) do
       (1..iterations).each { |n| n }
     end
 
-    x.report(:each_with_index) do
+    b.report(:each_with_index) do
       (1..iterations).each_with_index { |n, i| n }
     end
   end
@@ -149,19 +149,29 @@ require 'set'
 list = ('a'..'zzzz').to_a
 set = Set.new(list)
 
-Benchmark.ips do |bm|
-  bm.report('set access') do
+Benchmark.ips do |b|
+  b.report('set access') do
     set.include?('foo')
   end
 
-  bm.report('array access') do
+  b.report('array access') do
     list.include?('foo')
   end
 
-  bp.compare!
+  b.compare!
 end
-```
 
+# Warming up --------------------------------------
+# set access   264.993k i/100ms
+# array access     1.709k i/100ms
+# Calculating -------------------------------------
+# set access      6.393M (± 4.7%) i/s -     32.064M in   5.029124s
+# array access     16.408k (± 5.7%) i/s -     82.032k in   5.017091s
+
+# Comparison:
+# set access:  6393067.2 i/s
+# array access:    16408.1 i/s - 389.63x  slow
+```
 
 You can also grab the output of the benchmark reports and use them to do things:
 
@@ -175,12 +185,12 @@ set = Set.new(list)
 old_stdout = $stdout
 $stdout = StringIO.new
 
-report = Benchmark.ips do |bm|
-  bm.report('set access') do
+report = Benchmark.ips do |b|
+  b.report('set access') do
     set.include?('foo')
   end
 
-  bm.report('array access') do
+  b.report('array access') do
     list.include?('foo')
   end
 end
@@ -207,12 +217,12 @@ graph_data = {
   benchmarks: Hash.new([]),
 }
 ITERATION_SETS.each do |iterations|
-  report = Benchmark.ips do |bm|
-    bm.report('set access') do
+  report = Benchmark.ips do |b|
+    b.report('set access') do
       set.include?('foo')
     end
 
-    bm.report('array access') do
+    b.report('array access') do
       list.include?('foo')
     end
   end
