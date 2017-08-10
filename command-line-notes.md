@@ -617,19 +617,31 @@ $ sudo useradd -m -s /bin/bash conference2017
 ### Setting user password:
 
 ```bash
-$ sudo passwd conference2017
+$ sudo passwd <username>
+```
+
+### Adding a user to a group
+
+```bash
+$ sudo usermod -a -G <groupname> <username>
+```
+
+### Removing a user from a group
+
+```bash
+$ sudo userdel <username> <groupname>
 ```
 
 ### Deleting a user
 
 ```bash
-$ sudo deluser conference2017
+$ sudo deluser <username>
 ```
 
 ### Deleting a group
 
 ```bash
-$ sudo delgroup conference2017
+$ sudo delgroup <groupname>
 ```
 
 ## The date command
