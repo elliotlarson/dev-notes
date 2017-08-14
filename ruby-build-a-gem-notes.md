@@ -65,3 +65,19 @@ task(:console) do
   exec("pry -I './lib' -r foo")
 end
 ```
+
+## Thor and executables
+
+In order for thor subcommands to load appropriately, I needed to set my executable up with the lib directory of the gem manually added to the loadpath:
+
+```ruby
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w[.. lib]))
+
+require 'rubygems'
+require 'my_gem'
+
+MyGem::CLI.start(ARGV)
+```
