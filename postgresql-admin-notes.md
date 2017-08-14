@@ -12,6 +12,46 @@ $ ssh -nNT -L 3333:ra-sam.cdko7wofihzp.us-west-2.rds.amazonaws.com:5432 deploy@w
 $ psql -h localhost -p 3333 -U postgres -W ra_sam
 ```
 
+
+## Pg stat statement
+
+Tracking execution statistics for all SQL statements executed by the server
+
+First you need to add the appropriate config to the `postgresql.conf`
+
+```bash
+# changed from
+# #shared_preload_libraries = ''
+# to:
+shared_preload_libraries = 'pg_stat_statements'
+```
+
+Create the extention for the specific database you want to work with
+
+```bash
+$ psql mydb
+> create extension pg_stat_statements;
+```
+
+Get the top 100 slow queries:
+
+```sql
+SELECT
+  (total_time / 1000 / 60) as total_minutes,
+  (total_time/calls) as average_time,
+  query
+FROM pg_stat_statements
+ORDER BY 1 DESC
+LIMIT 100;
+```
+
+Resetting the stats
+
+```bash
+$ psql mydb
+> select pg_stat_reset();
+```
+
 ## Getting database size:
 
 For the whole database:
@@ -96,6 +136,18 @@ Using the Postgres.app on the Mac: `~/Library/Application\ Support/Postgres/var-
 Using Homebrew: `/usr/local/var/log/postgres.log`
 
 ### Config file
+
+You can get postgres to tell you this with the query:
+
+```sql
+SHOW CONFIG_FILE;
+```
+
+... or on the command line with the help of `psql`
+
+```bash
+$ psql -c 'show config_file'
+```
 
 Using the Postgres.app on the Mac: `~/Library/Application\ Support/Postgres/var-9.5/postgresql.conf`
 
