@@ -20,6 +20,53 @@ $ psql -U brandt -h mydb.host.com -p 60924 -d mydbname
 * `\pset pager off` = turning pager setting off
 * `\dn` = Listing schemas
 * `\dl *.*` = Listing schemas and tables
+* `\h` = getting help
+
+### Executing queries and getting immediate output
+
+You can execute quick queries without having to to into an interactive prompt by using the `-c` flag
+
+```bash
+$ psql mydb -c 'select count(*) from users'
+#  count
+# -------
+#   1004
+# (1 row)
+#
+# Time: 1.187 ms
+```
+
+You can get rid of the table header portion of this output with the `-t` flag
+
+```bash
+$ psql mydb -t -c 'select count(*) from users'
+#    1004
+#
+# Time: 1.187 ms
+```
+
+You can also remove the spacing before and the line after the output with the `-A` flag
+
+```bash
+$ psql -A -t -c 'select count(*) from users'
+# 1004
+# Time: 1.187 ms
+```
+
+Then you can pipe to the `head` command to pull out just the first line
+
+```bash
+$ psql -A -t -c 'select count(*) from users' | head -n 1
+# 1004
+```
+
+### Getting help in interactive mode
+
+If you'd like to know more about a command, you can precede it with `\h` for help
+
+```bash
+psql> \h DELETE
+```
 
 ## Creating a database with `createdb`
 
