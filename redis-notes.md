@@ -1,5 +1,11 @@
 # Redis Notes
 
+## Flush the database
+
+```bash
+$ redis-cli flushdb
+```
+
 ## Get a list of keys
 
 You can list all keys in Redis:
@@ -23,6 +29,12 @@ redis> keys sidekiq*
 
 This will match all keys that start with "sidekiq".
 
+You can also do this with one command:
+
+```bash
+$ redis-cli keys '*'
+```
+
 ## Finding the type of a key
 
 To get the contents of a key, you first need to find out its type:
@@ -42,7 +54,7 @@ redis> hgetall sidekiq:ip-172-31-13-9:12066:de4c0df743d1:workers
 # 2) "{\"queue\":\"default\",\"payload\":{\"class\":\"ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper\",\"wrapped\":\"CreateForecastJobForTrancheVersion\",\"queue\":\"default\",\"args\":[{\"job_class\":\"CreateForecastJobForTrancheVersion\",\"job_id\":\"70c29af0-196a-4902-b035-02808291ac38\",\"queue_name\":\"default\",\"arguments\":[8],\"locale\":\"en\"}],\"retry\":true,\"jid\":\"304a418b3cb89bdcef7e7ace\",\"created_at\":1461714639.5868776,\"enqueued_at\":1461714639.5869234},\"run_at\":1461714641}"
 ```
 
-This gives you a listing of keys and values.  
+This gives you a listing of keys and values.
 
 You can get a list of just values with:
 
