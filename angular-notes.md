@@ -2,18 +2,27 @@
 
 I'm starting to learn Angular with version 2, so these are Angular 2 notes.
 
-## Upgrading Angular 
+## Upgrading Angular Version
 
-To upgrade to the most recent version of Angular, if you are using the CLI:
+To upgrade the versions of npm packages
 
 ```bash
-$ npm uninstall --global angular-cli
-$ npm cache clean
-$ npm install --global angular-cli
-$ ng init
+$ npm update -D && npm update -S
 ```
 
-**Note:** I attempted to use `$ npm update --save`, but this resulted in code being out of sync.  We started getting weird zone.js errors.  This needs to be revisited.  There should be standard documentation on the Angular site at some point about how to do this.
+To upgrade the version of angular CLI to the latest release
+
+```bash
+$ npm uninstall -g @angular/cli
+$ npm install -g @angular/cli@latest
+$ npm install --save-dev @angular/cli
+```
+
+To upgrade TypeScript to the latest release
+
+```bash
+$ npm install -g typescript@latest
+```
 
 ## Expressions
 
@@ -47,7 +56,7 @@ The code in the curly braces is interpolated JavaScript, so you can manipulate v
 export class AppComponent {
   numberOne: number = 1;
   numberTwo: number = 2;
-  
+
   constructor() {}
 }
 ```
@@ -69,7 +78,7 @@ You use square brackets `[]` to wrap a property you want to set to a value in yo
 })
 export class AppComponent {
   logoUrl: string = './img/logo.svg';
-  
+
   constructor() {}
 }
 ```
@@ -88,7 +97,7 @@ However, changing the value of an attribute bound like this after it has been re
 })
 export class AppComponent {
   name: string = 'Elliot';
-  
+
   constructor() {}
 }
 ```
@@ -109,9 +118,9 @@ We can do this manually by using one way property binding and event binding:
 })
 export class AppComponent {
   name: string = 'Elliot';
-  
+
   constructor() {}
-  
+
   updateName(event) {
     this.name = event.target.value;
   }
@@ -148,7 +157,7 @@ You can use a binding approach similar to property binding to bind to events.  B
 })
 export class AppComponent {
   constructor() {}
-  
+
   sayFoo(event) {
     event.preventDefault();
     console.log('foo foo foo');
@@ -170,7 +179,7 @@ This allows you to reference a template element elsewhere in a template.  For ex
     <a href='#' (click)='logIt($event, myStatement.value)'>Say it</a>
   `
 })
-export class AppComponent { 
+export class AppComponent {
   logIt(event: any, statement: string) {
     console.log(statement);
   }
@@ -241,7 +250,7 @@ export class AppComponent {
   ];
   constructor() {}
 }
-``` 
+```
 
 Notice the use of the `i` variable.  We reference this to the `index` variable made available to us by angular in the loop.
 
@@ -467,7 +476,7 @@ First, start the `karma` test runner with `start`.  This will unfortunately run 
 $ node_modules/.bin/karma start
 ```
 
-Then you can run the tests for a single file by calling the `karma run` command with the `--grep` option.  
+Then you can run the tests for a single file by calling the `karma run` command with the `--grep` option.
 
 The string provided for grepping is the top level describe block for the test file you care about.
 
