@@ -1,5 +1,34 @@
 # Postgresql Admin Notes
 
+## Changing your password
+
+You can use the psql command
+
+```bash
+$ psql
+psql> \password
+```
+
+... or, you can use a query
+
+```sql
+ALTER USER myuser PASSWORD 'secret';
+```
+
+## Getting config values from database
+
+Here's a query statement that shows all config values
+
+```bash
+$ psql -c 'show all'
+```
+
+You can also get individual values
+
+```bash
+$ psql -c 'show config_file'
+```
+
 ## Connecting through a tunnel
 
 Create the SSH tunnel:
@@ -11,7 +40,6 @@ $ ssh -nNT -L 3333:ra-sam.cdko7wofihzp.us-west-2.rds.amazonaws.com:5432 deploy@w
 ```bash
 $ psql -h localhost -p 3333 -U postgres -W ra_sam
 ```
-
 
 ## Pg stat statement
 
