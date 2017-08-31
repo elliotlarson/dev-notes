@@ -665,3 +665,44 @@ You can also output an ISO 8601 format date with
 ```bash
 $ date -u +"%Y-%m-%dT%H:%M:%SZ"
 ```
+
+## The `comm` command
+
+You can use the [`comm`](https://www.computerhope.com/unix/ucomm.htm) command to compare two files
+
+Say you have file 1, `file1.txt`:
+
+```text
+foo
+bar
+baz
+```
+
+and file 2, `file2.txt`
+
+```text
+foo
+biz
+bar
+bip
+```
+
+The following command, returns the comparison.
+
+```bash
+$ comm -3 file1.txt file2.txt
+```
+
+This results in the output:
+
+```text
+bar
+baz
+        biz
+        bar
+        bip
+```
+
+* The `-3` flag supresses lines that are the same in both files.
+* Lines printed out without any indent are present in the first file, but not the second
+* Lines printed out with an indent are not present in the first file, but are in the second
