@@ -22,6 +22,19 @@ Broken down into parts:
 1. User + System CPU time
 1. Ellapsed real time (wall clock time)
 
+You can also just get the `realtime`
+
+```ruby
+require 'benchmark'
+
+time = Benchmark.realtime do
+  (0..100_000_000).each { |n| n }
+end
+puts time.round(3)
+
+#=> 3.867
+```
+
 Often times you want to compare two implementations of something
 
 ```ruby
