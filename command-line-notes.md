@@ -620,6 +620,12 @@ $ sudo useradd -m -s /bin/bash conference2017
 $ sudo passwd <username>
 ```
 
+### Getting the current groups for a user
+
+```bash
+$ sudo groups <username>
+```
+
 ### Adding a user to a group
 
 ```bash
