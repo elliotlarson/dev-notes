@@ -1,5 +1,21 @@
 # Git Notes
 
+## Checkout latest commit on branch
+
+After you've navigated to a previous commit on a branch, to get back to the latest commit on that branch
+
+```bash
+$ git checkout -
+```
+
+## Show commits that have been added to a branch
+
+When doing a code review it might be nice to see a log of commits on a branch.  This command shows the commits that exist on the feature branch that do not exist on master:
+
+```bash
+$ git cherry -v master features/my-awesome-feature
+```
+
 ## Edit a previous commit
 
 Say the commit you want to edit is `bbc643cd`:
