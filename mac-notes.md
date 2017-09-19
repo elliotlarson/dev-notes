@@ -36,3 +36,10 @@ After inserting the USB stick, run the following command on the terminal.  Note 
 ```bash
 $ sudo /Applications/Install\ macOS\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/Untitled --applicationpath /Applications/Install\ macOS\ Sierra.app
 ```
+
+## Scheduling Timed Jobs
+
+You need to use the launchd agent for this
+
+* [setting up scheduled jobs](https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/ScheduledJobs.html)
+* [creating launchd jobs](https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html#//apple_ref/doc/uid/TP40001762-104142)
