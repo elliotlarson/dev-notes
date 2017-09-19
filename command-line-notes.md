@@ -647,7 +647,7 @@ $ sudo deluser <username>
 ### Deleting a group
 
 ```bash
-$ sudo delgroup <groupname>
+$ sudo gpasswd -d <username> <groupname>
 ```
 
 ## The date command
