@@ -1,5 +1,19 @@
 # Git Notes
 
+## Prune deleted remote origins from local branch listing
+
+You can get a listing of remote branches with
+
+```bash
+$ git branch -a
+```
+
+But, this list might be very long and could include deleted branches.  To remove them from the list
+
+```bash
+$ git remote prune origin
+```
+
 ## Checkout latest commit on branch
 
 After you've navigated to a previous commit on a branch, to get back to the latest commit on that branch
