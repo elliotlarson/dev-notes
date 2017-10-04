@@ -1,5 +1,18 @@
 # Git Notes
 
+## Checkout master version of file on branch during rebase
+
+Sometimes when rebasing master you get a conflict on a file and you just want to pull the version from master
+
+During a rebase
+
+* "ours" = master
+* "theirs" = your branch
+
+```bash
+$ git checkout --ours somefile.txt
+```
+
 ## Prune deleted remote origins from local branch listing
 
 You can get a listing of remote branches with
