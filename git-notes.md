@@ -25,6 +25,8 @@ But, this list might be very long and could include deleted branches.  To remove
 
 ```bash
 $ git remote prune origin
+```
+
 ## Push local branch to origin and make tracking
 
 ```bash
