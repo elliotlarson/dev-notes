@@ -712,3 +712,23 @@ baz
 * The `-3` flag supresses lines that are the same in both files.
 * Lines printed out without any indent are present in the first file, but not the second
 * Lines printed out with an indent are not present in the first file, but are in the second
+
+## Watch a directory listing
+
+Sometimes you want to watch a directory.  You can list its contents with something like:
+
+```bash
+$ while; do clear; ls -la; sleep 1; done
+```
+
+Or you can use `tree` to see a nested structure:
+
+```bash
+$ while; do clear; tree .; sleep 1; done
+```
+
+Or you can use the `watch` command
+
+```bash
+$ watch -n 1 tree .
+```
