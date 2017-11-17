@@ -163,6 +163,14 @@ A process can fork off a new child process.  The process is a copy of the parent
 
 Forking utilizes copy-on-write, which means the child process uses all of the same data as the parent, until the data needs to be modified.  So, in Ruby, if you create an array in a script and then fork, the sub process will get the same array.  But, if you modify the array in any way, the array is copied and becomes distinct from the array in the parent process.
 
+`fork` utilizes the Unix system call `fork(2)` under the hood.  This is not available on Windows.
+
+View documentation page for `fork(2)` with:
+
+```bash
+$ man 2 fork
+```
+
 The `fork` method executes its code in a child process.  And it returns the process ID of the child.
 
 ```ruby
@@ -316,6 +324,10 @@ pid = Process.spawn({ 'FOO' => 'bar' }, 'some-cmd-that-requires-foo')
 Process.detach(pid)
 ```
 
+#### Difference between spawn and fork
+
+Use `Process.spawn` if you want to execute another application in a subprocess.  Use `fork` and `exec` if you want to execute arbitrary Ruby code in a sub process.
+
 ### System
 
 Executes a command in a sub-shell but waits for it to execute.  Like a blocking version of `Process.spawn`:
@@ -339,4 +351,26 @@ status = Kernel.system('which', 'foo') # status = false
 ```ruby
 io_obj = IO.popen(['ls', '-l'])
 puts io_obj.read
+```
+
+Note that the File descriptor is a stream IO object.  When you read, you flush the buffer (is that the correct terminology?) and the content is gone.
+
+You can also do it in one step and achieve something similar to backticks:
+
+```ruby
+header_str = IO.popen(['head', '-n', '1', 'my_data.csv']).read
+```
+
+Note that this is better than backticks because the array approach you pass to `IO.popen` is escaped, which is more secure than the string you pass to backticks.
+
+This also leaves the file handle open, so this might be better:
+
+```ruby
+header_str = IO.popen(['head', '-n', '1', 'my_data.csv']) { |fh| fh.read }
+```
+
+or
+
+```ruby
+header_str = IO.popen(['head', '-n', '1', 'my_data.csv'], &:read)
 ```
