@@ -1,5 +1,11 @@
 # Git Notes
 
+## Reset local branch to head of remote branch
+
+```bash
+git reset --hard origin/features/mah-feature
+```
+
 ## Checkout master version of file on branch during rebase
 
 Sometimes when rebasing master you get a conflict on a file and you just want to pull the version from master

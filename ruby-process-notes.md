@@ -252,6 +252,10 @@ puts 'Parent exited'
 
 The `ppid` of an orphaned process is 1, the master system process `init`.
 
+### Fork and exec
+
+The combination of these two is at the heart of process spawning in Unix.  You use fork to create a copy of the current process and then exec to transform it.
+
 ### Sharing information between child and parent processes
 
 When you fork, file descriptors are shared with the child process. If you want to communicate between the processes you can create a `pipe`, which has it's own file descriptors for readers and writers.
@@ -327,6 +331,13 @@ Process.detach(pid)
 #### Difference between spawn and fork
 
 Use `Process.spawn` if you want to execute another application in a subprocess.  Use `fork` and `exec` if you want to execute arbitrary Ruby code in a sub process.
+Get the output of the command:
+
+```ruby
+r, w = IO.pipe
+pid = spawn(command, out: w)   # r, w is closed in the child process.
+w.close
+```
 
 ### System
 
