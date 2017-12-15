@@ -5,6 +5,10 @@
 * `ctrl - u` = kill text from the cursor location to the beginning of the line
 * `ctrl - t` = sends a SIGINFO to the currently running command, giving progress information
 
+## Edit the current line in your editor
+
+`ctrl-x, ctrl-e` will open the current line
+
 ## Re-execute a series of commands with `ctrl-o`
 
 Say you've executed:
