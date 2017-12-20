@@ -81,3 +81,32 @@ Then, when you save your file and close it, you'll be back in pry, where you can
 ```
 
 This re-reruns the request, hopefully successfully.
+
+## Getting back some code entered in a temporary editor buffer
+
+Say you've started a section of code that's going to span a few lines.  Instead of writing in pry, you enter `edit` to do it in your editor.
+
+But in the edit section you save out of the temporary file
+
+```ruby
+Customer.pluck(:subdomain).each do |customer_name|
+  ts(customer_name)
+  provider_count = Provider.count
+  program_count = Program.count
+  puts("#{customer_name}, Providers: #{provider_count}, Programs: #{program_count}, product: #{provider_count * program_count}")
+end
+```
+
+When you save this, the code will execute, but the history won't show it.
+
+If you want to get this code back and modify it, you can use the `_in_` collection:
+
+```text
+> _in_.each_with_index { |ini, index| puts "#{index} #{ini}" }
+```
+
+This will print out the input collection.  All of the code will be on one of the input lines.  Use the array index ID to get the code back and edit it again:
+
+```text
+> edit --in 9
+```
