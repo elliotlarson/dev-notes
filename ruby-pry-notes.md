@@ -1,5 +1,20 @@
 # Ruby Pry Notes
 
+## Basic `.pryrc` setup
+
+You can stick a `.pryrc` file in the root of the project, or you can stick it in your home directory as a default.
+
+```ruby
+Pry.config.editor = 'vim'
+
+if defined?(PryByebug)
+  Pry.commands.alias_command 'c', 'continue'
+  Pry.commands.alias_command 's', 'step'
+  Pry.commands.alias_command 'n', 'next'
+  Pry.commands.alias_command 'f', 'finish'
+end
+```
+
 ## Debugging Rails with Pry
 
 See this video: https://www.youtube.com/watch?v=4hfMUP5iTq8
@@ -9,11 +24,12 @@ Let's say we have an error in our `users#index.html.erb` view.
 Make sure you have the following gems in your Gemfile:
 
 ```ruby
-gem 'pry-rails' # pry binding with Rails, making it the default rather than IRB
+gem 'gist' # allows copying of history
 gem 'pry-byebug' # pry using byebug for debugging
+gem 'pry-inline' # adds inline printing of values in the pry `whereami` code
+gem 'pry-rails' # pry binding with Rails, making it the default rather than IRB
 gem 'pry-rescue' # start pry binding at exception point
 gem 'pry-stack_explorer' # allow exception stack navigation in pry
-gem 'gist' # allows copying of history
 ```
 
 **Note:** At the time I'm writing this, you need the version of `pry-rescue` from GitHub.  There is a bug fix that is not in a released version of the gem that allows debugging of views in Rails (PR #106).
@@ -110,3 +126,42 @@ This will print out the input collection.  All of the code will be on one of the
 ```text
 > edit --in 9
 ```
+
+## Get the local variables defined in pry
+
+```bash
+$ pry
+[1] pry(main)> foo = 'foo'
+=> "foo"
+[2] pry(main)> bar = 'bar'
+=> "bar"
+[3] pry(main)> ls
+self.methods: inspect  to_s
+locals: _  __  _dir_  _ex_  _file_  _in_  _out_  _pry_  bar  env  foo  old_prompt
+[4] pry(main)> ls --locals
+foo = "foo"
+bar = "bar"
+env = nil
+old_prompt = nil
+```
+
+## Print out all instance variables for current object
+
+If you've navigated into an object and you want to print out the instance variables, you can type `self`.
+
+Here I've navigated into an instance of a `RestClient::Request` object.
+
+```bash
+[26] pry(#<RestClient::Request>)> self
+=> #<RestClient::Request:0x00007f8535f81df0
+ @block_response=nil,
+ @cookies={},
+ @headers={},
+ @method=:get,
+ @password=nil,
+ @payload=nil,
+ @raw_response=false,
+ @ssl_opts={:verify_ssl=>1},
+ @url="http://api.wunderground.com/api/a9766f280aacf3d6/conditions/q/CA/San_Francisco.json",
+ @user=nil>
+ ```
