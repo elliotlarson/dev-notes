@@ -57,9 +57,11 @@ end
 ### Writing a CSV file
 
 ```ruby
-CSV.open('path/to/file.csv') do |csv|
-  csv << ['header 1', 'header 2']
-  csv << ['data 1', 'data 2']
+CSV.open('path/to/file.csv', 'w') do |csv|
+  csv << ['first_name', 'last_name', 'email']
+  users.each do |user|
+    csv << [user.first_name, user.last_name, user.email]
+  end
 end
 ```
 
