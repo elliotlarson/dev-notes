@@ -15,6 +15,24 @@ if defined?(PryByebug)
 end
 ```
 
+## Existing/useful aliases
+
+* `@` = `whereami`
+* `$` = `show-source`
+* `?` = `show-doc`
+
+## Open a gem
+
+```bash
+[1] pry(main)> gem-open rest-client
+```
+
+## Show readme for a gem
+
+```bash
+[1] pry(main)> gem-readme rest-client
+```
+
 ## Debugging Rails with Pry
 
 See this video: https://www.youtube.com/watch?v=4hfMUP5iTq8
