@@ -42,8 +42,10 @@ Let's say we have an error in our `users#index.html.erb` view.
 Make sure you have the following gems in your Gemfile:
 
 ```ruby
-gem 'gist' # allows copying of history
+gem 'gist' # allows copying to gist or clipboard in pry
 gem 'pry-byebug' # pry using byebug for debugging
+gem 'pry-coolline' # live syntax highlighting for pry
+gem 'pry-doc' # pry documentation exploration
 gem 'pry-inline' # adds inline printing of values in the pry `whereami` code
 gem 'pry-rails' # pry binding with Rails, making it the default rather than IRB
 gem 'pry-rescue' # start pry binding at exception point
