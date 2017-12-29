@@ -102,7 +102,7 @@ class RegistrationFormObject
 
   def user_valid?
     return true if user.valid?
-    user.errors.messages.each { |k, ers| ers.each { |e| errors.add(k, e) } }
+    user.errors.messages.each_pair { |k, ers| ers.each { |e| errors.add(k, e) } }
     false
   end
 end
@@ -169,7 +169,7 @@ class UserUpdatorFormObject
 
   def user_valid?
     return true if user.valid?
-    user.errors.messages.each { |k, ers| ers.each { |e| errors.add(k, e) } }
+    user.errors.messages.each_pair { |k, ers| ers.each { |e| errors.add(k, e) } }
     false
   end
 end
