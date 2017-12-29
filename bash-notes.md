@@ -118,6 +118,8 @@ Some of the usefule file test options:
 | -s   | file exists and has a length greater than zero   |
 | -d   | file is a directory                              |
 
+#### String Tests
+
 You can also do tests on strings:
 
 ```bash
@@ -150,6 +152,8 @@ else
 fi
 ```
 
+#### Integer based tests
+
 You can do integer based tests:
 
 ```bash
@@ -170,6 +174,9 @@ Some usefule integer comparisons:
 | integer1 -le integer2  | integer1 is less than or equal to integer2    |
 | integer1 -ne integer2  | integer1 is not equal to integer2             |
 
+
+#### Using the newer [[test]] method
+
 There is a newer test method `[[ test ]]` that adds a regular expression operator `=~` to string tests:
 
 ```bash
@@ -178,6 +185,8 @@ if [[ "$MY_STRING" =~ ^\([0-9]{3}\)[[:space:]][0-9]{3}-[0-9]{4} ]]; then
   echo "It's a phone number"
 fi
 ```
+
+#### Using the ((test)) method for arithmetic
 
 And, there is a test command, `(())` for performing arithmetic boolean operations:
 
@@ -199,6 +208,8 @@ else
   echo "It is odd"
 fi
 ```
+
+#### Using logical opporators in tests
 
 You can use logical operators in tests:
 
@@ -224,6 +235,8 @@ if [[ $INT -ge 55 -a $INT -lt 100 ]]; then
 fi
 ```
 
+#### Ensure the script is being run by root
+
 Here is a test that checks to see if the user is the root user:
 
 ```bash
@@ -231,6 +244,12 @@ if [[ $( id -u) -eq 0 ]]; then
   echo "The current user is root"
 fi
 ```
+
+Here is another one I found in a script
+
+[[ $EUID == 0 ]] || { echo "Must be run as root."; exit; }
+
+#### Check if the last process worked
 
 Here is a test that checks if the last process worked:
 
@@ -241,7 +260,7 @@ if [ $? -ne 0 ]; then
 fi
 ```
 
-Test to see if an argument was passed to the script:
+#### Check if an argument was passed to the script
 
 ```bash
 if [[ $# -ne 0 ]] ; then
