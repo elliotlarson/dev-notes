@@ -1,5 +1,27 @@
 # JavaScript ES6 Notes
 
+## Messing with babel
+
+You can use the `babel-cli` package:
+
+```bash
+$ yarn global add babel-cli
+```
+
+Then you can use the `babel-node` command.  Say you have a file `index.js`:
+
+```javascript
+const fruit = ['apple', 'pear', 'banana', 'orange'];
+console.log(fruit);
+```
+
+You can output it with:
+
+```bash
+$ babel-node index.js
+# => ['apple', 'pear', 'banana', 'orange']
+```
+
 ## Arrow functions
 
 Arrow functions give you a more concise way of writing functions:
@@ -242,4 +264,36 @@ This just takes a list of arguments and creates an array from them:
 
 ```javascript
 const names = Array.of('Jim', 'Joe', 'Bob');
+```
+
+## Working with arrays
+
+### Removing an element from an array
+
+You can find the index of the item you want to remove and then `splice` it out.
+
+```javascript
+let fruit = ['apple', 'pear', 'banana', 'orange'];
+const bananaIndex = fruit.findIndex((f) => f === 'banana');
+fruit.splice(bananaIndex, 1);
+console.log(fruit); // => ['apple', 'pear', 'orange']
+```
+
+As you can see `splice` is destructive.
+
+### See if all array items match a condition
+
+```javascript
+const numbers = [1, 2, 3, 4];
+const allPositive = numbers.every((n) => n > 0);
+console.log(allPositive); // => true
+```
+
+### Selecting elements in an array that match a condition
+
+```javascript
+let fruit = ['apple', 'pear', 'banana', 'orange'];
+let inFridge = ['pie', 'apple', 'cheese', 'bread'];
+let fruitInFridge = inFridge.filter((f) => fruit.includes(f));
+console.log(fruitInFridge); // => ['apple']
 ```
