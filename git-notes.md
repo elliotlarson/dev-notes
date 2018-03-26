@@ -1,9 +1,17 @@
 # Git Notes
 
+## Undo git commit --amend
+
+Here's a good explanation: https://stackoverflow.com/questions/38001038/how-to-undo-a-git-commit-amend/38002218
+
+```bash
+$ git reset --soft @{1}
+```
+
 ## Reset local branch to head of remote branch
 
 ```bash
-git reset --hard origin/features/mah-feature
+$ git reset --hard origin/features/mah-feature
 ```
 
 ## Checkout master version of file on branch during rebase
