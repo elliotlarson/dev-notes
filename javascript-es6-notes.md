@@ -214,6 +214,15 @@ for (const key of Object.keys(fruits)) {
 }
 ```
 
+Iterating over objects with for-of and Object.entries:
+
+```javascript
+const fruits = { name: 'apple', crunchy: true, color: 'red' };
+for (const [key, value] of Object.entries(fruits)) {
+  console.log(key, value);
+}
+```
+
 Iterating over objects with for-in:
 
 ```javascript
@@ -223,6 +232,7 @@ for (const key in fruits) {
   console.log(key, value);
 }
 ```
+
 
 ## Array.from
 
