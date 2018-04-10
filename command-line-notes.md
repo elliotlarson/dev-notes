@@ -1,3 +1,29 @@
+## Base64 ecode
+
+Encode a file
+
+```bash
+$ base64 id_rsa > id_rsa_base64
+```
+
+Decode a file
+
+```bash
+$ base64 -d id_rsa_base64 > id_rsa
+```
+
+Encode a string
+
+```bash
+$ echo "My secret message" | base64
+```
+
+Decode a string
+
+```bash
+$ echo "TXkgc2VjcmV0IG1lc3NhZ2UK" | base64 -D
+```
+
 ## Keyboard shortcuts for `readline`
 
 * `ctrl - d` = delete the character at the cursor location
