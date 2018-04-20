@@ -39,6 +39,18 @@ You can negate any of them with the `not` method chain:
 expect(value).not.toEqual(23);
 ```
 
+## Focusing specific tests
+
+If you want to focus an `it` or a `describe` section, use `only`
+
+```javascript
+it.only("verifies coolness", () => {
+  const coolSpy = jest.spyOn(elliotIs, "cool");
+  elliotIs.cool();
+  expect(coolSpy).toHaveBeenCalled();
+});
+```
+
 ## Mocking
 
 You can mock a method and then test that it was called:
@@ -69,14 +81,96 @@ it("verifies coolness", () => {
 });
 ```
 
-If you want to focus an `it` or a `describe` section, use `only`
+> Creates a mock function similar to jest.fn but also tracks calls to object[methodName]. Returns a Jest mock function.
+
+> Note: By default, jest.spyOn also calls the spied method. This is different behavior from most other test libraries.
+
+### Clearing, resetting and restoring mocks
+
+`mockClear` resets all information stored in the `mockFn.mock.calls` and `mockFn.mock.instances` arrays.
+
+> Often this is useful when you want to clean up a mock's usage data between two assertions.
 
 ```javascript
-it.only("verifies coolness", () => {
-  const coolSpy = jest.spyOn(elliotIs, "cool");
-  elliotIs.cool();
-  expect(coolSpy).toHaveBeenCalled();
-});
+const mockFn = jest.fn();
+// some tests
+mockFn.mockClear()
+```
+
+`mockReset` resets all information stored in the mock, including any initial implementation and mock name given.
+
+> This is useful when you want to completely restore a mock back to its initial state.
+
+```javascript
+const mockFn = jest.fn();
+// some tests
+mockFn.mockReset()
+```
+
+`mockRestor` removes the mock and restores the initial implementation.
+
+> This is useful when you want to mock functions in certain test cases and restore the original implementation in others.
+
+```javascript
+const mockFn = jest.fn();
+// some tests
+mockFn.mockRestor()
+```
+
+### Mocking the implementation
+
+> Note: `jest.fn(implementation)` is a shorthand for `jest.fn().mockImplementation(implementation)`
+
+You can add a standin implementation for a mock
+
+```javascript
+const meaningOfLife = jest.fn(() => 42);
+```
+
+You can also mock the implementation once, so the first time the mock is called, it will return the mock implementation, and then after that, the original functionality is used.  These can be chanined:
+
+```javascript
+const meaningOfLife = jest
+  .fn(() => "I mean, it's a silly question, really")
+  .mockImplementationOnce(() => "42")
+  .mockImplementationOnce(() => "I mean it, 42")
+console.log(meaningOfLife(), meaningOfLife(), meaningOfLife(), meaningOfLife())
+// => 42
+// => I mean it, 42
+// => I mean, it's a silly question, really
+// => I mean, it's a silly question, really
+```
+
+You can use `mockReturnValue` instead of `jest.fn(() => 42)`
+
+```javascript
+const mock = jest.fn().mockReturnValue(42);
+mock(); // 42
+```
+
+### Mocking imports
+
+If you are testing a class that has imports you would like to mock out, you can use `jest.mock`
+
+Implementation:
+
+```javascript
+import knowledge from "google";
+
+class MeaningOfLife {
+  ask() {
+    const googleThinks = knowlege.meaningOfLife;
+    return `${googleThinks}, or 42`;
+  }
+}
+```
+
+Test, this mocks out `google` in the implementation file.
+
+```javascript
+import MeaningOfLife from "./meaning-of-life";
+import knowledge from "google";
+jest.mock("google");
 ```
 
 ## Command line usage
