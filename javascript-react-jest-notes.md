@@ -112,3 +112,92 @@ To watch the one file
 ```bash
 $ jest test --watch MyComponent.spec.js
 ```
+
+## Working with Enzyme
+
+Using the [Enzyme](http://airbnb.io/enzyme/) library from AirBnb can help make React component testing better.
+
+### Snapshot testing
+
+Snapshot testing with Enzyme is a bit simpler than with vanilla Jest
+
+```javascript
+describe("<Foo />", () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallow(<Foo />);
+  });
+
+  describe("snapshot", () => {
+    it("renders correctly", () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
+});
+```
+
+### Working with the shallow render
+
+Once you've used `shallow` to render the component, you can interact with it in a few useful ways.
+
+#### Setting state
+
+```javascript
+wrapper.setState({ foo: "bar" });
+```
+
+#### Getting state
+
+```javascript
+wrapper.state("foo");
+```
+
+#### Setting props
+
+```javascript
+wrapper.setProps({ foo: "bar" });
+```
+
+#### Working with instance methods and properties
+
+The shallow render is just a shallow rendered instance of the component class.  The instance of this object is available with `wrapper.instance()`.  Off of this you can work with methods and data on the class.
+
+This can be useful for properties that are not a part of the object's state
+
+```javascript
+class Foo extends Component {
+  constructor(props) {
+    super(props);
+    this.foo = "bar";
+  }
+}
+
+// ... then in your test
+wrapper.instance().foo; // bar
+```
+
+This can also be a useful way to mock out methods
+
+```javascript
+class Foo extends Component {
+  myMethod() {
+    // does some stuff
+  }
+}
+
+// ... then in your test
+const myMethodMock = jest.fn();
+wrapper.instance().myMethod = myMethodMock;
+// ... some testing stuff that calls myMethod()
+expect(myMethodMock).toHaveBeenCalledTimes(1);
+```
+
+#### Simulating events
+
+You can also use the shallow wrapper to find rendered elements and simulate events on them
+
+```javascript
+wrapper.find("button").simulate("click");
+expect(onButtonClickMock).toHaveBeenCalledTimes(1);
+```
