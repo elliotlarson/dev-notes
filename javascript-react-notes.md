@@ -1,5 +1,36 @@
 # React Notes
 
+## Basic functional component
+
+```javascript
+const Foo = (props) => {
+  return <h1>Hello</h1>;
+};
+```
+
+... or shortified
+
+```javascript
+const Foo = props => <h1>Hello</h1>
+```
+
+## An object component
+
+```javascript
+class Foo extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      some: "stuff"
+    }
+  }
+
+  render() {
+    return <h1>Hello</h1>;
+  }
+}
+```
+
 ## `React.Fragment`
 
 Components do not allow you to have sibling elements at the root level.  There needs to be a single root element:
