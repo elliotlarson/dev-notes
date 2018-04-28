@@ -295,3 +295,19 @@ You can also use the shallow wrapper to find rendered elements and simulate even
 wrapper.find("button").simulate("click");
 expect(onButtonClickMock).toHaveBeenCalledTimes(1);
 ```
+
+### Working with mount renderer
+
+The mount renderer does a full DOM render.  You need this if you are testing methods that deal with references.
+
+```javascript
+describe("mouseEnterHandler", () => {
+  it("sets the style transform property of myRef", () => {
+    wrapper = mount(<Foo {...defaultProps} />);
+    wrapper.instance().mouseEnterHandler("event-stub");
+    expect(
+      wrapper.instance().myRef.current.style.transform
+    ).toEqual("rotate(0deg) translate(-50%, -50%)");
+  });
+});
+```

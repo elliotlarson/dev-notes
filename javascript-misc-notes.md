@@ -4,7 +4,6 @@
 
 You can output a hash as a table in the browser console with `console.table`:
 
-
 ```javascript
 const inventors = [
   { first: 'Albert', last: 'Einstein', year: 1879 },
@@ -13,3 +12,11 @@ const inventors = [
 ];
 console.table(inventors);
 ```
+
+## Copying an object printed out in the console
+
+You can right click an object in the console and select the menu option `store as global variable`.
+
+This will output a variable like `temp1` to the console.
+
+You can then `JSON.stringify(temp1)`.
