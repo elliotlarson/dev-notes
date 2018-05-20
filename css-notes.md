@@ -341,14 +341,14 @@ You can use `not` to negate rules in certain circumstances.  For example, if you
 }
 ```
 
-## `after` pseudo class
+## `after` pseudo class and the clearfix technique
 
-You can use after to do things like add markup that is useful for CSS, like a clearfix:
+You can use after to do things like add markup that is useful for CSS, like a clearfix.
 
 ```css
 .clearfix:after {
   content: "";
-  display: table;
+  display: block;
   clear: both;
 }
 ```
