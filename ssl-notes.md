@@ -1,5 +1,9 @@
 # SSL Notes
 
+## Comodo SSL from NameCheap
+
+You will get back a
+
 ## Generating a self signed certificate
 
 #### Generate the signing request
@@ -42,4 +46,3 @@ decrypt
 ```bash
 $ echo U2FsdGVkX1+xjBe4rymHvzSAHAOAcBqD5/Gy7LRfVJw= | openssl aes-256-cbc -a -d -salt
 ```
-

@@ -145,7 +145,13 @@ background-image: linear-gradient(#fff, #efefef);
 or both:
 
 ```css
-background-image: linear-gradient(to right, #fff, #efefef), url(../img/foo.png);
+background-image: linear-gradient(#fff, #efefef), url(../img/foo.png);
+```
+
+Making a gradient that fills diagonally.
+
+```css
+background-image: linear-gradient(to right bottom, #fff, #efefef);
 ```
 
 More information [about linear gradients](https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient).
