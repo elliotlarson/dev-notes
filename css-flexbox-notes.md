@@ -1,8 +1,51 @@
 # Flexbox Notes
 
-Flexbox is a new-ish CSS layout system that gives designers greater control over web based layouts.
+## Horizontal spacing
 
-Lets start with a container and 3 child items in HTML:
+Center alignment:
+
+```css
+.flex-parent {
+  justify-content: center;
+}
+```
+
+Other options:
+
+* `flex-start`: align children left
+* `flex-end`: align children right
+* `space-around`: even spacing between children and half spacing on the outsides
+* `even-spacing`: event spacing around children and on the outside
+
+## Vertical spacing
+
+Center alignment
+
+```css
+.flex-parent {
+  align-items: center;
+}
+```
+
+Other options:
+
+* `stretch`: vertically stretch all children so they take up the vertical height of the parent
+* `flex-start`
+* `flex-end`
+
+## Width with flex items
+
+Make items take up roughly 25% of the width of the available space in the parent
+
+```css
+.flex-child {
+  flex: 0 1 25%;
+}
+```
+
+In order, these are `flex-grow`, `flex-shrink`, and `flex-basis`.  These are the default values for grow and shrink.
+
+## A container and 3 child items
 
 ```html
 <div class="container">
@@ -45,7 +88,7 @@ Without flexbox, this will look like:
 
 You can add flexbox with `display: flex;`:
 
-```css 
+```css
 .container {
   display: flex;
 }
@@ -63,7 +106,7 @@ If none of these properties is defined, it defaults to `flex: 0 0 auto;`.  This 
 
 `flex-basis` sets the internal size of the item box.  These rules do the same thing:
 
-```css 
+```css
 .item {
   flex: 0 0 50px;
 }
@@ -91,16 +134,16 @@ If you set `flex-grow` to `1`, the flex item will fill the available space.  How
 
 To force the flex items to even out irrespective of contents, set the `flex-base` to `0`.
 
-These are essentially the same: 
+These are essentially the same:
 
-```css 
+```css
 .item {
   flex-grow: 1;
   flex-base: 0;
 }
 
 .item {
-  flex: 1; 
+  flex: 1;
   /* this expands to:
   flex-grow: 1;
   flex-shrink: 1;

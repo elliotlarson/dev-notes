@@ -1,6 +1,6 @@
 # Raspberry PI Notes
 
-## Setup Raspian 
+## Setup Raspian
 
 I setup my PI with the **Pixel Jessie** version of Raspian. [Download the image here](https://www.raspberrypi.org/downloads/raspbian/).
 
@@ -20,31 +20,122 @@ After disconnecting the pi from the ethernet and restarting, the pi showed up on
 
 ## GPIO
 
-### Basic Python Blink
+### Basic LED Blink with Python3
 
-I developed this locally and then uploaded to the pi via `scp`.  I called the file `blink.py`
+Hardware setup:
+
+1. Connect wire from ground pin on raspberry pi to ground row on breadboard
+1. Connect 220 resistor from ground row to breadboard row
+1. Add short leg of led to ground resistor row of breadboard
+1. Connect Pin 23 from Raspberry pi to breadboard row
+1. Connect long leg of led to RP 23 breadboard row
+
+See img `img/raspberry-pi-notes/led_blink.png`.
+
+Software setup:
+
+I developed this locally and then uploaded to the pi via `scp`.
+
+I called the file `led_blink.py`
+
+```python
+from gpiozero import LED
+import time
+
+led = LED(23)
+
+while True:
+    led.on()
+    time.sleep(1)
+    led.off()
+    time.sleep(1)
+```
+After uploading, I executed it on the pi with:
+
+```bash
+$ python3 led_blink.py # you need to be root to use GPIO
+```
+
+### Control brightness of LED
+
+This involves using pulse width modulation to change the frequency of showing the light, giving the impression of a dimmer than 100% brightness.  The pulse happens so fast it is indistinguishable to the naked eye.
+
+```python
+import RPi.GPIO as GPIO
+
+led_pin = 23
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(led_pin, GPIO.OUT)
+
+pwm_led = GPIO.PWM(led_pin, 500)
+pwm_led.start(100)
+
+while True:
+    duty_s = input("Enter brightness (1-100)?: ")
+    duty = int(duty_s)
+    pwm_led.ChangeDutyCycle(duty)
+
+```
+
+### Fade in and out
 
 ```python
 import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-GPIO.setup(18, GPIO.OUT)
+led_pin = 23
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(led_pin, GPIO.OUT)
+
+pwm_led = GPIO.PWM(led_pin, 500)
+current_brightness = 1
+pwm_led.start(current_brightness)
+
+FADE_DELAY = .01
+
+def set_brightness(brightness):
+    pwm_led.ChangeDutyCycle(brightness)
+
+def fade_up_to(target_brightness):
+    global current_brightness
+    while current_brightness < target_brightness:
+        current_brightness += 1
+        set_brightness(current_brightness)
+        time.sleep(FADE_DELAY)
+
+def fade_down_to(target_brightness):
+    global current_brightness
+    while current_brightness > target_brightness:
+        current_brightness -= 1
+        set_brightness(current_brightness)
+        time.sleep(FADE_DELAY)
+
+def fade_to(target_brightness):
+    if target_brightness > current_brightness:
+        fade_up_to(target_brightness)
+    else:
+        fade_down_to(target_brightness)
 
 while True:
-    print('LED on')
-    GPIO.output(18, GPIO.HIGH)
-    time.sleep(1)
-
-    print('LED off')
-    GPIO.output(18, GPIO.LOW)
-    time.sleep(1)
+    target_brightness = input("Enter brightness (1-100)?: ")
+    fade_to(int(target_brightness))
 ```
 
-After uploading, I executed it on the pi with:
+### Creating a web UI
+
+Using the Flask python framework, we'll create a simple server:
+
+Install Flask for python 3.
 
 ```bash
-$ sudo python3 blink.py # you need to be root to use GPIO
+# create project directory
+$ mkdir my_project && cd my_project
+# use venv
+$ python3 -m venv venv
+# activate the environment
+$ . venv/bin/activate
+# install Flask
+$ pip install Flask
 ```
