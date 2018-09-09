@@ -18,6 +18,76 @@ $ wpa_passphrase "networkname" "password" >> /etc/wpa_supplicant/wpa_supplicant.
 
 After disconnecting the pi from the ethernet and restarting, the pi showed up on the network via its WIFI connection.
 
+## Configure keyboard
+
+The default keyboard setup is for the UK locality.  You might need to change your keyboard configuration up if you type and get strange characters for some of the keys:
+
+```bash
+$ sudo dpkg-reconfigure keyboard-configuration
+```
+
+Options I've picked in the past
+* Keyboard model: Generic 101-key PC
+* Keyboard layout: English (US)
+* Key to function as AltGr: Both Alt keys
+* Compose key: Menu key
+
+```bash
+# reboot for settings to take effect
+$ sudo reboot
+```
+
+### Swapping the ctrl and caps lock keys
+
+```bash
+$ sudo vim /etc/default/keyboard
+```
+
+Make sure the `XKBOPTIONS` entry includes `ctrl:nocaps`.  Mine looks like:
+
+```txt
+XKBOPTIONS="lv3:alt_switch,compose:menu,ctrl:nocaps"
+```
+
+After this, re-run the `dpkg-reconfigure` command and hit enter for everything including the final question about keeping current keyboard configurations; then reboot.
+
+```bash
+$ sudo dpkg-reconfigure keyboard-configuration
+# hit enter a few times
+$ sudo reboot
+```
+
+## What version of OS is this
+
+```bash
+$ cat /etc/os-release
+```
+
+## Wireless
+
+See the current wifi config:
+
+```bash
+$ iwconfig
+```
+
+... or, just get the ID of the network:
+
+```bash
+$ iwgetid
+```
+
+See what wireless networks are available:
+
+```bash
+$ sudo iwlist wlan0 scan | less
+# then search for the network you want
+```
+
+```bash
+$ wpa_passphrase "networkname" "password" >> /etc/wpa_supplicant/wpa_supplicant.conf
+```
+
 ## GPIO
 
 ### Basic LED Blink with Python3
