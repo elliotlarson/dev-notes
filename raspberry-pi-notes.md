@@ -1,5 +1,11 @@
 # Raspberry PI Notes
 
+## Updating the firmware
+
+```bash
+$ sudo rpi-update
+```
+
 ## Setup Raspian
 
 I setup my PI with the **Pixel Jessie** version of Raspian. [Download the image here](https://www.raspberrypi.org/downloads/raspbian/).
@@ -63,12 +69,28 @@ $ sudo reboot
 $ cat /etc/os-release
 ```
 
+## Setting locale
+
+```bash
+$ sudo raspi-config
+# setting the locales should be a menu option
+# set to: en-US.UTF8 UTF8
+```
+
 ## Wireless
 
 See the current wifi config:
 
 ```bash
 $ iwconfig
+```
+
+...or
+
+```bash
+$ ifconfig wlan0
+# do this with watch to observe differences
+$ watch -n 1 ifconfig wlan0
 ```
 
 ... or, just get the ID of the network:
@@ -87,6 +109,14 @@ $ sudo iwlist wlan0 scan | less
 ```bash
 $ wpa_passphrase "networkname" "password" >> /etc/wpa_supplicant/wpa_supplicant.conf
 ```
+
+### turning power management off
+
+```bash
+$ sudo iwconfig wlan0 power off
+```
+
+You can add that command to the `/etc/rc.local` file to turn it off automatically.
 
 ## GPIO
 
