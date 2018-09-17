@@ -18,10 +18,16 @@ $ pbpaste | svgo -i - -o -
 
 This will dump the output in the terminal.
 
+To encode the URL:
+
+```bash
+$ pbpaste | svgo -i - -o - --datauri=enc
+```
+
 You can also copy the output back into the clipboard buffer:
 
 ```bash
-$ pbpaste | svgo -i - -o - | pbcopy
+$ pbpaste | svgo -i - -o - --datauri=enc | pbcopy
 ```
 
 If you are using Sass, you can paste the results into a variable:
@@ -30,3 +36,5 @@ If you are using Sass, you can paste the results into a variable:
 // place the image code after the comma
 $my-image: 'data:image/svg+xml,';
 ```
+
+
