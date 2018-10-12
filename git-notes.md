@@ -101,7 +101,7 @@ If the commit isn't the last commit, you need to rebase:
 $ git rebase -i head~3
 ```
 
-This will open the last 3 commits in an interactive rebase.  Each commit starts with the work `pick`.  For the commit you want to change the message for, change `pick` to `reword`:
+This will open the last 3 commits in an interactive rebase.  Each commit starts with the work `pick`.  For the commit you want to change the message for, change `pick` to `edit`:
 
 ```text
 pick 0d7dd56 Moving test helpers out into support file
