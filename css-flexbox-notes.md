@@ -1,5 +1,15 @@
 # Flexbox Notes
 
+You apply flexbox to a parent element:
+
+```css
+.flex-parent {
+  display: flex;
+}
+```
+
+This causes the immediate children to be controlled with flexbox.
+
 ## Horizontal spacing
 
 Center alignment:
@@ -156,3 +166,17 @@ And the result is:
 
 ![alt text](https://raw.githubusercontent.com/elliotlarson/dev-notes/master/img/css-flexbox-notes/06.png?token=AAEe3S79DoSPKBELd76nwEqgbwUmg7Jwks5YjUs8wA%3D%3D "")
 
+
+## Flex Direction column
+
+If you use the flex direction of `column`, justify content and align columns reverse:
+
+```css
+.flex-parent {
+  flex-direction: column;
+  /* now this is vertical alignment */
+  justify-content: flex-start;
+  /* now this is horizontal alignment */
+  align-items: flex-end;
+}
+```
