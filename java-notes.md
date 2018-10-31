@@ -9,6 +9,7 @@ $ /usr/libexec/java_home
 # => /Library/Java/JavaVirtualMachines/jdk-11.jdk/Contents/Home
 ```
 
+<<<<<<< HEAD
 ## `final`
 
 You use the `final` keyword to denote a constant:
@@ -64,4 +65,15 @@ String[] fortunes = {
 };
 int rnd = new Random().nextInt(fortunes.length);
 return fortunes[rnd];
+=======
+## Bitwise XOR `^`
+
+Java has a conditional operator that is "one or the other".  If only one side of the comparison is true, then it is true:
+
+```java
+(true ^ true) // => false
+(false ^ true) // => true
+(true ^ false) // => true
+(false ^ false) // => false
+>>>>>>> Java notes
 ```
