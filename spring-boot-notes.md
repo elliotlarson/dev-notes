@@ -74,3 +74,56 @@ public class ChuckConfiguration {
   }
 }
 ```
+
+## Loading config from a config file
+
+In your `resources` directory, add a property file (name doesn't matter, but the convension is to use the `.properties` extension):
+
+`resources/datasource.properties`
+
+```java
+db.user=joebob23
+db.pass=supersecret
+db.host=127.0.0.1
+```
+
+Then in your top package add a `config` directory with the following file:
+
+`<root-package>/config/PropertyConfig.java`
+
+```java
+@Configuration
+@PropertySource("classpath:db.properties")
+public class PropertyConfig {
+  @Value("${db.user}")
+  String user;
+
+  @Value("${db.pass}")
+  String pass;
+
+  @Value("${db.host}")
+  String host;
+
+  @Bean
+  public FakeDataSource fakeDataSource() {
+    FakeDataSource fakeDataSource = new FakeDataSource();
+    fakeDataSource.setUser(user);
+    fakeDataSource.setPass(pass);
+    fakeDataSource.setHost(host);
+    return fakeDataSource;
+  }
+
+  @Bean
+  public static PropertySourcesPlaceholderConfigurer properties() {
+    PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer =
+      new PropertySourcesPlaceholderConfigurer();
+    return propertySourcesPlaceholderConfigurer;
+  }
+}
+```
+
+Then in your main app:
+
+```java
+FakeDataSource fakeDataSource = (FakeDataSource) ctx.getBean(FakeDataSource.class);
+```

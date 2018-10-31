@@ -48,7 +48,6 @@ public class PrintName {
 }
 ```
 
-
 ## Method parameters
 
 Java always uses call by value, meaning methods always get a copy of all parameter values.  The method can not modify the contents of a variable passed to it.

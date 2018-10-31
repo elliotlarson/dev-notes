@@ -24,3 +24,9 @@ Then with the keyboard combo, `cmd` + `n`, a dialog will appear, with options fo
 
 * `sout` = `System.out.println();`
 * `psvm` = `public static void main(String[] args) {}`
+
+## Add Maven dependency
+
+You can have IntelliJ bring in a dependency for you.  Open the `pom.xml` file and hit `cmd` + `n`, and select the `dependency` option.
+
+If "search for artifacts" is empty or mostly empty, you may need to update your local repos.  `Settings` > `Build, Execution, Deployment` > `Build Tools` > `Maven` > `Repositories`.  Click on the one that says `https://repo.maven.apache.org/maven2` to select it and then click th `update` button.  This should download stuff for awhile.  Once finished the dependency menu should populate with options.
