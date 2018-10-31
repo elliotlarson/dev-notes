@@ -9,7 +9,6 @@ $ /usr/libexec/java_home
 # => /Library/Java/JavaVirtualMachines/jdk-11.jdk/Contents/Home
 ```
 
-<<<<<<< HEAD
 ## `final`
 
 You use the `final` keyword to denote a constant:
@@ -49,6 +48,7 @@ public class PrintName {
 }
 ```
 
+
 ## Method parameters
 
 Java always uses call by value, meaning methods always get a copy of all parameter values.  The method can not modify the contents of a variable passed to it.
@@ -65,7 +65,6 @@ String[] fortunes = {
 };
 int rnd = new Random().nextInt(fortunes.length);
 return fortunes[rnd];
-=======
 ## Bitwise XOR `^`
 
 Java has a conditional operator that is "one or the other".  If only one side of the comparison is true, then it is true:
@@ -75,5 +74,4 @@ Java has a conditional operator that is "one or the other".  If only one side of
 (false ^ true) // => true
 (true ^ false) // => true
 (false ^ false) // => false
->>>>>>> Java notes
 ```
