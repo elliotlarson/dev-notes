@@ -127,3 +127,93 @@ Then in your main app:
 ```java
 FakeDataSource fakeDataSource = (FakeDataSource) ctx.getBean(FakeDataSource.class);
 ```
+
+## Basic MVC
+
+Imagine we want to list out some fruit names as a basic example.
+
+Create a Spring Boot starter with `web` and `thymeleaf` templates.
+
+### Model
+
+Create a `model` package in your base package and add a `Fruit.java` pojo:
+
+`<base-package>/model/Fruit.java`
+
+```java
+class Fruit {
+  private String name;
+
+  Fruit(String name) {
+    this.name = name;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public setName(String name) {
+    this.name = name;
+  }
+}
+```
+
+### View
+
+In the `/resources/templates` directory create a `fruits` directory and add an `index.html` file:
+
+`/resources/templates/fruits/index.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Fruits</title>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Fruit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="fruit : ${fruits}">
+          <td th:text="${fruit.name}">Banana</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
+```
+
+### Controller
+
+Create a `controllers` package in your base package and add a controller file:
+
+`<base-package>/controllers/FruitsController.java`
+
+```java
+// ... imports here
+@Controller
+class FruitsController {
+  @RequestMapping({ "/fruits", "/fruits/index" })
+  public String getFruits(Model model) {
+    // create some fruit objects
+    List fruits = new ArrayList();
+    Fruit apple = new Fruit("apple");
+    fruits.add(apple);
+    Fruit pear = new Fruit("pear");
+    fruits.add(pear);
+    Fruit orange = new Fruit("orange");
+    fruits.add(orange);
+
+    // add fruits to the model
+    model.addAttribute("fruits", fruits);
+
+    // render the view
+    return "fruits/index.html";
+  }
+}
+```
