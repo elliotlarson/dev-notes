@@ -763,3 +763,13 @@ And, you can count the number of arguments being passed in with `$#`:
 echo $#
 ```
 
+## Truncate a number of files
+
+```bash
+# rename the files
+$ for f in *.csv; do mv $f $f-full; done
+# truncate the files
+$ for f in *-full; do head -n 500 $f > $(echo $f | sed -e 's/-full//g'); done
+# delete files with -full on the end
+$ find . -name '*-full' -delete
+```

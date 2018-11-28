@@ -2,9 +2,17 @@
 
 ## Comodo SSL from NameCheap
 
-You will get back a
+Generate a CSR (signing request), like shown below.
 
-## Generating a self signed certificate
+Choose the HTTP verification method.  They will give you a file with a name like `E58996C5861F2EF2074DEED44AC173D8.txt` that you are meant to upload to your webserver such that it it available at `http://<domain>/.well-known/pki-validation/E58996C5861F2EF2074DEED44AC173D8.txt`.
+
+When they send you the CRT, combine it with the CA bundle file.  For example:
+
+```bash
+$ cat admin_wpbinc_com.crt admin_wpbinc_com.ca-bundle > ssl.admin.wpbinc.com/admin.wpbinc.com.crt
+```
+
+## Generating a certificate
 
 #### Generate the signing request
 
