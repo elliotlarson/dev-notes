@@ -1,5 +1,15 @@
 # Postgresql Admin Notes
 
+## psql: FATAL: database "<user>" does not exist
+
+If you see this for your user account, you need to create a database for your user:
+
+```bash
+$ createdb
+```
+
+This command with no arguments should create your user db
+
 ## Changing your password
 
 You can use the psql command
