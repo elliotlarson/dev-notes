@@ -63,7 +63,7 @@ package main
 
 The `main` package is special and indicates to the Go compiler that the program is going to be an executable.
 
-The package `main` is accompanied by the function `main` that is the entrypoint for execution of an executable Go app:
+The package `main` is accompanied by the function `main` that is the entry point for execution of an executable Go app:
 
 ```go
 package main
@@ -73,7 +73,7 @@ func main() {
 }
 ```
 
-If there is no `main` package the application is then a set of utlity packages meant for reuse in other programs.
+If there is no `main` package the application is then a set of utility packages meant for reuse in other programs.
 
 For example, if you look at the `net/http` package from the standard library, it has no `main` package and its directory structure is:
 
@@ -89,11 +89,11 @@ net/http
   testdata
 ```
 
-By convention, packages take the name of their directory, so this library has a `cgi` package and a `httptest` package.  You can have any number of files in a directory that belong to a package.  However, you may not have multiple packages in a directory.  One directory, one package.
+By convention, packages take the name of their directory, so this library has a `cgi` package and a `httptest` package.  You can have any number of files in a directory that belong to a package.
 
 #### Importing packages
 
-To import a library from the standar go library, you just need to use it's name:
+To import a library from the standard go library, you just need to use it's name:
 
 ```go
 import (
@@ -113,7 +113,7 @@ If you don't have this file on your local system, you can import with `go get`:
 $ go get github.com/fatih/color
 ```
 
-The go compiler will look for a matching library in this order, quiting when it finds one that satisfies an import statement:
+The go compiler will look for a matching library in this order, quitting when it finds one that satisfies an import statement:
 
 1. standard library location: $GOPATH/src/pkg
 2. the current project: $GOROOT/src/your/project
@@ -295,7 +295,7 @@ ms := &MyStruct{}
 
 #### The make function
 
-`Make` allocates and initializes a slice, map, or channel.  The first argumnet is a type and it returns a type.  The next arguments depend on the type.
+`Make` allocates and initializes a slice, map, or channel.  The first argument is a type and it returns a type.  The next arguments depend on the type.
 
 For a slice, `make` accepts two size arguments.  The first is length, and the second is capacity.  This allocates an int slice with a length of 0 and a capacity of 10.
 
@@ -449,6 +449,7 @@ limit := 10
 i := 0
 for {
   fmt.Println("Hello, World!")
+  i++
   if i == limit {
     break
   }
@@ -625,7 +626,7 @@ words[5] = "jumped"
 // => panic: runtime error: index out of range ...
 ```
 
-You can use an alternate sytax to create a slice where you specify the number of items and the make length of the slice:
+You can use an alternate syntax to create a slice where you specify the number of items and the make length of the slice:
 
 ```go
 words := make([]string, 0, 4)
@@ -874,7 +875,7 @@ You can also create types that are based on existing types.
 type Duration int64
 ```
 
-This can be useful if you want to attach applicationn specific functionality or meaning to a standard type.
+This can be useful if you want to attach application specific functionality or meaning to a standard type.
 
 You can add behavior to user defined types with methods:
 
@@ -1046,7 +1047,7 @@ func (i *Irishman) Cheers() string {
 
 The `German` and `Irishman` structs are said to implement the `BeerDrinker` interface because they both have the method `Cheers() string`.
 
-Notice that these structs do not need to specificially state that they implement `BeerDrinker`.  Simply by having the appropriate method, they do.
+Notice that these structs do not need to specifically state that they implement `BeerDrinker`.  Simply by having the appropriate method, they do.
 
 One advantage here is that you can create general collections of user defined types that implement an interface:
 
