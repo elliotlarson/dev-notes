@@ -1,5 +1,127 @@
 # Docker Notes
 
+## Build an image from a Docker file and run it
+
+Say you have a directory with a `Dockerfile` and an `index.html` file.
+
+`Dockerfile`
+
+```text
+FROM nginx:latest
+WORKDIR /usr/share/nginx/html
+COPY index.html index.html
+```
+
+`index.html`
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello Docker</title>
+  </head>
+  <body>
+    <h1>Hello, Docker!</h1>
+  </body>
+</html>
+```
+
+Build the image:
+
+```bash
+$ docker image build -t nginx-with-html .
+```
+
+Run a container of the image:
+
+```bash
+$ docker container run -p 80:80 --rm
+```
+
+If you want to upload this image to Docker Hub, you need to tag it:
+
+```bash
+$ docker image tag nginx-with-html:latest elliotlarson/nginx-with-html:latest
+```
+
+## Build a Golang app image
+
+Say you have an Echo app
+
+`server.go`
+
+```go
+package main
+
+import (
+	"net/http"
+
+	"github.com/labstack/echo"
+)
+
+func main() {
+	e := echo.New()
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Hello, from Echo!")
+	})
+	e.Logger.Fatal(e.Start(":1323"))
+}
+```
+
+And you have a Dockerfile:
+
+`Dockerfile`
+
+```dockerfile
+FROM golang:1.11.4-alpine
+
+RUN apk update && apk upgrade && \
+    apk add --no-cache bash git openssh
+
+WORKDIR /go/src/golang-hello-world
+
+COPY . .
+
+RUN go get -u github.com/labstack/echo/...
+RUN go install -v ./...
+
+EXPOSE 1323
+
+CMD ["golang-hello-world"]
+```
+
+You can build the image with:
+
+```bash
+$ docker image build -t nginx-with-html .
+```
+
+And, you can run the container from the image with:
+
+```bash
+$ docker run -it --rm -p 80:1323 --name my-running-app golang-hello-world
+```
+
+Add to Docker Hub.
+
+You may need to login first:
+
+```bash
+$ docker login
+```
+
+Tag the image:
+
+```bash
+$ docker tag golang-hello-world elliotlarson/golang-hello-world
+```
+
+Push the repository to Docker Hub:
+
+```bash
+$ docker push elliotlarson/golang-hello-world
+```
+
 ## Zsh docker completions
 
 If you are using oh-my-zsh, then you can just use the docker plugin:
@@ -119,4 +241,48 @@ The `-t` flag opens a tty prompt and the `-i` command keeps the prompt active.  
 
 ```bash
 $ docker container exec -it nginx bash
+```
+
+## Start a container and run bash
+
+```bash
+$ docker container run -it ubuntu:14.04 bash
+```
+
+To automatically remove the container when finished, use the `--rm` flag:
+
+```bash
+$ docker container run --rm -it ubuntu:14.04 bash
+```
+
+## Show Docker Networks
+
+```bash
+$ docker network ls
+# => NETWORK ID          NAME                DRIVER              SCOPE
+# => 8c8c0be73fb5        bridge              bridge              local
+# => 9e306b3b7093        host                host                local
+# => 1cde17949134        none                null                local
+```
+
+Docker has a default network subnet called `bridge` that connects the local host machine to the docker containers.
+
+## Inspect a network
+
+This will give more detailed info about the network and give information about the containers that are connected
+
+```bash
+$ docker network inspect <network-id>
+```
+
+## Connect a running container to a network
+
+```bash
+$ docker network connect <network-id> <container-id>
+```
+
+## Disconnect a running container to a network
+
+```bash
+$ docker network disconnect <network-id> <container-id>
 ```
