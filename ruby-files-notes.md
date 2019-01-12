@@ -34,6 +34,14 @@ end
 file.close
 ```
 
+... or:
+
+```ruby
+File.open('foo.txt').each_line do |line|
+  # do some stuff with the line
+end
+```
+
 ### Write to a file
 
 ```ruby
@@ -179,5 +187,17 @@ CSV.parse(
   col_sep: "\t",
 ) do |row|
   binding.pry
+end
+```
+
+### Iterating through files in a directory
+
+Here's an example where we are looking to iterate over the svg images in a Rails directory:
+
+```ruby
+Dir.glob(Rails.root.join('app', 'views', 'fr', 'angle_and_spacings', 'panels', '*.svg')).each do |f|
+  basename = File.basename(f)
+  dirname = File.dirname(f)
+  File.rename(f, "#{dirname}/_#{basename}.erb")
 end
 ```
