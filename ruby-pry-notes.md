@@ -185,3 +185,53 @@ Here I've navigated into an instance of a `RestClient::Request` object.
  @url="http://api.wunderground.com/api/a9766f280aacf3d6/conditions/q/CA/San_Francisco.json",
  @user=nil>
  ```
+
+ ## Play the contents of a file into the current session
+
+ If you have a file, like `spike.rb`, you can play the contents into the current pry session with:
+
+`spike.rb`
+
+```ruby
+foo = "bar"
+```
+
+```bash
+pry> play spike.rb
+pry> foo
+=> "bar"
+```
+
+## Pry Rails Showing models
+
+Show all models
+
+```bash
+pry> show-models
+```
+
+Show a specific model
+
+```bash
+pry> show-model User
+```
+
+## Pry Rails Showing Routes
+
+Show all routes
+
+```bash
+pry> show-routes
+```
+
+Grep routes for term like, customer:
+
+```bash
+pry> show-routes -G customer
+```
+
+Find all routes that match a given controller
+
+```bash
+pry> find-route PatientsController
+```
