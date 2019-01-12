@@ -91,6 +91,12 @@ net/http
 
 By convention, packages take the name of their directory, so this library has a `cgi` package and a `httptest` package.  You can have any number of files in a directory that belong to a package.
 
+#### Advice on package naming
+
+> Name your packages after what they provide, not what they contain. - Dave Cheney
+
+Dave Cheney has a quick blog entry about this: https://dave.cheney.net/2019/01/08/avoid-package-names-like-base-util-or-common
+
 #### Importing packages
 
 To import a library from the standard go library, you just need to use it's name:
