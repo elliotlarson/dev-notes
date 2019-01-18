@@ -201,3 +201,9 @@ Dir.glob(Rails.root.join('app', 'views', 'fr', 'angle_and_spacings', 'panels', '
   File.rename(f, "#{dirname}/_#{basename}.erb")
 end
 ```
+
+### Read the first line of a file
+
+```ruby
+first_line = File.open('file.txt', &:readline)
+```
