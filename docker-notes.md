@@ -44,6 +44,8 @@ If you want to upload this image to Docker Hub, you need to tag it:
 $ docker image tag nginx-with-html:latest elliotlarson/nginx-with-html:latest
 ```
 
+Think of tags as a composite of `<image-name>:<repository-name>`.
+
 ## Build a Golang app image
 
 Say you have an Echo app
@@ -185,7 +187,7 @@ If you don't want the process to take up your terminal process, you can run the 
 $ docker container run -p 8888:80 --detach nginx
 ```
 
-## Viewing the logs for a detached container
+## Viewing the logs for a container
 
 ```bash
 $ docker container logs <container-id-or-name>
@@ -286,3 +288,69 @@ $ docker network connect <network-id> <container-id>
 ```bash
 $ docker network disconnect <network-id> <container-id>
 ```
+
+## Run a container with a named volume (data volume)
+
+You can create a named volumn that stores the data from a container to the host machine.  Docker places it in some Docker owned directory on the host machine.
+
+```bash
+$ docker container run -d --name psql -v psql:/var/lib/postgresql/data postgres
+```
+
+## Run a container with a volumn mapping (bind mounting)
+
+You can map a directory in the container to a directory on the host machine.
+
+```bash
+$ docker container run -d --name nginx -p 80:80 -v $(pwd):/usr/share/nginx/html nginx
+```
+
+## Running a Rails server in a Docker container
+
+Add this to your app's directory: `Dockerfile`
+
+```Dockerfile
+FROM ruby:2.6
+RUN apt-get update -yqq
+RUN apt-get install -yqq --no-install-recommends nodejs
+COPY . /usr/src/app
+WORKDIR /usr/src/app
+RUN bundle install
+```
+
+Build the image from this Dockerfile:
+
+```bash
+$ docker build . -t myapp:1.0 -t myapp
+```
+
+Here I'm creating multiple tags, a versioned tag and an easy to use generic tag.
+
+After the command finishes, you should see the unique ID assigned to it.
+
+Run a container from the image:
+
+```bash
+$ docker run -p 1234:3000 myapp bin/rails s -b 0.0.0.0
+```
+
+This will run the Rails app in the container and make it availabe on your host machine at port 1234.
+
+The `-b 0.0.0.0` tells the rails server to accept traffic from any location, not just localhost.  Since we're running in a container, the traffic coming from our host machine to the Docker container will not be localhost.
+
+## Cleaning up with prune
+
+```bash
+$ docker system prune
+```
+
+As the message says:
+
+> This will remove:
+> - all stopped containers
+> - all networks not used by at least one container
+> - all dangling images
+> - all dangling build cache
+
+This does not appear to remove base images, like `ruby:2.6-alpine`.
+
