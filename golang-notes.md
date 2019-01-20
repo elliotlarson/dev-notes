@@ -1,5 +1,27 @@
 # Golang Notes
 
+## Reference and Value types
+
+In go, there are two different categories of types.  Value types are copied when passed as arguments into methods.  If you want to modify the original variable value for them, you need to pass a pointer as an argument or receiver and then dereference them.
+
+The reference types are already essentially a pointer to an underlying data structure.  When you pass them to a function, you do not need to pass in a pointer to modify the original variable value.
+
+Value Types:
+
+* int
+* float
+* string
+* bool
+* struct
+
+Reference Types:
+
+* slice
+* map
+* channel
+* pointer
+* function
+
 ## Setting up
 
 First, install Go:
@@ -140,6 +162,12 @@ The Go compiler will fail if you have an import statement for a package that you
 import (
   _ "some/library/with/init/functionality"
 )
+```
+
+To get all packages used in a codebase:
+
+```bash
+$ go get ./...
 ```
 
 #### Init functions
