@@ -46,84 +46,6 @@ $ docker image tag nginx-with-html:latest elliotlarson/nginx-with-html:latest
 
 Think of tags as a composite of `<image-name>:<repository-name>`.
 
-## Build a Golang app image
-
-Say you have an Echo app
-
-`server.go`
-
-```go
-package main
-
-import (
-	"net/http"
-
-	"github.com/labstack/echo"
-)
-
-func main() {
-	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, from Echo!")
-	})
-	e.Logger.Fatal(e.Start(":1323"))
-}
-```
-
-And you have a Dockerfile:
-
-`Dockerfile`
-
-```dockerfile
-FROM golang:1.11.4-alpine
-
-RUN apk update && apk upgrade && \
-    apk add --no-cache bash git openssh
-
-WORKDIR /go/src/golang-hello-world
-
-COPY . .
-
-RUN go get -u github.com/labstack/echo/...
-RUN go install -v ./...
-
-EXPOSE 1323
-
-CMD ["golang-hello-world"]
-```
-
-You can build the image with:
-
-```bash
-$ docker image build -t nginx-with-html .
-```
-
-And, you can run the container from the image with:
-
-```bash
-$ docker run -it --rm -p 80:1323 --name my-running-app golang-hello-world
-```
-
-Add to Docker Hub.
-
-You may need to login first:
-
-```bash
-$ docker login
-```
-
-Tag the image:
-
-```bash
-$ docker tag golang-hello-world elliotlarson/golang-hello-world
-```
-
-Push the repository to Docker Hub:
-
-```bash
-$ docker push elliotlarson/golang-hello-world
-```
-
 ## Zsh docker completions
 
 If you are using oh-my-zsh, then you can just use the docker plugin:
@@ -305,39 +227,6 @@ You can map a directory in the container to a directory on the host machine.
 $ docker container run -d --name nginx -p 80:80 -v $(pwd):/usr/share/nginx/html nginx
 ```
 
-## Running a Rails server in a Docker container
-
-Add this to your app's directory: `Dockerfile`
-
-```Dockerfile
-FROM ruby:2.6
-RUN apt-get update -yqq
-RUN apt-get install -yqq --no-install-recommends nodejs
-COPY . /usr/src/app
-WORKDIR /usr/src/app
-RUN bundle install
-```
-
-Build the image from this Dockerfile:
-
-```bash
-$ docker build . -t myapp:1.0 -t myapp
-```
-
-Here I'm creating multiple tags, a versioned tag and an easy to use generic tag.
-
-After the command finishes, you should see the unique ID assigned to it.
-
-Run a container from the image:
-
-```bash
-$ docker run -p 1234:3000 myapp bin/rails s -b 0.0.0.0
-```
-
-This will run the Rails app in the container and make it availabe on your host machine at port 1234.
-
-The `-b 0.0.0.0` tells the rails server to accept traffic from any location, not just localhost.  Since we're running in a container, the traffic coming from our host machine to the Docker container will not be localhost.
-
 ## Cleaning up with prune
 
 ```bash
@@ -353,4 +242,3 @@ As the message says:
 > - all dangling build cache
 
 This does not appear to remove base images, like `ruby:2.6-alpine`.
-
