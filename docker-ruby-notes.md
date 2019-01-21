@@ -90,3 +90,73 @@ CMD ["bin/rails", "s", "-b", "0.0.0.0"]
 If you change the README in your app and then rebuild, the gems get installed again, which is slow.  Docker will cache the layers used to create each step of the build process, but we've updated a file causing the caches for steps after the `COPY` command to be busted.  So, bundle install needs to get run again.
 
 To get around this, copy and the `Gemfile` and `Gemfile.lock` over first, run a bundle install and then copy the rest of the app files over.  This way the cache for the bundle install only needs to get run.
+
+## Docker composing
+
+Given a `docker-compose.yml` file:
+
+```yaml
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/usr/src/app
+  redis:
+    image: redis
+  database:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: supersecret
+      POSTGRES_DB: myapp_development
+```
+
+### Run it
+
+You can start up the cluster of containers with:
+
+```bash
+$ docker-compose up
+```
+
+### Verify that the containers are running
+
+You can view the running containers with:
+
+```bash
+$ docker-compose ps
+```
+
+### Access Redis
+
+You can log into the Redis container with:
+
+```bash
+$ docker-compose run --rm redis redis-cli -h redis
+```
+
+This creates a new throw-away container based on the redis image and runs the `redis-cli` command with the `-h` or host flag pointing at the already running redis container.  The magic of docker compose's networking means the running redis container can just be refered to by the name "redis".
+
+### Access Postgres
+
+```bash
+$ docker-compose run --rm postgres psql -U postgres -h postgres
+```
+
+After entering the password you should be in.
+
+### Rebuild to add in new gems
+
+After you add a new gem to the Gemfile, to run `bundle install` you need to rebuild the image:
+
+```bash
+# stop the container
+$ docker-compose stop web
+# build the image
+$ docker-compose build web
+# restart the web image
+$ docker-compose up -d web
+```
