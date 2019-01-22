@@ -104,14 +104,19 @@ services:
       - '3000:3000'
     volumes:
       - .:/usr/src/app
+    env_file:
+      - .env/development/web
+      - .env/development/database
   redis:
     image: redis
   database:
     image: postgres
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: supersecret
-      POSTGRES_DB: myapp_development
+    env_file:
+      - .env/development/database
+    volumes:
+      - db_data:/var/lib/postgresql/data
+volumes:
+  db_data:
 ```
 
 ### Run it
@@ -155,8 +160,99 @@ After you add a new gem to the Gemfile, to run `bundle install` you need to rebu
 ```bash
 # stop the container
 $ docker-compose stop web
-# build the image
+# add gems to the Gemfile
+# build the image, which will do the bundle install
 $ docker-compose build web
 # restart the web image
-$ docker-compose up -d web
+$ docker-compose up -d --force-recreate web
 ```
+
+`--force-recreate` = Recreate containers even if their configuration and image haven't changed.
+
+### Generate a model and migrate
+
+```bash
+$ docker-compose exec web bin/rails g model User first_name:string last_name:string
+$ docker-compose exec web bin/rails migrate
+```
+
+### Find out information about the database volume
+
+```bash
+$ docker volume inspect myapp_db_data
+# [
+#     {
+#         "CreatedAt": "2019-01-21T19:36:28Z",
+#         "Driver": "local",
+#         "Labels": {
+#             "com.docker.compose.project": "myapp",
+#             "com.docker.compose.version": "1.23.2",
+#             "com.docker.compose.volume": "db_data"
+#         },
+#         "Mountpoint": "/var/lib/docker/volumes/myapp_db_data/_data",
+#         "Name": "myapp_db_data",
+#         "Options": null,
+#         "Scope": "local"
+#     }
+# ]
+```
+
+If you are not sure of the name of the volume:
+
+```bash
+$ docker volume ls
+```
+
+### Add webpacker and rails to an existing app
+
+It should be this simple, but the following was not sufficient when I tried it.  There was hours of troubleshooting and magic webpack/babel encantations.  Hopefully in the future, the following will suffice:
+
+If the web container is running, stop it:
+
+```bash
+$ docker-compose stop web
+```
+
+Add the webpacker gem to your `Gemfile`:
+
+```ruby
+gem 'webpacker'
+```
+
+Build the image to run the bundle install command:
+
+```bash
+$ docker-compose build web
+```
+
+Install webpacker:
+
+```bash
+$ docker-compose run web bin/rails webpacker:install
+```
+
+Install React:
+
+```bash
+$ docker-compose run web bin/rails webpacker:install:react
+```
+
+### Add a binding pry to it
+
+You need to make sure that your web service has the following config in the docker compose:
+
+```yaml
+stdin_open: true
+tty: true
+```
+
+Then you can do your standard `$ docker-compose up` command.
+
+In another terminal, attach with:
+
+```bash
+$ docker attach $(docker-compose ps -q web)
+```
+
+When a `binding.pry` is hit, the prompt will show up in this window.
+

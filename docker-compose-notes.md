@@ -101,3 +101,15 @@ Compose will start up a network, containers, volumns, etc.  To clean up when you
 ```bash
 $ docker-compose down
 ```
+
+## Removing a container
+
+```bash
+$ docker-compose rm database
+```
+
+...or, without a confirmation dialog, pass in the `-f` (force) flag:
+
+```bash
+$ docker-compose rm -f database
+```
