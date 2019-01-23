@@ -43,15 +43,25 @@ RUN apk add --update \
     build-base \
     postgresql-dev \
     sqlite-dev \
-    nodejs \
     tzdata \
     bash \
+    nodejs \
+    yarn \
+    git \
     && rm -rf /var/cache/apk/*
+
+ENV BUNDLE_PATH /gems
+
 COPY Gemfile* /usr/src/app/
-WORKDIR /usr/src/app/
+WORKDIR /usr/src/app
 RUN bundle install
+
+COPY package.json /usr/src/app/
+COPY yarn.lock /usr/src/app/
+RUN yarn install
+
 COPY . /usr/src/app/
-CMD ["bin/rails", "s", "-b", "0.0.0.0"]
+ENTRYPOINT [ "./docker-entrypoint.sh" ]
 ```
 
 This produces an image that is about 350MB.
