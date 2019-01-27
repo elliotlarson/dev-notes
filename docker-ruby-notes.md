@@ -266,3 +266,8 @@ $ docker attach $(docker-compose ps -q web)
 
 When a `binding.pry` is hit, the prompt will show up in this window.
 
+In order for this to work, I needed to add the `tput` command, which is a part of the `ncurses` package:
+
+```bash
+$ apk add ncurses
+```

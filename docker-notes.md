@@ -229,16 +229,20 @@ $ docker container run -d --name nginx -p 80:80 -v $(pwd):/usr/share/nginx/html 
 
 ## Cleaning up with prune
 
+To remove all containers and images, including any stopped or unused containers and images:
+
 ```bash
-$ docker system prune
+$ docker system prune -a
 ```
 
-As the message says:
+Remove all volumes:
 
-> This will remove:
-> - all stopped containers
-> - all networks not used by at least one container
-> - all dangling images
-> - all dangling build cache
+```bash
+$ docker volume prune
+```
 
-This does not appear to remove base images, like `ruby:2.6-alpine`.
+Verify that all is gone
+
+```bash
+$ docker container ls && docker images && docker volume ls
+```
