@@ -37,4 +37,8 @@ If you are using Sass, you can paste the results into a variable:
 $my-image: 'data:image/svg+xml,';
 ```
 
+## Process all SVGs in a directory
 
+```bash
+$ svgo *.svg
+```
