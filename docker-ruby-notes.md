@@ -271,3 +271,103 @@ In order for this to work, I needed to add the `tput` command, which is a part o
 ```bash
 $ apk add ncurses
 ```
+
+## Integrating CI
+
+At Semaphore CI.  The steps are:
+
+1. Push to master on GitHub gets picked up by Semaphore
+1. Semaphore grabs the code and runs the specs
+1. When the specs pass, it builds a production Docker image for the app
+1. Semaphore pushes the new image to the Docker Hub
+1. It then initiates a Swarm stack deploy on the Swarm master node
+
+I'm using the following build commands:
+
+```bash
+$ mv /home/runner/onehouse-website-rails/config/database.production.yml /home/runner/onehouse-website-rails/config/database.yml
+$ docker build -f Dockerfile.production -t elliotlarson/onehouse-website:production .
+$ docker push elliotlarson/onehouse-website:production
+$ export DOCKER_TLS_VERIFY="1"
+$ export DOCKER_HOST="tcp://178.128.15.86:2376"
+$ export DOCKER_CERT_PATH="/home/runner/onehouse-website-rails/.docker/"
+$ docker stack deploy --prune --with-registry-auth -c docker-stack.yml ohweb
+$ docker system prune --force
+```
+
+When Semaphore grabs the code and runs the spec suite it replaces the `database.yml` file with its own.  Before we build the Docker image, we need to replace this file with our own.  The `database.production.yml` file lives in the repo and is copied over.  The file uses environment variables for passwords, etc.
+
+The `docker-stack.yml` file looks like:
+
+```yaml
+version: '3'
+services:
+
+  web:
+    image: elliotlarson/onehouse-website:production
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 10s
+    ports:
+      - 80:3000
+    env_file:
+      - .env.production
+
+  database:
+    image: postgres:11.1-alpine
+    env_file:
+      - .env.production
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  db-creator:
+    image: elliotlarson/myapp_web:prod
+    command: ["bin/rails", "db:create"]
+    env_file:
+      - .env.production
+    deploy:
+      restart_policy:
+        condition: none
+    depends_on:
+      - database
+
+  db-migrator:
+    image: elliotlarson/myapp_web:prod
+    command: ["bin/rails", "db:migrate"]
+    env_file:
+      - .env.production
+    deploy:
+      restart_policy:
+        condition: none
+    depends_on:
+      - db-creator
+
+volumes:
+  db_data:
+  gem_cache:
+```
+
+It points to a `.env.production` file.  This is added to Semaphore as an encrypted configuration file.  When Semaphore grabs the code, it also puts the configuration files in place.
+
+In Semaphore we also setup a Docker Hub integration.  This allows us to push to the Docker Hub after building the image without having to login each time.
+
+In order to deploy to the Docker Swarm on the server I needed to add the appropriate certificates.  These you can get from the `docker-machine`:
+
+```bash
+$ docker-machine config ohweb
+# --tlsverify
+# --tlscacert="/Users/elliot/.docker/machine/machines/ohweb/ca.pem"
+# --tlscert="/Users/elliot/.docker/machine/machines/ohweb/cert.pem"
+# --tlskey="/Users/elliot/.docker/machine/machines/ohweb/key.pem"
+# -H=tcp://178.128.15.86:2376
+```
+
+This shows you where the certs are.  I copied these and created encrypted configuration files with them in Semaphore:
+
+* `.docker/ca.pem`
+* `.docker/cert.pem`
+* `.docker/key.pem`
+
+The environment variable in the build commands `DOCKER_CERT_PATH` is set to look in this directory.
