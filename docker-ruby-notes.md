@@ -371,3 +371,24 @@ This shows you where the certs are.  I copied these and created encrypted config
 * `.docker/key.pem`
 
 The environment variable in the build commands `DOCKER_CERT_PATH` is set to look in this directory.
+
+### Checking deploy status
+
+If you want to see when the last time a service was updated you can:
+
+```bash
+$ eval $(docker-machine env ohweb)
+$ docker service ps ohweb_web
+# fueeao0m5boy        ohweb_web.1         elliotlarson/onehouse-website:production   ohweb               Running             Running 44 seconds ago
+# rp0m280pwdw7         \_ ohweb_web.1     elliotlarson/onehouse-website:production   ohweb               Shutdown            Shutdown 45 seconds ago
+# e28w7sho9xb7         \_ ohweb_web.1     elliotlarson/onehouse-website:production   ohweb               Shutdown            Shutdown 14 hours ago
+# wwbrrcm40bx4         \_ ohweb_web.1     elliotlarson/onehouse-website:production   ohweb               Shutdown            Shutdown 14 hours ago
+# bk4oaalfpg57         \_ ohweb_web.1     elliotlarson/onehouse-website:production   ohweb               Shutdown            Shutdown 14 hours ago
+# qrsk9g7v86pt        ohweb_web.2         elliotlarson/onehouse-website:production   ohweb               Running             Running 59 seconds ago
+# beolmpmpeeoj         \_ ohweb_web.2     elliotlarson/onehouse-website:production   ohweb               Shutdown            Shutdown about a minute ago
+# w5i7edpwlrkd         \_ ohweb_web.2     elliotlarson/onehouse-website:production   ohweb               Shutdown            Shutdown 14 hours ago
+# pvkxqez0sbud         \_ ohweb_web.2     elliotlarson/onehouse-website:production   ohweb               Shutdown            Shutdown 14 hours ago
+# w07ccgyulfhe         \_ ohweb_web.2     elliotlarson/onehouse-website:production   ohweb               Shutdown            Shutdown 14 hours ago
+```
+
+Notice that the first entry of the output shows the service was updated 44 seconds ago.
