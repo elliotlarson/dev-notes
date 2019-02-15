@@ -12,6 +12,12 @@ WORKDIR /usr/share/nginx/html
 COPY index.html index.html
 ```
 
+This says to use the latest version of the official nginx image from the Docker Hub.
+
+It makes the working directory, or the directory that it begins it's process in `/usr/share/nginx/html`.
+
+And, then it copies over the following file:
+
 `index.html`
 
 ```html
@@ -32,11 +38,15 @@ Build the image:
 $ docker image build -t nginx-with-html .
 ```
 
+This builds the image from the Dockerfile in the current directory and tags it with the name `nginx-with-html`.
+
 Run a container of the image:
 
 ```bash
 $ docker container run -p 80:80 --rm
 ```
+
+This runs a container off of the image, connecting port 80 on the host machine to port 80 on the container.  The `--rm` flag will remove the running container after we exit with `ctrl+z`.
 
 If you want to upload this image to Docker Hub, you need to tag it:
 
@@ -79,18 +89,22 @@ The `-p` flag connects port 8888 on the host machine to port 80 in the container
 ## Specify a name for the container
 
 ```bash
-$ docker container run -p 8888:80 --name webhost nginx
+$ docker container run --rm -p 8888:80 --name webhost nginx
 ```
 
 ## Figure out which port a docker container is connected to
 
 ```bash
-$ docker container port
+$ docker container port 4ef58e0b2ef5
+# 80/tcp -> 0.0.0.0:8888
+```
 
 ## View running containers
 
 ```bash
 $ docker container ls
+# CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
+# 4ef58e0b2ef5        nginx               "nginx -g 'daemon of…"   23 seconds ago      Up 21 seconds       0.0.0.0:8888->80/tcp   objective_lehmann
 ```
 
 Notice that there is a name and an ID number.
@@ -107,6 +121,8 @@ If you don't want the process to take up your terminal process, you can run the 
 
 ```bash
 $ docker container run -p 8888:80 --detach nginx
+# or
+$ docker container run -p 8888:80 -d nginx
 ```
 
 ## Viewing the logs for a container
