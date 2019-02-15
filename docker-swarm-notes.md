@@ -217,6 +217,26 @@ $ docker-machine ssh node1
 node1> $ docker service create --replicas 3 alpine ping 8.8.8.8
 ```
 
+### Stopping a docker-machine node
+
+This will gracefully stop the VM:
+
+```bash
+$ docker-machine stop node1
+```
+
+### Restarting a stopped docker-machine node
+
+```bash
+$ docker-machine start node1
+```
+
+### Removing a docker-machine
+
+```bash
+$ docker-machine rm node1
+```
+
 ## Creating a server on a VPS provider
 
 If you're creating VPSs to host the swarm, you need to install Docker:
