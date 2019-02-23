@@ -15,16 +15,17 @@ I think the workflow should be something like this:
 
 ## Docker ToDos
 
-[ ] Figure out how to integrate CI
+[x] Figure out how to integrate CI
 [ ] Figure out how to add selenium specs
-[ ] Work with Ubuntu base images instead to try it out
+[x] Work with Ubuntu base images instead to try it out
 [ ] Learn how to use the swarm secrets.  What's better, Rails secrets or swarm... or both
 [ ] Add Git sha for current commit to container
 [ ] What to do with logging.  Does log rotate need to be hooked up?  What's the process for viewing historical logs.  How do we send logs to third party logging service?
-[ ] When you deploy an updated image to a server, the old ones remain.  Is this going to run the server out of space or is it going to remove older images after a time?
+[x] When you deploy an updated image to a server, the old ones remain.  Is this going to run the server out of space or is it going to remove older images after a time?
 [ ] How do you setup a recurring task, like a cron job?  Do we create a cron container or do we use the system's crontab to run one off swarm services?
 [ ] Swarm stack deploy rollback if something goes wrong
 [ ] Figure out how to setup Nginx service proxying to Rails application services in the swarm
+[ ] Multi-stage builds
 
 ## Stack deploy weirdness
 

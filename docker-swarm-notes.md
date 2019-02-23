@@ -327,8 +327,11 @@ $ eval($docker-machine env ohweb)
 
 # Deploy to the swarm
 $ docker stack deploy --with-registry-auth -c docker-stack.yml ohweb
+```
 
-# See if stuff worked
+### See if stuff worked
+
+```bash
 $ docker service ls
 # ID                  NAME                MODE                REPLICAS            IMAGE                                      PORTS
 # 9ffl0bmlyh9a        rtest_database      replicated          1/1                 postgres:11.1-alpine
@@ -346,4 +349,52 @@ $ docker service logs ohweb_web
 
 # Once happy undo the env var setting
 $ eval $(docker-machine env -u)
+```
+
+### Troubleshooting
+
+```bash
+# Make sure you have the env vars set so you talk to the server with Docker commands
+$ eval($docker-machine env ohweb)
+```
+
+#### View the service logs
+
+```bash
+# See what services are running
+$ docker service ps
+# ID                  NAME                MODE                REPLICAS            IMAGE                                      PORTS
+# iubo5lg3z5lx        rtest_app           replicated          1/1                 elliotlarson/onehouse-website:production   *:80->3000/tcp
+# wolxt036jpxi        rtest_database      replicated          1/1                 postgres:11.1-alpine
+# 5csm97zz4ifh        rtest_db-creator    replicated          0/1                 elliotlarson/onehouse-website:production
+# idtgsg3apftb        rtest_db-migrator   replicated          0/1                 elliotlarson/onehouse-website:production
+
+# Checkout the logs for a service
+$ docker service logs rtest_app
+```
+
+#### Log into the container
+
+```bash
+# See what containers are running
+$ docker container ps
+# CONTAINER ID        IMAGE                                      COMMAND                  CREATED             STATUS              PORTS               NAMES
+# 7fb12e44f183        elliotlarson/onehouse-website:production   "bin/rails s -b 0.0.…"   2 minutes ago       Up 2 minutes                            rtest_app.1.pu4h2tflon9jj9kcjbsqj74c9
+# 06fc7a7124e8        postgres:11.1-alpine                       "docker-entrypoint.s…"   19 minutes ago      Up 19 minutes       5432/tcp            rtest_database.1.yrv0bgfzqr57frwn3ogm9okht
+
+# Log into the container
+$ docker exec -it rtest_app.1.pu4h2tflon9jj9kcjbsqj74c9 sh
+```
+
+#### Hop on the Rails console
+
+```bash
+# Get a list of the containers
+$ docker container ls
+# CONTAINER ID        IMAGE                                      COMMAND                  CREATED             STATUS              PORTS               NAMES
+# 95c853b76ca2        elliotlarson/onehouse-website:production   "bin/rails s -b 0.0.…"   5 minutes ago       Up 5 minutes                            rtest_app.1.h3smda9yk95u0w8adkyrbv2cc
+# 06fc7a7124e8        postgres:11.1-alpine                       "docker-entrypoint.s…"   42 minutes ago      Up 42 minutes       5432/tcp            rtest_database.1.yrv0bgfzqr57frwn3ogm9okht
+
+# Get on the Rail console
+$ docker exec -it rtest_app.1.h3smda9yk95u0w8adkyrbv2cc rails c
 ```
