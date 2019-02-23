@@ -185,6 +185,12 @@ You can also run the following command which sets the above environment variable
 $ eval $(docker-machine env node1)
 ```
 
+To unset this:
+
+```bash
+$ eval $(docker-machine evn -u)
+```
+
 ### Create a swarm
 
 Create the first swarm manager on node1
@@ -310,3 +316,34 @@ node1> $ docker service ps blissful_davinci
 ```
 
 Notice that it spread the service containers across the 3 available nodes.
+
+## Deploying
+
+```bash
+# Build image
+$ docker build -f Dockerfile.production -t elliotlarson/onehouse-website:production .
+$ docker push elliotlarson/onehouse-website:production
+$ eval($docker-machine env ohweb)
+
+# Deploy to the swarm
+$ docker stack deploy --with-registry-auth -c docker-stack.yml ohweb
+
+# See if stuff worked
+$ docker service ls
+# ID                  NAME                MODE                REPLICAS            IMAGE                                      PORTS
+# 9ffl0bmlyh9a        rtest_database      replicated          1/1                 postgres:11.1-alpine
+# jzpb3277447w        rtest_db-creator    replicated          0/1                 elliotlarson/myapp_web:prod
+# tm8telxthliq        rtest_db-migrator   replicated          0/1                 elliotlarson/myapp_web:prod
+# zk83eabezdv6        rtest_web           replicated          1/1                 elliotlarson/onehouse-website:production   *:80->3000/tcp
+$ docker service ps ohweb_web
+# ID                  NAME                IMAGE                                      NODE                DESIRED STATE       CURRENT STATE             ERROR                       PORTS
+# ed2k9qzn6j3x        rtest_web.1         elliotlarson/onehouse-website:production   rtest               Running             Running 2 minutes ago
+# axrycw0uadax         \_ rtest_web.1     elliotlarson/onehouse-website:production   rtest               Shutdown            Shutdown 2 minutes ago
+# 7h7uoy7fjptd         \_ rtest_web.1     elliotlarson/onehouse-website:production   rtest               Shutdown            Shutdown 14 minutes ago
+# oc1gb5iego9z         \_ rtest_web.1     elliotlarson/onehouse-website:production   rtest               Shutdown            Failed 14 minutes ago     "task: non-zero exit (1)"
+# ngyu5rmw9zdx         \_ rtest_web.1     elliotlarson/onehouse-website:production   rtest               Shutdown            Failed 14 minutes ago     "task: non-zero exit (1)"
+$ docker service logs ohweb_web
+
+# Once happy undo the env var setting
+$ eval $(docker-machine env -u)
+```

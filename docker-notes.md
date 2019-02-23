@@ -143,6 +143,24 @@ $ docker container stop <container-id-or-name>
 $ docker top <container-id-or-name>
 ```
 
+For example:
+
+```bash
+# Run the latest nginx image
+$ docker container run -p 80:80 nginx
+
+# Get the container name/id
+$ docker container ls
+# CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES
+# 8b83c50abdc0        nginx               "nginx -g 'daemon of…"   7 seconds ago       Up 6 seconds        0.0.0.0:80->80/tcp   eloquent_yonath
+
+# Get the processes running on the nginx container
+$ docker container top eloquent_yonath
+# PID                 USER                TIME                COMMAND
+# 79694               root                0:00                nginx: master process nginx -g daemon off;
+# 79735               101                 0:00                nginx: worker process
+```
+
 ## Removing a container
 
 ```bash
@@ -173,6 +191,8 @@ This allows you to see memory usage, memory limit, and CPU usage.
 
 ```bash
 $ docker container stats
+# CONTAINER ID        NAME                CPU %               MEM USAGE / LIMIT    MEM %               NET I/O             BLOCK I/O           PIDS
+# 8b83c50abdc0        eloquent_yonath     0.00%               2.09MiB / 1.952GiB   0.10%               21.4kB / 3.7kB      6.57MB / 0B         2
 ```
 
 ## Access a command line for a running container
