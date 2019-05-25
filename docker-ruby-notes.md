@@ -392,3 +392,11 @@ $ docker service ps ohweb_web
 ```
 
 Notice that the first entry of the output shows the service was updated 44 seconds ago.
+
+## Run pry in a version of Ruby
+
+Sometimes you just want to checkout some stuff on pry for a specific Ruby version:
+
+```bash
+$ docker run --rm -it ruby:2.6.2 bash -c "gem install pry; gem install pry-coolline; pry"
+```
