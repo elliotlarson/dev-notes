@@ -233,7 +233,6 @@ for (const key in fruits) {
 }
 ```
 
-
 ## Array.from
 
 There are times where you get something that is array-like, for example when you get a list of nodes from the DOM:
