@@ -8,3 +8,8 @@ To turn this off, navigate to `chrome://net-internals/#hsts`.  Under the "Delete
 
 pulled from: https://superuser.com/questions/565409/how-to-stop-an-automatic-redirect-from-http-to-https-in-chrome
 
+## Check Version from Command line
+
+```bash
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version
+```
