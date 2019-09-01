@@ -1,5 +1,27 @@
 # Docker Notes
 
+## Run an image as a container
+
+Let's say you have an `index.html` file in the current directory:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello Docker</title>
+  </head>
+  <body>
+    <h1>Hello, Docker!</h1>
+  </body>
+</html>
+```
+
+You can run the official Docker nginx image and serve the file with:
+
+```bash
+$ docker container run --rm -p 80:80 -v $(pwd):/usr/share/nginx/html nginx
+```
+
 ## Build an image from a Docker file and run it
 
 Say you have a directory with a `Dockerfile` and an `index.html` file.
@@ -249,13 +271,13 @@ $ docker network disconnect <network-id> <container-id>
 
 ## Run a container with a named volume (data volume)
 
-You can create a named volumn that stores the data from a container to the host machine.  Docker places it in some Docker owned directory on the host machine.
+You can create a named volume that stores the data from a container to the host machine.  Docker places it in some Docker owned directory on the host machine.
 
 ```bash
 $ docker container run -d --name psql -v psql:/var/lib/postgresql/data postgres
 ```
 
-## Run a container with a volumn mapping (bind mounting)
+## Run a container with a volume mapping (bind mounting)
 
 You can map a directory in the container to a directory on the host machine.
 
