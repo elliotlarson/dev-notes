@@ -1,0 +1,209 @@
+# The Nature of Code
+
+Daniel Shiffman's Nature of Code: https://natureofcode.com/
+
+## Vectors
+
+They have direction and magnitude.
+
+A vector object usually contains `x` and `y` properties, which are manipulated at the same time to move things around.
+
+```javascript
+class Vector {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+}
+```
+
+Creating a new instance of `Vector` and assigning it to the `location` constant:
+
+```javascript
+const location = new Vector(50, 100);
+```
+
+### Velocity
+
+`velocity` is how the position of a vector changes over time.
+
+This can also be described as a vector:
+
+```javascript
+const velocity = new Vector(1, 2);
+```
+
+### Add and Subtract
+
+```javascript
+class Vector {
+  // ...
+  add(vector) {
+    this.x += vector.x;
+    this.y += vector.y;
+  }
+
+  subtract(vector) {
+    this.x -= vector.x;
+    this.y -= vector.y;
+  }
+}
+```
+
+Now we can add velocity to location:
+
+```javascript
+location.add(velocity);
+```
+
+In processing this is done as a part of an animation loop.  So we end up calling this a number of times a second.
+
+
+### Multiply and Divide
+
+These are really about scaling a vector.
+
+```javascript
+class Vector {
+  // ...
+  multiply(vector) {
+    this.x *= vector.x;
+    this.y *= vector.y;
+  }
+
+  divide(vector) {
+    this.x /= vector.x;
+    this.y /= vector.y;
+  }
+}
+```
+
+Note, that subtracting one vector from another gives the vector between the two locations. For example, if you want a line from the center of the window to the mouse position, you subtract the mouse position from the center of the window position.
+
+### Magnitude
+
+This is the length of the vector from the origin, figured out with Pythagorean:
+
+```javascript
+class Vector {
+  // ...
+  get magnitude() {
+    return Math.sqrt(this.x * this.x + this.y * this.y);
+  }
+}
+```
+
+### Normalize
+
+Take the magnitude and turn it into 1.
+
+```javascript
+class Vector {
+  // ...
+  normalize() {
+    this.x /= this.x;
+    this.y /= this.y;
+  }
+}
+```
+
+### Set magnitude
+
+This just normalizes and multiplies in one step `location.magnitude = 50`
+
+```javascript
+class Vector {
+  // ...
+  set magnitude(newMagnitude) {
+    this.normalize();
+    this.multiply(newMagnitude);
+  }
+}
+```
+
+## Acceleration
+
+A vector that adjusts velocity over time.  So, the change in velocity over time.  In the case of Processing, it's the change in velocity per animation frame.
+
+* Acceleration changes velocity
+* Velocity changes location
+
+```javascript
+const location = new Vector(0, 0);
+const velocity = new Vector(0, 0);
+const acceleration = new Vector(0.001, 0.001);
+
+// in animation loop
+velocity.add(acceleration);
+location.add(velocity);
+// render
+```
+
+## Force
+
+A vector that causes an object with mass to accelerate.
+
+### Newton's Laws
+
+1. An object at rest stays at rest and an object in motion stays in motion
+1. Force equals mass times acceleration
+1. For every action there is an equal and opposite reaction (forces always occur in pairs.  The two forces are of equal strength, but in opposite directions)
+
+In our sketches we want to accumulate forces and apply them to an object.  For example, you might apply both gravity and wind to an object.
+
+> "Acceleration equals the sum of all forces applied to an object".
+
+### Friction
+
+`Friction = normal force * friction coefficient`
+`normal force = mass * gravity constant`
+
+In Processing terms:
+
+```javascript
+const friction = velocity.get(); // copy of velocity vector
+friction.normalize();
+friction.mult(-1);
+const frictionCoefficient = 0.1; // some arbitrary value
+friction.mult(frictionCoefficient);
+mover.applyForce(friction);
+```
+
+### Drag Force
+
+Things like air, fluid, etc.
+
+`Force of drag = -1/2 * density * magnitude of velocity squared * surface area * the coefficient of drag * velocity unit vector`
+
+What if density and surface area equal 1?  You can make equations easier by assuming one.
+
+```javascript
+const drag = mover.velocity.get();
+drag.normalize();
+const dragCoefficient = -0.1;
+const speed = mover.velocity.get();
+drag.mult(dragCoefficient * speed * speed);
+mover.applyForce(drag);
+```
+
+### Gravitational Attraction
+
+`Force of gravity = (gravitational constant * mass of the first object * the mass of the second object / distance squared) * unit vector`
+
+
+```javascript
+const force = moverPlanet.attractionForce(moverMoon);
+moverMoon.applyForce(force);
+moverMoon.update();
+
+
+// moverPlanet#attractionForce
+attractionForce(obj) {
+  const force = Vector.sub(this.location, obj.location);
+  const distance = force.mag();
+  force.normalize();
+  const gravitationalConstant = 1;
+  const strength = (gravitationalConstant * this.mass * obj.mass) / (distance * distance)
+  force.mult(strength);
+}
+```
