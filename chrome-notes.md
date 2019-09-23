@@ -13,3 +13,9 @@ pulled from: https://superuser.com/questions/565409/how-to-stop-an-automatic-red
 ```bash
 /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version
 ```
+
+## Developer Tools Console Output Copy to Paste Ring
+
+1. Right click on value in console output, and click the "Store as Global Variable" menu option
+1. This will output something like `temp1`
+1. Then type `copy(temp1)`
