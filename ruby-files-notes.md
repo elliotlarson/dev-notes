@@ -207,3 +207,65 @@ end
 ```ruby
 first_line = File.open('file.txt', &:readline)
 ```
+
+### Get the current directory of a file
+
+For the relative path:
+
+```ruby
+dir = __dir__
+```
+
+For the absolute path:
+
+```ruby
+dir = File.expand_path(__dir__)
+```
+
+You can also get at this information with:
+
+```ruby
+dir = File.expand_path(File.dirname(__FILE__))
+```
+
+### Iterate through a directory listing
+
+You can get all of the files and directories in the current directory with:
+
+```ruby
+Dir.glob("*")
+```
+
+This will only give you the current level.  To recurse, use this:
+
+```ruby
+Dir.glob("**/*")
+```
+
+If you are not in the correct directory, you can change into this directory with:
+
+```ruby
+Dir.chdir("/some/other/dir") do
+  Dir.glob("*")
+end
+```
+
+Glob will give you everything including "." and "..".  Let's say you only want the directories in the current directory:
+
+```ruby
+Dir.glob("*").each do |f|
+  if File.directory?(f)
+    # do some stuff
+  end
+end
+```
+
+You can also grab stuff that matches a regex:
+
+```ruby
+Dir.glob("*").each do |f|
+  if f.match?(/^\d{3})
+    # do some stuff
+  end
+end
+```
