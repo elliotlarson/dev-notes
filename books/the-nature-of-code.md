@@ -58,7 +58,6 @@ location.add(velocity);
 
 In processing this is done as a part of an animation loop.  So we end up calling this a number of times a second.
 
-
 ### Multiply and Divide
 
 These are really about scaling a vector.
@@ -175,7 +174,7 @@ Things like air, fluid, etc.
 
 `Force of drag = -1/2 * density * magnitude of velocity squared * surface area * the coefficient of drag * velocity unit vector`
 
-What if density and surface area equal 1?  You can make equations easier by assuming one.
+What if density and surface area equal 1? (You can make equations easier by assuming one.)
 
 ```javascript
 const drag = mover.velocity.get();
@@ -190,12 +189,10 @@ mover.applyForce(drag);
 
 `Force of gravity = (gravitational constant * mass of the first object * the mass of the second object / distance squared) * unit vector`
 
-
 ```javascript
 const force = moverPlanet.attractionForce(moverMoon);
 moverMoon.applyForce(force);
 moverMoon.update();
-
 
 // moverPlanet#attractionForce
 attractionForce(obj) {
@@ -206,4 +203,85 @@ attractionForce(obj) {
   const strength = (gravitationalConstant * this.mass * obj.mass) / (distance * distance)
   force.mult(strength);
 }
+```
+
+## Angles
+
+### Radians
+
+![Radians](nature-of-code/ch03-radians-external-graphic.gif)
+
+If you have a circle with a radius of 1, then 1 radian equals the angle of the piece of that circle where the arc created also equals 1.
+
+Also, with a radius of 1, the circumference of that circle is `2PI`.
+
+### Degrees to radians
+
+```javascript
+const radians = 2 * Math.PI * (degrees / 360)
+```
+
+Processing has a `radians` method:
+
+```javascript
+const radians = p5.radians(degrees);
+```
+
+### Sohcahtoa
+
+* **soh**: `sine = opposite / hypotenuse`
+* **cah**: `cosine = adjacent / hypotenuse`
+* **toa**: `tangent = opposite / adjacent`
+
+![Drag Racing](nature-of-code/ch03_04.png)
+
+The vector is the hypotenuse.
+
+### Figuring out the angle of a vector
+
+The formula for tangent is:
+
+`tangent(angle) = velocityX / velocityY`
+
+The problem is that we don't have the angle.
+
+So, we use `arctangent` or `tan**-1`.
+
+if this is true
+`tangent(angle) = b`
+then this is true
+`a = arctangent(b)`
+
+In our case:
+
+```javascript
+const angle = Math.atan2(velocityY / velocityX);
+```
+
+This uses the special `atan2` method.  The problem with `atan` is that there are two cases where the results are the same, but the angles are in exact opposite directions.  Instead of using `atan` with conditional logic for the positive and negative cases, most programming environments give you `atan2`, which does this for you.
+
+## Angular Motion
+
+Angular motion works in a similar way to cartesian motion.
+
+```javascript
+const angularAcceleration = 0.1;
+const angularVelocity += angularAcceleration;
+const angle += angularVelocity;
+```
+
+This is also where push and pop matrix start to come in handy:
+
+```javascript
+// say you have some position in cartesian space where the rect is
+// supposed to be
+const x = 100;
+const y = 200;
+const angle = 2.5;
+p5.push();
+p5.translate(x, y);
+p5.rectMode(p5.CENTER);
+p5.rect(0, 0, 50, 150);
+p5.pop();
+p5.rotate(angle);
 ```
