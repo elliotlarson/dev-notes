@@ -20,3 +20,17 @@ You can right click an object in the console and select the menu option `store a
 This will output a variable like `temp1` to the console.
 
 You can then `JSON.stringify(temp1)`.
+
+## Create a random number between 2 numbers
+
+```javascript
+function randomIntFromInterval(min, max) { // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+```
+
+## Get a random item from an array
+
+```javascript
+myArray[Math.floor(Math.random() * myArray.length)];
+```
