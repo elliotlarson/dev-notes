@@ -306,3 +306,25 @@ let inFridge = ['pie', 'apple', 'cheese', 'bread'];
 let fruitInFridge = inFridge.filter((f) => fruit.includes(f));
 console.log(fruitInFridge); // => ['apple']
 ```
+
+### Iterate `n` times
+
+```javascript
+Array.from(Array(3)).map((_, i) => i);
+//=> [0, 1, 2]
+```
+
+According to a Stack Overflow answer, this is more performant:
+
+```javascript
+Array.from({ length: 3 }).map((_, i) => i);
+//=> [0, 1, 2]
+```
+
+You could also use Underscore's `times` method if you are just doing a `forEach` iteration.
+
+```javascript
+_.times(n, () => {
+  // some logic
+});
+```
