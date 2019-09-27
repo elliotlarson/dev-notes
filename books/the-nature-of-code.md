@@ -2,6 +2,8 @@
 
 Daniel Shiffman's Nature of Code: https://natureofcode.com/
 
+Repo: https://github.com/nature-of-code/noc-examples-processing
+
 ## Vectors
 
 They have direction and magnitude.
@@ -237,11 +239,13 @@ const radians = p5.radians(degrees);
 
 The vector is the hypotenuse.
 
+**Note**: The `Math.sin` function always produces values between 1 and -1.
+
 ### Figuring out the angle of a vector
 
 The formula for tangent is:
 
-`tangent(angle) = velocityX / velocityY`
+`tangent(angle) = opposite / adjacent`
 
 The problem is that we don't have the angle.
 
@@ -285,3 +289,28 @@ p5.rect(0, 0, 50, 150);
 p5.pop();
 p5.rotate(angle);
 ```
+
+## Translating Between Polar and Cartesian Coordinates
+
+Designing with polar coordinates allows you move things in arcs, but you need to use the cartesian coordinate system to place items on the "stage".
+
+`y = radius * sin(theta)`
+`x = radius * cos(theta)`
+
+The radius is the hypotenuse of the triangle.  In our case, this is the magnitude of the vector.
+
+Theta is the angle in radians.
+
+So, you can find the angle with `atan2` and you can find the x and y with `sin` and `cos`.
+
+## Oscillation
+
+![Drag Racing](nature-of-code/period-amplitude.svg)
+
+`x = amplitude * cos(2 * PI * frameCount / period)`
+
+Amplitude is the height of the wave and period is the frequency of, or distance between, the peeks in the wave.
+
+However for our purposes, we can just shorten it to:
+
+`x = amplitude * cos(some value that works)`
