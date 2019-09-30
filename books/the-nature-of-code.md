@@ -314,3 +314,20 @@ Amplitude is the height of the wave and period is the frequency of, or distance 
 However for our purposes, we can just shorten it to:
 
 `x = amplitude * cos(some value that works)`
+
+### Harmonic motion
+
+You can use a sin function to create a smooth animation between -1 and 1 for an incrementing value.  This will allow you to nicely model harmonic motion in your sketches.
+
+Since the sin function will always output values in the -1 to 1 range you can map these values to some other range and use in your sketches.
+
+## Springs
+
+Hook's Law: "the force of the spring is directly proportional to the extension of the spring"
+
+`force = -k * x`
+
+* **k**: spring constant (is it very springy or stiff?)
+* **x**: the extension of the spring past it's rest length
+
+The rest length is the length of x where the forces are at equilibrium.
