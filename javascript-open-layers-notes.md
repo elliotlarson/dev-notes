@@ -2,6 +2,12 @@
 
 Using the OpenLayers framework for generating interactive maps using 3rd party map tile services.
 
+## Common API Doc Pages and Pages of Interest
+
+* **FAQ**: https://openlayers.org/en/latest/doc/faq.html
+* **Map**: https://openlayers.org/en/latest/apidoc/module-ol_Map-Map.html
+* **View**: https://openlayers.org/en/latest/apidoc/module-ol_View-View.html
+
 ## Adding mapping provider layers
 
 Tile layers can be added to the `layers` array in the map constructor
@@ -140,3 +146,116 @@ If you need to remove the draw and snap interactions:
 map.removeInteraction(draw);
 map.removeInteraction(snap);
 ```
+
+## Get current lat and lng
+
+After the map gets loaded the user may pan to a different position.  You may want to save this position and use it the next time you render the map.
+
+```javascript
+// in projection units
+map.getView().getCenter();
+```
+
+This outputs values using the current projection.  For me, this defaulted to `EPSG:3857`.  See [What projection is OpenLayers using?](https://openlayers.org/en/latest/doc/faq.html#what-projection-is-openlayers-using-) for a little more info.
+
+You can get your current projection with:
+
+```javascript
+map.getView().getProjection();
+```
+
+To output the center in lng and lat:
+
+```javascript
+import { transform } from "ol/proj";
+
+transform(map.getView().getCenter(), "EPSG:3857", "EPSG:4326");
+```
+
+## Get the current zoom for the map
+
+```javascript
+map.getView().getZoom();
+```
+
+## Getting data for drawn features
+
+Output the lat and long points for a drawn polygon.  This outputs an array of shapes.  Each shape is an array of points.  Each point is an array of lng, lat pairs.
+
+```javascript
+const features = this.vectorSource.getFeatures();
+features.forEach(feature => {
+  console.log(feature.getGeometry().getCoordinates());
+});
+```
+
+**Note**: this will output the coordinates in the current project's values.
+
+To output the values in lng and lat:
+
+```javascript
+import { transform } from "ol/proj";
+
+function projectionToLngLat(point) {
+  return transform(point, "EPSG:3857", "EPSG:4326");
+}
+
+const features = this.vectorSource.getFeatures().map(feature => {
+  return feature
+    .getGeometry()
+    .getCoordinates()
+    .map(featureCoordinates => featureCoordinates.map(projectionToLngLat));
+});
+```
+
+You can also use the utility method `toLonLat`:
+
+```javascript
+import { toLonLat } from "ol/proj";
+
+const features = this.vectorSource.getFeatures().map(feature => {
+  return feature
+    .getGeometry()
+    .getCoordinates()
+    .map(featureCoordinates => featureCoordinates.map(c => toLonLat(c)));
+});
+```
+
+## Loading Data for Feature
+
+Say you've stored some lon lat coordinates for a polygon in the database and you're trying to load this data while initializing:
+
+```javascript
+const polygonName = "Roof Section # 1";
+const lonLatCoordinates = [
+  [-122.4898787094275, 37.78816778207835],
+  [-122.48986658163463, 37.78818046427956],
+  [-122.48978508509853, 37.78818754452024],
+  [-122.4897285622106, 37.788152931313164],
+  [-122.48983963668286, 37.78814423471637],
+  [-122.4898787094275, 37.78816778207835],
+];
+// Translate to projection coordinates
+const coordinates = lonLatCoordinates.map(c => fromLonLat(c));
+const geometry = new Polygon([coordinates]);
+const feature = new Feature({ geometry, name: polygonName })
+```
+
+Then you can either add the feature to the layer source during initialization:
+
+```javascript
+const vectorSource = new VectorSource({ features: [feature] });
+```
+
+... or you can add it after the fact with a setter:
+
+```javascript
+vectorSource.addFeature(feature);
+```
+
+## Styles
+
+* **Style**: https://openlayers.org/en/latest/apidoc/module-ol_style_Style-Style.html
+* **StyleFunction**: https://openlayers.org/en/latest/apidoc/module-ol_style_Style.html#~StyleFunction
+
+> Container for vector feature rendering styles. Any changes made to the style or its children through set*() methods will not take effect until the feature or layer that uses the style is re-rendered.
