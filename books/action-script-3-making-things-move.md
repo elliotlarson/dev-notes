@@ -114,3 +114,39 @@ const dy = one.y - two.y;
 const distance = Math.sqrt(dx * dx, dy * dy); // Pythagorean
 ```
 
+## Easing
+
+This is standard "ease out" easing.
+
+```javascript
+const easing = 0.2;
+const pagePadding = 100;
+
+const current = {
+  x: 0 + pagePadding,
+  y: p5.windowHeight / 2,
+};
+
+const target = {
+  x: p5.windowWidth - pagePadding,
+  y: p5.windowHeight / 2,
+};
+
+const dx = target.x - current.x;
+const dy = target.y - current.y;
+
+const vx = dx * easing;
+const vy = dy * easing;
+
+current.x += vx;
+current.y += vy;
+
+p5.ellipse(current.x, current.y, 100, 100);
+```
+
+In this example, easing is basically a constant acceleration force applied to the ellipse.
+
+### Easing functions
+
+You can get more complicated with your easing by using one of a series of easing functions.  These help graph the position of something over time.  The functions return a number between 0 and 1.  They essentially plot a set of points on a curve.  The shape of that curve gives you different kinds of easing.
+
