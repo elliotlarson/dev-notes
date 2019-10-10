@@ -106,6 +106,29 @@ const map = new Map({
 });
 ```
 
+## Adding a map event
+
+You can assign an event handler to the map.
+
+Here are some of the events you can assign:
+
+* **click**: A click with no dragging. A double click will fire two of this.
+* **dblclick**: A true double click, with no dragging.
+* **error**: Generic error event. Triggered when an error occurs.
+* **moveend**: Triggered after the map is moved.
+* **movestart**: Triggered when the map starts moving.
+* **pointerdrag**: Triggered when a pointer is dragged.
+* **pointermove**: Triggered when a pointer is moved. Note that on touch devices this is triggered when the map is panned, so is not the same as mousemove.
+
+A full list of events can be found here: https://openlayers.org/en/latest/apidoc/module-ol_Map-Map.html
+
+```javascript
+// the event object contains additional map related information, like `coordinate`:
+map.on("click", (event) => {
+  console.log(`map click: ${event.coordinate}`);
+})
+```
+
 ## Adding polygon drawing to map
 
 You need to add a vector layer and a drawing interaction to the map.
@@ -253,9 +276,77 @@ const vectorSource = new VectorSource({ features: [feature] });
 vectorSource.addFeature(feature);
 ```
 
+## Deleting a selected polygon
+
+Let's say you want to do this when the user hits the backspace/delete key:
+
+You need the event handler function to have access to:
+
+* The `select` interaction to get the selected features (polygon) from
+* The `vector source` to remove the feature (polygon) from
+
+```javascript
+document.addEventListener("keydown", event => {
+  if (event.key === "Backspace") {
+    const features = select.getFeatures().getArray();
+    features.forEach(feature => vectorSource.removeFeature(feature));
+  }
+});
+```
+
+## Complete drawing polygon when hitting escape key
+
+This can be helpful to speed up the creation, but also in allowing users to get out of creating a polygon that they didn't mean to start.
+
+You can figure out if the polygon is essentially a straight line (i.e. user dropped a point when they didn't mean to and completed the polygon by hitting escape), by looking at the area.  If the area is 0, then we have a line instead of a polygon shape and we can just remove it.
+
+You need the event handler function to have access to:
+
+* The `draw` interaction to call `finishDrawing` on
+* The `vector source` to remove the feature (polygon) from if it has no area
+
+```javascript
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && draw) {
+    draw.finishDrawing();
+
+    // If we end up with a line, remove it
+    const features = vectorSource.getFeatures();
+    const lastFeature = features[features.length - 1];
+    if (lastFeature.getGeometry().getArea() === 0) {
+      vectorSource.removeFeature(lastFeature);
+    }
+  }
+});
+```
+
 ## Styles
 
-* **Style**: https://openlayers.org/en/latest/apidoc/module-ol_style_Style-Style.html
-* **StyleFunction**: https://openlayers.org/en/latest/apidoc/module-ol_style_Style.html#~StyleFunction
+You can add custom styling to vector features.
 
-> Container for vector feature rendering styles. Any changes made to the style or its children through set*() methods will not take effect until the feature or layer that uses the style is re-rendered.
+### Default styling
+
+If you don't supply any styling, the default is used:
+
+```javascript
+import {Fill, Stroke, Circle, Style} from 'ol/style';
+
+const fill = new Fill({
+  color: 'rgba(255,255,255,0.4)'
+});
+const stroke = new Stroke({
+  color: '#3399CC',
+  width: 1.25
+});
+const styles = [
+  new Style({
+    image: new Circle({
+      fill: fill,
+      stroke: stroke,
+      radius: 5
+    }),
+    fill: fill,
+    stroke: stroke
+  })
+];
+```
