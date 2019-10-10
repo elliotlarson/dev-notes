@@ -32,7 +32,7 @@ const layer = new TileLayer({
   visible: true,
   preload: Infinity,
   source: new BingMaps({
-    key: "As1EYRAwzuKhOXFnoKIqB2xj9eFPl6anDISd6H7bTg5Eaky8AUqG4Wlgii1b8fK_",
+    key: "",
     imagerySet: "AerialWithLabelsOnDemand",
     // use maxZoom 19 to see stretched tiles instead of the BingMaps
     // "no photos at this zoom level" tiles
