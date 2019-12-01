@@ -58,7 +58,7 @@ rescue LoadError
 end
 ```
 
-You can allso update the `console` task in your `Rakefile`
+You can also update the `console` task in your `Rakefile`
 
 ```ruby
 task(:console) do
