@@ -1,5 +1,31 @@
 # Ruby Bundler Notes
 
+## Deploying
+
+When you deploy to a production server or to a CI environment, the user account you are deploying with may not have permissions to install system gems.  To deal with this, bundler has a special install flag:
+
+```bash
+$ bundle install --deployment
+```
+
+This installs gems in the `vendor/bundle` directory.  Even if there are system gems already on the machine that would satisfy a requirement, with this option in place, Bundler will not use them and instead opt to install a new gem in `vendor/bundle`.
+
+Also, you can opt to cache gems by running:
+
+```bash
+$ bundler package
+```
+
+This will install gems in `vendor/cache`.  When you do this, Bundler will look in this directory for dependencies when you run `bundle install` before going out to rubygems.org to get them.  This will substantially speed up your dependency installs.
+
+## Setting up Heroku
+
+On heroku, you can set an environment variable so that bundler does not install specified groups during bundle install:
+
+```bash
+$ heroku config:set BUNDLE_WITHOUT="development:test"
+```
+
 ## Installing gems in `vendor/bundle`
 
 To generate a `.bundler` directory and set variables for your current app:
