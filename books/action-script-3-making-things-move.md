@@ -1,6 +1,6 @@
 # ActionScript 3 Making Things Move
 
-Porting examples to JavaScript.
+Porting examples to JavaScript, and using P5js for a number of them.
 
 ## Radians and Degrees
 
@@ -146,7 +146,51 @@ p5.ellipse(current.x, current.y, 100, 100);
 
 In this example, easing is basically a constant acceleration force applied to the ellipse.
 
-### Easing functions
+## Springs
 
-You can get more complicated with your easing by using one of a series of easing functions.  These help graph the position of something over time.  The functions return a number between 0 and 1.  They essentially plot a set of points on a curve.  The shape of that curve gives you different kinds of easing.
+```javascript
+const spring = 0.1;
+const friction = 0.75;
 
+let sprite = {
+  x: 0,
+  y: p5.windowHeight / 2,
+};
+
+let vx = 0;
+let yv = 0;
+
+const target = {
+  x: p5.windowWidth,
+  y: p5.windowHeight / 2,
+};
+
+vx += (target.x - sprite.x) * spring;
+vy += (target.x - sprite.x) * spring;
+vx *= friction;
+vy *= friction;
+sprite.x += vx;
+sprite.y += vy;
+
+p5.ellipse(sprite.x, sprite.y, 100, 100);
+```
+
+Using vectors:
+
+```javascript
+const spring = 0.1;
+const friction = 0.75;
+
+let sprite = p5.createVector(0, p5.windowHeight / 2);
+let velocity = p5.createVector(0, 0);
+const target = p5.createVector(p5.windowWidth, p5.windowHeight / 2)
+
+const distance = target.copy().sub(sprite);
+const acceleration = distance.mult(spring);
+velocity.add(acceleration);
+velocity.mult(friction);
+
+sprite.add(velocity);
+
+p5.ellipse(sprite.x, sprite.y, 100, 100);
+```
