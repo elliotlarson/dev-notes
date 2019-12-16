@@ -243,3 +243,39 @@ $ heroku pg:backups:schedules -a elliot-app
 # === Backup Schedules
 # DATABASE_URL: daily at 2:00 America/Los_Angeles
 ```
+
+## Upgrading the database plan from hobby to next level
+
+https://devcenter.heroku.com/articles/updating-heroku-postgres-databases
+
+The only option for upgrading a hobby database is with `pg:copy`.  There is another way to upgrade a production database you are already paying for that will likely result in less downtime, if it's important.  The difference my only be seconds to a few minutes.
+
+To use the `pg:copy` approach, you need to provision a new database and copy the data into it.
+
+```bash
+$ heroku addons:create heroku-postgresql:hobby-basic
+```
+
+You can view both databases:
+
+```bash
+$ heroku addons
+```
+
+This will show you the environment variable to use to copy:
+
+```bash
+$ heroku pg:copy DATABASE_URL HEROKU_POSTGRESQL_PINK
+```
+
+Then you need to promote the new database:
+
+```bash
+$ heroku pg:promote HEROKU_POSTGRESQL_PINK
+```
+
+## Upgrading database version
+
+TODO
+
+https://devcenter.heroku.com/articles/upgrading-heroku-postgres-databases
