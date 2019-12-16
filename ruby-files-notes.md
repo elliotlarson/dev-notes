@@ -24,6 +24,14 @@ File.open('foo.txt') do |f|
 end
 ```
 
+... or
+
+```ruby
+File.foreach('foo.txt') do |line|
+  # do some stuff with the line
+end
+```
+
 You could also get a file handle and then manually close it
 
 ```ruby
