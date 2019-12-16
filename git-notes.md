@@ -1,5 +1,15 @@
 # Git Notes
 
+## Use a global .gitignore
+
+First setup git to use the global gitignore from your home directory
+
+```bash
+$ git config --global core.excludesfile '~/.gitignore'
+```
+
+Then add your global .gitignore
+
 ## Undo git commit --amend
 
 Here's a good explanation: https://stackoverflow.com/questions/38001038/how-to-undo-a-git-commit-amend/38002218
