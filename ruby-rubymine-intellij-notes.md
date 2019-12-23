@@ -164,7 +164,7 @@ Turn tabs shadow off
 * A lot of keyboard shortcuts with function keys.  This is awkward, especially with a laptop
 * Design/UX of the editor is klunky.  There's a lot of UI and it looks like software from 15 years ago.  You can use the material theme, but this is a little like makeup on a pig
 
-## Opening an existing file
+## Opening an existing project
 
 This is what kept me from using RubyMine every time I tried.  I want to try out RubyMine.  I open an existing project in it and tried to run a test.  It doesn't work and I can't get it to work.  I move on.
 
