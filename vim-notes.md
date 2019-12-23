@@ -81,6 +81,14 @@ This will run rspec on the current file when using `<leader>t`.
 :map ,t :!rspec %<cr>
 ```
 
+#### Map to copy selection to clipboard (mac)
+
+```
+:map '' :w !pbcopy<cr><cr>
+```
+
+This maps `''` to copy the selection.
+
 #### Copy line to register
 
 `shift + "`,  `a`, `yy`
@@ -92,7 +100,7 @@ This will run rspec on the current file when using `<leader>t`.
 
 #### Create a Directory for the current file
 
-I'm often creating a spec file on the fly by using my Gary Bernhardt test/implementation file switcher.  I switch from the my new implementation file to a new test file, which doesn't exist yet.  The test file switcher will create the file in the buffer.  But when I try to save it, if it's located in a directory that doesn't exist in my spec directory, it errors out with a directory not found error.  
+I'm often creating a spec file on the fly by using my Gary Bernhardt test/implementation file switcher.  I switch from the my new implementation file to a new test file, which doesn't exist yet.  The test file switcher will create the file in the buffer.  But when I try to save it, if it's located in a directory that doesn't exist in my spec directory, it errors out with a directory not found error.
 
 But, I can auto create the directory with this workflow:
 

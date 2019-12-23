@@ -46,3 +46,15 @@ en:
       order:
         inv_num: "Invoice number"
 ```
+
+## Get a list of the tables that are defined
+
+```ruby
+ActiveRecord::Base.connection.tables
+```
+
+## Execute an SQL statement
+
+```ruby
+ActiveRecord::Base.connection.execute "drop table foo"
+```

@@ -107,3 +107,69 @@ ActiveRecord::Schema.define do
   end
 end
 ```
+
+## Make a migration that isn't reversible
+
+```ruby
+def up
+  Tag.all.each { |tag| tag.destroy if tag.pages.empty? }
+end
+
+def down
+  raise ActiveRecord::IrreversibleMigration, "can't recover deleted tags"
+end
+```
+
+## Make an alteration to a table and then use it immediately
+
+```ruby
+class AddPeopleSalary < ActiveRecord::Migration[5.0]
+  def up
+    add_column :people, :salary, :integer
+    Person.reset_column_information
+    Person.all.each do |p|
+      p.update_attribute :salary, SalaryCalculator.compute(p)
+    end
+  end
+end
+```
+
+## Specifying a block in the change method to be reversible
+
+```ruby
+def change
+  add_column :users, :first_name, :string
+  add_column :users, :last_name, :string
+
+  reversible do |dir|
+    User.reset_column_information
+    User.all.each do |u|
+      dir.up   { u.first_name, u.last_name = u.full_name.split(' ') }
+      dir.down { u.full_name = "#{u.first_name} #{u.last_name}" }
+      u.save
+    end
+  end
+
+  revert { add_column :users, :full_name, :string }
+end
+```
+
+## Specify a migration you would like to revert
+
+```ruby
+def change
+  revert TenderloveMigration
+
+  create_table(:apples) do |t|
+    t.string :variety
+  end
+end
+```
+
+## Create table only if it doesn't exist
+
+```ruby
+create_table :products, if_not_exists: true do |t|
+  t.string :name
+end
+```

@@ -163,3 +163,37 @@ Turn tabs shadow off
 * It looks like the Rubymine team rolls out bugs and code that breaks stuff frequently
 * A lot of keyboard shortcuts with function keys.  This is awkward, especially with a laptop
 * Design/UX of the editor is klunky.  There's a lot of UI and it looks like software from 15 years ago.  You can use the material theme, but this is a little like makeup on a pig
+
+## Opening an existing file
+
+This is what kept me from using RubyMine every time I tried.  I want to try out RubyMine.  I open an existing project in it and tried to run a test.  It doesn't work and I can't get it to work.  I move on.
+
+When I open the project it says "Framework Detected.  JRuby on Rails".  I'm not using JRuby, but Intellij is built with Java, so, hmmm... don't know.  It's probably fine?  Moving on.  Try to run a test.  It's not working.  The test runner icon is grayed out.  No other information.  Oh, wait.  There's this even log thing.  Reads error messages and with a touch of clairvoyance I come to the conclusion that I have to configure the test runner.  Opens debug/runner config window... 3 hours later and still no luck.  Really frustrated now.  If they can't get this right, what's the point of even trying to use this editor?
+
+2 years later, smart people in my industry keep using this editor and saying great things about it.  Would really be nice to use an editor where Ruby is a first class citizen.  Looking at feature videos on website.  Looks really nice.  Downloads editor, opens project, tests don't run.  Hm, I remember this.  Maybe I was dumb last time.  I'm better now.  I'm older.  I'm wiser.  Well, anyway, I'm older.  Let's give it another go.  3 hours later: Jesus, why is this so hard?  If they can't get this right, why bother?
+
+So, okay rinse repeat a few times.  (I've been at this for awhile.)  I really would like to try Rubymine/Intellij.  I'm not taking no for an answer this time.  I'm going to figure this shit out.  Walks toward desk with newfound resolve.  Stubs toe really hard on the way.
+
+After more frustration and frantic, pathetic, Google thrashing, I found this: https://intellij-support.jetbrains.com/hc/en-us/community/posts/206704845-Silly-question-Is-JRuby-required-for-Ruby-support-in-Intellij-Ultimate-s-Ruby-plugin-
+
+Oleg Sukhodolsky explains:
+
+> The problem is that Idea creates Java module when you open directory with a code but you need a Ruby module.
+To fix that you need:
+
+1. open the project
+1. open project structure (File|Project Structure)
+1. select modules
+1. delete the only module you have
+1. add new Ruby module
+1. as name you can use anything you want (e.g. directory name), as path the project root
+make sure that the correct ruby sdk is set for module sdk ("Gems" tab)
+(optional) if this is a rails app - add rails facet
+
+```ruby
+puts "WTF" * 50
+```
+
+I mean, if this were Vim or Emacs, I would have signed up to be whipped hard with leather and knew what I was getting into.  But this is a commercial product designed to work for my use case.
+
+But, yeah.  Now I can run tests in RubyMine.  Still thinking, "if they can't get this right, then...".  But, trying to be optimistic.
