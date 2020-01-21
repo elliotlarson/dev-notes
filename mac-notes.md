@@ -25,6 +25,12 @@ $ defaults write -g ApplePressAndHoldEnabled -bool false
 $ sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
 ```
 
+## Don't use the window opening animation 
+
+```bash
+$ defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool NO
+```
+
 ## Create install USB drive
 
 Download Sierra (or current Mac OS) via the AppStore App.  Cancel out of the installer window when it loads up after it downloads.
