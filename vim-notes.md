@@ -81,6 +81,12 @@ This will run rspec on the current file when using `<leader>t`.
 :map ,t :!rspec %<cr>
 ```
 
+#### Map to save and then run
+
+```
+:map ,r :w\|!bin/rails runner %<cr>
+```
+
 #### Map to copy selection to clipboard (mac)
 
 ```
