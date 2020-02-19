@@ -530,7 +530,6 @@ $ | match end of line | `grep 'foo$' myfile.txt`
 {n,} | match `n` or more times | `grep -E 'z{3,}' myfile.txt`
 {,m} | match no more than `m` times | `grep -E 'z{,3}' myfile.txt`
 
-
 #### Grep a tail of a log
 
 ```bash
@@ -598,7 +597,6 @@ You can use this with the delete flag to remove files older than 1 day:
 ```bash
 $ find ~/ -mtime +1 -delete
 ```
-
 
 ## Syncing a directory into another with `rsync`
 
