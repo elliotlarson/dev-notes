@@ -1,5 +1,13 @@
 # Git Notes
 
+## Checkout a deleted file
+
+```bash
+$ git log -- path/to/file.txt
+# look for the commit before the commit where the file was deleted (assuming you know)
+$ git checkout commitish-sha -- path/to/file.txt
+```
+
 ## Use a global .gitignore
 
 First setup git to use the global gitignore from your home directory
