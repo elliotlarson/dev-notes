@@ -102,7 +102,7 @@ Run all the tests in the current file (this opens the run dialog with the curren
 
 `ctrl + alt + r`
 
-Get the fully qualified path for current file, so you can run your tests in terminal:
+Get the fully qualified path for current file, so you can run your tests in terminal (I mapped this to "Copy path"):
 
 `cmd + ctrl + c`
 
@@ -146,6 +146,27 @@ Project view:
 * Font size (makes it smaller)
 
 Turn tabs shadow off
+
+Check the "Themed title bar" option 
+
+In the Editor -> ColorScheme, edit the:
+* Console font (the terimal has too much line spacing for some reason, so I went down to 0.8 on the line spacing)
+* Color Scheme font 
+* General -> Editor:
+  * Tear line: darken (with material theme I used 2f2f2f)
+  * Ident guide: darken
+  * Language defaults:
+    * Identifier: light blue #c5f3ff
+  * Ruby:
+    * Local variable: #fdffd8
+
+## Linting
+
+I've changed the warnings about naming length for the following to 50
+* constants 
+* instance variables
+* instance methods
+* class methods
 
 ## What do I think?
 
