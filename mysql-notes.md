@@ -34,3 +34,31 @@ FROM information_schema.TABLES
 WHERE table_schema = "$DB_NAME"
 ORDER BY (data_length + index_length) DESC;
 ```
+
+## Config on Mac 
+
+When loading a new database I get an error:
+
+> ERROR 3167 (HY000) at line 17: The 'INFORMATION_SCHEMA.SESSION_VARIABLES' feature is disabled; see the documentation for 'show_compatibility_56'
+
+You need to set the `show_compatibility_56 = ON`.
+
+To do this on a Mac:
+
+```bash
+$ sudo vim /etc/my.cnf
+```
+
+Add this text:
+
+```text
+[mysqld]
+show_compatibility_56 = ON
+performance_schema
+```
+
+Then restart MySQL:
+
+```bash
+$ brew services restart mysql@5.7
+```
