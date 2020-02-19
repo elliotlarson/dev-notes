@@ -236,7 +236,7 @@ You can also get at this information with:
 dir = File.expand_path(File.dirname(__FILE__))
 ```
 
-### Iterate through a directory listing
+### Iterate through a directory listing using glob
 
 You can get all of the files and directories in the current directory with:
 
@@ -276,4 +276,45 @@ Dir.glob("*").each do |f|
     # do some stuff
   end
 end
+```
+
+## Create a directory
+
+If the directory does not exist
+
+```ruby
+Dir.mkdir("dir") unless File.directory?("dir")
+```
+
+... or you can use FileUtils 
+
+```ruby
+require "fileutils"
+
+FileUtils.mkdir_p("dir")
+```
+
+## Load a YAML file 
+
+```ruby
+YAML.load_file("path/to/file.yml")
+```
+
+## Load a YAML string 
+
+```ruby
+yaml_string = <<~YAML
+en:
+  activerecord:
+    attributes:
+      order:
+        inv_num: "Invoice number"
+YAML
+YAML.load(yaml_string)
+```
+
+## Load a JSON file 
+
+```ruby
+JSON.parse(File.read("path/to/file.yml"))
 ```
