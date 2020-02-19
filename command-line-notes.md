@@ -762,3 +762,9 @@ Or you can use the `watch` command
 ```bash
 $ watch -n 1 tree .
 ```
+
+## Iterate n times
+
+```bash
+for i in {1..10}; do command${i}; done
+```
