@@ -313,6 +313,12 @@ YAML
 YAML.load(yaml_string)
 ```
 
+## Load an ERB YAML file 
+
+```ruby
+YAML.load(ERB.new(File.read("path/to/file.yml")).result)
+```
+
 ## Load a JSON file 
 
 ```ruby
