@@ -1,5 +1,17 @@
 # Git Notes
 
+## Show the different commits between branches 
+
+```bash
+$ git log develop..egl/my-feature-branch
+```
+
+You can also show the changes with `-p`:
+
+```bash
+$ git log -p develop..egl/my-feature-branch
+```
+
 ## Checkout a deleted file
 
 ```bash

@@ -1,5 +1,29 @@
 # RubyMine Notes
 
+## Setup
+
+1. Install vim, ruby, material theme, go, File watchers, Prettier, git toolbox
+1. Tweak material theme until happy (use material fonts, use atom material icons, crunch line height in menus)
+1. To allow the bottom line of the file to be brought to the middle of the screen you need to select the `Preferences -> Editor -> General -> Check: Show virtual space at file bottom` checkbox.  Then you can hit the vim `zz` command`
+1. Open terminal with command: `ctrl + shift + u`. Search for terminal in prefs and look under keymap; add to existing `alt + f12`
+1. Under keyboard shortcuts, remove keyboard shortcut `alt + shift + b` from git blame and add to annotate 
+1. Moving a file from one split to the next is called "Move to opposite group" and it only toggles to the opposite split.  I've mapped this to `cmd + ctrl + shift + up`
+1. Add keyboard shortcut for split and move right: `cmd + shift + crl + right arrow`
+1. Keymap: Add selection for next occurence: `alt + g`
+1. Remove system keyboard shortcut that blocks the search for all actions `cmd + shift + a`.  Keyboard -> shortcuts -> services -> Search man page index in terminal
+1. Added `cmd + ctrl + c` shortcut to "Copy path" functionality (removed from "Copy absolute path").  This allows you to select the relative path with line number if you want
+1. Change color of unused function (default is hard to see): Editor > Color scheme > General > Errors and Warnings > Unused sumbol
+1. Install File watchers and prettier plugins (after restarting, go to Tools > File watchers; add new file watcher for prettier)
+1. Editor > General > Smart Keys > Reformat on paste = None (this doesn't seem to work at this time, but maybe it will in the future?)
+1. Editor > General > Ensure empty line at end of file on Save
+1. Configure ESLint autofix external tool: https://blog.jetbrains.com/webstorm/2016/08/using-external-tools/
+
+Opening a project:
+
+1. Open project preferences: `cmd + ;` and set the SDK to the correct Rbenv version.  Also remove the non-rails module and add in a ruby on rails one with the appropriate project name and path 
+1. Connect database
+1. Do a serch for "Terminal" in settings (under tools) and set the variable there `USING_RUBYMINE_TERMINAL=1`.
+
 ## Properties
 
 There is an experimental feature to improve typing speed.  To activate it, go to `Help > Edit Custom Properties...`.  If the file doesn't exist yet, you will be prompted to create it.  Then add this line to the file `editor.zero.latency.typing=true`.

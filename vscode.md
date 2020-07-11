@@ -1,5 +1,11 @@
 # VSCode Notes
 
+## Really open files when you open them
+
+```
+enablePreviewFromQuickOpen = false
+```
+
 ## Setting up a command with a keyboard shortcut
 
 For example, say we want `$ gulp test` to run when we use the keyboard combination `cmd+shift+t`:

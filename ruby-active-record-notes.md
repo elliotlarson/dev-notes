@@ -1,5 +1,13 @@
 # Ruby ActiveRecord Notes
 
+## Select records that do not have a relationship
+
+In this case, the relationship is `projects` have one `project_site`:
+
+```ruby
+Pr::Project.includes(:project_site).where({ project_sites: { id: nil } }).pluck(:id) 
+```
+
 ## Using in a basic script
 
 ```ruby

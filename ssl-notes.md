@@ -17,7 +17,52 @@ $ cat admin_wpbinc_com.crt admin_wpbinc_com.ca-bundle > ssl.admin.wpbinc.com/adm
 #### Generate the signing request
 
 ```bash
-$ domain=onehou.se && openssl req -newkey rsa:2048 -nodes -keyout ${domain}.key -out ${domain}.csr
+$ domain=acadia.org && openssl req -newkey rsa:2048 -nodes -keyout ${domain}.key -out ${domain}.csr
+Generating a RSA private key
+................+++++
+.......+++++
+writing new private key to 'acadia.org.key'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:US
+State or Province Name (full name) [Some-State]:US
+Locality Name (eg, city) []:San Francisco
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:acadia
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:acadia.org
+Email Address []:webmaster@acadia.org
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:
+An optional company name []:
+```
+
+For working with Namecheap Comodo:
+
+`Upload the validation file to acadia.org/.well-known/pki-validation/`
+
+Download the file from Namecheap, upload to server and then test 
+(e.g. http://acadia.org/.well-known/pki-validation/F188C64A33C5EEE04EDB3DA69F9C8265.txt)
+
+When you get the signed crt from Namecheap:
+
+> You need to have all the Certificates (your_domain.crt and your_domain.ca-bundle) combined in a single '.crt' file.
+
+> The Certificate for your domain should come first in the file, followed by the chain of Certificates (CA Bundle).
+
+> Enter the directory where you uploaded the certificate files. Run the following command to combine the files:
+
+> $ cat your_domain.crt your_domain.ca-bundle >> your_domain_chain.crt
+
+```bash
+$ domain=acadia.org && cat ${domain}.crt ${domain}.ca-bundle >> ../${domain}.crt
 ```
 
 #### Self sign the request

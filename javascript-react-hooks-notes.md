@@ -51,7 +51,6 @@ useEffect(() => {
 
 Run cleanup function for effect before component is removed from the DOM.  For example, when you've created a subscription of some kind:
 
-
 ```javascript
 useEffect(() => {
   foo();
@@ -86,7 +85,6 @@ function Foo({ someValue }) {
 ```
 
 It takes two arguments: 1) a function to execute to get the value, and 2) an array of the values that when changed trigger re-calling the memo function.
-
 
 ## `useCallback`
 
