@@ -414,6 +414,12 @@ Auto running git bisect with a command
 $ git bisect run zeus rspec ./spec/models/commercial_application_spec.rb
 ```
 
+To quit a bisect session, enter:
+
+```bash
+$ git bisect reset
+```
+
 ## Branches
 
 #### Track a remote branch
