@@ -1,5 +1,18 @@
 # VSCode Notes
 
+## Convert symbol hashrockets to "new" object style
+
+```ruby
+:foo => "bar"
+# to
+foo: "bar"
+```
+
+Find with regular expressions on:
+
+Find: `:(\w*) => `
+Replace: `$1: `
+
 ## Really open files when you open them
 
 ```

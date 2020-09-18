@@ -1,5 +1,32 @@
 # Postgresql SQL Notes
 
+## Problem on Mac OS
+
+After installing a new OS update, I started getting this error when trying to connect to postgres:
+
+```bash
+$ psql
+# psql: could not connect to server: No such file or directory
+# 	Is the server running locally and accepting
+# 	connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+```
+
+After some Google action, I found a solution that worked:
+
+Search for the `postmaster.pid` file and remove it:
+
+```bash
+$ sudo find / -name postmaster.pid
+# /usr/local/var/postgresql@11/postmaster.pid
+$ rm -rf /usr/local/var/postgresql@11/postmaster.pid
+```
+
+Then start postgres:
+
+```bash
+$ brew services start postgresql@11
+```
+
 ## Creating a database
 
 ```sql
