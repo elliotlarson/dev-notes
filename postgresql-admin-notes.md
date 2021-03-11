@@ -1,5 +1,21 @@
 # Postgresql Admin Notes
 
+## Could not connect error
+
+Sometimes Apple does some system update that messes up postgres:
+
+```text
+psql: could not connect to server: No such file or directory
+	Is the server running locally and accepting
+	connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+```
+
+I've found that sometimes just removing the `postmaster.pid` file works:
+
+```bash
+$ rm /usr/local/var/postgresql@11/postmaster.pid
+```
+
 ## psql: FATAL: database "<user>" does not exist
 
 If you see this for your user account, you need to create a database for your user:
