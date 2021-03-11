@@ -766,3 +766,13 @@ $ watch -n 1 tree .
 ```bash
 for i in {1..10}; do command${i}; done
 ```
+
+## Diff command
+
+Diffing the code for the same webpage on different servers:
+
+```bash
+$ diff -u <(curl http://localhost:3000/pitched-roof-mounting/resources) <(curl https://base.ironridge.com/pitched-roof-mounting/resources)
+```
+
+The `<()` syntax converts output into a file descriptor that the diff command can work with.
