@@ -1,5 +1,11 @@
 # Nginx Notes
 
+## Check that your configuration is ok
+
+```bash
+$ nginx -t
+```
+
 ## Forcing HTTP traffic to use HTTPS
 
 This amounts to redirecting traffic from HTTP to HTTPS.
@@ -51,7 +57,7 @@ server {
 
 ## Checking configuration
 
-You can do a configuration test with 
+You can do a configuration test with
 
 ```bash
 $ sudo service nginx configtest
@@ -64,3 +70,32 @@ To find out what's wrong try:
 ```bash
 $ sudo nginx -t
 ```
+
+## Doing a redirect from one domain to another
+
+```nginx
+server {
+    server_name www.domain1.com;
+    rewrite ^/(.*)$ http://www.domain2.com/$1 redirect;
+}
+```
+
+## Adding Letsencrypt
+
+Install the Certbot library:
+
+```bash
+$ sudo add-apt-repository ppa:certbot/certbot
+$ sudo apt install python-certbot-nginx
+```
+
+Obtain certificates:
+
+```bash
+$ sudo certbot --nginx -d example.com
+```
+
+Note: This assumes that you have an server block in your sites-available directory `/etc/nginx/sites-available/example.com`, and that you've added a symlink in the sites-enabled directory to this block.
+
+
+
