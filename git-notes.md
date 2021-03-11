@@ -1,6 +1,26 @@
 # Git Notes
 
-## Show the different commits between branches 
+## Break up previous commit
+
+If you have a prior commit that you'd like to break up into multiple commits, you can rebase and reset:
+
+```bash
+$ git rebase -i head~3
+```
+
+Change the commit to `edit` in the rebase window, save and exit.  Then reset to undo the commit you are editing:
+
+```bash
+$ git reset head~1
+```
+
+Now you can stage and commit until you are finished committing all of the files.  Once you've finished creating your new commits, you can continue:
+
+```bash
+$ git rebase --continue
+```
+
+## Show the different commits between branches
 
 ```bash
 $ git log develop..egl/my-feature-branch
@@ -10,6 +30,14 @@ You can also show the changes with `-p`:
 
 ```bash
 $ git log -p develop..egl/my-feature-branch
+```
+
+## Show the files modified comparing to another branch
+
+This is useful if you are thinking about creating a PR and you're curious how many files are going to end up in it:
+
+```bash
+$ git diff --name-status master..my-feature-branch
 ```
 
 ## Checkout a deleted file
