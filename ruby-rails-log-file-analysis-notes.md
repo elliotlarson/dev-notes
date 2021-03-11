@@ -95,5 +95,23 @@ $
 Do a Google search for your IP address, then tail/grep the log:
 
 ```bash
-$ tail -f production.log| grep '234.23.23.231'
+$ tail -f production.log | grep '234.23.23.231'
+```
+
+## View a list of requests without the details
+
+Requests in Rails have the word `Started` in them:
+
+```txt
+I, [2020-12-15T21:17:14.573081 #24237]  INFO -- : [5bc7f226-ec56-4a3c-aca0-af36bbe356e2] Started GET "/my_projects" for 73.202.254.72 at 2020-12-15 21:17:14 +0000
+```
+
+```bash
+$ tail -n 100000 staging.log | grep Started
+```
+
+If you want to exclude requests you don't care about you can pull them out with:
+
+```bash
+$ tail -n 100000 staging.log | grep Started | grep -v /check/all.json
 ```
