@@ -1,5 +1,13 @@
 # Ruby Gem Notes
 
+## Figure out the path of an executable installed by a gem
+
+Here's how to find the location of the `wkhtmltopdf` executable installed by `wicked_pdf`.
+
+```ruby
+Gem.bin_path('wkhtmltopdf-binary', 'wkhtmltopdf')
+```
+
 ## Install a gem
 
 ```bash
