@@ -2,12 +2,20 @@
 
 Notes about setting a Ruby/Rails, etc. development machine running Ubuntu Linux.
 
+## Keyboar Shortcuts
+
+* `super + up arrow` - maximize window
+* `super + right arrow` - window takes up right side of screen
+* `super + left arrow` - window takes up left side of screen
+
 ## System Monitoring Tools
 
 * `htop` - Good interactive terminal UI for seeing what's happening with your computer's resources.  There's a nice view of all your cores.
 * `glances` - Another tool like `htop` but provides some additional info about network, disk space, and IO
 * `zellij` - terminal multiplexer like Tmux, but more modern and easier to use
 * `fzf` - fuzzy finder for history and vim
+* `neovim` 
+* `ulauncher` - an application launcher (ctrl + space)
 
 ## Misc Info
 
@@ -76,4 +84,24 @@ Install Ruby build:
 
 ```bash
 $ git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+```
+
+## Installing Nvidia drivers
+
+Check which drivers you need:
+
+```bash
+$ ubuntu-drivers devices
+```
+
+Install missing drivers that you see:
+
+```bash
+$ sudo apt-get install nvidia-driver-460
+```
+
+Reboot
+
+```bash
+$ sudo reboot
 ```
