@@ -53,3 +53,34 @@ document.body.appendChild(frameRateDiv);
 // Then in your draw function
 frameRateDiv.innerHTML = Math.floor(p5.frameRate());
 ```
+
+## Working with vectors
+
+You can create a vector class that helps simplify coordinate math like so:
+
+```javascript
+const vec = p5.createVector(100, 100); // x, y coordinate
+```
+
+This will allow you to do things like:
+
+```javascript
+const v1 = p5.createVector(100, 100);
+const v2 = p5.createVector(50, 50);
+v1.add(v2);
+```
+
+This modifies the v1 vector by adding the v2 coordinates to it.  If you don't want to modify, but you'd rather create a new vector:
+
+```javascript
+const v3 = p5.Vector.add(v1, v2);
+```
+
+You can also create a random unit vector:
+
+```javascript
+const v1 = p5.Vector.random2D();
+```
+
+## Noise
+
