@@ -290,6 +290,15 @@ p5.pop();
 p5.rotate(angle);
 ```
 
+## Rotating around another point
+
+https://gamefromscratch.com/gamedev-math-recipes-rotating-one-point-around-another-point/
+
+```javascript
+const rotatedX = Math.cos(angle) * (point.x - center.x) - Math.sin(angle) * (point.y-center.y) + center.x;
+const rotatedY = Math.sin(angle) * (point.x - center.x) + Math.cos(angle) * (point.y - center.y) + center.y;
+```
+
 ## Translating Between Polar and Cartesian Coordinates
 
 Designing with polar coordinates allows you move things in arcs, but you need to use the cartesian coordinate system to place items on the "stage".
