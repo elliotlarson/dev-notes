@@ -1,5 +1,11 @@
 # VSCode Notes
 
+## Keyboard shortcuts
+
+* `cmd + shift + enter` = move cursor to previous line
+* with a selection `shift + alt + down arrow` = copies the selection to the area below
+* `cmd + enter` = enter a new line
+
 ## Convert symbol hashrockets to "new" object style
 
 ```ruby

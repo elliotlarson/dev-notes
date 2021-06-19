@@ -82,6 +82,20 @@ Also, note that the final method needs to come last. Execution is order dependen
 
 You'll also see a warning if you don't group the functions with the same name together in a module.
 
+Functions can be on one line, like so:
+
+```elixir
+def say_hi(name), do: IO.puts("Hello, #{name}")
+```
+
+You can also define conditionals in the function definition:
+
+```elixir
+def guess(a, b) when a > b, do: guess(b, a)
+```
+
+You can't stick function calls inside of the when clause, so adding something like `String.length(name)` wouldn't work.
+
 ### Private functions
 
 You can create functions only accessible inside the module using `defp`.
@@ -106,6 +120,12 @@ Strings are immutable, like everything else in Elixir, but you can create someth
 ```bash
 iex> "/bears/" <> "1"
 "/bears/1"
+```
+
+You can also use a sigil if your string is going to contain quotes:
+
+```elixir
+~s("foo", "bar", "baz")
 ```
 
 ## Pattern matching
@@ -144,4 +164,50 @@ There's also a shorthand for this:
 defmodule Servy.Parser do
   alias Servy.Conv
 end
+```
+
+## Creating a simple app and trying it out
+
+Here is a simple greeter module.
+
+```elixir
+defmodule Greeter do
+  def say_hi do
+    name = IO.gets("What's your name?\n")
+    greet(String.trim(name))
+  end
+
+  def greet("Elliot") do
+    IO.puts("Hey, Elliot! That's a great name!")
+    whats_your_nickname()
+  end
+
+  def greet(name) do
+    IO.puts("Hey, #{name}.  Nice to meet you.")
+    whats_your_nickname()
+  end
+
+  def whats_your_nickname do
+    nickname = IO.gets("What's your nickname?\n")
+    IO.puts("Yo, #{String.trim(nickname)}.")
+  end
+end
+```
+
+Save this in a file named `greeter.ex`.
+
+Then enter an IEX session, compile the file, and use it:
+
+```bash
+$ iex
+iex> c "greeter.ex"
+# [Greeter]
+iex> Greeter.say_hi
+# What's your name?
+# Elliot
+# Hey, Elliot! That's a great name!
+# What's your nickname?
+# Dude
+# Yo, Dude.
+# :ok
 ```
