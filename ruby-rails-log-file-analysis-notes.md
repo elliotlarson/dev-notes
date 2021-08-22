@@ -1,3 +1,15 @@
+## Watching requests on logfile
+
+```bash
+$ tail -f log/development.log | grep Started
+```
+
+You can also watch the request and the time it takes for the request to complete:
+
+```bash
+$ tail -f log/development.log | grep "Started\/Completed"
+```
+
 ## Tracking down an error
 
 Let's say you get an error in the bug tracker you want to trace:
