@@ -15,6 +15,9 @@ Also, the `from` macro is usable because we've imported it, like so:
 
 ```elixir
 import Ecto.Query
+
+query = from(Product)
+Repo.all(query)
 ```
 
 ## Get all records
@@ -285,5 +288,11 @@ Repo.all(
 ## Executing raw SQL query
 
 ```elixir
-Ecto.Adapters.SQL.query(Repo, "SELECT power($1, $2)", [2, 10])
+Repo.query("SELECT power($1, $2)", [2, 10])
+```
+
+## Print out the SQL for a query
+
+```elixir
+Repo.to_sql(:all, query)
 ```
