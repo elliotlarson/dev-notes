@@ -1,5 +1,12 @@
 # Ruby Process Notes
 
+## Get number of cores on machine
+
+```ruby
+require "etc"
+cores = Etc.nprocessors
+```
+
 ## Current program's process ID
 
 All programs, including the current Ruby program, have a process id.
