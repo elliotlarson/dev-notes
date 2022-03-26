@@ -1,5 +1,11 @@
 # SSL Notes
 
+## Let's encrypt
+
+```
+$ certbot --nginx -d 2021.acadia.org
+```
+
 ## Comodo SSL from NameCheap
 
 Generate a CSR (signing request), like shown below.
@@ -48,7 +54,7 @@ For working with Namecheap Comodo:
 
 `Upload the validation file to acadia.org/.well-known/pki-validation/`
 
-Download the file from Namecheap, upload to server and then test 
+Download the file from Namecheap, upload to server and then test
 (e.g. http://acadia.org/.well-known/pki-validation/F188C64A33C5EEE04EDB3DA69F9C8265.txt)
 
 When you get the signed crt from Namecheap:
