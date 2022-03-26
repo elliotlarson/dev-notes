@@ -198,6 +198,14 @@ CSV.parse(
 end
 ```
 
+### Stripping fields
+
+```ruby
+CSV.foreach(csv_file, converters: ->(f) { f&.strip }) do |row|
+  # row processing code
+end
+```
+
 ### Iterating through files in a directory
 
 Here's an example where we are looking to iterate over the svg images in a Rails directory:
@@ -286,7 +294,7 @@ If the directory does not exist
 Dir.mkdir("dir") unless File.directory?("dir")
 ```
 
-... or you can use FileUtils 
+... or you can use FileUtils
 
 ```ruby
 require "fileutils"
@@ -294,13 +302,13 @@ require "fileutils"
 FileUtils.mkdir_p("dir")
 ```
 
-## Load a YAML file 
+## Load a YAML file
 
 ```ruby
 YAML.load_file("path/to/file.yml")
 ```
 
-## Load a YAML string 
+## Load a YAML string
 
 ```ruby
 yaml_string = <<~YAML
@@ -313,13 +321,13 @@ YAML
 YAML.load(yaml_string)
 ```
 
-## Load an ERB YAML file 
+## Load an ERB YAML file
 
 ```ruby
 YAML.load(ERB.new(File.read("path/to/file.yml")).result)
 ```
 
-## Load a JSON file 
+## Load a JSON file
 
 ```ruby
 JSON.parse(File.read("path/to/file.yml"))
