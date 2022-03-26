@@ -1,3 +1,10 @@
+## Download production log file archives and look for project requests
+
+```bash
+$ scp irp:/data/ir_production/shared/log/production.log-\* ./
+$ gunzip -c production.log-* | rg projects/866533 -A 50 | less
+```
+
 ## Watching requests on logfile
 
 ```bash
@@ -42,7 +49,7 @@ The first line of the request log results should have an IP address in it
 ### grep IP address to find all actions for user
 
 ```bash
-$ gunzip -c production.log-20181024.gz| grep -F '50.233.147.82'
+$ gunzip -c production.log-20181024.gz | grep -F '50.233.147.82'
 ```
 
 This gives you the starting line of every transaction in the log
