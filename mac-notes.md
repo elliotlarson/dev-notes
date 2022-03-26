@@ -1,5 +1,13 @@
 # Mac Notes
 
+## Check if the computer is throttling
+
+```bash
+$ pmset -g thermlog
+```
+
+Check the CPU speed limit line
+
 ## Play a system sound on the command line
 
 ```bash
@@ -25,7 +33,7 @@ $ defaults write -g ApplePressAndHoldEnabled -bool false
 $ sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
 ```
 
-## Don't use the window opening animation 
+## Don't use the window opening animation
 
 ```bash
 $ defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool NO
