@@ -82,5 +82,17 @@ You can also create a random unit vector:
 const v1 = p5.Vector.random2D();
 ```
 
-## Noise
+## HSB Color Mode
 
+HSB stands for hue, saturation, and brightness.  The default color mode for P5js is RGB.  To set the HSB mode:
+
+```javascript
+p5.colorMode(p5.HSB)
+```
+
+The function also takes other parameters:
+
+1. `maxHue` (defaults to 360)
+1. `maxSaturation` (defaults to 100)
+1. `maxBrightness` (defaults to 100)
+1. `maxAlpha` (defaults to 1)
