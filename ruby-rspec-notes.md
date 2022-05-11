@@ -35,3 +35,24 @@ let(:tempfile) do
   end
 end
 ```
+
+## Testing in a single file
+
+This can be useful if you are just trying out an idea and don't need more than a single file.
+
+```ruby
+require "bundler/inline"
+
+gemfile do
+  source "https://rubygems.org"
+  gem "rspec"
+end
+
+require "rspec/autorun"
+
+RSpec.describe "foo" do
+  it "works" do
+    expect(true).to be true
+  end
+end
+```
