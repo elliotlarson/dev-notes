@@ -81,7 +81,7 @@ Put the search results in a turbo frame tag:
 Then in your form add a data attribute for the turbo frame:
 
 ```haml
-= form_with(url: search_path, method: :get, data: { turbo_frame: "results }) do |f|
+= form_with(url: search_path, method: :get, data: { turbo_frame: "results" }) do |f|
   -# search form content
 ```
 
@@ -103,4 +103,46 @@ Alternatively, you can add this to the turbo frame tag instead, since it's the o
 ```haml
 = turbo_frame_tag "results", data: { turbo_action: "advance" } do
   -# some results content
+```
+
+## Turbo Auto Search
+
+You can use Stimulus to receive input events and automatically submit the search form.
+
+Create a Stimulus controller:
+
+```bash
+$ r g stimulus auto_search
+```
+
+We'll need to add the debounce library in order to keep the form from getting submitted every time we enter a letter.
+
+```bash
+$ yarn add debounce
+# or with import maps
+$ bin/importmap pin debounce
+```
+
+Add the controller, submit action and event handlers to the form:
+
+```haml
+= form_with(url: search_path, method: :get,
+  data: { turbo_frame: "results", action: "input->auto-submit#submit" }) do |f|
+```
+
+Then flesh out the Stimulus controller:
+
+```javascript
+import { Controller } from "@hotwired/stimulus";
+import debounce from "debounce";
+
+export default class extends Controller {
+  initialize() {
+    this.submit = debounce(this.submit, 300);
+  }
+
+  submit(_event) {
+    this.element.requestSubmit();
+  }
+}
 ```
