@@ -252,3 +252,48 @@ g.labels = (0..label_series.size - 1).to_a.zip(label_series).to_h
 graph_data[:benchmarks].each { |label, values| g.data(label, values) }
 g.write('ips_output.png')
 ```
+
+## Benchmarking memory
+
+In this article the author analyzes the memory usage and time spent for CSV processing:
+
+https://dalibornasevic.com/posts/68-processing-large-csv-files-with-ruby
+
+```ruby
+require 'benchmark'
+
+def print_memory_usage
+  memory_before = `ps -o rss= -p #{Process.pid}`.to_i
+  yield
+  memory_after = `ps -o rss= -p #{Process.pid}`.to_i
+
+  puts "Memory: #{((memory_after - memory_before) / 1024.0).round(2)} MB"
+end
+
+def print_time_spent
+  time = Benchmark.realtime do
+    yield
+  end
+
+  puts "Time: #{time.round(2)}"
+end
+```
+
+And then he uses the methods, like:
+
+```ruby
+require_relative './helpers'
+require 'csv'
+
+print_memory_usage do
+  print_time_spent do
+    sum = 0
+
+    CSV.foreach('data.csv', headers: true) do |row|
+      sum += row['id'].to_i
+    end
+
+    puts "Sum: #{sum}"
+  end
+end
+```
