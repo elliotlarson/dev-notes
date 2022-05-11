@@ -4,10 +4,6 @@ https://github.com/Casecommons/pg_search
 
 There are two kinds of PG search, single model search and global multi-model search, which is a global search across multiple models in your system.
 
-## Questions?
-
-* Is there a way to do multi-model search with different groups of models, like one group of models for a section of the site, and another group of models for another section of a site?
-
 ## Single Model Search
 
 You can add a search scope to your model, like so:
@@ -67,7 +63,7 @@ PgSearch.multisearch("Red") #=> [#<PgSearch::Document searchable: rose>]
 
 When you create, update, or delete a record with `multisearch` applied to the model pg_search will automatically create a record in the `pg_search_documents` table.  The combined value of text that you want to be searched will be added to the `content` field.
 
-Two associations are built automatically. On the original record, there is a has_one :pg_search_document association pointing to the PgSearch::Document record, and on the PgSearch::Document record there is a belongs_to :searchable polymorphic association pointing back to the original record.
+Two associations are built automatically. On the original record, there is a has_one `:pg_search_document` association pointing to the PgSearch::Document record, and on the PgSearch::Document record there is a belongs_to `:searchable` polymorphic association pointing back to the original record.
 
 ```ruby
 odyssey = EpicPoem.create!(title: "Odyssey", author: "Homer")
