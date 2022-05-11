@@ -67,6 +67,12 @@ $ git push heroku master
 $ heroku open
 ```
 
+## Run the rails console
+
+```bash
+$ heroku run rails c -a APP_NAME
+```
+
 ## Ensure you have a dyno running
 
 If you have more than 1 web dyno running, this will scale down to 1.  However, with a new environment this will ensure you have at least one.
