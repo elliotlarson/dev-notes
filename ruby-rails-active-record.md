@@ -118,61 +118,78 @@ Entry.comments         # => Entry.where(entryable_type: "Comment")
 Use this to create an in memory setup so you can experiment with Active Record concepts outside the context of a Rails app:
 
 ```ruby
-begin
-  require "bundler/inline"
-rescue LoadError => e
-  $stderr.puts "Bundler version 1.10 or later is required. Please update your Bundler"
-  raise e
-end
+require "bundler/inline"
 
-gemfile(true) do
+gemfile do
   source "https://rubygems.org"
-
-  git_source(:github) { |repo| "https://github.com/#{repo}.git" }
-
-  gem "rails", github: "rails/rails"
   gem "sqlite3"
+  gem "activerecord"
+  gem "pry"
+  gem "pry-coolline"
 end
 
 require "active_record"
-require "minitest/autorun"
-require "logger"
 
-# This connection will do for database-independent bug reports.
-ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:")
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 
+ActiveRecord::Base.establish_connection(
+  adapter: "sqlite3",
+  database: ":memory:", # using in memory data store
+)
+
 ActiveRecord::Schema.define do
-  create_table :orders, force: true do |t|
-  end
-  create_table :products, force: true do |t|
-    t.datetime :deleted_at
-  end
-
-  create_table :line_items, force: true do |t|
-    t.references :order
-    t.integer :purchasable_id
-    t.string :purchasable_type
+  create_table :widgets do |t|
+    t.string :name
   end
 end
 
-class Order < ActiveRecord::Base
-  has_many :line_items
-  has_many :products, through: :line_items, source: :purchasable, source_type: 'Product'
+class Widget < ActiveRecord::Base
 end
 
-class Product < ActiveRecord::Base
-  has_many :line_items, as: :purchasable
+binding.pry
+1
+```
+
+## Using `merge` to join scopes
+
+https://gorails.com/blog/activerecord-merge
+
+```ruby
+class Author < ActiveRecord::Base
+  has_many :books
 end
 
-class LineItem < ActiveRecord::Base
-  belongs_to :purchasable, -> { where(deleted_at: false) }, polymorphic: true
-end
+class Book < ActiveRecord::Base
+  belongs_to :author
 
-class BugTest < Minitest::Test
-  def test_association_stuff
-    Product.create!
-    assert_equal Order.joins(:products).where(products: {id: nil}).count, 0
-  end
+  scope :available, ->{ where(available: true) }
 end
+```
+
+Instead of this:
+
+```ruby
+Author.joins(:books).where("books.available = ?", true)
+```
+
+You can use merge like this:
+
+```ruby
+Author.joins(:books).merge(Book.available)
+```
+
+Merge will replace previous pieces of a scope chain that reference the same field key:
+
+```ruby
+User.where(id: [1, 2]).merge(User.where(id: [2, 3])).to_sql
+#=> "SELECT \"users\".* FROM \"users\" WHERE \"users\".\"id\" IN (2, 3)">
+```
+
+## Using `and` to join scopes
+
+Merge replaces previous keys in the scope chain whereas `and` composes the intersection:
+
+```ruby
+User.where(id: [1, 2]).and(User.where(id: [2, 3])).to_sql
+#=> "SELECT \"users\".* FROM \"users\" WHERE \"users\".\"id\" IN (1, 2) AND \"users\".\"id\" IN (2, 3)"
 ```
