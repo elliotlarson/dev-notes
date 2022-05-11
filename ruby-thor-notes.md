@@ -38,7 +38,7 @@ RSpec.describe('my_thor_command') do
 end
 ```
 
-## Calling thor class from rake task
+## Calling Thor task from Rake task
 
 Import thor tasks in `Rakefile`
 
@@ -75,8 +75,7 @@ namespace :foo do
 end
 ```
 
-
-## Calling a rake task from a thor task
+## Calling a Rake task from a Thor task
 
 In your `Thorfile` you need to make sure to load the rake tasks:
 
