@@ -201,6 +201,35 @@ transform(map.getView().getCenter(), "EPSG:3857", "EPSG:4326");
 map.getView().getZoom();
 ```
 
+## Get the meters per pixel at the current zoom level
+
+Perhaps common sense, but as you zoom out this number gets bigger.  As you zoom in it gets smaller.
+
+```javascript
+map.getView().getResolution()
+```
+
+## Showing and hiding a vector layer
+
+You can assign a property to the vector layer that makes it easy to pluck out of an array:
+
+```javascript
+myVectorLayer.set("dataType", "FOO");
+```
+
+Then you can look for this layer by finding on the layers added to the map:
+
+```javascript
+// getLayers returns an OL Collection object which doesn't directly support `find`
+const myVecLayer = map.getLayers().getArray().find((l) => l.get("dataType") === "FOO")
+```
+
+Then you can turn its visibility off and on:
+
+```javascript
+myVecLayer.setVisibility(false); // or true
+```
+
 ## Getting data for drawn features
 
 Output the lat and long points for a drawn polygon.  This outputs an array of shapes.  Each shape is an array of points.  Each point is an array of lng, lat pairs.
@@ -349,4 +378,12 @@ const styles = [
     stroke: stroke
   })
 ];
+```
+
+## Manually trigger style function to get called
+
+If you call the `changed` method on a feature it will result in OL calling the style function for the feature again:
+
+```javascript
+featuresVectorSource.getFeatures().forEach((f) => f.changed());
 ```
