@@ -198,12 +198,48 @@ CSV.parse(
 end
 ```
 
-### Stripping fields
+### Stripping fields with a custom converter
 
 ```ruby
-CSV.foreach(csv_file, converters: ->(f) { f&.strip }) do |row|
+# You can register the converter for CSV like so and then use it
+CSV::Converters[:strip_fields] = ->(f) { f&.strip }
+# Then you can use it like so
+CSV.foreach(csv_file, converters: [:strip_fields] ) do |row|
   # row processing code
 end
+```
+
+Also, instead of registering it and accessing it with a key, you can pass in a lambda instead of a key name:
+
+```ruby
+strip_fields = ->(f) { f&.strip }
+# Then you can use it like so
+CSV.foreach(csv_file, converters: [strip_fields] ) do |row|
+  # row processing code
+end
+```
+
+### Custom converters by header name
+
+You can also pass in a converter that will handle fields on a header name basis:
+
+https://stackoverflow.com/a/51233900/2325596
+
+```ruby
+custom_converter = lambda do |value, field_info|
+  case field_info.header
+  when 'OrderUuid', 'Exchange', 'Type', 'OrderType'
+    value.to_s
+  when 'Quantity', 'Limit', 'CommissionPaid', 'Price'
+    value.to_f
+  when 'Opened', 'Closed'
+    Time.zone.parse(value)
+  else
+    fail("Unknown field name #{field_info.inspect}=#{value}")
+  end
+end
+
+CSV.parse(content, headers: :first_row, converters: [custom_converter])
 ```
 
 ### Iterating through files in a directory
