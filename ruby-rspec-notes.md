@@ -56,3 +56,17 @@ RSpec.describe "foo" do
   end
 end
 ```
+
+## Hash including
+
+```ruby
+expect(response_json).to include(hash_including({
+  employee: hash_including(jobs_count: 0)
+}))
+```
+
+You could also use this:
+
+```ruby
+expect(subject).to match(a_hash_including(key: value))
+```
