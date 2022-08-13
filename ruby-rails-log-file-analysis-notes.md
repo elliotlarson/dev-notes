@@ -1,7 +1,7 @@
 ## Download production log file archives and look for project requests
 
 ```bash
-$ scp irp:/data/ir_production/shared/log/production.log-\* ./
+$ scp irp:/data/ir_production/shared/log/production.log\* ./
 $ gunzip -c production.log-* | rg projects/866533 -A 50 | less
 ```
 
