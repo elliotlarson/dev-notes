@@ -8,7 +8,7 @@ This will prompt you with some questions.  If you accept the defaults it will ou
 * `id_rsa.pub` = the public key
 
 ```bash
-$ ssh-keygen -t rsa -b 4096 -C 'your_email@example.com'
+$ ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
 ## Logging into a remote server
