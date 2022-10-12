@@ -1,5 +1,16 @@
 # Git Notes
 
+## Resolving a conflict with package.json for Gemfile.lock
+
+If you rebase a branch and end up with conflicts on either of these files, first checkout the `HEAD` version of the file:
+
+```bash
+$ git checkout HEAD -- yarn.lock
+$ git checkout HEAD -- Gemfile.lock
+```
+
+Then followup with a `yarn install` or `bundle install`.
+
 ## Break up previous commit
 
 If you have a prior commit that you'd like to break up into multiple commits, you can rebase and reset:
