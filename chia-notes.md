@@ -61,11 +61,11 @@ $ sudo mount -t nfs 169.254.250.65:/volume5/volume5shared /mnt/chchchchia-volume
 
 ## Commands
 
+* `chia start farmer` – Starts the farmer, harvester, bode, and wallet
+* `chia start farmer -r` – Restarts everything
 * `chia init` – Migrates files from an old version to the latest version after an update
 * `chia start node` – Starts node only
 * `chia start node -r` – Restarts the node
-* `chia start farmer` – Starts the farmer, harvester, bode, and wallet
-* `chia start farmer -r` – Restarts everything
 * `chia plots check` – Checks all plot files
 * `chia show -s` – Show status of node
 * `chia show -c` – Show connections
