@@ -1,5 +1,11 @@
 # Git Notes
 
+## Rename the current branch
+
+```bash
+$ git branch -m <newname>
+```
+
 ## Resolving a conflict with package.json for Gemfile.lock
 
 If you rebase a branch and end up with conflicts on either of these files, first checkout the `HEAD` version of the file:
