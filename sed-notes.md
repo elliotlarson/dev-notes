@@ -5,12 +5,12 @@ Sed operates on each line of a file, processing it like a stream.  For each line
 Say we have a text file `data.txt` with the contents:
 
 ```text
-The quick green fox jumps over the lazy green cat. 
-The quick green fox jumps over the lazy green cat. 
+The quick green fox jumps over the lazy green cat.
+The quick green fox jumps over the lazy green cat.
 The quick green fox jumps over the lazy green cat.
 ```
 
-## Replace first occurance of word 
+## Replace first occurance of word
 
 To replace the first occurance of the word "green" with the word "brown" in each line, do this:
 
@@ -103,7 +103,7 @@ $ sed '/root/s/Administrator/czar/' /etc/passwd
 # => root:*:0:0:System czar:/var/root:/bin/sh
 ```
 
-## Delete specified lines 
+## Delete specified lines
 
 Lets say you have a header line you want to get rid of:
 
@@ -145,6 +145,13 @@ You can tell `sed` to supress printing with the `-n` flag, and then use the `p` 
 ```bash
 $ sed -n 1p data.txt
 # => The quick green fox jumps over the lazy green cat.
+```
+
+You can also print out a range of lines with:
+
+```bash
+# Printing lines 100 to 200
+$ sed -n '100,200p' myfile.log
 ```
 
 Do do a replacement on the specified line and then print it, use the `p` modifier after the `s` command:
