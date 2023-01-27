@@ -1,5 +1,14 @@
 # Git Notes
 
+## Renaming a tag
+
+```bash
+$ git tag new old
+$ git tag -d old
+$ git push origin new :old
+$ git pull --prune --tags
+```
+
 ## Rename the current branch
 
 ```bash
