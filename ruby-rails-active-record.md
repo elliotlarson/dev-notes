@@ -1,5 +1,39 @@
 # Active Record
 
+## Figure out what the database pool size is
+
+```ruby
+ActiveRecord::Base.connection_pool.size
+```
+
+## Aggregate counting
+
+Getting users who have created 10 or more projects in the past 2 years:
+
+```ruby
+Project.where.not(user_id: nil)
+       .where("created_at > ?", 2.years.ago)
+       .select(:user_id, "COUNT(*) AS count")
+       .group(:user_id)
+       .having("COUNT(*) > 9")
+       .to_sql
+
+# => SELECT "projects"."user_id", COUNT(user_id) as count FROM "projects" WHERE "projects"."user_id" IS NOT NULL AND (created_at > '2020-12-02 20:43:32.412328') GROUP BY "projects"."user_id" HAVING (count > 9)
+```
+
+## Aggregate count & sort through association
+
+Getting a list of companies ordered by count of memberships (companies have many memberships)
+
+```ruby
+Company.left_joins(:memberships)
+       .select("companies.*, COUNT(company_memberships.id) as count")
+       .group("companies.id")
+       .order("count desc")
+       .limit(100)
+       .map { |p| [p.id, p.name, p.count] }
+```
+
 ## Has secure password
 
 You can add password authentication to a user model with `has_secure_password`.
