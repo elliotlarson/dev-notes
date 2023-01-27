@@ -1,5 +1,33 @@
 # Chia Notes
 
+## Installing
+
+### Install packages
+
+```bash
+$ sudo apt-get update
+$ sudo apt-get install ca-certificates curl gnupg
+```
+
+### Add GPG key
+
+```bash
+$ curl -sL https://repo.chia.net/FD39E6D3.pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/chia.gpg
+```
+
+### Set up repository
+
+```bash
+$ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/chia.gpg] https://repo.chia.net/debian/ stable main" | sudo tee /etc/apt/sources.list.d/chia.list > /dev/null
+$ sudo apt-get update
+```
+
+###  Install chia-blockchain
+
+```bash
+$ sudo apt-get install chia-blockchain
+```
+
 ## Open port
 
 On your farmer, get your IP address:
