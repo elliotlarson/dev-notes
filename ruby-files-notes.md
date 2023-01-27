@@ -363,6 +363,41 @@ YAML.load(yaml_string)
 YAML.load(ERB.new(File.read("path/to/file.yml")).result)
 ```
 
+## Generate files from ERB templates
+
+```ruby
+require "erb"
+
+bugs_json = JSON.parse(File.read("data/bugs.json"))
+
+content_template = <<-ERB
+---
+params:
+  id: <%= id %>
+  hashid: <%= hashid %>
+  term: <%= term %>
+  language: <%= language %>
+  translation: <%= translation %>
+  color_scheme:
+  <%- color_scheme.each do |color| -%>
+    - "<%= color %>"
+  <%- end -%>
+  text_color: "<%= text_color %>"
+  wikipedia: <%= wikipedia %>
+  batch: <%= batch %>
+---
+ERB
+
+bugs_json.each do |bug|
+  # markdown because this is meant to be content pages for Hugo pages
+  markdown = ERB.new(content_template, trim_mode: "-").result_with_hash(bug)
+  filename = "#{bug["hashid"]}.md"
+  filepath = "content/#{filename}"
+
+  File.write(filepath, markdown)
+end
+```
+
 ## Load a JSON file
 
 ```ruby
