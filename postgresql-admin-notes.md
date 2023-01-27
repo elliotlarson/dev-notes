@@ -183,6 +183,10 @@ WHERE category IN( 'Reporting and Logging / Where to Log' , 'File Locations')
 ORDER BY category, name;
 ```
 
+```sql
+SHOW LOG_DESTINATION;
+```
+
 ### Log File
 
 Using the Postgres.app on the Mac: `~/Library/Application\ Support/Postgres/var-9.5/postgres-server.log`
