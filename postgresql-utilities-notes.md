@@ -109,7 +109,7 @@ $ createuser brandt
 * `-f <filename>` = the file to dump the data to
 
 ```bash
-$ pg_dump -v -e -c -O -x databasename -f databasename.dumps
+$ pg_dump -v -e -c -O -x databasename -f databasename.dump
 ```
 
 ### Loading database backup
