@@ -17,7 +17,7 @@ You can wrap a section of a page with a Turbo Frame tag:
   -# ... project markup
 ```
 
-Assuming project is a model, this pulls the ID off of it.  This is shorthand for `dom_id(@project)`.
+Assuming project is a model, this pulls the ID off of it. This is shorthand for `dom_id(@project)`.
 
 When you are responding to a request from a Turbo Frame, you just render a partial that has a Turbo Frame in it, and Turbo will do the work to update that part of the page.
 
@@ -41,17 +41,17 @@ If you are in a turbo frame tag and you want to link to another page, you need t
 
 ## Turbo Streams
 
-Turbo streams are a way to carry out actions on turbo frames on the page.  They are markup that get sent over the wire that turbo knows how to handle on the front end.
+Turbo streams are a way to carry out actions on turbo frames on the page. They are markup that get sent over the wire that turbo knows how to handle on the front end.
 
 Types of stream actions:
 
-* `append` adds the content to the end of the target element without changing its existing contents. For example, you want to add something to the bottom of a list.
-* `prepend` adds the content to the beginning of the target element without changing its existing contents. For example, you want to add something to the top of a list.
-* `remove` removes the target element. Boom, gone!
-* `replace` completely replaces the target element with the given content. For example, we used it to replace an outdated section of a page (a bait) with updated content.
-* `update` only replaces the content of the target element with the given content. For example, we used it to replace a number within a <div> element, but not the entire <div>.
-* `before` inserts the given content before the target element. For example, you want to put a high-priority item before a lower-priority item.
-* `after` inserts the given content after the target element. For example, you want to put a February item after a January item.
+- `append` adds the content to the end of the target element without changing its existing contents. For example, you want to add something to the bottom of a list.
+- `prepend` adds the content to the beginning of the target element without changing its existing contents. For example, you want to add something to the top of a list.
+- `remove` removes the target element. Boom, gone!
+- `replace` completely replaces the target element with the given content. For example, we used it to replace an outdated section of a page (a bait) with updated content.
+- `update` only replaces the content of the target element with the given content. For example, we used it to replace a number within a <div> element, but not the entire <div>.
+- `before` inserts the given content before the target element. For example, you want to put a high-priority item before a lower-priority item.
+- `after` inserts the given content after the target element. For example, you want to put a February item after a January item.
 
 You can have multiple stream tags in a turbo stream template:
 
@@ -85,7 +85,7 @@ Then in your form add a data attribute for the turbo frame:
   -# search form content
 ```
 
-What this really does is update the `src` attribute of the linked to turbo frame.  When the source is updated Turbo knows to make a request to the backend to update the content.
+What this really does is update the `src` attribute of the linked to turbo frame. When the source is updated Turbo knows to make a request to the backend to update the content.
 
 When a request is initiated from a turbo frame, a header `Turbo-Frame: results` is sent with the request.
 
@@ -146,3 +146,13 @@ export default class extends Controller {
   }
 }
 ```
+
+## Real time broadcasting
+
+There doesn't seem to be good documentation yet for Turbo Rails broadcasting, but you can checkout the comments in this code:
+
+https://github.com/hotwired/turbo-rails/blob/ea00f3732e21af9c2156cf74dabe95524b17c361/app/models/concerns/turbo/broadcastable.rb
+
+And here is the notes page for the PragmaticStudio course:
+
+https://online.pragmaticstudio.com/courses/hotwire/steps/40
