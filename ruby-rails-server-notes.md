@@ -132,7 +132,7 @@ Login as deploy:
 Make sure your dependencies are all installed:
 
 ```bash
-$ sudo apt install git curl libssl-dev libreadline-dev zlib1g-dev autoconf bison build-essential libyaml-dev libreadline-dev libncurses5-dev libffi-dev libgdbm-dev -y
+$ sudo apt install git curl libssl-dev libreadline-dev zlib1g-dev autoconf bison build-essential libyaml-dev libreadline-dev libncurses5-dev libffi-dev libgdbm-dev libcurl4-openssl-dev -y
 ```
 
 Install Rbenv:
