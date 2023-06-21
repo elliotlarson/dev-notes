@@ -285,3 +285,9 @@ $ heroku pg:promote HEROKU_POSTGRESQL_PINK
 TODO
 
 https://devcenter.heroku.com/articles/upgrading-heroku-postgres-databases
+
+## SSH into container
+
+```bash
+$ heroku ps:exec -a <app-name>
+```
