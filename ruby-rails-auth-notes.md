@@ -4,7 +4,7 @@
 
 The default approach to storing session data in Rails is with cookies.
 
-Note: if you want to store more data in the session than a cookie can store, or if you want to be able to access session data with something like a background job (for example, you may want another system to be able to logout a user), then you can store your session data in a database.
+Note: if you want to store more data in the session than a cookie allows, or if you want to be able to access session data with something like a background job (for example, you may want another system to be able to logout a user), then you can store your session data in a database.
 
 When a user visits the app for the first time, Rails creates a session hash, encrypts it, and then stores it in a response header:
 
@@ -18,9 +18,9 @@ To decrypt the cookie:
 
 ```ruby
 # Note: In Rails 7 I can't get this to work, and for purposes of these notes it's not important to really
-# be able to do this.  this is more interesting from the perspective of understanding the basic flow:
+# be able to do this.  This is more interesting from the perspective of understanding the basic flow:
 
-# If you grab the value from the header
+# Launch the Rails console, add the following class, and call it with a copied cookie value from the header
 class CookieDecryptor
   def self.call(cookie)
     secret_key_base = Rails.application.secret_key_base # This can be stored in `config/secrets.yml` or `config/credentials.yml.enc`
@@ -38,7 +38,7 @@ class CookieDecryptor
     signature = decoded_cookie[last_index + 2..-1]
 
     puts "Cookie data: #{cookie_data}"
-    puts "signature: #{signature}"
+    puts "Signature: #{signature}"
 
     key_generator = ActiveSupport::KeyGenerator.new(secret_key_base, iterations: 1000)
     secret = key_generator.generate_key(encrypted_cookie_salt)
@@ -54,9 +54,7 @@ end
 
 ## A look at Warden
 
-Devise uses the Warden gem under the hood to handle authentication.
-
-Warden is Rack based middleware.
+Devise uses the Warden gem under the hood to handle authentication. Warden is Rack based middleware.
 
 To provide some quick Rack context, Rack is a standardized API library for receiving and responding to web requests. A basic Rack app looks like:
 
@@ -119,9 +117,9 @@ $ bin/rails middleware
 # run MyApp::Application.routes
 ```
 
-Note: that after the Cookie related middlewares run, the `Warden::Manager` runs, which picks up the session cookie (something like `env["rack.session"]`).
+Note: that after the Cookie related middleware runs, the `Warden::Manager` runs, which picks up the session cookie (something like `env["rack.session"]`).
 
-### Look at what Warden is doing
+### What Warden is doing
 
 You can intercept the `Warden::Manager` middleware by adding another piece of middleware before and after it.
 
@@ -157,7 +155,7 @@ end
 
 Then you need to restart the server and the debugger will stop in the middleware chain before and after `Warden::Manager` is called.
 
-After it is called the manager adds an `env["warden"]` value with a `Warden::Proxy` object.
+After it's called the manager adds an `env["warden"]` value with a `Warden::Proxy` object.
 
 After you sign in, you'll notice that the session goes from being something like:
 
@@ -166,7 +164,7 @@ puts env["rack.session"].to_h
 # {"session_id"=>"6a11613b8c1290e7f18b8a7f48dc6112", "_csrf_token"=>"YGPGEZf3qxF78IGe-MO_RZjbqP_PPm3IipXeXjaxHl4"}
 ```
 
-... to something like this:
+... to something like:
 
 ```ruby
 puts env["rack.session"].to_h
@@ -193,7 +191,7 @@ It uses a default strategy of `:password` to take this info, and lookup the user
 
 ## Devise Additions
 
-Devise adds a method to get the warden object out of the request environment:
+Devise adds a method to get the warden object out of the request environment in the controller:
 
 ```ruby
 def warden
@@ -227,7 +225,7 @@ def authenticate_user!
 end
 ```
 
-Devise also handles encrypting the password and storing it in the database. Here is the method it uses to figure out if the user supplied password is valid:
+Devise also handles encrypting the password and storing it in the database. Here is the method it uses as a part of its authentication strategy to figure out if the user supplied password is valid:
 
 ```ruby
 def valid_password?(password)
@@ -238,7 +236,7 @@ def valid_password?(password)
 end
 ```
 
-Note that Devise provides it's own Warden strategy for authenticating the user, `Devise::Strategies::DatabaseAuthenticatable`, and it's this strategy that ultimately calls the method above to authenticate the user with a password during the Warden middleware execution.
+Note that Devise provides it's own Warden strategy for authenticating the user, `Devise::Strategies::DatabaseAuthenticatable`, and it's this strategy that ultimately calls the `valid_password?` method to authenticate the user with a password during the Warden middleware execution.
 
 Devise initializes this strategy with Warden and then Warden calls it with:
 
@@ -246,15 +244,15 @@ Devise initializes this strategy with Warden and then Warden calls it with:
 env['warden'].authenticate(:database_authenticatable)
 ```
 
-## Omniauth oAuth2
+## Omniauth OAuth2
 
 Omniauth allows logging into to your app by authenticating through a third party, like Google.
 
-To set this up you need to get a oAuth key and secret from your third party provider.
+To set this up you need to get an OAuth key and secret from your third party provider.
 
 To handle the individual third party providers, Omniauth provides strategies. These are often separate gems like `omniauth-google-oauth2`.
 
-Devise works with Omniauth and you configure an Omniauth strategry to work with Devise by adding lines to the `config/initializers/devise.rb` initializer:
+Devise works with Omniauth and OAuth out of the box. You can configure an Omniauth strategy to work with Devise by adding lines to the `config/initializers/devise.rb` initializer:
 
 ```ruby
 Devise.setup do |config|
@@ -288,7 +286,7 @@ Under the hood this will map POST requests to `/users/auth/google_oauth2`, to yo
 ```ruby
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-    # This does not support account creation with Google oAuth.  It requires logging in with your original system
+    # This does not support account creation with Google OAuth.  It requires logging in with your original system
     # account first, connecting Google, and then on subsequent logins you can use the login with Google approach.
     def google_oauth2
       email = auth["info"]["email"]
@@ -330,7 +328,7 @@ module Users
 end
 ```
 
-You also need to configure Devise to be onmiauthable in your user model:
+You also need to configure Devise to be onmiauthable in your user model.
 
 ```ruby
 devise(
@@ -340,9 +338,11 @@ devise(
 )
 ```
 
+This allows something like `User.from_omniauth(request.env["omniauth.auth"])` to be called on your `User` model.
+
 Then you add a button form to your login page that posts to: `/users/auth/google_oauth2`.
 
-When you post to this route, the `omniauth-google-oauth2` middelware builds a URL for Google's OAuth2 authorization endpoint, which looks like this:
+When you post to this route, the `omniauth-google-oauth2` middleware builds a URL for Google's OAuth2 authorization endpoint, which looks like this:
 
 > https://accounts.google.com/o/oauth2/auth?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=REQUESTED_SCOPES&state=RANDOM_STRING
 
@@ -352,13 +352,13 @@ When you post to this route, the `omniauth-google-oauth2` middelware builds a UR
 - `scope`: This is a space-separated list of scopes that your application is requesting access to.
 - `state`: This is a random string that your application generates to prevent CSRF attacks. Google will include this string in the redirect back to your application, and your application should check that it matches the original string.
 
-Here's a real example:
+Here's a real-ish example:
 
 > https://accounts.google.com/o/oauth2/auth?access_type=offline&client_id=2342342342342423234.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fusers%2Fauth%2Fgoogle_oauth2%2Fcallback&response_type=code&scope=email+profile&state=b0befa4f0c6f9806d230309c63696874431840a965bba852
 
 Notice that the `redirect_uri` is set to `/users/auth/google_oauth2/callback`.
 
-After you have logged in at `accounts.google.com`, they post back to `/users/auth/google_oauth2/callback`. The request looks like:
+After you've logged in at `accounts.google.com`, Google posts back to `/users/auth/google_oauth2/callback`. The request looks like:
 
 > Started GET "/users/auth/google_oauth2/callback?state=d177530061589ba7fd9c6d037f855b3136bf49d9fbf10dd7&code=4/0AbUR2VN5oqlojMIu4HhedGHxAvduq2inN70WERRAm97ltKrDHr3tdLlQnv_NJcTdDq_7TQ&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile%20openid&authuser=0&hd=elliot.la&prompt=none" for 127.0.0.1 at 2023-06-20 16:57:21 -0700
 
@@ -371,37 +371,15 @@ This carries the state CSRF token ensuring that the request is coming from Googl
   "authuser"=>"0", "hd"=>"elliot.la", "prompt"=>"none" }
 ```
 
-In the OAuth2 flow with Devise and the `omniauth-google-oauth2` gem, the provider's User ID (UID) comes from the information that Google sends back to your application in the callback after a successful user authentication.
-
-1. **Google Redirects to Your Callback**: After the user successfully logs in and consents to your app's access request, Google redirects the user back to your application's callback URL. In this redirect, Google includes an authorization code as a query parameter.
-2. **Authorization Code Exchange**: Your application exchanges the authorization code for an access token and an ID token. The ID token is a JWT (JSON Web Token) that includes information about the user, including their Google user ID.
-3. **User Information Extraction**: The `omniauth-google-oauth2` gem decodes the ID token and extracts the user's information, including their Google user ID. This is set as the UID in the OmniAuth auth hash, which is a standardized hash of information that OmniAuth provides to your application.
-4. **Devise Handles the Auth Hash**: In the callback controller (typically `Users::OmniauthCallbacksController` in a Devise-based Rails application), you'll have access to this auth hash via `request.env['omniauth.auth']`. This hash includes a lot of user data, such as their email, name, and the aforementioned UID, among other details.
-5. **User Creation or Sign In**: With this auth hash, you can find or create a user in your application's database. Typically, you'll use the provider (in this case 'google_oauth2') and the UID to find the user. If the user doesn't exist, you'll create a new user with the information from the auth hash.
-
 ### Where the Google uid comes from
 
-The provider uid for the user comes from Google and is in a JWT token sent from Google:
+After authorizing an account with Google for the first time, you generally save the uid for the user to your app's database. The provider uid comes from Google and is decoded from a JWT token:
+
+### Basic process of getting the JWT and decoding it
 
 1. **Your Application Sends a Request to Google's Token Endpoint**: After receiving the authorization code from Google, your application (more specifically, the `omniauth-google-oauth2` gem) sends a POST request to Google's token endpoint (`https://oauth2.googleapis.com/token`). This request includes the authorization code, your application's client ID and client secret, the redirect URI, and a grant type parameter (`grant_type=authorization_code`).
 2. **Google Validates the Request**: Google validates the authorization code, the client ID and secret, and the redirect URI against the original values. If everything checks out, Google responds with a JSON object that includes an access token, an ID token, and a refresh token.
 3. **The Access Token and ID Token Are Extracted**: The `omniauth-google-oauth2` gem parses the JSON response and extracts the access token and ID token. The access token can be used to make authenticated requests on behalf of the user, and the ID token contains user profile information (including the user's Google ID) encoded in a JWT (JSON Web Token).
-
-In terms of code, this exchange process happens within the `omniauth-oauth2` gem (which `omniauth-google-oauth2` depends on) and it's not something you generally have to implement or manage yourself. The Omniauth library takes care of this process for you.
-
-Lastly, it's important to note that this process is secured by HTTPS, so the information sent in these requests (like the client secret and authorization code) is encrypted.
-
-### Decoding the JWT
-
-When the ID token is returned to your application, your application will verify the token's signature to ensure that it was indeed issued by Google and has not been tampered with. This process uses Google's public keys, which your application can retrieve from Google's JSON Web Key (JWK) set endpoint.
-
-The ID token is encoded with claims about the authenticated user and is signed by Google to verify its authenticity. Your application's client secret is not used in the creation or verification of the ID token.
-
-The client secret is used when your application makes a server-to-server request to the Google token endpoint to exchange the authorization code for an access token. The client secret, along with the client ID and the authorization code, are sent in the request. The client secret verifies to Google that the request is coming from your application.
-
-In conclusion, the client secret is used to authenticate your application to Google, not to encode or decode the JWT. The JWT is signed using Google's private keys and your application verifies the signature using Google's public keys.
-
-### Why there is a two step process
 
 OAuth2 uses a two-step process for exchanging an authorization code for an access token for several reasons, largely related to security:
 
@@ -410,13 +388,35 @@ OAuth2 uses a two-step process for exchanging an authorization code for an acces
 3. **Short-lived authorization code**: The authorization code is short-lived and single-use. This means even if it was intercepted during the redirection step, it can't be used again to obtain an access token. This mitigates the risk of access token leakage.
 4. **Binding of redirection URI**: During the exchange of the authorization code for the access token, the client needs to supply the same `redirect_uri` (if it was included in the initial authorization request). This means even if an attacker steals the authorization code, they won't be able to use it unless they also control the redirection endpoint.
 
+## Creating a user account from the OAuth response
+
+In the `Users::OmniauthCallbacksController#google_oauth2` method, you would just update the conditional flow to handle the case where the provider user is not found and the user email address is not found:
+
+```ruby
+  if !provider_user && !User.find_by(email: auth["info"]["email"])
+    new_user = User.create!(
+      first_name: auth["info"]["first_name"],
+      last_name: auth["info"]["first_name"],
+      email: auth["info"]["email"],
+      password: SecureRandom.hex(10),
+      confirmed_at: Time.zone.now,
+      # ... etc.
+    )
+    flash[:notice] = "Signed in successfully via Google."
+    sign_out_all_scopes
+    sign_in_and_redirect new_user, event: :authentication
+  # ... rest of conditional statement
+```
+
+Note that this needs to be updated to potentially handle any validation errors on user, like the `auth["info"]["first_name"]` is empty. Also, there may be data required by the app that the OAuth provider doesn't have. You may in this case want to redirect to a special account registration page created for the purpose of providing the additional needed info.
+
 ## Authenticated links from a logged in app to another app
 
-Let's say you have two apps, LoginApp, where users can login, manage their user account details, and view a list of project names for projects held in a second app, ProjectsApp. Let's imagine a workflow where a user logs in at LoginApp (https://loginapp.com), views a list of projects in ProjectsApp (https://projectsapp.com), and clicks a link to one of the projects, which takes them over to the project, authenticates them at ProjectsApp and then allows the user to view/edit the project.
+Let's say you have two apps: a LoginApp, where users can login, manage their user account details, and view a list of project names for projects held in a second app; and then a ProjectsApp where users view and carry out project related CRUD actions. Let's imagine a workflow where a user logs in at LoginApp (https://loginapp.com), views a list of projects in ProjectsApp (https://projectsapp.com), and clicks a link to one of the projects, which takes them over to the project, authenticates them, and then allows the user to view/edit the project.
 
-We'll accomplish this with JWT tokens and we'll assume that both applications have access to a shared secret key, `my$ecretK3`, for token authentication.
+We can accomplish this with JWT tokens and we'll assume that both applications have access to a shared secret key, `my$ecretK3`, for token authentication.
 
-1. **User Login:** When a user logs into the LoginApp, the LoginApp will verify the credentials and then generate a JWT that includes the user's id. The token will be stored in a secure HTTP-only cookie.
+1. **User Login:** When a user logs into the LoginApp it will verify the credentials and generate a JWT token that includes the user's id. The token will be stored in a secure HTTP-only cookie.
 
 **LoginApp**
 
@@ -428,7 +428,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       payload = { user_id: user.id }
-      hmac_secret = "my$ecretK3y"  # Load from secure environment variable in production
+      hmac_secret = "my$ecretK3y"  # Stored in an environment variable
       token = JWT.encode payload, hmac_secret, "HS256"
 
       # Set JWT as a secure HttpOnly cookie
@@ -442,7 +442,7 @@ class SessionsController < ApplicationController
 end
 ```
 
-2. **Project List:** The LoginApp shows the list of project names as links. The links point to the ProjectsApp's project detail pages and include the user's JWT as a query parameter.
+2. **Project List:** The LoginApp shows the list of project names as links. The links point to the ProjectsApp's project detail pages and includes the user's JWT as a query parameter (there's a more secure way of doing this by storing the JWT in the header, discussed below).
 
 In `app/controllers/projects_controller.rb`:
 
@@ -471,16 +471,13 @@ In `app/controllers/application_controller.rb`:
 
 ```ruby
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
-
   private
 
-  # This method could either call out to Devise's `authenticate_user!`, which is already included in the
-  # ApplicationController by Devise.
+  # Overridden method from Devise
   def authenticate_user!
     if params[:jwt]
       jwt = params[:jwt]
-      hmac_secret = "my$ecretK3y" # Load from secure environment variable in production
+      hmac_secret = "my$ecretK3y" # Stored in an environment variable
       begin
         decoded_token = JWT.decode jwt, hmac_secret, true, { algorithm: "HS256" }
         user = User.find(decoded_token[0]["user_id"])
@@ -507,19 +504,17 @@ class ProjectsController < ApplicationController
 end
 ```
 
-Note that JWTs are typically stored in HTTP-only cookies to prevent access from JavaScript and mitigate the risk of XSS attacks. However, the example above includes the JWT in the URL for simplicity. In a production system, you should
+Note that JWTs are typically stored in HTTP-only cookies to prevent access from JavaScript and mitigate the risk of XSS attacks.
 
 ### JWT in the header
 
-There are several reasons why passing a JWT (or any sensitive data) in an HTTP header is generally more secure than passing it in a query string:
+There are several reasons why passing a JWT (or any sensitive data) in an HTTP header is generally more secure than passing it in a query string parameter:
 
 1. **Logging**: Web servers often log URLs, including the query string, by default. If your JWT is in the query string, it could be accidentally recorded in these logs, creating a security risk if these logs are not properly protected.
 2. **Browser History**: URLs, including the query string, are stored in the user's browser history. If a JWT is part of the URL, it could be accidentally exposed or reused by anyone with access to the user's browser history.
 3. **Referer Header**: When navigating from one page to another, browsers often send the URL of the originating page in the Referer HTTP header. If a JWT is part of the URL, it could be accidentally exposed in the Referer header.
 4. **Caching**: URLs, including query parameters, may be cached in various parts of the system (browser, server, intermediate proxies, CDNs). If sensitive data like JWT tokens are included in URLs, there is a risk of the tokens being accidentally stored in these caches.
 5. **Sharing**: Users may unknowingly share URLs that contain sensitive data. For example, a user might copy a URL from the address bar and email it to someone, inadvertently sharing their JWT.
-
-Putting a JWT in an HTTP header, particularly the `Authorization` header, avoids these risks. Headers are not logged by default, not stored in browser history, not included in Referer headers, not cached, and not shared by users.
 
 The hurdle to using JWT tokens in the header is that a straightforward navigation link in HTML doesn't allow the setting of headers, so you can't directly include the JWT token as a header when the user clicks a link to navigate to the ProjectsApp. However, you can use JavaScript and AJAX/fetch requests, which allow setting of headers. Alternatively, the handshake method I described above could also be used.
 
@@ -528,13 +523,12 @@ For the AJAX/fetch approach, here's how you can implement it:
 **LoginApp**
 
 1. Keep the same login process where a JWT is generated upon successful login and stored in a secure HttpOnly cookie.
-
 2. When the user clicks a project link, instead of directly navigating to the ProjectsApp, make an AJAX/fetch request to the ProjectsApp, including the JWT token as a header. On successful authentication, you can then navigate to the project page in the ProjectsApp. Here's how the JavaScript code could look:
 
 ```javascript
 document.querySelectorAll(".project-link").forEach((link) => {
   link.addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent the link from navigating immediately
+    event.preventDefault();
 
     const url = this.href;
     const jwt = getCookie("jwt"); // Implement a method to get the JWT cookie
@@ -543,7 +537,6 @@ document.querySelectorAll(".project-link").forEach((link) => {
       headers: { Authorization: `Bearer ${jwt}` },
     }).then((response) => {
       if (response.ok) {
-        // If ProjectsApp authenticated the user successfully, navigate to the project page
         window.location.href = url;
       } else {
         // Handle failure
@@ -570,6 +563,67 @@ def authenticate_user!
     end
   else
     super # call to Devise's version of the method
+  end
+end
+```
+
+## Logging out on LoginApp causes Logout on ProjectsApp
+
+Let's say a user has authenticated with the LoginApp, clicked the a link to ProjectsApp for a project, has been authenticated via a JWT token in the header, logged in programmatically with Devise, and shown a project details page. Then the user navigates back to the LoginApp and logs out. This is roughly how you would handle logging out the user automatically on ProjectsApp after logging out on LoginApp.
+
+1. **Logout Process on LoginApp**: When the user clicks logout on the LoginApp, you will not only need to clear the user's session in the LoginApp, but also need to make an HTTP request to ProjectsApp signaling that the user has been logged out. This could be done with an HTTP GET or POST request carrying the user's JWT, or by setting a flag in a shared database or a shared session store.
+
+```ruby
+class SessionsController < ApplicationController
+  def destroy
+    user = current_user
+    logout_user(user)
+    clear_user_session
+    # This could be a GET or POST request as per your preference
+    notify_logout_to_projects_app(user)
+    redirect_to root_path
+  end
+
+  private
+
+  def logout_user(user)
+    # Logic to logout user from LoginApp
+  end
+
+  def clear_user_session
+    # Logic to clear user's session
+  end
+
+  def notify_logout_to_projects_app(user)
+    # Replace with actual ProjectsApp logout URL and appropriate http method
+    uri = URI("http://projectsapp.com/logout")
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Post.new(uri.path, {'Content-Type' => 'application/json'})
+    request.body = { jwt: generate_jwt(user) }.to_json
+    response = http.request(request)
+  end
+end
+```
+
+2. **Logout Endpoint on ProjectsApp**: Create a new endpoint in the ProjectsApp that will accept the logout request from the LoginApp. When this endpoint is hit, it should clear the user's session in ProjectsApp.
+
+```ruby
+class SessionsController < ApplicationController
+  def destroy_from_login_app
+    jwt = params[:jwt]
+    user = get_user_from_jwt(jwt)
+    logout_user(user)
+    render status: :ok
+  end
+
+  private
+
+  def get_user_from_jwt(jwt)
+    # Logic to decode JWT and find user
+  end
+
+  def logout_user(user)
+    # Logic to logout user from ProjectsApp
   end
 end
 ```
